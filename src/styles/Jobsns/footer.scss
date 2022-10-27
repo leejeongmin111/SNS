@@ -1,0 +1,57 @@
+@import "../variables";
+
+.footer_navigation {
+  background-color: $background-grey;
+  border-top: 2px solid $border-color-grey;
+  z-index: 1;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+
+  .footer_container {
+    width: 950px;
+    padding: 0.25em 0 0.25em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 100px 0 450px;
+    height: 50px;
+
+    .menu {
+      display: flex;
+      width: 500px;
+      height: 40px;
+
+      .icon {
+        padding: 0.5em 2.5em 0 2.5em;
+        width: 23px;
+        height: 23px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 860px) {
+    .container {
+      margin: 0;
+      justify-content: center;
+      .container_Logo {
+        display: flex;
+        width: 120px;
+        height: 30px;
+        .logo {
+          width: 100px;
+        }
+      }
+      .container_Special {
+        width: 120px;
+        height: 30px;
+        .Icon {
+          width: 100px;
+        }
+      }
+    }
+  }
+}

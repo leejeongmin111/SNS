@@ -1,0 +1,96 @@
+@import "../variables";
+
+.navigation {
+  background-color: $background-white;
+  border-bottom: 2px solid $border-color-grey;
+  z-index: 1;
+  width: 100%;
+  position: fixed;
+  top: 0;
+
+  .container {
+    width: 950px;
+    padding: 0.25em 0 0.25em 0;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-left: 625px;
+    height: 50px;
+
+    .container_Logo {
+      display: flex;
+      width: 300px;
+      height: 40px;
+
+      .logo {
+        padding: 0 0 0 0.5em;
+        width: 180px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    .container_Special {
+      display: flex;
+      width: 150px;
+      height: 40px;
+      justify-content: left;
+      margin: 0 100px 0 50px;
+
+      .Icon {
+        padding: 0.25em 3em 0 0;
+        height: 35px;
+        width: 40px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    .search {
+      border: 2px solid $border-color-grey;
+      border-radius: 5px;
+      background-color: $background-grey;
+      width: 250px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 100px;
+
+      .searchIcon {
+        width: 10px;
+        opacity: 0.4;
+        margin-right: 0.3em;
+      }
+
+      .searchText {
+        color: $font-color-secondary;
+        font-size: 0.85em;
+        font-weight: 300;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 860px) {
+    .container {
+      margin: 0;
+      justify-content: center;
+      .container_Logo {
+        display: flex;
+        width: 120px;
+        height: 30px;
+        .logo {
+          width: 100px;
+        }
+      }
+      .container_Special {
+        width: 120px;
+        height: 30px;
+        .Icon {
+          width: 100px;
+        }
+      }
+    }
+  }
+}
