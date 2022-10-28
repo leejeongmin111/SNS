@@ -11,7 +11,12 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import '../../styles/Account/Myprofile.scss'
-
+import JobIcon from "../../Icons/JobProfile";
+import LikeNone from "../../Icons/LikeNone";
+import Reply from "../../Icons/Reply";
+import SaveNone from "../../Icons/SaveNone";
+import SnsProfile from "../../Icons/SnsProfile";
+import TagIcon from "../../Icons/TagIcon";
 
 
 const itemData = [
@@ -85,10 +90,16 @@ function MyProfile(){
                   <Profile></Profile>
                   </Box>
                   <hr></hr>
+                  <Box sx={{marginLeft:60}}>
+                    <SnsProfile/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <JobIcon/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <SaveNone/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <TagIcon/>
+                  </Box>
                   <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                    {Array.from(Array(6)).map((_, index) => (
                     <Grid item xs={2} sm={4} md={4} key={index}>
-                    <img src={itemData[1].img} width='300px' className="imgs"></img>
+                    <img src={itemData[1].img} className="imgs"></img>
                     </Grid>
                     ))}
                   </Grid>
