@@ -24,18 +24,18 @@ function Profilemy(props) {
     : users[Math.floor(Math.random() * users.length)].username;
 
   return (
-    <div className="profile">
+    <div className="My_profile">
       <ProfileIcon
         iconSize={iconSize}
         storyBorder={storyBorder}
         image={image}
       />
       {(accountName || caption) && !hideAccountName && (
-        <div className="textContainer">
-          <span className="accountName">{accountName}</span>
+        <div className="My_textContainer">
+          <span className="My_accountName">{accountName}</span>
           
 
-          <Box className="box">
+          <Box className="My_box">
             <Grid container spacing={2}>
              <Grid item xs={3}>
                 <span>게시물 &nbsp;&nbsp; 0</span>
