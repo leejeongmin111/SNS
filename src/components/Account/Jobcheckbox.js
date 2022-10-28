@@ -26,7 +26,7 @@ export default function Jobcheckbox() {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={10}>IT</MenuItem>
+          <MenuItem value="IT">IT</MenuItem>
         </Select>
       </FormControl>
     </div>

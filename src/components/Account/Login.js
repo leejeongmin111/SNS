@@ -17,6 +17,7 @@ import phone from "../../images/phone.png";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../../styles/Account/Login.scss"
 
 function Copyright(props) {
   return (

@@ -12,11 +12,11 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import '../../styles/Account/Myprofile.scss'
 import JobIcon from "../../Icons/JobProfile";
-import LikeNone from "../../Icons/LikeNone";
-import Reply from "../../Icons/Reply";
 import SaveNone from "../../Icons/SaveNone";
 import SnsProfile from "../../Icons/SnsProfile";
 import TagIcon from "../../Icons/TagIcon";
+import '../../styles/App.scss'
+import Profilemy from "./Profilemy";
 
 
 const itemData = [
@@ -81,31 +81,40 @@ const Item = styled(Paper)(({ theme }) => ({
 function MyProfile(){
     return(
         <>
-            <Header/>
-            <React.Fragment>
+            <Header className="head"/>
+            <main>
+            <React.Fragment >
               <Container>
-                <Box sx={{ bgcolor: 'white', height: '100vh', marginTop :10}}>
+                <Box className='box'>
                   <br></br>
-                  <Box sx={{marginLeft:4}}>
-                  <Profile></Profile>
+                  <Box className="pro">
+                  <Profilemy></Profilemy>
                   </Box>
                   <hr></hr>
-                  <Box sx={{marginLeft:60}}>
+                  <Box className='icon'>
                     <SnsProfile/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <JobIcon/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <SaveNone/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <TagIcon/>
                   </Box>
-                  <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                   {Array.from(Array(6)).map((_, index) => (
+                  <Box className='icon'>
+                    Daily&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Job&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Save&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Tag
+                  </Box>
+                  <br></br>
+                  <Grid container spacing={{ xs: 1, md: 1 }} columns={{ xs: 4, sm: 8, md: 12 }} className='gird'>
+                   {Array.from(Array(12)).map((_, index) => (
                     <Grid item xs={2} sm={4} md={4} key={index}>
-                    <img src={itemData[1].img} className="imgs"></img>
+                    <item><img src={itemData[1].img} className="imgs"></img></item>
                     </Grid>
                     ))}
                   </Grid>
                 </Box>
               </Container>
             </React.Fragment>
+            </main>
             <Footer/>
         </>
     )
