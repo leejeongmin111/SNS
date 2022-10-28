@@ -1,6 +1,6 @@
 @import "../variables";
 
-main{
+.Pro_main{
     background-color: $background-white;
   border-bottom: 2px solid $border-color-grey;
   border-right: 2px solid $border-color-grey;
@@ -13,17 +13,17 @@ main{
   background-color: $background-blue;
 
     
-.box{
+.Pro_box{
     width: 100%;   
     .pro{
         margin-left: 2rem;
       
     }     
-    .icon{
+    .Pro_icon{
         margin-left: 13rem;
         font-size: 0.08rem;
     }
-    .grid{
+    .Pro_grid{
         // margin: 1px;
         
     }

@@ -9,7 +9,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
+import PhotoIcon from '../../Icons/PhotoIcon';
+import IconButton from '@mui/material/IconButton';
+import write_click from "../../images/write.png";
 
 
 
@@ -32,69 +34,75 @@ export default function Write() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [kind, setKind] = React.useState('');
-
   const [value, setValue] = React.useState('Controlled');
   const handleChange = (e) => {
-    setKind(e.target.value);}
+    setKind(e.target.value);
+    }
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     await axios
+    //       .post("", {
+    //       })
+    //       .then((res) => {
+    //         console.log("문제없음", res);
+    //       })
+    //       .catch(() => {
+    //         console.log("문제발생");
+    //       });
+    //   };
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
-      <Modal
+      <Button onClick={handleOpen}><img src={write_click} className="icon"></img></Button>
+      
+        <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
+        >
+        <Box sx={style} 
+            component="form"
+            //onSubmit={handleChange}
+            >
           <Typography id="modal-modal-title" variant="h6" component="h2">
           
           <TextField
           label="Title"
           defaultValue=""
-          sx={{width:300}}
+          sx={{width:250}}
           />
-          
+            <FormControl sx={{width:100}} >
+              <InputLabel>Kind</InputLabel>
+                 <Select
+                    labelId="Kind"
+                    id="Kind"
+                    value={kind}
+                    label="Kind"
+                    name='kind'
+                    onChange={handleChange}
+                >
+                <MenuItem value="Daily">Daily</MenuItem>
+                <MenuItem value="JobSnS">JobSnS</MenuItem>
+                </Select>
+            </FormControl>
+                <IconButton aria-label="upload picture" component="label" size='large'>
+                    <input hidden accept="image/*" type="file" name='img'/>
+                    <PhotoIcon></PhotoIcon>
+                </IconButton>
 
-
-          <FormControl sx={{width:100}}>
-        <InputLabel id="demo-simple-select-label">Kind</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={kind}
-          label="Age"
-          onChange={handleChange}
-         >
-          <MenuItem value="Daily">Daily</MenuItem>
-          <MenuItem value="JobSnS">JobSnS</MenuItem>
-        </Select>
-         </FormControl>
-
-
-
-          <Box sx={{ minWidth: 120 }}>
-         </Box>
-
-
-
-
-
-
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 1 }}>
-
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 1 }}>
         
-          
-          <br></br>
-          <TextField
-          label="Post"
-          multiline
-          rows={20}
-          defaultValue=""
-          fullWidth
-          />
-
+            <br></br>
+            <TextField
+            label="Post"
+            multiline
+            rows={20}
+            defaultValue=""
+            fullWidth
+            name='text'
+            />
           </Typography>
         </Box>
       </Modal>
