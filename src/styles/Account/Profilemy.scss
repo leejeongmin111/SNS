@@ -1,0 +1,41 @@
+@import "../variables";
+
+.profile {
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  margin-bottom: 0.85em;
+
+  .textContainer {
+    display: flex;
+    flex-direction: column;
+    margin-left: 3em;
+    margin-bottom: 3em;
+    min-width: 180px;
+
+    .accountName {
+      font-weight: 600;
+      margin-bottom: 5px;
+      
+        
+
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+
+    .caption {
+      color: $font-color-secondary;
+
+      &.small {
+        font-size: 0.8em;
+      }
+    }
+  }
+
+  a {
+    text-align: right;
+    width: 100%;
+  }
+}

@@ -12,13 +12,11 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import '../../styles/Account/Myprofile.scss'
 import JobIcon from "../../Icons/JobProfile";
-import LikeNone from "../../Icons/LikeNone";
-import Reply from "../../Icons/Reply";
 import SaveNone from "../../Icons/SaveNone";
 import SnsProfile from "../../Icons/SnsProfile";
 import TagIcon from "../../Icons/TagIcon";
 import '../../styles/App.scss'
-import Setting from "../../Icons/Setting";
+import Profilemy from "./Profilemy";
 
 
 const itemData = [
@@ -90,7 +88,7 @@ function MyProfile(){
                 <Box className='box'>
                   <br></br>
                   <Box className="pro">
-                  <Profile></Profile><Setting></Setting>
+                  <Profilemy></Profilemy>
                   </Box>
                   <hr></hr>
                   <Box className='icon'>
