@@ -29,7 +29,10 @@ function Profilemy(props) {
       />
       {(accountName || caption) && !hideAccountName && (
         <div className="textContainer">
-          <span className="accountName">{accountName}&nbsp;&nbsp;&nbsp;</span>
+          <span className="accountName">{accountName}</span>
+          <span>게시물        팔로우         팔로잉</span>
+          <span>게시물        팔로우         팔로잉</span>
+
           <span className={`caption ${captionSize}`}>{caption}</span>
           
         </div>
