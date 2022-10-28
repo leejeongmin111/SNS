@@ -14,11 +14,12 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import logo from "../../images/jobsnsLogo.png";
 import phone from "../../images/phone.png";
-import Login from "../../styles/Account/Login.scss";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
-    
     <Typography
       variant="body2"
       color="text.secondary"
@@ -37,14 +38,32 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function Logins() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const [pw, setPw] = useState("");
+  const nav = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // const data = new FormData(event.currentTarget);
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
+
+    console.log(email, pw);
+
+    await axios
+      .post("http://127.0.0.1:3001/login", {
+        email: email,
+        pw: pw,
+      })
+      .then((res) => {
+        console.log("문제없음", res);
+        nav("/mainsns");
+      })
+      .catch(() => {
+        console.log("문제발생");
+      });
   };
 
   return (
@@ -96,6 +115,7 @@ export default function Logins() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={(e) => setEmail(e.target.value)}
                   autoFocus
                 />
                 <TextField
@@ -106,6 +126,7 @@ export default function Logins() {
                   label="Password"
                   type="password"
                   id="password"
+                  onChange={(e) => setPw(e.target.value)}
                   autoComplete="current-password"
                 />
                 <FormControlLabel

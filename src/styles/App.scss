@@ -10,14 +10,18 @@ body {
 }
 
 main {
-  background-color: $background-blue;
   margin-top: 60px;
 
   .container {
+    background-color: $background-blue;
+    border-right: 2px solid $border-color-grey;
+    border-left: 2px solid $border-color-grey;
     display: flex;
-    justify-content: left;
-    margin: 0 auto;
-    max-width: 1000px;
+    justify-content: center;
+    width: 640px;
+    position: relative;
+    top: 0;
+    left: 29%;
   }
 }
 
