@@ -17,7 +17,7 @@ import phone from "../../images/phone.png";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../../styles/Account/Login.scss"
+import "../../styles/Account/Login.scss";
 
 function Copyright(props) {
   return (
@@ -36,23 +36,15 @@ function Copyright(props) {
     </Typography>
   );
 }
-
 const theme = createTheme();
-
 export default function Login() {
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const nav = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
 
     console.log(email, pw);
-
     await axios
       .post("http://127.0.0.1:3001/login", {
         email: email,
@@ -62,11 +54,10 @@ export default function Login() {
         console.log("문제없음", res);
         nav("/mainsns");
       })
-      .catch(() => {
-        console.log("문제발생");
+      .catch((err) => {
+        console.log("문제발생", err);
       });
   };
-
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -101,7 +92,6 @@ export default function Login() {
               >
                 <img src={logo} width="300px"></img>
               </Box>
-
               <Box
                 component="form"
                 onSubmit={handleSubmit}
@@ -143,13 +133,12 @@ export default function Login() {
                   Sign In
                 </Button>
                 <br></br>
-
                 <Link href="#" variant="body2">
                   비밀번호를 잊으셨나요?
                 </Link>
                 <br></br>
                 <br></br>
-                <Link href="#" variant="body1">
+                <Link href="http://127.0.0.1:3001/register" variant="body1">
                   {"Don't have an account ?  Resgister"}
                 </Link>
                 <Copyright sx={{ mt: 8, mb: 4 }} />

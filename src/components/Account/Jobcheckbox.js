@@ -1,14 +1,15 @@
-import * as React from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import * as React from "react";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
-export default function Jobcheckbox() {
-  const [age, setAge] = React.useState('');
+export default function Jobcheckbox(props) {
+  const [age, setAge] = React.useState("");
 
   const handleChange = (event) => {
     setAge(event.target.value);
+    props.setJob(event.target.value);
   };
 
   return (
@@ -23,7 +24,7 @@ export default function Jobcheckbox() {
           autoWidth
           label="JOB"
         >
-          <MenuItem value="">
+          <MenuItem value="None">
             <em>None</em>
           </MenuItem>
           <MenuItem value="IT">IT</MenuItem>
@@ -32,4 +33,3 @@ export default function Jobcheckbox() {
     </div>
   );
 }
-
