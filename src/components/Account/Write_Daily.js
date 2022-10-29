@@ -11,6 +11,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import PhotoIcon from '../../Icons/PhotoIcon';
 import IconButton from '@mui/material/IconButton';
+import { useState } from 'react';
+import "../../styles/Account/Write_Daily.scss"
 
 
 
@@ -33,8 +35,14 @@ export default function Write_Daily() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [kind, setKind] = React.useState('');
+  const [imgSrc,setimgSrc] = useState("");
+  const srcChange = (e)=>{
+    setimgSrc(e.target.files[0])
+    console.log(e.target.files[0])
+  }
+
   const handleChange = (e) => {
-    setKind(e.target.value);
+    
     }
 
     // const handleSubmit = async (e) => {
@@ -66,38 +74,16 @@ export default function Write_Daily() {
             // action 여기다가 주소 값 입력 해주세영~~!~!~!
             >
           <Typography id="modal-modal-title" variant="h6" component="h2">
-          
-          <TextField
-          label="Title"
-          defaultValue=""
-          sx={{width:250}}
-          />
-            <FormControl sx={{width:10}} >
-            </FormControl>
 
-            <FormControl sx={{width:100}} >
-              <InputLabel>Program</InputLabel>
-                 <Select
-                    labelId="Program"
-                    id="Program"
-                    value={kind}
-                    label="Program"
-                    name='Program'
-                    //</FormControl>onChange={handleChange}
-                >
-                <MenuItem value="None">None</MenuItem>
-                <MenuItem value="Java">Java</MenuItem>
-                <MenuItem value="Python">Python</MenuItem>
-                <MenuItem value="React">React</MenuItem>
-                <MenuItem value="Html">HTML</MenuItem>
-
-                </Select>
-            </FormControl>
 
                 <IconButton aria-label="upload picture" component="label" size='large'>
-                    <input hidden accept="image/*" type="file" name='img'/>
+                    <input accept="image/*" type="file" name='img' onChange={srcChange}/>
                     <PhotoIcon></PhotoIcon>
                 </IconButton>
+                <Box className='uploadimg' sx={{border:1}}>
+                  {imgSrc &&<img src={imgSrc}></img>}
+                </Box>
+
 
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 1 }}>
@@ -106,7 +92,7 @@ export default function Write_Daily() {
             <TextField
             label="Post"
             multiline
-            rows={20}
+            rows={10}
             defaultValue=""
             fullWidth
             name='text'
