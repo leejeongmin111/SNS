@@ -3,7 +3,7 @@ import Login from "../components/Account/Login";
 import { Route, Routes } from "react-router-dom";
 import Register from "../components/Account/Register.js";
 import MainSns from "./MainSns";
-import Write from "./Account/Write";
+import Write_Job_Special from "./Account/Write_Job_Special";
 
 import MyProfile from "./Account/MyProfile";
 // import Profile from "./JobSns/Profile";
@@ -16,7 +16,7 @@ function App() {
         <Route path="/" element={<Login></Login>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>
         <Route path="/mainsns" element={<MainSns></MainSns>}></Route>
-        <Route path="/write" element={<Write></Write>}></Route>
+        <Route path="/write/jobspecial" element={<Write_Job_Special></Write_Job_Special>}></Route>
 
       </Routes>
     </>

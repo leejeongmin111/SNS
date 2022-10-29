@@ -11,7 +11,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import PhotoIcon from '../../Icons/PhotoIcon';
 import IconButton from '@mui/material/IconButton';
-import write_click from "../../images/write.png";
 
 
 
@@ -29,15 +28,15 @@ const style = {
   p: 4,
 };
 
-export default function Write() {
+export default function Write_Job_Special() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [kind, setKind] = React.useState('');
-  const [value, setValue] = React.useState('Controlled');
   const handleChange = (e) => {
     setKind(e.target.value);
     }
+
     // const handleSubmit = async (e) => {
     //     e.preventDefault();
     //     await axios
@@ -53,7 +52,7 @@ export default function Write() {
 
   return (
     <div>
-      <Button onClick={handleOpen}><img src={write_click} className="icon"></img></Button>
+        <Button onClick={handleOpen}>Job_Special</Button>
       
         <Modal
         open={open}
@@ -64,6 +63,7 @@ export default function Write() {
         <Box sx={style} 
             component="form"
             //onSubmit={handleChange}
+            // action 여기다가 주소 값 입력 해주세영~~!~!~!
             >
           <Typography id="modal-modal-title" variant="h6" component="h2">
           
@@ -72,20 +72,28 @@ export default function Write() {
           defaultValue=""
           sx={{width:250}}
           />
+            <FormControl sx={{width:10}} >
+            </FormControl>
+
             <FormControl sx={{width:100}} >
-              <InputLabel>Kind</InputLabel>
+              <InputLabel>Program</InputLabel>
                  <Select
-                    labelId="Kind"
-                    id="Kind"
+                    labelId="Program"
+                    id="Program"
                     value={kind}
-                    label="Kind"
-                    name='kind'
-                    onChange={handleChange}
+                    label="Program"
+                    name='Program'
+                    //</FormControl>onChange={handleChange}
                 >
-                <MenuItem value="Daily">Daily</MenuItem>
-                <MenuItem value="JobSnS">JobSnS</MenuItem>
+                <MenuItem value="None">None</MenuItem>
+                <MenuItem value="Java">Java</MenuItem>
+                <MenuItem value="Python">Python</MenuItem>
+                <MenuItem value="React">React</MenuItem>
+                <MenuItem value="Html">HTML</MenuItem>
+
                 </Select>
             </FormControl>
+
                 <IconButton aria-label="upload picture" component="label" size='large'>
                     <input hidden accept="image/*" type="file" name='img'/>
                     <PhotoIcon></PhotoIcon>
@@ -106,9 +114,9 @@ export default function Write() {
           </Typography>
                 <Button
                   type="submit"
-                  variant="contained"
+                  variant="outlined"
                 >
-                  Sign In
+                  Submit
                 </Button>
         </Box>
       </Modal>
