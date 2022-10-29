@@ -104,6 +104,12 @@ export default function Write() {
             name='text'
             />
           </Typography>
+                <Button
+                  type="submit"
+                  variant="contained"
+                >
+                  Sign In
+                </Button>
         </Box>
       </Modal>
     </div>
