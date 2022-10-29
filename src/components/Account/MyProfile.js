@@ -82,7 +82,7 @@ function MyProfile(){
     return(
         <>
             <Header className="head"/>
-            <main>
+            <main className="Pro_main">
             <React.Fragment >
               <Container>
                 <Box className='box'>
@@ -91,23 +91,23 @@ function MyProfile(){
                   <Profilemy></Profilemy>
                   </Box>
                   <hr></hr>
-                  <Box className='icon'>
+                  <Box className='Pro_icon'>
                     <SnsProfile/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <JobIcon/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <SaveNone/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <TagIcon/>
                   </Box>
-                  <Box className='icon'>
+                  <Box className='Pro_icon'>
                     Daily&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     Job&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     Save&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     Tag
                   </Box>
                   <br></br>
-                  <Grid container spacing={{ xs: 1, md: 1 }} columns={{ xs: 4, sm: 8, md: 12 }} className='gird'>
+                  <Grid container spacing={{ xs: 1, md: 1 }} columns={{ xs: 4, sm: 8, md: 12 }} className='Pro_gird'>
                    {Array.from(Array(12)).map((_, index) => (
                     <Grid item xs={2} sm={4} md={4} key={index}>
-                    <item><img src={itemData[1].img} className="imgs"></img></item>
+                    <item><img src={itemData[1].img} className="Pro_imgs"></img></item>
                     </Grid>
                     ))}
                   </Grid>

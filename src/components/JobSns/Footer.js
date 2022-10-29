@@ -4,6 +4,7 @@ import message from "../../images/message.png";
 import home from "../../images/home.png";
 import write from "../../images/write.png";
 import mypage from "../../images/mypage.png";
+import Write from "../Account/Write";
 
 function Footer() {
   return (
@@ -13,7 +14,8 @@ function Footer() {
           <img className="icon" src={notice} alt="notice" />
           <img className="icon" src={message} alt="message" />
           <img className="icon" src={home} alt="home" />
-          <img className="icon" src={write} alt="write" />
+          {/* <img className="icon" src={write} alt="write" /> */}
+          <Write></Write>
           <img className="icon" src={mypage} alt="mypage" />
         </div>
       </div>

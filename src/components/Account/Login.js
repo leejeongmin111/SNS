@@ -17,6 +17,8 @@ import phone from "../../images/phone.png";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../../styles/Account/Login.scss";
+
 function Copyright(props) {
   return (
     <Typography
@@ -41,11 +43,7 @@ export default function Login() {
   const nav = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
+
     console.log(email, pw);
     await axios
       .post("http://127.0.0.1:3001/login", {

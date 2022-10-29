@@ -33,7 +33,7 @@ router.post("/register", (req, res) => {
   let gender = req.body.gender;
   let job = req.body.job;
 
-  let sql = `insert into t_member(mb_id ,mb_pw, mb_name, mb_nick, mb_rn, mb_phone, mb_gender,mb_job) values(?,?,?,?,?,?,?,?)`;
+  let sql = `insert into t_member(mb_id ,mb_pw, mb_name, mb_nick, mb_rn, mb_phone, mb_gender) values(?,?,?,?,?,?,?)`;
   // t_member테이블에 job컬럼없어서 오류발생 그러므로 생성해야함
   conn.query(
     sql,
