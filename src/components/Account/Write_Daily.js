@@ -38,7 +38,9 @@ export default function Write_Daily() {
   const [imgSrc,setimgSrc] = useState("");
   const srcChange = (e)=>{
     setimgSrc(e.target.files[0])
-    console.log(e.target.files[0])
+    console.log(e.target.files[0].config);
+    console.log("dd");
+
   }
 
   const handleChange = (e) => {
