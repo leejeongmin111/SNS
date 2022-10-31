@@ -22,8 +22,8 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 500,
-  height: 600,
+  width: 800,
+  height: 500,
   bgcolor: 'background.paper',
   border: '1px solid #000',
   boxShadow: 24,
@@ -34,14 +34,16 @@ export default function Write_Daily() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [kind, setKind] = React.useState('');
   const [imgSrc,setimgSrc] = useState("");
   const srcChange = (e)=>{
-    setimgSrc(e.target.files[0])
-    console.log(e.target.files[0].config);
-    console.log("dd");
-
+    setimgSrc(URL.createObjectURL(e.target.files[0]));
   }
+
+  const deleteSrc = () => {
+    URL.revokeObjectURL(imgSrc);
+    setimgSrc("");
+  };
+
 
   const handleChange = (e) => {
     
@@ -79,33 +81,40 @@ export default function Write_Daily() {
 
 
                 <IconButton aria-label="upload picture" component="label" size='large'>
-                    <input accept="image/*" type="file" name='img' onChange={srcChange}/>
+                    <input hidden accept="image/*" type="file" name='img' onChange={srcChange}/>
                     <PhotoIcon></PhotoIcon>
                 </IconButton>
-                <Box className='uploadimg' sx={{border:1}}>
-                  {imgSrc &&<img src={imgSrc}></img>}
-                </Box>
-
-
+                <br></br>
+                <div className='uploadbox' >
+                 <img src={imgSrc} className="uploadimg"></img>
+                </div>
+                <div className='text_box'>
+                 <TextField
+                  label="Post"
+                  multiline
+                  rows={16}
+                  defaultValue=""
+                  name='text'
+                  fullWidth
+                  />
+                </div>
             </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 1 }}>
-        
-            <br></br>
-            <TextField
-            label="Post"
-            multiline
-            rows={10}
-            defaultValue=""
-            fullWidth
-            name='text'
-            />
-          </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 50 }}>
+
                 <Button
                   type="submit"
                   variant="outlined"
+                  className='daily_button'
                 >
                   Submit
                 </Button>
+                <Button
+                  variant="outlined"
+                  onClick={deleteSrc}
+                >
+                  Cancle
+                </Button>
+          </Typography>
         </Box>
       </Modal>
     </div>
