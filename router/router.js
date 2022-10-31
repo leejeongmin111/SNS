@@ -52,6 +52,47 @@ router.post("/register", (req, res) => {
   );
 });
 
+router.post("/write_daily", (req, res) => {
+  console.log("가져온값 : ", req.body.text);
+  console.log("가져온값 : ", req.body.img);
+
+  let text = req.body.text;
+  let img = req.body.img;
+  let div = 0;
+
+  let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,"jays",0,0,${div})`;
+  conn.query(sqlText, [text], function (err, rows) {
+    if (!err) {
+      console.log("text집어넣기성공");
+      res.json("text집어넣기 성공");
+    } else {
+      console.log("text집어넣기 문제", err);
+      throw err;
+    }
+  });
+});
+
+router.post("/mainsns", (req, res) => {
+  console.log("mainsns");
+  let id = request.body.id;
+
+  // 세션 등록
+  // request.session.원하는 변수이름 = {}
+  // key는 ""안에 작성 => EJS render 작업할때와 비교해서 주의할것
+  request.session.user = {
+    id: id,
+  };
+
+  console.log("세션 등록 성공");
+  res.json({});
+
+  // 등록한 세션 확인
+  console.log(request.session.user.id);
+
+  // 응답을 끝내주는 작업
+  response.end();
+});
+
 router.post("/login", (req, res) => {
   // View (React) => router로 데이텅 보내기
   console.log("join router", req.body.email);
@@ -66,7 +107,7 @@ router.post("/login", (req, res) => {
     if (rows.length > 0) {
       console.log("문제없음");
       res.json({
-        success: "회원가입성공",
+        email: email,
       });
     } else {
       console.log("문제존나많아 앙기철ㄸㄸㄸㄸ", err);

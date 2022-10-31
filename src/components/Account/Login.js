@@ -18,6 +18,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Account/Login.scss";
+import { useDispatch } from "react-redux";
 
 function Copyright(props) {
   return (
@@ -38,6 +39,7 @@ function Copyright(props) {
 }
 const theme = createTheme();
 export default function Login() {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const nav = useNavigate();
@@ -51,7 +53,9 @@ export default function Login() {
         pw: pw,
       })
       .then((res) => {
-        console.log("문제없음", res);
+        console.log("문제없음");
+        console.log(res);
+        dispatch({ type: "test", email: res.data.email });
         nav("/mainsns");
       })
       .catch((err) => {
