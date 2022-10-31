@@ -3,11 +3,11 @@ import Login from "../components/Account/Login";
 import { Route, Routes } from "react-router-dom";
 import Register from "../components/Account/Register.js";
 import MainSns from "./MainSns";
-import Write_Job_Special from "./Account/Write_Job_Special";
 import Dm from "./Account/Dm";
 import MyProfile from "./Account/MyProfile";
 import Write_Daily from "./Account/Write_Daily";
 // import Profile from "./JobSns/Profile";
+import Job_Dash from "./JobSns/Job_Dash";
 
 import { createStore } from "redux";
 import { Provider } from "react-redux";
@@ -31,6 +31,7 @@ const store = createStore(reducer);
 function App() {
   return (
     <>
+
       <Provider store={store}>
         <Routes>
           <Route path="/pro" element={<MyProfile></MyProfile>}></Route>
