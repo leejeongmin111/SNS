@@ -1,8 +1,11 @@
 import "../../styles/Account/Profilemy.scss";
 import ProfileIcon from "../JobSns/ProfileIcon";
 import users from "../../data/users";
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import Setting from "../../Icons/Setting";
-
 
 function Profilemy(props) {
   const {
@@ -21,18 +24,32 @@ function Profilemy(props) {
     : users[Math.floor(Math.random() * users.length)].username;
 
   return (
-    <div className="profile">
+    <div className="My_profile">
       <ProfileIcon
         iconSize={iconSize}
         storyBorder={storyBorder}
         image={image}
       />
       {(accountName || caption) && !hideAccountName && (
-        <div className="textContainer">
-          <span className="accountName">{accountName}</span>
-          <span>게시물        팔로우         팔로잉</span>
-          <span>게시물        팔로우         팔로잉</span>
+        <div className="My_textContainer">
+          <span className="My_accountName">{accountName}</span>
+          
 
+          <Box className="My_box">
+            <Grid container spacing={1}>
+             <Grid item xs={3}>
+                <span>게시물 &nbsp;&nbsp; 0</span>
+             </Grid>
+              <Grid item xs={3}>
+              <span>팔로우 &nbsp;&nbsp; 0</span>
+              </Grid>
+            <Grid item xs={3}>
+              <span>팔로잉 &nbsp;&nbsp; 0</span>
+            </Grid>
+          </Grid>
+          </Box>
+          
+          
           <span className={`caption ${captionSize}`}>{caption}</span>
           
         </div>
