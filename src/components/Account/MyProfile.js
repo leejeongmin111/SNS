@@ -1,10 +1,6 @@
-import ProfileIcon from "../JobSns/ProfileIcon";
-import Profile from "../JobSns/Profile";
 import Header from "../JobSns/Header";
 import Footer from "../JobSns/Footer";
 import * as React from 'react';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { experimentalStyled as styled } from '@mui/material/styles';
@@ -17,6 +13,7 @@ import SnsProfile from "../../Icons/SnsProfile";
 import TagIcon from "../../Icons/TagIcon";
 import '../../styles/App.scss'
 import Profilemy from "./Profilemy";
+import Sidebar from "../JobSns/Sidebar";
 
 
 const itemData = [
@@ -85,9 +82,9 @@ function MyProfile(){
             <main className="Pro_main">
             <React.Fragment >
               <Container>
-                <Box className='box'>
+                <Box className='Pro_box'>
                   <br></br>
-                  <Box className="pro">
+                  <Box className="pro_text">
                   <Profilemy></Profilemy>
                   </Box>
                   <hr></hr>
@@ -105,7 +102,7 @@ function MyProfile(){
                   </Box>
                   <br></br>
                   <Grid container spacing={{ xs: 1, md: 1 }} columns={{ xs: 4, sm: 8, md: 12 }} className='Pro_gird'>
-                   {Array.from(Array(12)).map((_, index) => (
+                   {Array.from(Array(20)).map((_, index) => (
                     <Grid item xs={2} sm={4} md={4} key={index}>
                     <item><img src={itemData[1].img} className="Pro_imgs"></img></item>
                     </Grid>
@@ -115,7 +112,9 @@ function MyProfile(){
               </Container>
             </React.Fragment>
             </main>
+            
             <Footer/>
+
         </>
     )
 }

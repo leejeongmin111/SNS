@@ -36,7 +36,7 @@ function Profilemy(props) {
           
 
           <Box className="My_box">
-            <Grid container spacing={2}>
+            <Grid container spacing={1}>
              <Grid item xs={3}>
                 <span>게시물 &nbsp;&nbsp; 0</span>
              </Grid>

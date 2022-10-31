@@ -1,21 +1,23 @@
 @import "../variables";
 
 .Pro_main{
-    background-color: $background-white;
+background-color: $background-white;
   border-bottom: 2px solid $border-color-grey;
   border-right: 2px solid $border-color-grey;
   border-left: 2px solid $border-color-grey;
   z-index: 1;
   width: 640px;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 29%;
   background-color: $background-blue;
 
+
+  
     
 .Pro_box{
     width: 100%;   
-    .pro{
+    .pro_text{
         margin-left: 2rem;
       
     }     
@@ -27,18 +29,24 @@
         // margin: 1px;
         
     }
+    .Pro_imgs{
+    height: 12em;
+    width: 12em;
+    margin-left: 2em;
+    margin-left: 0.3em;
+}
 }
 }
 
   
 
 
-.imgs{
-    height: 12em;
-    width: 12em;
-    // margin-left: 2em;
-    // margin-left: 0.3em;
-}
+// .imgs{
+//     height: 12em;
+//     width: 12em;
+//     // margin-left: 2em;
+//     // margin-left: 0.3em;
+// }
 
 
 
