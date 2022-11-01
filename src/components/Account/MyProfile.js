@@ -86,8 +86,10 @@ function MyProfile(){
 
     return(
         <>
+
             <Header className="head"/>
             <main className="Pro_main">
+
             <React.Fragment >
               <Container>
                 <Box className='Pro_box'>

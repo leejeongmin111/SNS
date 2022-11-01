@@ -29,17 +29,18 @@ function Profilemy(props) {
  
 
   return (
+    <>
     <div className="My_profile">
+      <div className="My_img">
       <ProfileIcon
         iconSize={iconSize}
         storyBorder={storyBorder}
         image={image}
       />
+      </div>
       {(accountName || caption) && !hideAccountName && (
         <div className="My_textContainer">
           <span className="My_accountName">{accountName}</span>
-          
-
           <Box className="My_box">
             <Grid container spacing={1}>
              <Grid item xs={3}>
@@ -53,14 +54,12 @@ function Profilemy(props) {
             </Grid>
           </Grid>
           </Box>
-          
-          
           <span className={`caption ${captionSize}`}>{caption}</span>
-          
         </div>
       )}
       <a href="/">{urlText}</a>
     </div>
+    </>
   );
 }
 
