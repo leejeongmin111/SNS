@@ -1,0 +1,35 @@
+// @import "./_variables";
+
+// body {
+//   background-color: $background-white;
+//   font-family: $font;
+//   font-size: 16px;
+//   margin: 0;
+//   padding: 0;
+//   min-width: fit-content;
+// }
+
+// main {
+//   .container {
+//     background-color: $background-blue;
+//     border-right: 2px solid $border-color-grey;
+//     border-left: 2px solid $border-color-grey;
+//     display: flex;
+//     justify-content: center;
+//     width: 640px;
+//     position: relative;
+//     left: 29%;
+//   }
+// }
+// a {
+//   text-decoration: none;
+//   color: $link-color;
+//   font-size: 0.9em;
+//   font-weight: 500;
+// }
+
+// @media only screen and (max-width: 1024px) {
+//   main .container {
+//     justify-content: center !important;
+//   }
+// }
