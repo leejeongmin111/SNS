@@ -12,11 +12,19 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import '../../styles/Account/Myprofile.scss'
 import JobIcon from "../../Icons/JobProfile";
+<<<<<<< HEAD
+import LikeNone from "../../Icons/LikeNone";
+import Reply from "../../Icons/Reply";
+import SaveNone from "../../Icons/SaveNone";
+import SnsProfile from "../../Icons/SnsProfile";
+import TagIcon from "../../Icons/TagIcon";
+=======
 import SaveNone from "../../Icons/SaveNone";
 import SnsProfile from "../../Icons/SnsProfile";
 import TagIcon from "../../Icons/TagIcon";
 import '../../styles/App.scss'
 import Profilemy from "./Profilemy";
+>>>>>>> d02598ef17b21f208758890f14601b66fe7ceb3f
 
 
 const itemData = [
@@ -91,12 +99,22 @@ function MyProfile(){
                   <Profilemy></Profilemy>
                   </Box>
                   <hr></hr>
+<<<<<<< HEAD
+                  <Box sx={{marginLeft:60}}>
+=======
                   <Box className='icon'>
+>>>>>>> d02598ef17b21f208758890f14601b66fe7ceb3f
                     <SnsProfile/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <JobIcon/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <SaveNone/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <TagIcon/>
                   </Box>
+<<<<<<< HEAD
+                  <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                   {Array.from(Array(6)).map((_, index) => (
+                    <Grid item xs={2} sm={4} md={4} key={index}>
+                    <img src={itemData[1].img} className="imgs"></img>
+=======
                   <Box className='icon'>
                     Daily&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     Job&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -108,6 +126,7 @@ function MyProfile(){
                    {Array.from(Array(12)).map((_, index) => (
                     <Grid item xs={2} sm={4} md={4} key={index}>
                     <item><img src={itemData[1].img} className="imgs"></img></item>
+>>>>>>> d02598ef17b21f208758890f14601b66fe7ceb3f
                     </Grid>
                     ))}
                   </Grid>
