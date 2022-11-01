@@ -1,0 +1,15 @@
+@import "../_variables";
+
+.container_QnA {
+  width: 30%;
+  height: 50px;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  background-color: $background-skyblue;
+
+  top: 15%;
+  .QnA_Text {
+    width: 60%;
+  }
+}

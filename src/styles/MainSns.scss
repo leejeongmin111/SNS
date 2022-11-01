@@ -1,0 +1,43 @@
+@import "./_variables";
+
+body {
+  background-color: $background-white;
+  font-family: $font;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  min-width: fit-content;
+
+  main {
+    display: grid;
+    grid-template-columns: 600px 1fr 600px;
+
+    .blank {
+      background-color: $background-skyblue;
+    }
+    .Main_container {
+      background-color: $background-blue;
+      border-right: 2px solid $border-color-grey;
+      border-left: 2px solid $border-color-grey;
+      grid-template-columns: 1fr;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      // padding-left: 1.5%;
+      .card_container {
+        padding: 15% 0 0 0%;
+        width: 100%;
+        align-items: center;
+      }
+    }
+    .box {
+      background-color: $background-skyblue;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  main .container {
+    justify-content: center !important;
+  }
+}

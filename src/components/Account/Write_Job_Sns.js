@@ -41,6 +41,21 @@ export default function Write_Daily() {
     setimgSrc("");
   };
 
+  const handleChange = (e) => {};
+
+  // const handleSubmit = async (e) => {
+  //     e.preventDefault();
+  //     await axios
+  //       .post("", {
+  //       })
+  //       .then((res) => {
+  //         console.log("문제없음", res);
+  //       })
+  //       .catch(() => {
+  //         console.log("문제발생");
+  //       });
+  //   };
+
   return (
     <div>
       <Button onClick={handleOpen}>Job_Sns</Button>

@@ -14,6 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
 import "../../styles/Account/Write_Daily.scss";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const style = {
@@ -55,6 +56,7 @@ export default function Write_Daily() {
       })
       .then((res) => {
         console.log(res.data);
+        // 값은 받아와지는데 페이지 이동이 안됨
         window.location.href = "/mainsns";
       })
       .catch((err) => {

@@ -1,23 +1,24 @@
-import "../styles/App.scss";
-import Header from "../components/JobSns/Header";
-import Cards from "../components/JobSns/Cards";
-import Sidebar from "../components/JobSns/Sidebar";
-import Footer from "../components/JobSns/Footer";
-import { Route, Routes } from "react-router-dom";
-import Register from "../components/Account/Register";
+import "../styles/MainSns.scss";
+import Header from "./MainSns/MainHeader";
+import Cards from "./MainSns/MainCards";
+import Sidebar from "./MainSns/MainSidebar";
+import Footer from "./MainSns/MainFooter";
 
 function MainSns() {
   return (
-    <div className="App">
-      <Header />
-      <main>
-        <div className="container">
+    <main>
+      <div className="blank"></div>
+      <div className="Main_container">
+        <Header />
+        <div className="card_container">
           <Cards />
-          <Sidebar />
         </div>
-      </main>
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+      <div className="box">
+        <Sidebar />
+      </div>
+    </main>
   );
 }
 export default MainSns;
