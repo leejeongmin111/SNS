@@ -8,67 +8,61 @@ import '../../styles/Jobsns/Job_chart.scss'
 
 const data = [
   {
-    "name": "Page A",
-    "pv": 2400
+    name: "IT서비스",
+    pv: 3940,
   },
   {
-    "name": "Page B",
-    "pv": 1398
+    name: "게임SW",
+    pv: 4311,
   },
   {
-    "name": "Page C",
-    "pv": 9800
+    name: "인터넷SW",
+    pv: 4281,
   },
   {
-    "name": "Page D",
-    "pv": 3908
-  }
-]
-
+    name: "패키지SW",
+    pv: 4348,
+  },
+];
 const data01 = [
   {
-    "name": "Group A",
-    "value": 400
+    name: "IT서비스",
+    pv: 70,
   },
   {
-    "name": "Group B",
-    "value": 300
+    name: "게임SW",
+    pv: 72.8,
   },
   {
-    "name": "Group C",
-    "value": 300
+    name: "인터넷SW",
+    pv: 72.37,
   },
   {
-    "name": "Group D",
-    "value": 200
-  }
- 
+    name: "패키지SW",
+    pv: 71.32,
+  },
 ];
 const data02 = [
   {
-    "name": "Group A",
-    "value": 2400
+    name: "3년이하",
+    value: 92.9,
   },
   {
-    "name": "Group B",
-    "value": 4567
+    name: "3~5년",
+    value: 111,
   },
   {
-    "name": "Group C",
-    "value": 1398
+    name: "5~10년",
+    value: 73,
   },
   {
-    "name": "Group D",
-    "value": 9800
+    name: "10~15년",
+    value: 72,
   },
   {
-    "name": "Group E",
-    "value": 3908
+    name: "15년 이상",
+    value: 24,
   },
-  {
-    "name": "Group F",
-    "value": 4800
-  }
 ];
 
 
