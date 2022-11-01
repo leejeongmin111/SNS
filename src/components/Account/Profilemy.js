@@ -7,6 +7,9 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Setting from "../../Icons/Setting";
 
+
+
+
 function Profilemy(props) {
   const {
     username,
@@ -23,24 +26,27 @@ function Profilemy(props) {
     ? username
     : users[Math.floor(Math.random() * users.length)].username;
 
+ 
+
   return (
+    <>
     <div className="My_profile">
+      <div className="My_img">
       <ProfileIcon
         iconSize={iconSize}
         storyBorder={storyBorder}
         image={image}
       />
+      </div>
       {(accountName || caption) && !hideAccountName && (
         <div className="My_textContainer">
           <span className="My_accountName">{accountName}</span>
-          
-
           <Box className="My_box">
             <Grid container spacing={1}>
              <Grid item xs={3}>
                 <span>게시물 &nbsp;&nbsp; 0</span>
              </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={3} >
               <span>팔로우 &nbsp;&nbsp; 0</span>
               </Grid>
             <Grid item xs={3}>
@@ -48,14 +54,12 @@ function Profilemy(props) {
             </Grid>
           </Grid>
           </Box>
-          
-          
           <span className={`caption ${captionSize}`}>{caption}</span>
-          
         </div>
       )}
       <a href="/">{urlText}</a>
     </div>
+    </>
   );
 }
 

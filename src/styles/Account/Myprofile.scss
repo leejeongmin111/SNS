@@ -11,19 +11,22 @@
   top: 0;
   left: 29%;
   background-color: $background-blue;
-
-
-  
     
 .Pro_box{
     width: 100%;   
+    
     .pro_text{
         margin-left: 2rem;
       
     }     
     .Pro_icon{
-        margin-left: 13rem;
-        font-size: 0.08rem;
+        //margin-left: 13rem;
+        //font-size: 0.08rem;
+
+        .icon_button{
+        background-color: $background-blue;
+        }
+
     }
     .Pro_grid{
         // margin: 1px;

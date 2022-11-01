@@ -14,6 +14,8 @@ import TagIcon from "../../Icons/TagIcon";
 import '../../styles/App.scss'
 import Profilemy from "./Profilemy";
 import Sidebar from "../JobSns/Sidebar";
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 
 
 const itemData = [
@@ -75,11 +77,19 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+ 
+
+
 function MyProfile(){
+
+  const [value, setValue] = React.useState(0);
+
     return(
         <>
+
             <Header className="head"/>
             <main className="Pro_main">
+
             <React.Fragment >
               <Container>
                 <Box className='Pro_box'>
@@ -88,18 +98,24 @@ function MyProfile(){
                   <Profilemy></Profilemy>
                   </Box>
                   <hr></hr>
+
+
                   <Box className='Pro_icon'>
-                    <SnsProfile/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <JobIcon/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <SaveNone/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <TagIcon/>
-                  </Box>
-                  <Box className='Pro_icon'>
-                    Daily&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    Job&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    Save&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    Tag
-                  </Box>
+                    <BottomNavigation
+                      showLabels
+                      value={value}
+                      onChange={(event, newValue) => {
+                        setValue(newValue);
+                      }}
+                      >
+                    <BottomNavigationAction label="Daily" icon={<SnsProfile/>} className='icon_button' />
+                    <BottomNavigationAction label="Job" icon={<JobIcon />}className='icon_button' />
+                    <BottomNavigationAction label="Save" icon={<SaveNone />} className='icon_button'/>
+                    <BottomNavigationAction label="Tag" icon={<TagIcon/>}className='icon_button' />
+
+                    </BottomNavigation>
+                   </Box>
+                
                   <br></br>
                   <Grid container spacing={{ xs: 1, md: 1 }} columns={{ xs: 4, sm: 8, md: 12 }} className='Pro_gird'>
                    {Array.from(Array(20)).map((_, index) => (

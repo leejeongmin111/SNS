@@ -38,6 +38,8 @@ function App() {
           <Route path="/register" element={<Register></Register>}></Route>
           <Route path="/mainsns" element={<MainSns></MainSns>}></Route>
           <Route path="/dm" element={<Dm></Dm>}></Route>
+          <Route path="/jobdash" element={<Job_Dash/>}></Route>
+
         </Routes>
       </Provider>
     </>
