@@ -31,7 +31,6 @@ const store = createStore(reducer);
 function App() {
   return (
     <>
-
       <Provider store={store}>
         <Routes>
           <Route path="/pro" element={<MyProfile></MyProfile>}></Route>
