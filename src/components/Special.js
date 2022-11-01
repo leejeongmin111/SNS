@@ -1,20 +1,21 @@
-import "../styles/App.scss";
-import Special_Header from "./Special/Header";
-import Special_Footer from "./Special/Footer";
-import Special_Question from "./Special/Question";
-import { Route, Routes } from "react-router-dom";
+import "../styles/Special.scss";
+import Header from "./Special/SHeader";
+import Footer from "./Special/SFooter";
+import Question from "./Special/SQuestion";
 
 function Special() {
   return (
-    <div className="App">
-      <Special_Header />
-      <main>
-        <div className="container">
-          <Special_Question />
+    <main>
+      <div className="blank"></div>
+      <div className="Special_container">
+        <Header />
+        <div className="container_QnA">
+          <Question />
         </div>
-      </main>
-      <Special_Footer />
-    </div>
+        <Footer />
+      </div>
+      <div className="box"></div>
+    </main>
   );
 }
 export default Special;

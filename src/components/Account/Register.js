@@ -1,4 +1,4 @@
-import * as React from "react";
+// import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -21,6 +21,9 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormLabel from "@mui/material/FormLabel";
 import Jobcheckbox from "./Jobcheckbox";
 import Logo from "../../images/jobsnsLogo.png";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -43,13 +46,37 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Register() {
-  const handleSubmit = (event) => {
+  const [email, setEmail] = useState("");
+  const [job, setJob] = useState("");
+  const [pw, setPw] = useState("");
+  const [name, setName] = useState("");
+  const [nick, setNick] = useState("");
+  const [rn, setRn] = useState("");
+  const [phone, setPhone] = useState("");
+  const [gender, setGender] = useState("");
+  const nav = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    console.log(email, pw, name, nick, rn, phone, gender, job);
+    await axios
+      .post("http://127.0.0.1:3001/register", {
+        email: email,
+        pw: pw,
+        name: name,
+        nick: nick,
+        rn: rn,
+        phone: phone,
+        gender: gender,
+        job: job,
+      })
+      .then((res) => {
+        console.log("문제없음", res);
+        nav("/");
+      })
+      .catch((err) => {
+        console.log("문제발생", err);
+      });
   };
 
   return (
@@ -63,10 +90,10 @@ export default function Register() {
             flexDirection: "column",
             alignItems: "center",
           }}
-        ><br></br>
+        >
+          <br></br>
           <img src={Logo} width="300px"></img>
-          <Typography component="h1" variant="h5">
-          </Typography>
+          <Typography component="h1" variant="h5"></Typography>
           <Box
             component="form"
             noValidate
@@ -81,6 +108,7 @@ export default function Register() {
                   id="email"
                   label="Email Address"
                   name="email"
+                  onChange={(e) => setEmail(e.target.value)}
                   autoComplete="email"
                 />
               </Grid>
@@ -92,6 +120,7 @@ export default function Register() {
                   label="Password"
                   type="password"
                   id="password"
+                  onChange={(e) => setPw(e.target.value)}
                   autoComplete="new-password"
                 />
               </Grid>
@@ -102,6 +131,7 @@ export default function Register() {
                   required
                   fullWidth
                   id="firstName"
+                  onChange={(e) => setName(e.target.value)}
                   label="Name"
                 />
               </Grid>
@@ -111,6 +141,7 @@ export default function Register() {
                   required
                   fullWidth
                   id="NickName"
+                  onChange={(e) => setNick(e.target.value)}
                   label="NickName"
                 />
               </Grid>
@@ -120,6 +151,7 @@ export default function Register() {
                   required
                   fullWidth
                   id="human_number"
+                  onChange={(e) => setRn(e.target.value)}
                   label="주민번호"
                 />
               </Grid>
@@ -129,6 +161,7 @@ export default function Register() {
                   required
                   fullWidth
                   id="phone_number"
+                  onChange={(e) => setPhone(e.target.value)}
                   label="phone_number"
                 />
               </Grid>
@@ -141,20 +174,21 @@ export default function Register() {
                   row
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="gender"
+                  onChange={(e) => setGender(e.target.value)}
                 >
                   <FormControlLabel
-                    value="female"
+                    value="F"
                     control={<Radio />}
                     label="Female"
                   />
                   <FormControlLabel
-                    value="male"
+                    value="M"
                     control={<Radio />}
                     label="Male"
                   />
                 </RadioGroup>
               </FormControl>
-              <Jobcheckbox></Jobcheckbox>
+              <Jobcheckbox setJob={setJob}></Jobcheckbox>
               <Grid item xs={12}></Grid>
               <Grid item xs={12}>
                 <FormControlLabel
@@ -175,7 +209,7 @@ export default function Register() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
