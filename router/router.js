@@ -58,39 +58,36 @@ router.post("/write_daily", (req, res) => {
 
   let text = req.body.text;
   let img = req.body.img;
+  let email = req.body.email;
   let div = 0;
 
-  let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,"jays",0,0,${div})`;
-  conn.query(sqlText, [text], function (err, rows) {
+  let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,0,0,${div})`;
+  conn.query(sqlText, [text, email], function (err, rows) {
     if (!err) {
       console.log("text집어넣기성공");
-      res.json("text집어넣기 성공");
     } else {
       console.log("text집어넣기 문제", err);
       throw err;
     }
   });
-});
-
-router.post("/mainsns", (req, res) => {
-  console.log("mainsns");
-  let id = request.body.id;
-
-  // 세션 등록
-  // request.session.원하는 변수이름 = {}
-  // key는 ""안에 작성 => EJS render 작업할때와 비교해서 주의할것
-  request.session.user = {
-    id: id,
-  };
-
-  console.log("세션 등록 성공");
-  res.json({});
-
-  // 등록한 세션 확인
-  console.log(request.session.user.id);
-
-  // 응답을 끝내주는 작업
-  response.end();
+  // let seq = "select bd_seq from t_community order by bd_seq desc";
+  // let seq_result = "";
+  // conn.query(seq, (err, cnt) => {
+  //   if (cnt.lenght > 0) {
+  //     console.log("bd_seq가져오기 성공", cnt[0]);
+  //     seq_result = cnt[0];
+  //   } else {
+  //     console.log("bd_seq 실패");
+  //   }
+  // });
+  let sqlImg = `insert into bd_file values(?,1,?)`;
+  conn.query(sqlImg, [email, img], (err, rows) => {
+    if (!err) {
+      console.log("img들어가기 성공");
+    } else {
+      console.log("img오류 발생", err);
+    }
+  });
 });
 
 router.post("/login", (req, res) => {
