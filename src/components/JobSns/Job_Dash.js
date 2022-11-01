@@ -76,21 +76,24 @@ const data02 = [
 
 function Job_Dash() {
   return (
-    <div className="App">
+    <>
+    <div className="Dash_App">
       <Header />
       <main className="chart_main">
       <div className="chart1">
-        <BarChart width={500} height={250} data={data} >
+        <h2>연봉</h2>
+        <BarChart width={500} height={250} data={data}  >
            <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
-              <YAxis />
-                <Tooltip />
+              <YAxis type="number" domain={['dataMin-100', 'dataMax+100']}/>
+                <Tooltip/>
                <Legend />
               <Bar dataKey="pv" fill="#1c13dd" />
           </BarChart>
           </div>
           
           <div className="chart2">
+          <h2>연봉</h2>
           <BarChart width={500} height={250} data={data}>
            <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
@@ -102,14 +105,16 @@ function Job_Dash() {
           </div>
           
           <div className="chart3">
+          <h2>연봉</h2>
             <PieChart width={1000} height={500}>
-             <Pie data={data02} dataKey="value" nameKey="name" cx="15%" cy="20%" outerRadius={50} fill="#1c13dd" label="dd" />
+             <Pie data={data02} dataKey="value" nameKey="name" cx="15%" cy="20%" outerRadius={50} fill="#1c13dd" />
             </PieChart>
            </div>
           
        </main>
       <Footer />
     </div>
+    </>
   );
 }
 export default Job_Dash;
