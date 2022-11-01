@@ -1,3 +1,4 @@
+const { ContentPasteSearchOutlined } = require("@mui/icons-material");
 const express = require("express");
 const router = express.Router();
 const mysql = require("mysql2"); //설치한 mysql기능
@@ -61,33 +62,47 @@ router.post("/write_daily", (req, res) => {
   let email = req.body.email;
   let div = 0;
 
-  let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,0,0,${div})`;
-  conn.query(sqlText, [text, email], function (err, rows) {
-    if (!err) {
-      console.log("text집어넣기성공");
-    } else {
-      console.log("text집어넣기 문제", err);
-      throw err;
-    }
-  });
-  // let seq = "select bd_seq from t_community order by bd_seq desc";
-  // let seq_result = "";
-  // conn.query(seq, (err, cnt) => {
-  //   if (cnt.lenght > 0) {
-  //     console.log("bd_seq가져오기 성공", cnt[0]);
-  //     seq_result = cnt[0];
-  //   } else {
-  //     console.log("bd_seq 실패");
-  //   }
-  // });
-  let sqlImg = `insert into bd_file values(?,1,?)`;
-  conn.query(sqlImg, [email, img], (err, rows) => {
-    if (!err) {
-      console.log("img들어가기 성공");
-    } else {
-      console.log("img오류 발생", err);
-    }
-  });
+  if (img === undefined) {
+    let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,0,0,${div})`;
+    conn.query(sqlText, [text, email], function (err, rows) {
+      if (!err) {
+        console.log("text집어넣기성공");
+      } else {
+        console.log("text집어넣기 문제", err);
+        throw err;
+      }
+    });
+  } else {
+    let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,0,0,${div})`;
+    conn.query(sqlText, [text, email], function (err, rows) {
+      if (!err) {
+        console.log("text집어넣기성공");
+      } else {
+        console.log("text집어넣기 문제", err);
+        throw err;
+      }
+    });
+
+    let seq = "select bd_seq from t_community order by bd_seq desc";
+    conn.query(seq, (err, cnt) => {
+      if (!err) {
+        console.log("bd_seq가져오기 성공", cnt[0]);
+        let sqlImg = `insert into bd_file values(?,?,?)`;
+        console.log("위 기철" + cnt[0]);
+        conn.query(sqlImg, [email, cnt[0], img], (err, rows) => {
+          console.log("아래 앙 기철ㄸㄸㄸㄸ" + cnt[0]);
+          if (!err) {
+            console.log("img들어가기 성공");
+          } else {
+            console.log("img오류 발생", err);
+          }
+        });
+      } else {
+        console.log("bd_seq 실패", err);
+        throw err;
+      }
+    });
+  }
 });
 
 router.post("/login", (req, res) => {
