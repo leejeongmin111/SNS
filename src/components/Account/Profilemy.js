@@ -7,6 +7,9 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Setting from "../../Icons/Setting";
 
+
+
+
 function Profilemy(props) {
   const {
     username,
@@ -22,6 +25,8 @@ function Profilemy(props) {
   let accountName = username
     ? username
     : users[Math.floor(Math.random() * users.length)].username;
+
+ 
 
   return (
     <div className="My_profile">
@@ -40,7 +45,7 @@ function Profilemy(props) {
              <Grid item xs={3}>
                 <span>게시물 &nbsp;&nbsp; 0</span>
              </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={3} >
               <span>팔로우 &nbsp;&nbsp; 0</span>
               </Grid>
             <Grid item xs={3}>

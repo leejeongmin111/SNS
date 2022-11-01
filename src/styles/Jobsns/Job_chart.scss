@@ -1,0 +1,30 @@
+@import "../variables";
+
+    
+
+.chart_main{
+    background-color: $background-white;
+    border-bottom: 2px solid $border-color-grey;
+    border-right: 2px solid $border-color-grey;
+    border-left: 2px solid $border-color-grey;
+    z-index: 1;
+    width: 640px;
+    height: 100%;
+    position: absolute;
+    left: 29%;
+    background-color: $background-blue;
+    float:left;
+
+    
+    .chart1{
+
+    }
+    .chart2{
+
+    }
+    .chart3{
+
+    }
+}
+   
+    
