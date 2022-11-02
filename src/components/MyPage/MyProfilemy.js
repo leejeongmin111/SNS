@@ -74,10 +74,7 @@ function Profilemy(props) {
         <a href="/">{urlText}</a>
       </div>
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 138108e9718051ee62cc4f917f5ac59ad7685dc4
       {/* 모달 : 팔로우 팔로잉 창 */}
       <div>
       <Modal
