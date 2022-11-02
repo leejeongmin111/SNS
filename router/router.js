@@ -88,7 +88,6 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
       throw err;
     }
   });
-<<<<<<< HEAD
   // let seq = "select bd_seq from t_community order by bd_seq desc";
   // let seq_result = "";
   // conn.query(seq, (err, cnt) => {
@@ -107,7 +106,6 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
       console.log("img오류 발생", err);
     }
   });
-=======
   if (img !== undefined) {
     let seq = "select bd_seq from t_community order by bd_seq desc";
     conn.query(seq, (err, cnt) => {
@@ -220,7 +218,6 @@ router.post("/write_special", upload.single("img"), (req, res) => {
   //   });
   // }
   // res.redirect("/mainsns");
->>>>>>> 35a68dcf6bc3981b03ee11eb1c1cd9398255b2af
 });
 
 router.post("/login", (req, res) => {
