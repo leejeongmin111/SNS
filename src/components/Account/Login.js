@@ -54,6 +54,7 @@ export default function Login() {
         console.log("문제없음");
         console.log(res);
         dispatch({ type: "test", email: res.data.email });
+        sessionStorage.setItem("email", res.data.email);
         nav("/mainsns");
       })
       .catch((err) => {

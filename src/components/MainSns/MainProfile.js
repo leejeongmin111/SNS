@@ -6,17 +6,16 @@ function Profile(props) {
   const {
     username,
     caption,
-    urlText,
+    // urlText,
     iconSize,
     captionSize,
     storyBorder,
     hideAccountName,
     image,
   } = props;
-
   let accountName = username
     ? username
-    : users[Math.floor(Math.random() * users.length)].username;
+    : users[Math.floor(Math.random() * (users.length - 1))].username;
 
   return (
     <div className="profile">
@@ -31,7 +30,7 @@ function Profile(props) {
           <span className={`caption ${captionSize}`}>{caption}</span>
         </div>
       )}
-      <a href="/">{urlText}</a>
+      {/* <a href="/">{urlText}</a> */}
     </div>
   );
 }

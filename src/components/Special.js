@@ -1,7 +1,8 @@
 import "../styles/Special.scss";
 import Header from "./Special/SHeader";
 import Footer from "./Special/SFooter";
-import Question from "./Special/SQuestion";
+import QuestionHeader from "./Special/SQuestionHeader";
+import QuestionCard from "./Special/SQuestionCard";
 
 function Special() {
   return (
@@ -10,9 +11,12 @@ function Special() {
       <div className="Special_container">
         <Header />
         <div className="container_QnA">
-          <Question />
+          <div className="container_main">
+            <QuestionHeader />
+            <QuestionCard />
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
       <div className="box"></div>
     </main>

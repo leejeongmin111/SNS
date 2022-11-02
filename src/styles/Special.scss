@@ -20,12 +20,17 @@ body {
       border-right: 2px solid $border-color-grey;
       border-left: 2px solid $border-color-grey;
       grid-template-columns: 1fr;
-      left: 0;
       display: flex;
       width: 100%;
+      align-items: center;
+      left: 0;
       .container_QnA {
+        padding: 13.5% 0 0 1.5%;
         width: 100%;
-        padding: 3% 0 0 1.4%;
+        align-items: center;
+        .container_main {
+          padding: 0 0 0 0.5%;
+        }
       }
     }
     .box {
@@ -33,6 +38,7 @@ body {
     }
   }
 }
+
 @media only screen and (max-width: 1024px) {
   main .container {
     justify-content: center !important;

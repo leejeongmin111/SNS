@@ -13,6 +13,8 @@ import PhotoIcon from "../../Icons/PhotoIcon";
 import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
 import "../../styles/Account/Write_Daily.scss";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -33,6 +35,10 @@ export default function Write_Special() {
   const handleClose = () => setOpen(false);
   const [imgSrc, setimgSrc] = useState("");
   const [kind, setKind] = useState("");
+  const email = useSelector((state) => state.email);
+  const [text, setText] = useState("");
+  const [title, setTitle] = useState("");
+
   const srcChange = (e) => {
     setimgSrc(URL.createObjectURL(e.target.files[0]));
   };
@@ -40,10 +46,30 @@ export default function Write_Special() {
   const deleteSrc = () => {
     URL.revokeObjectURL(imgSrc);
     setimgSrc("");
+    window.location.href = "/mainsns";
   };
 
   const handleChange = (e) => {
     setKind(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await axios
+      .post("http://127.0.0.1:3001/write_special", {
+        text: text,
+        img: imgSrc,
+        kind: kind,
+        title: title,
+        email: email,
+      })
+      .then((res) => {
+        console.log(res.data);
+        window.location.href = "/mainsns";
+      })
+      .catch((err) => {
+        console.log("문제발생", err.response.data);
+      });
   };
 
   return (
@@ -56,11 +82,7 @@ export default function Write_Special() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box
-          sx={style}
-          component="form"
-          // action 여기다가 주소 값 입력 해주세영~~!~!~!
-        >
+        <Box sx={style} component="form">
           <Typography id="modal-modal-title" variant="h6" component="h2">
             <IconButton
               aria-label="upload picture"
@@ -86,6 +108,7 @@ export default function Write_Special() {
                 multiline
                 rows={1}
                 defaultValue=""
+                onChange={(e) => setTitle(e.target.value)}
                 name="title"
               />
 
@@ -113,12 +136,18 @@ export default function Write_Special() {
                 rows={13}
                 defaultValue=""
                 name="text"
+                onChange={(e) => setText(e.target.value)}
                 fullWidth
               />
             </div>
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 50 }}>
-            <Button type="submit" variant="outlined" className="daily_button">
+            <Button
+              type="submit"
+              variant="outlined"
+              className="daily_button"
+              onClick={handleSubmit}
+            >
               Submit
             </Button>
             <Button variant="outlined" onClick={deleteSrc}>
