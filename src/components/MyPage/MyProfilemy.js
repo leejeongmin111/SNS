@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import Myfollow_Click from "./Myfollow_Click";
+import { useState } from "react";
 
 // 모달 스타일 설정
 const style = {
@@ -42,6 +43,8 @@ function Profilemy(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const [emailTest] = useState(sessionStorage.getItem("email"));
+
   return (
     <>
       <div className="My_profile">
@@ -54,7 +57,7 @@ function Profilemy(props) {
         </div>
         {(accountName || caption) && !hideAccountName && (
           <div className="My_textContainer">
-            <span className="My_accountName">{accountName}</span>
+            <span className="My_accountName">{emailTest}</span>
             <Box className="My_box">
               <Grid container spacing={1}>
                 <Grid item xs={3}>

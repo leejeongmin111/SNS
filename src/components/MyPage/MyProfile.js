@@ -27,7 +27,7 @@ function Profile(props) {
       />
       {(accountName || caption) && !hideAccountName && (
         <div className="textContainer">
-          <span className="accountName">{accountName}</span>
+          <span className="accountName">{username}</span>
           <span className={`caption ${captionSize}`}>{caption}</span>
         </div>
       )}
