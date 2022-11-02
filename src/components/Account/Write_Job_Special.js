@@ -27,7 +27,7 @@ const style = {
   p: 4,
 };
 
-export default function Write_Daily() {
+export default function Write_Special() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
