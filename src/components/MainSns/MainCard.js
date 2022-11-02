@@ -16,7 +16,21 @@ function Card(props) {
   const { storyBorder, image, comments, likedByText, likedByNumber, hours } =
     props;
   
-  const [hidden,setHidden] = useState("")
+  //댓글 숨기기 
+  const [show,setShow] = useState({display: 'none'});
+  const [num, setNum] =useState(0);
+  const [fold,setFold] = useState("보기")
+  function changeshow(){
+    if(num==0){
+      setNum(num+1);
+      setShow({display: 'block'});
+      setFold("접기");
+    }else{
+      setNum(0);
+      setShow({display: 'none'});
+      setFold("보기");
+    }
+  };
 
   function handleSubmit (e){
     e.preventDefault();
@@ -38,7 +52,13 @@ function Card(props) {
           <strong>{likedByNumber} others</strong>
         </span>
       </div>
-      <div className="comments">
+      <div className="timePosted">{hours} HOURS AGO <a onClick={changeshow} className="cmt_fold">{comments.length}개의 댓글 {fold}</a></div>
+        
+
+
+        {/* 댓글  */}
+      <div className="comments" style={show}>
+        <br></br>
         {comments.map((comment) => {
           return (
             <Comment
@@ -48,26 +68,11 @@ function Card(props) {
             />
           );
         })}
-      </div>
-      <div className="timePosted">{hours} HOURS AGO</div>
-      <div className="addComment">
+      </div> 
 
-
-
-      <div className="comments">
-        {comments.map((comment) => {
-          return (
-            <Comment
-              key={comment.id}
-              accountName={comment.user}
-              comment={comment.text}
-            />
-          );
-        })}
-      </div>
-
+      <div className="addComment" style={show}>
       <Box
-        visibility = "{hidden}"
+        className="input_comment"
         component="form"
         onSubmit={handleSubmit}
         noValidate

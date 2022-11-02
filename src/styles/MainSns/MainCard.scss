@@ -52,6 +52,10 @@
     padding-bottom: 1em;
     color: $font-color-secondary;
     border-bottom: 1px solid $border-color-grey-secondary;
+    .cmt_fold{
+      margin-left: 52em;
+      color: black;      
+    }
   }
 
   .addComment {
@@ -59,11 +63,7 @@
     justify-content: space-between;
     font-size: 0.85em;
     padding: 1.5em 1.25em;
-
-    .comment_post{
-      
-    }
-
+    
     .commentText {
       color: $font-color-secondary;
     }
