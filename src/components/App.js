@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import Login from "../components/Account/Login";
-=======
 import "../styles/App.scss";
-import Login from "./Account/Login";
->>>>>>> 35a68dcf6bc3981b03ee11eb1c1cd9398255b2af
+import Login from "./Account/Login"
 import { Route, Routes } from "react-router-dom";
 import Register from "../components/Account/Register.js";
 import MainSns from "./MainSns";
