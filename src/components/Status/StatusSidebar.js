@@ -5,7 +5,7 @@ import image from "../../images/profile.jpg";
 
 function Sidebar() {
   return (
-    <div className="sidebar_container">
+  <div className="sidebar_container">
       <div className="textcontainer">
         <span className="FriendsText">Your Friends</span>
       </div>
