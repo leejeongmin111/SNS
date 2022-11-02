@@ -3,9 +3,23 @@ const express = require("express");
 const router = express.Router();
 const mysql = require("mysql2"); //설치한 mysql기능
 //사용자가 보낸 값이 post방식일때 분석해주는 express기능
-
 const path = require("path");
+const multer = require("multer");
 
+var storage = multer.diskStorage({
+  destination: (req, file, callBack) => {
+    callBack(null, "./public/images/"); // '../public/images/' directory name where save the file
+  },
+  filename: (req, file, callBack) => {
+    callBack(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+var upload = multer({
+  storage: storage,
+});
 let conn = mysql.createConnection({
   // 나의 DB 정보
   host: "project-db-stu.ddns.net",
@@ -53,7 +67,7 @@ router.post("/register", (req, res) => {
   );
 });
 
-router.post("/write_daily", (req, res) => {
+router.post("/write_daily", upload.single("img"), (req, res) => {
   console.log("가져온값 : ", req.body.text);
   console.log("가져온값 : ", req.body.img);
 
@@ -61,41 +75,33 @@ router.post("/write_daily", (req, res) => {
   let img = req.body.img;
   let email = req.body.email;
   let div = 0;
+  if (text === "" && img === "") {
+    console.log("뭐좀 써봐");
+    res.redirect("/mainsns");
+    res.end();
+  }
 
-  if (img === undefined) {
-    let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,0,0,${div})`;
-    conn.query(sqlText, [text, email], function (err, rows) {
-      if (!err) {
-        console.log("text집어넣기성공");
-      } else {
-        console.log("text집어넣기 문제", err);
-        throw err;
-      }
-    });
-  } else {
-    let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,0,0,${div})`;
-    conn.query(sqlText, [text, email], function (err, rows) {
-      if (!err) {
-        console.log("text집어넣기성공");
-      } else {
-        console.log("text집어넣기 문제", err);
-        throw err;
-      }
-    });
-
+  let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,0,0,${div})`;
+  conn.query(sqlText, [text, email], function (err, rows) {
+    if (!err) {
+      console.log("text집어넣기성공");
+    } else {
+      console.log("text집어넣기 문제", err);
+      throw err;
+    }
+  });
+  if (img !== undefined) {
     let seq = "select bd_seq from t_community order by bd_seq desc";
     conn.query(seq, (err, cnt) => {
       if (!err) {
         console.log("bd_seq가져오기 성공", cnt[0]);
         let sqlImg = `insert into bd_file values(?,?,?)`;
         console.log("위 기철" + cnt[0]);
-        conn.query(sqlImg, [email, cnt[0], img], (err, rows) => {
-          console.log("아래 앙 기철ㄸㄸㄸㄸ" + cnt[0]);
-          if (!err) {
-            console.log("img들어가기 성공");
-          } else {
-            console.log("img오류 발생", err);
-          }
+        console.log("No file upload");
+        var imgsrc = "http://127.0.0.1:3000/images/" + req.file.filename;
+        conn.query(sqlImg, [email, cnt[0], imgsrc], (err, result) => {
+          if (err) throw err;
+          console.log("file uploaded");
         });
       } else {
         console.log("bd_seq 실패", err);
@@ -103,6 +109,7 @@ router.post("/write_daily", (req, res) => {
       }
     });
   }
+  res.redirect("/mainsns");
 });
 
 router.post("/login", (req, res) => {
