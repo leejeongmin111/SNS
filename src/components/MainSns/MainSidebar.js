@@ -2,8 +2,10 @@ import "../../styles/MainSns/MainSidebar.scss";
 import Profile from "./MainProfile";
 import Suggestions from "./MainSuggestions";
 import image from "../../images/profile.jpg";
+import { useSelector } from "react-redux";
 
 function Sidebar() {
+  const email = useSelector((state) => state.email);
   return (
     <div className="sidebar_container">
       <div className="textcontainer">
@@ -11,7 +13,7 @@ function Sidebar() {
       </div>
       <div className="Mainsidebar">
         <Profile
-          username="aleks.popovic"
+          username={email}
           caption="Aleksandar Popović"
           urlText="Switch"
           iconSize="big"
