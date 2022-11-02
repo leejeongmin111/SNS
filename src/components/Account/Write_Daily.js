@@ -15,6 +15,7 @@ import { useState } from "react";
 import "../../styles/Account/Write_Daily.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const style = {
   position: "absolute",
@@ -35,7 +36,7 @@ export default function Write_Daily() {
   const handleClose = () => setOpen(false);
   const [text, setText] = useState("");
   const [imgSrc, setimgSrc] = useState("");
-  const nav = useNavigate();
+  const email = useSelector((state) => state.email);
   const srcChange = (e) => {
     setimgSrc(URL.createObjectURL(e.target.files[0]));
   };
@@ -51,6 +52,7 @@ export default function Write_Daily() {
       .post("http://127.0.0.1:3001/write_daily", {
         text: text,
         img: imgSrc,
+        email: email,
       })
       .then((res) => {
         console.log(res.data);

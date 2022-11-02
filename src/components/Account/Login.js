@@ -19,7 +19,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Account/Login.scss";
 import { useDispatch } from "react-redux";
-
 function Copyright(props) {
   return (
     <Typography
@@ -45,7 +44,6 @@ export default function Login() {
   const nav = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     console.log(email, pw);
     await axios
       .post("http://127.0.0.1:3001/login", {
