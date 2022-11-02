@@ -88,6 +88,26 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
       throw err;
     }
   });
+<<<<<<< HEAD
+  // let seq = "select bd_seq from t_community order by bd_seq desc";
+  // let seq_result = "";
+  // conn.query(seq, (err, cnt) => {
+  //   if (cnt.lenght > 0) {
+  //     console.log("bd_seq가져오기 성공", cnt[0]);
+  //     seq_result = cnt[0];
+  //   } else {
+  //     console.log("bd_seq 실패");
+  //   }
+  // });
+  let sqlImg = `insert into bd_file values(?,1,?)`;
+  conn.query(sqlImg, [email, img], (err, rows) => {
+    if (!err) {
+      console.log("img들어가기 성공");
+    } else {
+      console.log("img오류 발생", err);
+    }
+  });
+=======
   if (img !== undefined) {
     let seq = "select bd_seq from t_community order by bd_seq desc";
     conn.query(seq, (err, cnt) => {
@@ -200,6 +220,7 @@ router.post("/write_special", upload.single("img"), (req, res) => {
   //   });
   // }
   // res.redirect("/mainsns");
+>>>>>>> 35a68dcf6bc3981b03ee11eb1c1cd9398255b2af
 });
 
 router.post("/login", (req, res) => {

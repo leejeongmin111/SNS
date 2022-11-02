@@ -58,9 +58,9 @@ function handleSubmit (e){
                   {/* 댓글 입력 창 */}
                   <input type="text" name="name" maxlength="20" size="60" placeholder="Add a commnet..." className="img_click_input"></input>
                   <Button type="submit">post</Button>
-                    </Box>
-                  </Box>
+                </Box>
             </Box>
+        </Box>
         </>
     );
 }
