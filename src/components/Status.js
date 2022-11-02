@@ -2,6 +2,8 @@ import "../styles/Status.scss";
 import Header from "./Status/StatusHeader";
 import Footer from "./Status/StatusFooter";
 import Sidebar from "./Status/StatusSidebar";
+import SideHeader from "./JobSns/JobSideHeader";
+
 import {
   Bar,
   BarChart,
@@ -126,6 +128,7 @@ function Status() {
         <Footer />
       </div>
       <div className="box">
+        <SideHeader></SideHeader>
         <Sidebar />
       </div>
     </main>

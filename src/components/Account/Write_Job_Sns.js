@@ -13,6 +13,8 @@ import PhotoIcon from "../../Icons/PhotoIcon";
 import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
 import "../../styles/Account/Write_Daily.scss";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -27,11 +29,13 @@ const style = {
   p: 4,
 };
 
-export default function Write_Daily() {
+export default function Write_Job_Sns() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [imgSrc, setimgSrc] = useState("");
+  const email = useSelector((state) => state.email);
+  const [text, setText] = useState("");
   const srcChange = (e) => {
     setimgSrc(URL.createObjectURL(e.target.files[0]));
   };
@@ -39,22 +43,25 @@ export default function Write_Daily() {
   const deleteSrc = () => {
     URL.revokeObjectURL(imgSrc);
     setimgSrc("");
+    window.location.href = "/mainsns";
   };
 
-  const handleChange = (e) => {};
-
-  // const handleSubmit = async (e) => {
-  //     e.preventDefault();
-  //     await axios
-  //       .post("", {
-  //       })
-  //       .then((res) => {
-  //         console.log("문제없음", res);
-  //       })
-  //       .catch(() => {
-  //         console.log("문제발생");
-  //       });
-  //   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await axios
+      .post("http://127.0.0.1:3001/write_job", {
+        text: text,
+        img: imgSrc,
+        email: email,
+      })
+      .then((res) => {
+        console.log(res.data);
+        window.location.href = "/mainsns";
+      })
+      .catch((err) => {
+        console.log("문제발생", err.response.data);
+      });
+  };
 
   return (
     <div>
@@ -97,13 +104,19 @@ export default function Write_Daily() {
                 multiline
                 rows={16}
                 defaultValue=""
+                onChange={(e) => setText(e.target.value)}
                 name="text"
                 fullWidth
               />
             </div>
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 50 }}>
-            <Button type="submit" variant="outlined" className="daily_button">
+            <Button
+              type="submit"
+              variant="outlined"
+              className="daily_button"
+              onClick={handleSubmit}
+            >
               Submit
             </Button>
             <Button variant="outlined" onClick={deleteSrc}>

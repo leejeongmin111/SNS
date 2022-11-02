@@ -116,7 +116,7 @@ function MyPage() {
                     className="icon_button"
                   />
                 </BottomNavigation>
-              </Box>
+              </Box> 
               <br></br>
               <Grid
                 container

@@ -25,10 +25,12 @@ body {
       width: 100%;
       .Pro_box {
         width: 100%;
-        padding: 13.5% 0 0 1.3%;
-
+        padding: 12% 0 0 1.3%;
+        background-color: white;
+        margin-top: 15px;
         .pro_text {
           margin-left: 2rem;
+          
         }
         .Pro_icon {
           //margin-left: 13rem;
@@ -36,6 +38,8 @@ body {
 
           .icon_button {
             background-color: $background-blue;
+            background-color: white;
+
           }
         }
         // .Pro_grid {

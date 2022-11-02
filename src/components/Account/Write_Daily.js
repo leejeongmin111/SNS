@@ -44,6 +44,7 @@ export default function Write_Daily() {
   const deleteSrc = () => {
     URL.revokeObjectURL(imgSrc);
     setimgSrc("");
+    window.location.href = "/mainsns";
   };
 
   const handleSubmit = async (e) => {
