@@ -144,7 +144,22 @@ router.post("/mainsns", (req, res) => {
   });
 });
 
-router.post("/maincard", (req, res) => {
+// router.post("/maincard", (req, res) => {
+//   let sql = "select bd_id,bd_content from t_community";
+//   conn.query(sql, (err, rows) => {
+//     if (!err) {
+//       console.log("아이디값 정민정민", rows[0].bd_id);
+//       console.log("게시글값 정민정민", rows[0].bd_content);
+//       res.send({
+//         email: rows[0].bd_id,
+//         content: rows[0].bd_content,
+//       });
+//     } else {
+//       console.log("정민이 아노디ㅛㅇ", err);
+//     }
+//   });
+// });
+router.post("/maincards", (req, res) => {
   let sql = "select bd_id,bd_content from t_community";
   conn.query(sql, (err, rows) => {
     if (!err) {

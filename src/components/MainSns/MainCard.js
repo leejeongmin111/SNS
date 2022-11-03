@@ -11,11 +11,12 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import MainImg_Click from "./MainImg_Click";
 import axios from "axios";
+import Post from "./MainPost";
 
 function Card(props) {
   const {
-    post,
     post_id,
+    post,
     storyBorder,
     image,
     comments,
@@ -54,16 +55,16 @@ function Card(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    axios
-      .post("http://127.0.0.1:3001/maincard", {})
-      .then((res) => {
-        console.log("아이디값 가져와짐");
-        setEmail(res.data.email);
-        setContent(res.data.content);
-      })
-      .catch((err) => {
-        console.log("문제발생", err.response.data);
-      });
+    // axios
+    //   .post("http://127.0.0.1:3001/maincard", {})
+    //   .then((res) => {
+    //     console.log("아이디값 가져와짐");
+    //     setEmail(res.data.email);
+    //     setContent(res.data.content);
+    //   })
+    //   .catch((err) => {
+    //     console.log("문제발생", err.response.data);
+    //   });
   }
 
   return (
@@ -79,6 +80,9 @@ function Card(props) {
           alt="card content"
           onClick={handleOpen}
         />
+
+        {/* 게시글 내용 */}
+        <Post post_id = {post_id} post={post}></Post>
         <CardMenu />
         <div className="likedBy">
           <Profile iconSize="small" hideAccountName={true} />

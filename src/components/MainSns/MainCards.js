@@ -4,19 +4,24 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function Cards() {
-  // const [inputText, setInput] = useState("");
-  // useEffect(() => {
-  //   axios
-  //     .post("http://127.0.0.1:3001/mainsns", {})
-  //     .then((res) => {
-  //       console.log("페이지 콘솔창" + res.data.search);
-  //       setInput(res.data.search);
-  //     })
-  //     .catch((err) => {
-  //       console.log("문제발생", err.response.data);
-  //     });
-  // });
-  
+  // email = 작성자 아이디 
+  // content = 게시글 내용 
+  const [email, setEmail] = useState("");
+  const [content, setContent] = useState("");
+  useEffect(() => {
+    axios
+      .post("http://127.0.0.1:3001/maincards", {})
+      .then((res) => {
+        console.log("아이디" + res.data.email);
+        console.log("글내용" + res.data.content);
+        setEmail(res.data.email);
+        setContent(res.data.content);
+      })
+      .catch((err) => {
+        console.log("문제발생", err.response.data);
+      });
+  });
+
   const commentsOne = [
     {
       user: "앙기철ㄸㄸㄸㄸ",
@@ -53,7 +58,8 @@ function Cards() {
   return (
     <div className="cards">
       <Card
-        accountName="노비타"
+        accountName={email}
+        post = "ggg"
         storyBorder={true}
         image="https://picsum.photos/800/900"
         comments={commentsOne}
@@ -61,15 +67,17 @@ function Cards() {
         likedByNumber={89}
         hours={16}
       />
-      {/* <Card
+      <Card
+        post_id = {email}
+        post = {content}
         accountName="앙기철ㄸㄸㄸㄸ"
         image="https://picsum.photos/800"
         comments={commentsTwo}
-        likedByText="therealadamsavage"
+        likedByText={email}
         likedByNumber={47}
         hours={12}
       />
-      <Card
+      {/* <Card
         accountName="이헬창111"
         storyBorder={true}
         image="https://picsum.photos/800/1000"
