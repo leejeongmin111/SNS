@@ -17,7 +17,6 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import postOff from "../../images/write_off.png";
 
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -48,7 +47,7 @@ export default function Write_Special() {
   const deleteSrc = () => {
     URL.revokeObjectURL(imgSrc);
     setimgSrc("");
-    window.location.href = "/mainsns";
+    window.location.href = "/special";
   };
 
   const handleChange = (e) => {
@@ -60,14 +59,13 @@ export default function Write_Special() {
     await axios
       .post("http://127.0.0.1:3001/write_special", {
         text: text,
-        img: imgSrc,
         kind: kind,
         title: title,
         email: email,
       })
       .then((res) => {
         console.log(res.data);
-        window.location.href = "/mainsns";
+        window.location.href = "/special";
       })
       .catch((err) => {
         console.log("문제발생", err.response.data);
@@ -76,7 +74,9 @@ export default function Write_Special() {
 
   return (
     <div>
-      <Button className="daily_img" onClick={handleOpen}><img src={postOff} className="icon" style={{marginTop:14}}></img></Button>
+      <Button className="daily_img" onClick={handleOpen}>
+        <img src={postOff} className="icon" style={{ marginTop: 14 }}></img>
+      </Button>
 
       <Modal
         open={open}

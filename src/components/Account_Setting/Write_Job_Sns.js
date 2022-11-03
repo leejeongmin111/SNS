@@ -17,7 +17,6 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import postOff from "../../images/write_off.png";
 
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -45,7 +44,7 @@ export default function Write_Job_Sns() {
   const deleteSrc = () => {
     URL.revokeObjectURL(imgSrc);
     setimgSrc("");
-    window.location.href = "/mainsns";
+    window.location.href = "/jobsns";
   };
 
   const handleSubmit = async (e) => {
@@ -58,7 +57,7 @@ export default function Write_Job_Sns() {
       })
       .then((res) => {
         console.log(res.data);
-        window.location.href = "/mainsns";
+        window.location.href = "/jobsns";
       })
       .catch((err) => {
         console.log("문제발생", err.response.data);
@@ -67,7 +66,9 @@ export default function Write_Job_Sns() {
 
   return (
     <div>
-      <Button className="daily_img" onClick={handleOpen}><img src={postOff} className="icon" style={{marginTop:14}}></img></Button>
+      <Button className="daily_img" onClick={handleOpen}>
+        <img src={postOff} className="icon" style={{ marginTop: 14 }}></img>
+      </Button>
 
       <Modal
         open={open}
