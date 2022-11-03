@@ -24,6 +24,11 @@ function Card(props) {
     hours,
   } = props;
 
+  // email: rows[0].bd_id,
+  // content: rows[0].bd_content,
+
+
+
   //댓글 숨기기
   const [show, setShow] = useState({ display: "none" });
   const [num, setNum] = useState(0);

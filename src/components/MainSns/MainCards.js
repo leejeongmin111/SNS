@@ -16,7 +16,7 @@ function Cards() {
   //       console.log("문제발생", err.response.data);
   //     });
   // });
-
+  
   const commentsOne = [
     {
       user: "앙기철ㄸㄸㄸㄸ",
@@ -50,7 +50,6 @@ function Cards() {
       id: 5,
     },
   ];
-
   return (
     <div className="cards">
       <Card
@@ -58,7 +57,7 @@ function Cards() {
         storyBorder={true}
         image="https://picsum.photos/800/900"
         comments={commentsOne}
-        likedByText="dadatlacak"
+        likedByText={email}
         likedByNumber={89}
         hours={16}
       />
