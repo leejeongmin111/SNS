@@ -12,7 +12,13 @@ import Select from "@mui/material/Select";
 import PhotoIcon from "../../Icons/PhotoIcon";
 import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
-import "../../styles/Account/Write_Daily.scss";
+import "../../styles/Account_Setting/Write_Daily.scss";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import postOff from "../../images/write_off.png";
+
+
 
 const style = {
   position: "absolute",
@@ -27,11 +33,13 @@ const style = {
   p: 4,
 };
 
-export default function Write_Job_Sns() {
+export default function Write_Daily() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [text, setText] = useState("");
   const [imgSrc, setimgSrc] = useState("");
+  const email = useSelector((state) => state.email);
   const srcChange = (e) => {
     setimgSrc(URL.createObjectURL(e.target.files[0]));
   };
@@ -39,26 +47,30 @@ export default function Write_Job_Sns() {
   const deleteSrc = () => {
     URL.revokeObjectURL(imgSrc);
     setimgSrc("");
+    window.location.href = "/mainsns";
   };
 
-  const handleChange = (e) => {};
-
-  // const handleSubmit = async (e) => {
-  //     e.preventDefault();
-  //     await axios
-  //       .post("", {
-  //       })
-  //       .then((res) => {
-  //         console.log("문제없음", res);
-  //       })
-  //       .catch(() => {
-  //         console.log("문제발생");
-  //       });
-  //   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await axios
+      .post("http://127.0.0.1:3001/write_daily", {
+        text: text,
+        img: imgSrc,
+        email: email,
+      })
+      .then((res) => {
+        console.log(res.data);
+        // 값은 받아와지는데 페이지 이동이 안됨
+        window.location.href = "/mainsns";
+      })
+      .catch((err) => {
+        console.log("문제발생", err.response.data);
+      });
+  };
 
   return (
     <div>
-      <Button onClick={handleOpen}>Job_Sns</Button>
+      <Button className="daily_img" onClick={handleOpen}><img src={postOff} className="icon" style={{marginTop:14}}></img></Button>
 
       <Modal
         open={open}
@@ -66,12 +78,7 @@ export default function Write_Job_Sns() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box
-          sx={style}
-          component="form"
-          //onSubmit={handleChange}
-          // action 여기다가 주소 값 입력 해주세영~~!~!~!
-        >
+        <Box sx={style} component="form">
           <Typography id="modal-modal-title" variant="h6" component="h2">
             <IconButton
               aria-label="upload picture"
@@ -98,12 +105,18 @@ export default function Write_Job_Sns() {
                 rows={16}
                 defaultValue=""
                 name="text"
+                onChange={(e) => setText(e.target.value)}
                 fullWidth
               />
             </div>
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 50 }}>
-            <Button type="submit" variant="outlined" className="daily_button">
+            <Button
+              type="submit"
+              variant="outlined"
+              className="daily_button"
+              onClick={handleSubmit}
+            >
               Submit
             </Button>
             <Button variant="outlined" onClick={deleteSrc}>

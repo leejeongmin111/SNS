@@ -8,8 +8,8 @@ import * as React from 'react';
 import { Form } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-
-
+import Modal from '@mui/material/Modal';
+import MainImg_Click from "./MainImg_Click";
 
 
 function Card(props) {
@@ -32,18 +32,25 @@ function Card(props) {
     }
   };
 
+  // 모달 설정 
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+ 
+
   function handleSubmit (e){
     e.preventDefault();
   }
 
 
   return (
+    <>
     <div className="card">
       <header>
         <Profile iconSize="medium" storyBorder={storyBorder} />
         <CardButton className="cardButton" />
       </header>
-      <img className="cardImage" src={image} alt="card content" />
+      <img className="cardImage" src={image} alt="card content" onClick={handleOpen}/>
       <CardMenu />
       <div className="likedBy">
         <Profile iconSize="small" hideAccountName={true} />
@@ -85,6 +92,25 @@ function Card(props) {
         
       </div>
     </div>
+
+        {/* 이미지 클릭 시 모달 창 */}
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+          <MainImg_Click accountName="rafagrassetti"
+            storyBorder={storyBorder}
+            image={image}
+            comments={comments}
+            likedByText={likedByText}
+            likedByNumber={likedByNumber}
+            hours={hours}
+          />
+      </Modal>
+
+    </>
   );
 }
 

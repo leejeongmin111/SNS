@@ -12,10 +12,11 @@ import Select from "@mui/material/Select";
 import PhotoIcon from "../../Icons/PhotoIcon";
 import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
-import "../../styles/Account/Write_Daily.scss";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import "../../styles/Account_Setting/Write_Job_Special.scss";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import postOff from "../../images/write_off.png";
+
 
 const style = {
   position: "absolute",
@@ -30,13 +31,16 @@ const style = {
   p: 4,
 };
 
-export default function Write_Daily() {
+export default function Write_Special() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [text, setText] = useState("");
   const [imgSrc, setimgSrc] = useState("");
+  const [kind, setKind] = useState("");
   const email = useSelector((state) => state.email);
+  const [text, setText] = useState("");
+  const [title, setTitle] = useState("");
+
   const srcChange = (e) => {
     setimgSrc(URL.createObjectURL(e.target.files[0]));
   };
@@ -44,19 +48,25 @@ export default function Write_Daily() {
   const deleteSrc = () => {
     URL.revokeObjectURL(imgSrc);
     setimgSrc("");
+    window.location.href = "/mainsns";
+  };
+
+  const handleChange = (e) => {
+    setKind(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .post("http://127.0.0.1:3001/write_daily", {
+      .post("http://127.0.0.1:3001/write_special", {
         text: text,
         img: imgSrc,
+        kind: kind,
+        title: title,
         email: email,
       })
       .then((res) => {
         console.log(res.data);
-        // 값은 받아와지는데 페이지 이동이 안됨
         window.location.href = "/mainsns";
       })
       .catch((err) => {
@@ -66,7 +76,7 @@ export default function Write_Daily() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Daily_SNS</Button>
+      <Button className="daily_img" onClick={handleOpen}><img src={postOff} className="icon" style={{marginTop:14}}></img></Button>
 
       <Modal
         open={open}
@@ -76,29 +86,46 @@ export default function Write_Daily() {
       >
         <Box sx={style} component="form">
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            <IconButton
+            {/* <IconButton
               aria-label="upload picture"
               component="label"
               size="large"
             >
-              <input
-                hidden
-                accept="image/*"
-                type="file"
-                name="img"
-                onChange={srcChange}
-              />
-              <PhotoIcon></PhotoIcon>
-            </IconButton>
+            </IconButton> */}
             <br></br>
-            <div className="uploadbox">
-              <img src={imgSrc} className="uploadimg"></img>
-            </div>
-            <div className="text_box">
+            <div className="special_text_box">
+              <TextField
+                label="Title"
+                multiline
+                rows={1}
+                defaultValue=""
+                onChange={(e) => setTitle(e.target.value)}
+                name="title"
+                className="special_title"
+              />
+
+              <FormControl sx={{ width: 120 }}>
+                <InputLabel>Program</InputLabel>
+                <Select
+                  onChange={handleChange}
+                  labelId="Program"
+                  id="Program"
+                  value={kind}
+                  label="Program"
+                  name="Program"
+                >
+                  <MenuItem value="None">None</MenuItem>
+                  <MenuItem value="Java">Java</MenuItem>
+                  <MenuItem value="Python">Python</MenuItem>
+                  <MenuItem value="React">React</MenuItem>
+                  <MenuItem value="Html">HTML</MenuItem>
+                </Select>
+              </FormControl>
+
               <TextField
                 label="Post"
                 multiline
-                rows={16}
+                rows={13}
                 defaultValue=""
                 name="text"
                 onChange={(e) => setText(e.target.value)}
@@ -110,7 +137,7 @@ export default function Write_Daily() {
             <Button
               type="submit"
               variant="outlined"
-              className="daily_button"
+              className="special_daily_button"
               onClick={handleSubmit}
             >
               Submit

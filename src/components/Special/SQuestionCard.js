@@ -1,13 +1,11 @@
 import "../../styles/Special/SQuestionCard.scss";
 
-function Question_Card() {
+function QuestionCard() {
   return (
-    <>
-      <div>
-        <div></div>
-        <div></div>
-      </div>
-    </>
+    <div className="Card_container">
+      <div className="Card_image"></div>
+      <div className="Card_text">궁금한 내용 칸</div>
+    </div>
   );
 }
-export default Question_Card;
+export default QuestionCard;

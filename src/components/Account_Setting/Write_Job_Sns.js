@@ -12,7 +12,11 @@ import Select from "@mui/material/Select";
 import PhotoIcon from "../../Icons/PhotoIcon";
 import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
-import "../../styles/Account/Write_Daily.scss";
+import "../../styles/Account_Setting/Write_Daily.scss";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import postOff from "../../images/write_off.png";
+
 
 const style = {
   position: "absolute",
@@ -27,12 +31,13 @@ const style = {
   p: 4,
 };
 
-export default function Write_Special() {
+export default function Write_Job_Sns() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [imgSrc, setimgSrc] = useState("");
-  const [kind, setKind] = useState("");
+  const email = useSelector((state) => state.email);
+  const [text, setText] = useState("");
   const srcChange = (e) => {
     setimgSrc(URL.createObjectURL(e.target.files[0]));
   };
@@ -40,15 +45,29 @@ export default function Write_Special() {
   const deleteSrc = () => {
     URL.revokeObjectURL(imgSrc);
     setimgSrc("");
+    window.location.href = "/mainsns";
   };
 
-  const handleChange = (e) => {
-    setKind(e.target.value);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await axios
+      .post("http://127.0.0.1:3001/write_job", {
+        text: text,
+        img: imgSrc,
+        email: email,
+      })
+      .then((res) => {
+        console.log(res.data);
+        window.location.href = "/mainsns";
+      })
+      .catch((err) => {
+        console.log("문제발생", err.response.data);
+      });
   };
 
   return (
     <div>
-      <Button onClick={handleOpen}>Job_Special</Button>
+      <Button className="daily_img" onClick={handleOpen}><img src={postOff} className="icon" style={{marginTop:14}}></img></Button>
 
       <Modal
         open={open}
@@ -59,6 +78,7 @@ export default function Write_Special() {
         <Box
           sx={style}
           component="form"
+          //onSubmit={handleChange}
           // action 여기다가 주소 값 입력 해주세영~~!~!~!
         >
           <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -82,43 +102,23 @@ export default function Write_Special() {
             </div>
             <div className="text_box">
               <TextField
-                label="Title"
-                multiline
-                rows={1}
-                defaultValue=""
-                name="title"
-              />
-
-              <FormControl sx={{ width: 100 }}>
-                <InputLabel>Program</InputLabel>
-                <Select
-                  onChange={handleChange}
-                  labelId="Program"
-                  id="Program"
-                  value={kind}
-                  label="Program"
-                  name="Program"
-                >
-                  <MenuItem value="None">None</MenuItem>
-                  <MenuItem value="Java">Java</MenuItem>
-                  <MenuItem value="Python">Python</MenuItem>
-                  <MenuItem value="React">React</MenuItem>
-                  <MenuItem value="Html">HTML</MenuItem>
-                </Select>
-              </FormControl>
-
-              <TextField
                 label="Post"
                 multiline
-                rows={13}
+                rows={16}
                 defaultValue=""
+                onChange={(e) => setText(e.target.value)}
                 name="text"
                 fullWidth
               />
             </div>
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 50 }}>
-            <Button type="submit" variant="outlined" className="daily_button">
+            <Button
+              type="submit"
+              variant="outlined"
+              className="daily_button"
+              onClick={handleSubmit}
+            >
               Submit
             </Button>
             <Button variant="outlined" onClick={deleteSrc}>
