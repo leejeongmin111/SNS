@@ -10,7 +10,7 @@ import MyPage from "./MyPage";
 import Dm from "./DM/Dm";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import Notice from "./Notice/Notice";
+import Notice from "./Notice";
 
 function reducer(currentState, action) {
   if (currentState === undefined) {
