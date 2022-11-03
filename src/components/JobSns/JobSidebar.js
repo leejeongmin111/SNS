@@ -2,8 +2,10 @@ import "../../styles/JobSns/JobSidebar.scss";
 import Profile from "./JobProfile";
 import Suggestions from "./JobSuggestions";
 import image from "../../images/profile.jpg";
+import { useState } from "react";
 
 function Sidebar() {
+  const [emailTest] = useState(sessionStorage.getItem("email"));
   return (
     <div className="sidebar_container">
       <div className="textcontainer">
@@ -11,7 +13,7 @@ function Sidebar() {
       </div>
       <div className="Mainsidebar">
         <Profile
-          username="aleks.popovic"
+          username={emailTest}
           caption="Aleksandar Popović"
           urlText="Switch"
           iconSize="big"

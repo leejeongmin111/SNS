@@ -18,8 +18,6 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import postOff from "../../images/write_off.png";
 
-
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -59,8 +57,7 @@ export default function Write_Daily() {
         email: email,
       })
       .then((res) => {
-        console.log(res.data);
-        // 값은 받아와지는데 페이지 이동이 안됨
+        console.log("기철기철 " + res.data.send);
         window.location.href = "/mainsns";
       })
       .catch((err) => {
@@ -70,7 +67,9 @@ export default function Write_Daily() {
 
   return (
     <div>
-      <Button className="daily_img" onClick={handleOpen}><img src={postOff} className="icon" style={{marginTop:14}}></img></Button>
+      <Button className="daily_img" onClick={handleOpen}>
+        <img src={postOff} className="icon" style={{ marginTop: 14 }}></img>
+      </Button>
 
       <Modal
         open={open}
