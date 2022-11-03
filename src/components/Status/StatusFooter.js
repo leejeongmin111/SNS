@@ -4,11 +4,9 @@ import dmOff from "../../images/message_off.png";
 import noticeOff from "../../images/bell_off.png";
 import homeOff from "../../images/home_off.png";
 import userOff from "../../images/user_off.png";
-import * as React from 'react';
+import * as React from "react";
 import Write_Special from "../Account_Setting/Write_Job_Special";
 import { useNavigate } from "react-router-dom";
-
-
 
 // 눌렀을 때 변경 될 아이콘
 // import dmOn from "../../images/message_on.png";
@@ -27,20 +25,29 @@ function Footer() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  function home_click() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }
-  function home_click(){
-    window.scrollTo(0, 0)
-  }
- 
 
   return (
     <div className="footer_container">
       <div className="menu">
         <img className="icon" src={dmOff} alt="dm" />
         <img className="icon" src={noticeOff} alt="message" />
-        <img className="icon" src={homeOff} alt="home" onClick={home_click}/>
+        <img className="icon" src={homeOff} alt="home" onClick={home_click} />
         <Write_Special></Write_Special>
-        <img className="icon" src={userOff} alt="mypage" onClick={()=>{nav('/mypage')}} />
+        <img
+          className="icon"
+          src={userOff}
+          alt="mypage"
+          onClick={() => {
+            nav("/mypage");
+          }}
+        />
       </div>
     </div>
   );
