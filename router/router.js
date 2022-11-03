@@ -130,6 +130,50 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
   // res.redirect("/mainsns");
 });
 
+router.post("/mainsns", (req, res) => {
+  let sql = "select bd_content from t_community";
+  conn.query(sql, (err, rows) => {
+    if (!err) {
+      console.log("값가져오기 성공", rows[0].bd_content);
+      res.send({
+        search: rows[0].bd_content,
+      });
+    } else {
+      console.log("문제발생", err);
+    }
+  });
+});
+
+router.post("/maincard", (req, res) => {
+  let sql = "select mb_id from t_member";
+  conn.query(sql, (err, rows) => {
+    if (!err) {
+      console.log("아이디값 정민정민", rows);
+      res.send({
+        email: rows,
+      });
+    } else {
+      console.log("정민이 아노디ㅛㅇ");
+    }
+  });
+});
+
+router.post("/comment", (req, res) => {
+  console.log("아이디", req.body.email);
+  console.log("코멘트", req.body.comment);
+  let cmt = req.body.comment;
+  let email = req.body.email;
+
+  let sql =
+    "insert into t_comment(bd_seq,cmt_content,mb_id,bd_id) values(1,?,'임시아이디',?)";
+
+  conn.query(sql, [cmt, email], (err, rows) => {
+    if (!err) {
+      console.log("값넣어졌어");
+    }
+  });
+});
+
 router.post("/write_job", upload.single("img"), (req, res) => {
   console.log("가져온값 : ", req.body.text);
   console.log("가져온값 : ", req.body.img);
@@ -208,9 +252,11 @@ router.post("/login", (req, res) => {
 
   conn.query(sql, [email, pw], function (err, rows) {
     if (rows.length > 0) {
-      console.log("문제없음");
+      console.log("문제없음", rows[0].mb_id);
+      console.log("문제없음", rows[0].mb_nick);
       res.json({
         email: email,
+        nick: rows[0].mb_id,
       });
     } else {
       console.log("문제존나많아 앙기철ㄸㄸㄸㄸ", err);
