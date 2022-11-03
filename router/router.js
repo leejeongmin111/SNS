@@ -68,23 +68,21 @@ router.post("/register", (req, res) => {
 
 router.post("/write_daily", upload.single("img"), (req, res) => {
   console.log("가져온값 : ", req.body.text);
-  // console.log("가져온값 : ", req.body.img);
+  console.log("가져온값 : ", req.body.img);
 
   let text = req.body.text;
-  // let img = req.body.img;
+  let img = req.body.img;
   let email = req.body.email;
   let div = 0;
-  // if (text === "" && img === "") {
-  //   console.log("뭐좀 써봐");
-  //   res.redirect("/mainsns");
-  // }
+  if (text === "" && img === "") {
+    console.log("뭐좀 써봐");
+    res.redirect("/mainsns");
+  }
 
   let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,0,0,${div})`;
   conn.query(sqlText, [text, email], function (err, rows) {
     if (!err) {
-      res.json({
-        send: "값넣기 성공",
-      });
+      console.log("text집어넣기성공");
     } else {
       console.log("text집어넣기 문제", err);
       throw err;
@@ -100,34 +98,34 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
   //     console.log("bd_seq 실패");
   //   }
   // });
-  // let sqlImg = `insert into bd_file values(?,1,?)`;
-  // conn.query(sqlImg, [email, img], (err, rows) => {
-  //   if (!err) {
-  //     console.log("img들어가기 성공");
-  //   } else {
-  //     console.log("img오류 발생", err);
-  //   }
-  // });
-  // if (img !== undefined) {
-  //   let seq = "select bd_seq from t_community order by bd_seq desc";
-  //   conn.query(seq, (err, cnt) => {
-  //     if (!err) {
-  //       console.log("bd_seq가져오기 성공", cnt[0]);
-  //       let sqlImg = `insert into bd_file values(?,?,?)`;
-  //       console.log("위 기철" + cnt[0]);
-  //       console.log("No file upload");
-  //       var imgsrc = "http://127.0.0.1:3000/images/" + req.file.filename;
-  //       conn.query(sqlImg, [email, cnt[0], imgsrc], (err, result) => {
-  //         if (err) throw err;
-  //         console.log("file uploaded");
-  //       });
-  //     } else {
-  //       console.log("bd_seq 실패", err);
-  //       throw err;
-  //     }
-  //   });
-  // }
-  // res.redirect("/mainsns");
+  let sqlImg = `insert into bd_file values(?,1,?)`;
+  conn.query(sqlImg, [email, img], (err, rows) => {
+    if (!err) {
+      console.log("img들어가기 성공");
+    } else {
+      console.log("img오류 발생", err);
+    }
+  });
+  if (img !== undefined) {
+    let seq = "select bd_seq from t_community order by bd_seq desc";
+    conn.query(seq, (err, cnt) => {
+      if (!err) {
+        console.log("bd_seq가져오기 성공", cnt[0]);
+        let sqlImg = `insert into bd_file values(?,?,?)`;
+        console.log("위 기철" + cnt[0]);
+        console.log("No file upload");
+        var imgsrc = "http://127.0.0.1:3000/images/" + req.file.filename;
+        conn.query(sqlImg, [email, cnt[0], imgsrc], (err, result) => {
+          if (err) throw err;
+          console.log("file uploaded");
+        });
+      } else {
+        console.log("bd_seq 실패", err);
+        throw err;
+      }
+    });
+  }
+  res.redirect("/mainsns");
 });
 
 router.post("/write_job", upload.single("img"), (req, res) => {
@@ -172,28 +170,54 @@ router.post("/write_job", upload.single("img"), (req, res) => {
       }
     });
   }
-  res.redirect("/mainsns");
+  res.redirect("/jobsns");
 });
 
-router.post("/write_special", (req, res) => {
+router.post("/write_special", upload.single("img"), (req, res) => {
   console.log("텍스트 : ", req.body.text);
+  console.log("이미지 : ", req.body.img);
   console.log("아이디 : ", req.body.email);
   console.log("타이틀 : ", req.body.title);
   console.log("종류 : ", req.body.kind);
 
-  let text = req.body.text;
-  let email = req.body.email;
-  let div = 2;
+  // let text = req.body.text;
+  // let img = req.body.img;
+  // let email = req.body.email;
+  // let div = 2;
+  // if (text === "" && img === "") {
+  //   console.log("뭐좀 써봐");
+  //   res.redirect("/mainsns");
+  // }
 
-  let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,0,0,${div})`;
-  conn.query(sqlText, [text, email], function (err, rows) {
-    if (!err) {
-      console.log("text집어넣기성공");
-    } else {
-      console.log("text집어넣기 문제", err);
-      throw err;
-    }
-  });
+  // let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,0,0,${div})`;
+  // conn.query(sqlText, [text, email], function (err, rows) {
+  //   if (!err) {
+  //     console.log("text집어넣기성공");
+  //   } else {
+  //     console.log("text집어넣기 문제", err);
+  //     throw err;
+  //   }
+  // });
+  // if (img !== undefined) {
+  //   let seq = "select bd_seq from t_community order by bd_seq desc";
+  //   conn.query(seq, (err, cnt) => {
+  //     if (!err) {
+  //       console.log("bd_seq가져오기 성공", cnt[0]);
+  //       let sqlImg = `insert into bd_file values(?,?,?)`;
+  //       console.log("위 기철" + cnt[0]);
+  //       console.log("No file upload");
+  //       var imgsrc = "http://127.0.0.1:3001/images/" + req.file.filename;
+  //       conn.query(sqlImg, [email, cnt[0], imgsrc], (err, result) => {
+  //         if (err) throw err;
+  //         console.log("file uploaded");
+  //       });
+  //     } else {
+  //       console.log("bd_seq 실패", err);
+  //       throw err;
+  //     }
+  //   });
+  // }
+  // res.redirect("/special");
 });
 
 router.post("/login", (req, res) => {
