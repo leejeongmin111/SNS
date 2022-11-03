@@ -15,6 +15,10 @@ import SnsProfile from "../Icons/SnsProfile";
 import TagIcon from "../Icons/TagIcon";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import { useEffect } from "react";
+import { display } from "@mui/system";
+
+
 const itemData = [
   {
     img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
@@ -74,10 +78,23 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 function MyPage() {
   const [value, setValue] = React.useState(0);
+
+  // let cnt = 0;
+  // useEffect(function (){
+  //   localStorage.getItem("email")
+  //   //클릭한 회원의 email
+  //   if(!){
+  //     cnt == 1;
+  // 연습
+  //   }
+  // });
+
   return (
     <main>
       <div className="blank"></div>
-      <div className="My_container">
+      <div className="My_container" >
+      {/* 연습 <div className="My_container"  style={cnt==1?{display:"none"}:{display:""}}> */}
+
         <Header />
         <React.Fragment>
           <Container>
