@@ -29,7 +29,6 @@ function Footer() {
       behavior: "smooth",
     });
   }
-
   return (
     <div className="footer_container">
       <div className="menu">
