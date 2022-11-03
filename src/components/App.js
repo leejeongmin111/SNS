@@ -10,6 +10,7 @@ import MyPage from "./MyPage";
 import Dm from "./DM/Dm";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
+import Notice from "./Notice/Notice";
 
 function reducer(currentState, action) {
   if (currentState === undefined) {
@@ -40,6 +41,7 @@ function App() {
           <Route path="/status" element={<Status></Status>}></Route>
           <Route path="/special" element={<Special></Special>}></Route>
           <Route path="/jobsns" element={<JobSns></JobSns>}></Route>
+          <Route path="/notice" element={<Notice></Notice>}></Route>
         </Routes>
       </Provider>
     </>
