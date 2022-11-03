@@ -49,16 +49,16 @@ function Card(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    axios
-      .post("http://127.0.0.1:3001/maincard", {})
-      .then((res) => {
-        console.log("아이디값 가져와짐");
-        setEmail(res.data.email);
-        setContent(res.data.content);
-      })
-      .catch((err) => {
-        console.log("문제발생", err.response.data);
-      });
+    // axios
+    //   .post("http://127.0.0.1:3001/maincard", {})
+    //   .then((res) => {
+    //     console.log("아이디값 가져와짐");
+    //     setEmail(res.data.email);
+    //     setContent(res.data.content);
+    //   })
+    //   .catch((err) => {
+    //     console.log("문제발생", err.response.data);
+    //   });
   }
 
   return (

@@ -4,18 +4,21 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function Cards() {
-  // const [inputText, setInput] = useState("");
-  // useEffect(() => {
-  //   axios
-  //     .post("http://127.0.0.1:3001/mainsns", {})
-  //     .then((res) => {
-  //       console.log("페이지 콘솔창" + res.data.search);
-  //       setInput(res.data.search);
-  //     })
-  //     .catch((err) => {
-  //       console.log("문제발생", err.response.data);
-  //     });
-  // });
+  const [email, setEmail] = useState("");
+  const [content, setContent] = useState("");
+  useEffect(() => {
+    axios
+      .post("http://127.0.0.1:3001/maincards", {})
+      .then((res) => {
+        console.log("아이디" + res.data.email);
+        console.log("글내용" + res.data.content);
+        setEmail(res.data.email);
+        setContent(res.res.data.content);
+      })
+      .catch((err) => {
+        console.log("문제발생", err.response.data);
+      });
+  });
 
   const commentsOne = [
     {
@@ -54,11 +57,11 @@ function Cards() {
   return (
     <div className="cards">
       <Card
-        accountName="노비타"
+        accountName={email}
         storyBorder={true}
         image="https://picsum.photos/800/900"
         comments={commentsOne}
-        likedByText="dadatlacak"
+        likedByText={content}
         likedByNumber={89}
         hours={16}
       />
