@@ -12,7 +12,7 @@ import Select from "@mui/material/Select";
 import PhotoIcon from "../../Icons/PhotoIcon";
 import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
-import "../../styles/Account_Setting/Write_Daily.scss";
+import "../../styles/Account_Setting/Write_Job_Special.scss";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import postOff from "../../images/write_off.png";
@@ -86,25 +86,14 @@ export default function Write_Special() {
       >
         <Box sx={style} component="form">
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            <IconButton
+            {/* <IconButton
               aria-label="upload picture"
               component="label"
               size="large"
             >
-              <input
-                hidden
-                accept="image/*"
-                type="file"
-                name="img"
-                onChange={srcChange}
-              />
-              <PhotoIcon></PhotoIcon>
-            </IconButton>
+            </IconButton> */}
             <br></br>
-            <div className="uploadbox">
-              <img src={imgSrc} className="uploadimg"></img>
-            </div>
-            <div className="text_box">
+            <div className="special_text_box">
               <TextField
                 label="Title"
                 multiline
@@ -112,9 +101,10 @@ export default function Write_Special() {
                 defaultValue=""
                 onChange={(e) => setTitle(e.target.value)}
                 name="title"
+                className="special_title"
               />
 
-              <FormControl sx={{ width: 100 }}>
+              <FormControl sx={{ width: 120 }}>
                 <InputLabel>Program</InputLabel>
                 <Select
                   onChange={handleChange}
@@ -147,7 +137,7 @@ export default function Write_Special() {
             <Button
               type="submit"
               variant="outlined"
-              className="daily_button"
+              className="special_daily_button"
               onClick={handleSubmit}
             >
               Submit

@@ -1,0 +1,25 @@
+.daily_img{
+    
+    height: 5px;
+    width: 5px;
+}
+
+
+.uploadbox{
+    border: 1px solid grey;
+    height: 400px;
+    width: 350px;
+    float: left;
+    
+    .uploadimg{
+        height: 100%;
+        width: 100%;
+    }
+}
+.special_text_box{
+    width: 800px;
+    float: left;
+    .special_title{
+        width: 680px;
+    }
+}

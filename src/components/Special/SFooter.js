@@ -3,7 +3,6 @@ import "../../styles/Special/SFooter.scss";
 import dmOff from "../../images/message_off.png";
 import noticeOff from "../../images/bell_off.png";
 import homeOff from "../../images/home_off.png";
-import postOff from "../../images/write_off.png";
 import userOff from "../../images/user_off.png";
 import * as React from 'react';
 import Write_Special from "../Account_Setting/Write_Job_Special";

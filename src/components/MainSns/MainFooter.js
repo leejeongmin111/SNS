@@ -27,6 +27,8 @@ function Footer() {
   const handleClose = () => {
     setAnchorEl(null);
   }
+
+  // 맨 위 페이지로 올라가기
   function home_click(){
     window.scrollTo(0, 0)
   }

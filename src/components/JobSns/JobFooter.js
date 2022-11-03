@@ -31,12 +31,17 @@ const nav = useNavigate();
     setAnchorEl(null);
   }
 
+  // 맨 위 페이지 올라가기
+  function home_click(){
+    window.scrollTo(0, 0)
+  }
+
   return (
     <div className="footer_container">
       <div className="menu">
         <img className="icon" src={dmOff} alt="dm" />
         <img className="icon" src={noticeOff} alt="message" />
-        <img className="icon" src={homeOff} alt="home" />
+        <img className="icon" src={homeOff} alt="home"  onClick={home_click} />
         <Write_Job_Sns></Write_Job_Sns>
         <img className="icon" src={userOff} alt="mypage" onClick={()=>{nav('/mypage')}}/>
       </div>
