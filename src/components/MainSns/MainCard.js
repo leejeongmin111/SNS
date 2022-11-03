@@ -29,6 +29,7 @@ function Card(props) {
   const [num, setNum] = useState(0);
   const [fold, setFold] = useState("보기");
   const [email, setEmail] = useState("");
+  const [content, setContent] = useState("");
   function changeshow() {
     if (num == 0) {
       setNum(num + 1);
@@ -51,8 +52,9 @@ function Card(props) {
     axios
       .post("http://127.0.0.1:3001/maincard", {})
       .then((res) => {
-        console.log("아이디값 가져와짐" + res.data[0].email);
-        setEmail(res.data[0].email);
+        console.log("아이디값 가져와짐");
+        setEmail(res.data.email);
+        setContent(res.data.content);
       })
       .catch((err) => {
         console.log("문제발생", err.response.data);
