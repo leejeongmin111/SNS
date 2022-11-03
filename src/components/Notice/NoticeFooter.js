@@ -1,4 +1,4 @@
-import "../../styles/MyPage/MyFooter.scss";
+import "../../styles/Notice/NoticeFooter.scss";
 // 흰색 아이콘
 import dmOff from "../../images/message_off.png";
 import noticeOff from "../../images/bell_off.png";
