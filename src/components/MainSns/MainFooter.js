@@ -5,8 +5,8 @@ import noticeOff from "../../images/bell_off.png";
 import homeOff from "../../images/home_off.png";
 import postOff from "../../images/write_off.png";
 import userOff from "../../images/user_off.png";
-import * as React from 'react';
-import Write_Daily from "../Account_Setting/Write_Daily"
+import * as React from "react";
+import Write_Daily from "../Account_Setting/Write_Daily";
 import { useNavigate } from "react-router-dom";
 // 눌렀을 때 변경 될 아이콘
 // import dmOn from "../../images/message_on.png";
@@ -18,7 +18,6 @@ import { useNavigate } from "react-router-dom";
 function Footer() {
   const nav = useNavigate();
 
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -26,11 +25,14 @@ function Footer() {
   };
   const handleClose = () => {
     setAnchorEl(null);
-  }
+  };
 
   // 맨 위 페이지로 올라가기
-  function home_click(){
-    window.scrollTo(0, 0)
+  function home_click() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }
 
   return (
@@ -38,10 +40,17 @@ function Footer() {
       <div className="menu">
         <img className="icon" src={dmOff} alt="dm" />
         <img className="icon" src={noticeOff} alt="message" />
-        <img className="icon" src={homeOff} alt="home" onClick={home_click}/>
+        <img className="icon" src={homeOff} alt="home" onClick={home_click} />
         <Write_Daily className="icon_daily"></Write_Daily>
         {/* <img className="icon" src={postOff} alt="post" /> */}
-        <img className="icon" src={userOff} alt="mypage" onClick={()=>{nav('/mypage')}}/>
+        <img
+          className="icon"
+          src={userOff}
+          alt="mypage"
+          onClick={() => {
+            nav("/mypage");
+          }}
+        />
       </div>
     </div>
   );

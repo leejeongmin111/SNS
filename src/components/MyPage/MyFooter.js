@@ -4,9 +4,8 @@ import dmOff from "../../images/message_off.png";
 import noticeOff from "../../images/bell_off.png";
 import homeOff from "../../images/home_off.png";
 import userOff from "../../images/user_off.png";
-import * as React from 'react';
+import * as React from "react";
 import Write_Daily from "../Account_Setting/Write_Daily";
-
 
 // 눌렀을 때 변경 될 아이콘
 // import dmOn from "../../images/message_on.png";
@@ -16,7 +15,6 @@ import Write_Daily from "../Account_Setting/Write_Daily";
 // import userOn from "../../images/user_on.png";
 
 function Footer() {
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -24,9 +22,12 @@ function Footer() {
   };
   const handleClose = () => {
     setAnchorEl(null);
-  }
-  function home_click(){
-    window.scrollTo(0, 0)
+  };
+  function home_click() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }
   return (
     <div className="footer_container">
