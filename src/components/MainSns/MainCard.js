@@ -11,11 +11,12 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import MainImg_Click from "./MainImg_Click";
 import axios from "axios";
+import Post from "./MainPost";
 
 function Card(props) {
   const {
-    post,
     post_id,
+    post,
     storyBorder,
     image,
     comments,
@@ -23,6 +24,11 @@ function Card(props) {
     likedByNumber,
     hours,
   } = props;
+
+  // email: rows[0].bd_id,
+  // content: rows[0].bd_content,
+
+
 
   //댓글 숨기기
   const [show, setShow] = useState({ display: "none" });
@@ -74,6 +80,9 @@ function Card(props) {
           alt="card content"
           onClick={handleOpen}
         />
+
+        {/* 게시글 내용 */}
+        <Post post_id = {post_id} post={post}></Post>
         <CardMenu />
         <div className="likedBy">
           <Profile iconSize="small" hideAccountName={true} />

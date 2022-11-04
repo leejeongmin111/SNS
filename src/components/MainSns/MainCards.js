@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function Cards() {
+  // email = 작성자 아이디
+  // content = 게시글 내용
   const [email, setEmail] = useState("");
   const [content, setContent] = useState("");
   useEffect(() => {
@@ -13,7 +15,7 @@ function Cards() {
         console.log("아이디" + res.data.email);
         console.log("글내용" + res.data.content);
         setEmail(res.data.email);
-        setContent(res.res.data.content);
+        setContent(res.data.content);
       })
       .catch((err) => {
         console.log("문제발생", err.response.data);
@@ -58,22 +60,25 @@ function Cards() {
     <div className="cards">
       <Card
         accountName={email}
+        post="ggg"
         storyBorder={true}
         image="https://picsum.photos/800/900"
         comments={commentsOne}
-        likedByText={content}
+        likedByText={email}
         likedByNumber={89}
         hours={16}
       />
-      {/* <Card
+      <Card
+        post_id={email}
+        post={content}
         accountName="앙기철ㄸㄸㄸㄸ"
         image="https://picsum.photos/800"
         comments={commentsTwo}
-        likedByText="therealadamsavage"
+        likedByText={email}
         likedByNumber={47}
         hours={12}
       />
-      <Card
+      {/* <Card
         accountName="이헬창111"
         storyBorder={true}
         image="https://picsum.photos/800/1000"
