@@ -162,7 +162,17 @@ router.post("/mainsns", (req, res) => {
 
 router.post("/maincards", (req, res) => {
   let sql = "select * from t_community"; // 모든 정보 배열 형태로 보내기 
-  
+  let sql_cmt = "select * from t_comment";
+  let cmts;
+  conn.query(sql_cmt,(err,rows)=>{
+    if (!err) {
+    cmts = rows
+    console.log("cmts값 넣기")
+    console.log("댓글들 ",cmts)
+    }
+  })
+
+
   conn.query(sql, (err, rows) => {
     if (!err) {
       console.log("아이디값 정민정민", rows[0]);
@@ -172,6 +182,7 @@ router.post("/maincards", (req, res) => {
         // content: rows[0].bd_content,
         // 배열 안 객체로 보냄
         post: rows,
+        cmts: cmts,
       });
     } else {
       console.log("정민이 아노디ㅛㅇ", err);
@@ -180,17 +191,23 @@ router.post("/maincards", (req, res) => {
 });
 
 router.post("/comment", (req, res) => {
-  console.log("아이디", req.body.email);
-  console.log("코멘트", req.body.comment);
-  let cmt = req.body.comment;
-  let email = req.body.email;
+  // console.log("아이디", req.body.email);
+  // console.log("코멘트", req.body.comment);
+  let bd_seq = req.body.bd_seq;
+  let cmt_content = req.body.cmt_content;
+  let mb_id = req.body.mb_id;
+  let bd_id = req.body.bd_id;
 
+  // "insert into t_comment(bd_seq,cmt_content,mb_id,bd_id) values(1,?,'임시아이디',?)";
   let sql =
-    "insert into t_comment(bd_seq,cmt_content,mb_id,bd_id) values(1,?,'임시아이디',?)";
+    "insert into t_comment(bd_seq,cmt_content,mb_id,bd_id) values(?,?,?,?)";
 
-  conn.query(sql, [cmt, email], (err, rows) => {
+  conn.query(sql, [bd_seq,cmt_content,mb_id,bd_id], (err, rows) => {
     if (!err) {
-      console.log("값넣어졌어");
+      console.log("댓글 넣어졌어");
+      res.send({
+        suc : "성공 정민"
+      })
     }
   });
 });

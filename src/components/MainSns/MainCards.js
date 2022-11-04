@@ -8,20 +8,27 @@ function Cards() {
   // const [content, setContent] = useState("");
   // 객체로 받아옴
   const [post,setPost] = useState([]);
+  const [cmts,setCmts] = useState([]);
+  
   useEffect(() => {
     axios
       .post("http://127.0.0.1:3001/maincards", {})
       .then((res) => {
-        // console.log("글내용" + res.data.content);
+        //console.log("글내용" + res.data.post[0].bd_id);
+        console.log(res.data.cmts);
         // setEmail(res.data.email);
         // setContent(res.data.content);
         setPost(res.data.post);
+        setCmts(res.data.cmts);
+        console.log(cmts)
       })
       .catch((err) => {
         console.log("문제발생", err.response.data);
       });
   },[]);
-
+  
+ 
+ 
 
   const commentsOne = [
     {
@@ -56,7 +63,6 @@ function Cards() {
   //     id: 5,
   //   },
   // ];
-
   return (
     <div className="cards">
       <Card
@@ -89,9 +95,13 @@ function Cards() {
         likedByNumber={90}
         hours={4}
       /> */}
-      {post.map(function(pos){
+      { post.map(function(pos){
+        console.log("Test")
+        // 게시글에 번호에 맞는 댓글 구하기 
+        
         return(
         <Card
+          key={pos.bd_seq}
           bd_id={pos.bd_id}               // 글 작성자
           bd_content = {pos.bd_content}   // 글 내용
           bd_seq = {pos.bd_seq}           // 글 번호 
@@ -100,13 +110,13 @@ function Cards() {
           storyBorder={true}
           image ={"https://picsum.photos/800/1000"}
           comments ={commentsTwo}
+          main_cmt = {cmts}
           likedByText= "mapvault"
           likedByNumber ={90}
           hours ={4}
         />
         );
       })}
-      
     </div>
   );
 }

@@ -13,6 +13,7 @@ import MainImg_Click from "./MainImg_Click";
 import axios from "axios";
 import Post from "./MainPost";
 
+
 function Card(props) {
   const {
     bd_id,        // 글 작성자
@@ -20,24 +21,27 @@ function Card(props) {
     bd_seq,       // 글 번호 
     bd_likes,     // 좋아요 갯수
     bd_time,      // 글 작성일 
+    main_cmt,         // 댓글 객체                
+    image,     
+    comments,     
     storyBorder,
-    image,
-    comments,
     likedByText,
     likedByNumber,
     hours,
   } = props;
-
+  
   // email: rows[0].bd_id,
   // content: rows[0].bd_content,
-
-
+   
+  
+  // 로그인되있는 아이디
+  const [email] = useState(sessionStorage.getItem("email"));
 
   //댓글 숨기기
   const [show, setShow] = useState({ display: "none" });
   const [num, setNum] = useState(0);
   const [fold, setFold] = useState("보기");
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
   const [content, setContent] = useState("");
   function changeshow() {
     if (num == 0) {
@@ -50,31 +54,45 @@ function Card(props) {
       setFold("보기");
     }
   }
-
   // 모달 설정
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    // axios
-    //   .post("http://127.0.0.1:3001/maincard", {})
-    //   .then((res) => {
-    //     console.log("아이디값 가져와짐");
-    //     setEmail(res.data.email);
-    //     setContent(res.data.content);
-    //   })
-    //   .catch((err) => {
-    //     console.log("문제발생", err.response.data);
-    //   });
+  // 댓글 입력 창
+  const [cmt,setCmt] = useState("");
+  function chCmt(e){
+    setCmt(e.target.value);
   }
 
+  // 댓글 입력 
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(bd_seq);
+    console.log(bd_id);
+    console.log(email);
+    //console.log(temp_cm);
+    axios
+      .post("http://127.0.0.1:3001/comment", {
+        bd_seq: bd_seq,        // 글 순번 
+        bd_id: bd_id,          // 글 작성자 
+        mb_id: email,         // 댓글 작성자 
+        cmt_content: cmt,  // 댓글 내용
+            
+      })
+      .then((res) => {
+        console.log("아이디값 가져와짐",res);
+        // window.location.href = "/mainsns";
+      })
+      .catch((err) => {
+        console.log("문제발생", err.response.data);
+      });
+  }
   return (
     <>
       <div className="card">
         <header>
-          <Profile iconSize="medium" storyBorder={storyBorder} />
+          <Profile iconSize="medium" storyBorder={storyBorder}/>
           <CardButton className="cardButton" />
         </header>
         <img
@@ -102,9 +120,25 @@ function Card(props) {
         </div>
 
         {/* 댓글  */}
-        <div className="comments" style={show}>
+        <div className="comments" style={show} >
           <br></br>
-          {comments.map((comment) => {
+          {main_cmt&&main_cmt.map((cm)=>{
+            console.log(cm.cmt_content);
+            if(cm.bd_seq==bd_seq){
+              return(
+                <Comment
+                key={cm.cmt_seq}
+                bd_id={cm.bd_id}
+                accountName={cm.mb_id }
+                comment={cm.cmt_content }
+              />
+              );
+            }
+          })  
+
+          }
+          {/* 아래는 원래 거  */}
+          {/* {comments.map((comment) => {
             return (
               <Comment
                 key={comment.id}
@@ -112,7 +146,7 @@ function Card(props) {
                 comment={comment.text}
               />
             );
-          })}
+          })} */}
         </div>
 
         <div className="addComment" style={show}>
@@ -126,10 +160,11 @@ function Card(props) {
             {/* 댓글 입력 창 */}
             <input
               type="text"
-              name="name"
+              name="comment"
               maxlength="20"
               size="75"
               placeholder="Add a commnet..."
+              onChange ={chCmt}
             ></input>
             <Button type="submit">post</Button>
           </Box>
