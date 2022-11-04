@@ -14,7 +14,6 @@ import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
 import "../../styles/Account_Setting/Write_Daily.scss";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import postOff from "../../images/write_off.png";
 
@@ -53,11 +52,10 @@ export default function Write_Daily() {
     await axios
       .post("http://127.0.0.1:3001/write_daily", {
         text: text,
-        img: imgSrc,
+        // img: imgSrc,
         email: email,
       })
       .then((res) => {
-        console.log("기철기철 " + res.data.send);
         window.location.href = "/mainsns";
       })
       .catch((err) => {

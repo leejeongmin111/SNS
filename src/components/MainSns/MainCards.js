@@ -38,21 +38,21 @@ function Cards() {
     },
   ];
 
-  const commentsTwo = [
-    {
-      user: "기철기철",
-      text: "Amazing content, keep it up!",
-      id: 4,
-    },
-  ];
+  // const commentsTwo = [
+  //   {
+  //     user: "기철기철",
+  //     text: "Amazing content, keep it up!",
+  //     id: 4,
+  //   },
+  // ];
 
-  const commentsThree = [
-    {
-      user: "아...ㄸ기철..",
-      text: "Love this!",
-      id: 5,
-    },
-  ];
+  // const commentsThree = [
+  //   {
+  //     user: "아...ㄸ기철..",
+  //     text: "Love this!",
+  //     id: 5,
+  //   },
+  // ];
 
   return (
     <div className="cards">

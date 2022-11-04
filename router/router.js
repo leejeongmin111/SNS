@@ -82,7 +82,7 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
   let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,0,0,${div})`;
   conn.query(sqlText, [text, email], function (err, rows) {
     if (!err) {
-      res.json({
+      res.send({
         send: "값넣기 성공",
       });
     } else {
@@ -159,21 +159,22 @@ router.post("/mainsns", (req, res) => {
 //     }
 //   });
 // });
-router.post("/maincards", (req, res) => {
-  let sql = "select bd_id,bd_content from t_community";
-  conn.query(sql, (err, rows) => {
-    if (!err) {
-      console.log("아이디값 정민정민", rows[0].bd_id);
-      console.log("게시글값 정민정민", rows[0].bd_content);
-      res.send({
-        email: rows[0].bd_id,
-        content: rows[0].bd_content,
-      });
-    } else {
-      console.log("정민이 아노디ㅛㅇ", err);
-    }
-  });
-});
+
+// router.post("/maincards", (req, res) => {
+//   let sql = "select bd_id,bd_content from t_community";
+//   conn.query(sql, (err, rows) => {
+//     if (!err) {
+//       console.log("아이디값 정민정민", rows[0].bd_id);
+//       console.log("게시글값 정민정민", rows[0].bd_content);
+//       res.send({
+//         email: rows[0].bd_id,
+//         content: rows[0].bd_content,
+//       });
+//     } else {
+//       console.log("정민이 아노디ㅛㅇ", err);
+//     }
+//   });
+// });
 
 router.post("/comment", (req, res) => {
   console.log("아이디", req.body.email);
@@ -191,49 +192,66 @@ router.post("/comment", (req, res) => {
   });
 });
 
-router.post("/write_job", upload.single("img"), (req, res) => {
+router.post("/specialTitle", (req, res) => {
+  let sql = `select bd_title from t_community where bd_div = 2`;
+  conn.query(sql, (err, rows) => {
+    if (rows.length > 0) {
+      console.log("코딩타이틀 가져옴");
+      res.send({
+        title: rows[0].bd_title,
+      });
+    } else {
+      console.log("코딩안됨/!!!", err);
+    }
+  });
+});
+
+router.post("/write_job", (req, res) => {
   console.log("가져온값 : ", req.body.text);
-  console.log("가져온값 : ", req.body.img);
+  // console.log("가져온값 : ", req.body.img);
   console.log("가져온값 : ", req.body.email);
 
   let text = req.body.text;
-  let img = req.body.img;
+  // let img = req.body.img;
   let email = req.body.email;
   let div = 1;
-  if (text === "" && img === "") {
-    console.log("뭐좀 써봐");
-    res.redirect("/mainsns");
-  }
+  // if (text === "" && img === "") {
+  //   console.log("뭐좀 써봐");
+  //   res.redirect("/mainsns");
+  // }
 
   let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,0,0,${div})`;
   conn.query(sqlText, [text, email], function (err, rows) {
     if (!err) {
       console.log("text집어넣기성공");
+      res.send({
+        text: "잡텍스트 들어감",
+      });
     } else {
       console.log("text집어넣기 문제", err);
       throw err;
     }
   });
-  if (img !== undefined) {
-    let seq = "select bd_seq from t_community order by bd_seq desc";
-    conn.query(seq, (err, cnt) => {
-      if (!err) {
-        console.log("bd_seq가져오기 성공", cnt[0]);
-        let sqlImg = `insert into bd_file values(?,?,?)`;
-        console.log("위 기철" + cnt[0]);
-        console.log("No file upload");
-        var imgsrc = "http://127.0.0.1:3001/images/" + req.file.filename;
-        conn.query(sqlImg, [email, cnt[0], imgsrc], (err, result) => {
-          if (err) throw err;
-          console.log("file uploaded");
-        });
-      } else {
-        console.log("bd_seq 실패", err);
-        throw err;
-      }
-    });
-  }
-  res.redirect("/mainsns");
+  // if (img !== undefined) {
+  //   let seq = "select bd_seq from t_community order by bd_seq desc";
+  //   conn.query(seq, (err, cnt) => {
+  //     if (!err) {
+  //       console.log("bd_seq가져오기 성공", cnt[0]);
+  //       let sqlImg = `insert into bd_file values(?,?,?)`;
+  //       console.log("위 기철" + cnt[0]);
+  //       console.log("No file upload");
+  //       var imgsrc = "http://127.0.0.1:3001/images/" + req.file.filename;
+  //       conn.query(sqlImg, [email, cnt[0], imgsrc], (err, result) => {
+  //         if (err) throw err;
+  //         console.log("file uploaded");
+  //       });
+  //     } else {
+  //       console.log("bd_seq 실패", err);
+  //       throw err;
+  //     }
+  //   });
+  // }
+  // res.redirect("/mainsns");
 });
 
 router.post("/write_special", (req, res) => {
@@ -243,13 +261,18 @@ router.post("/write_special", (req, res) => {
   console.log("종류 : ", req.body.kind);
 
   let text = req.body.text;
+  let title = req.body.title;
   let email = req.body.email;
+  let kind = req.body.kind;
   let div = 2;
 
-  let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,0,0,${div})`;
-  conn.query(sqlText, [text, email], function (err, rows) {
+  let sqlText = `insert into t_community(bd_type,bd_title,bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,?,?,0,0,${div})`;
+  conn.query(sqlText, [kind, title, text, email], function (err, rows) {
     if (!err) {
-      console.log("text집어넣기성공");
+      console.log("코딩문답 잘들어갔어요");
+      res.json({
+        suc: "잘들어갔어요",
+      });
     } else {
       console.log("text집어넣기 문제", err);
       throw err;

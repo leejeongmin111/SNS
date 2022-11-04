@@ -52,11 +52,10 @@ export default function Write_Job_Sns() {
     await axios
       .post("http://127.0.0.1:3001/write_job", {
         text: text,
-        img: imgSrc,
+        // img: imgSrc,
         email: email,
       })
       .then((res) => {
-        console.log(res.data);
         window.location.href = "/jobsns";
       })
       .catch((err) => {
@@ -76,12 +75,7 @@ export default function Write_Job_Sns() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box
-          sx={style}
-          component="form"
-          //onSubmit={handleChange}
-          // action 여기다가 주소 값 입력 해주세영~~!~!~!
-        >
+        <Box sx={style} component="form">
           <Typography id="modal-modal-title" variant="h6" component="h2">
             <IconButton
               aria-label="upload picture"
