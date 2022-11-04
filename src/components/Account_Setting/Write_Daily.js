@@ -37,7 +37,8 @@ export default function Write_Daily() {
   const handleClose = () => setOpen(false);
   const [text, setText] = useState("");
   const [imgSrc, setimgSrc] = useState("");
-  const email = useSelector((state) => state.email);
+  const [email] = useState(sessionStorage.getItem("email"));
+  // const email = useSelector((state) => state.email);
   const srcChange = (e) => {
     setimgSrc(URL.createObjectURL(e.target.files[0]));
   };
