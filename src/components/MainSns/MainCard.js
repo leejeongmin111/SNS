@@ -15,8 +15,11 @@ import Post from "./MainPost";
 
 function Card(props) {
   const {
-    post_id,
-    post,
+    bd_id,        // 글 작성자
+    bd_content,   // 글 내용
+    bd_seq,       // 글 번호 
+    bd_likes,     // 좋아요 갯수
+    bd_time,      // 글 작성일 
     storyBorder,
     image,
     comments,
@@ -82,13 +85,13 @@ function Card(props) {
         />
 
         {/* 게시글 내용 */}
-        <Post post_id = {post_id} post={post}></Post>
+        <Post bd_id = {bd_id} bd_content={bd_content}></Post>
         <CardMenu />
         <div className="likedBy">
           <Profile iconSize="small" hideAccountName={true} />
           <span>
             Liked by <strong>{likedByText}</strong> and{" "}
-            <strong>{likedByNumber} others</strong>
+            <strong>{bd_likes} others</strong>
           </span>
         </div>
         <div className="timePosted">
