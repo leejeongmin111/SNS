@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function Cards() {
-  // email = 작성자 아이디 
-  // content = 게시글 내용 
+  // email = 작성자 아이디
+  // content = 게시글 내용
   const [email, setEmail] = useState("");
   const [content, setContent] = useState("");
   useEffect(() => {
@@ -40,26 +40,27 @@ function Cards() {
     },
   ];
 
-  const commentsTwo = [
-    {
-      user: "기철기철",
-      text: "Amazing content, keep it up!",
-      id: 4,
-    },
-  ];
+  // const commentsTwo = [
+  //   {
+  //     user: "기철기철",
+  //     text: "Amazing content, keep it up!",
+  //     id: 4,
+  //   },
+  // ];
 
-  const commentsThree = [
-    {
-      user: "아...ㄸ기철..",
-      text: "Love this!",
-      id: 5,
-    },
-  ];
+  // const commentsThree = [
+  //   {
+  //     user: "아...ㄸ기철..",
+  //     text: "Love this!",
+  //     id: 5,
+  //   },
+  // ];
+
   return (
     <div className="cards">
       <Card
         accountName={email}
-        post = "ggg"
+        post="ggg"
         storyBorder={true}
         image="https://picsum.photos/800/900"
         comments={commentsOne}
@@ -68,8 +69,8 @@ function Cards() {
         hours={16}
       />
       <Card
-        post_id = {email}
-        post = {content}
+        post_id={email}
+        post={content}
         accountName="앙기철ㄸㄸㄸㄸ"
         image="https://picsum.photos/800"
         comments={commentsTwo}
