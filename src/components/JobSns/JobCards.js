@@ -1,5 +1,18 @@
 import "../../styles/JobSns/JobCards.scss";
 import Card from "./JobCard";
+import Profile from "./JobProfile";
+import { ReactComponent as CardButton } from "../../images/cardButton.svg";
+import CardMenu from "./JobCardMenu";
+import Comment from "./JobComment";
+import { useState , useEffect} from "react";
+import * as React from "react";
+import { Form } from "react-router-dom";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import JobImg_Click from "./JobImg_Click";
+import axios from "axios";
+import Post from "./JobPost";
 
 function Cards() {
 

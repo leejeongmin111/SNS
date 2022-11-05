@@ -115,6 +115,7 @@ function Card(props) {
         {/* 게시글 내용 */}
         <Post bd_id = {bd_id} bd_content={bd_content}></Post>
         <CardMenu />
+        
         <div className="likedBy">
           <Profile iconSize="small" hideAccountName={true} />
           <span>
