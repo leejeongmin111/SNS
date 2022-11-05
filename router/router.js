@@ -161,7 +161,7 @@ router.post("/mainsns", (req, res) => {
 // });
 
 router.post("/maincards", (req, res) => {
-  let sql = "select * from t_community"; // 모든 정보 배열 형태로 보내기 
+  let sql = "select * from t_community where bd_div=0"; // 모든 정보 배열 형태로 보내기 
   let sql_cmt = "select * from t_comment";
   let cmts;
   conn.query(sql_cmt,(err,rows)=>{
@@ -189,6 +189,37 @@ router.post("/maincards", (req, res) => {
     }
   });
 });
+
+router.post("/jobcards", (req, res) => {
+  let sql = "select * from t_community where bd_div = 1"; // 모든 정보 배열 형태로 보내기 
+  let sql_cmt = "select * from t_comment";
+  let cmts;
+  conn.query(sql_cmt,(err,rows)=>{
+    if (!err) {
+    cmts = rows
+    console.log("cmts값 넣기")
+    console.log("댓글들 ",cmts)
+    }
+  })
+
+
+  conn.query(sql, (err, rows) => {
+    if (!err) {
+      console.log("아이디값 정민정민", rows[0]);
+      console.log("게시글값 정민정민", rows);
+      res.send({
+        email: rows[0].bd_id,
+        // content: rows[0].bd_content,
+        // 배열 안 객체로 보냄
+        post: rows,
+        cmts: cmts,
+      });
+    } else {
+      console.log("정민이 아노디ㅛㅇ", err);
+    }
+  });
+});
+
 
 router.post("/comment", (req, res) => {
   // console.log("아이디", req.body.email);

@@ -3,7 +3,7 @@ import Profile from "./MainProfile";
 import { ReactComponent as CardButton } from "../../images/cardButton.svg";
 import CardMenu from "./MainCardMenu";
 import Comment from "./MainComment";
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import * as React from "react";
 import { Form } from "react-router-dom";
 import Box from "@mui/material/Box";
@@ -21,7 +21,7 @@ function Card(props) {
     bd_seq,       // 글 번호 
     bd_likes,     // 좋아요 갯수
     bd_time,      // 글 작성일 
-    main_cmt,         // 댓글 객체                
+    main_cmt,     // 댓글 객체                
     image,     
     comments,     
     storyBorder,
@@ -29,6 +29,16 @@ function Card(props) {
     likedByNumber,
     hours,
   } = props;
+  
+  // 댓글 개수 구하기
+  // useEffect(() => {
+  //   let cmt_count=0;
+  //   main_cmt.map((count)=>{
+  //     if(bd_seq==count.bd_seq){
+  //       cmt_count++;
+  //     }
+  //   })
+  // }, []);
   
   // email: rows[0].bd_id,
   // content: rows[0].bd_content,
@@ -82,7 +92,7 @@ function Card(props) {
       })
       .then((res) => {
         console.log("아이디값 가져와짐",res);
-        // window.location.href = "/mainsns";
+        window.location.href = "/mainsns";
       })
       .catch((err) => {
         console.log("문제발생", err.response.data);
@@ -115,7 +125,7 @@ function Card(props) {
         <div className="timePosted">
           {hours} HOURS AGO{" "}
           <a onClick={changeshow} className="cmt_fold">
-            {comments.length}개의 댓글 {fold}
+            {cmt.length}개의 댓글 {fold}
           </a>
         </div>
 
@@ -179,9 +189,11 @@ function Card(props) {
         aria-describedby="modal-modal-description"
       >
         <MainImg_Click
+          bd_seq={bd_seq}
           accountName="rafagrassetti"
           storyBorder={storyBorder}
           image={image}
+          main_cmts={main_cmt}
           comments={comments}
           likedByText={likedByText}
           likedByNumber={likedByNumber}

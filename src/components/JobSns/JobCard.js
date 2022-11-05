@@ -12,8 +12,20 @@ import Modal from '@mui/material/Modal';
 import JobImg_Click from "./JobImg_Click"
 
 function Card(props) {
-  const { storyBorder, image, comments, likedByText, likedByNumber, hours } =
-    props;
+  const {
+    bd_id,        // 글 작성자
+    bd_content,   // 글 내용
+    bd_seq,       // 글 번호 
+    bd_likes,     // 좋아요 갯수
+    bd_time,      // 글 작성일 
+    main_cmt,     // 댓글 객체                
+    image,     
+    comments,     
+    storyBorder,
+    likedByText,
+    likedByNumber,
+    hours,
+  } = props;
 
   const [show,setShow] = useState({display: 'none'});
   const [num, setNum] =useState(0);
