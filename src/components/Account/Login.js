@@ -26,6 +26,7 @@ export default function Login() {
         console.log(res);
         dispatch({ type: "test", email: res.data.email });
         sessionStorage.setItem("email", res.data.email);
+        sessionStorage.setItem("nick", res.data.nick);
         nav("/mainsns");
       })
       .catch((err) => {

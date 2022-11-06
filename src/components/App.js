@@ -12,6 +12,11 @@ import Dm from "./DM/Dm";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import Notice from "./Notice";
+<<<<<<< HEAD
+=======
+import UserPage from "./UserPage";
+
+>>>>>>> 54c92f16e1bc3ff5ee7f4ff1598c8d15eb0ea152
 
 function reducer(currentState, action) {
   if (currentState === undefined) {

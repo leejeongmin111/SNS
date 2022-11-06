@@ -94,7 +94,7 @@ function Profilemy(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [emailTest] = useState(sessionStorage.getItem("email"));
+  const [nick] = useState(sessionStorage.getItem("nick"));
 
   return (
     <>
@@ -108,7 +108,7 @@ function Profilemy(props) {
         </div>
         {(accountName || caption) && !hideAccountName && (
           <div className="My_textContainer">
-            <span className="My_accountName">{emailTest}</span>
+            <span className="My_accountName">{nick}</span>
             <Box className="My_box">
               <Grid container spacing={1}>
                 <Grid item xs={3}>

@@ -1,9 +1,11 @@
 import "../../styles/Notice/NoticeFooter.scss";
 // 흰색 아이콘
+
 import dmOff from "../../images/footer_icon/message_off.png";
 import noticeOff from "../../images/footer_icon/bell_off.png";
 import homeOff from "../../images/footer_icon/home_off.png";
 import userOff from "../../images/footer_icon/user_off.png";
+
 import * as React from "react";
 import Write_Daily from "../Account_Setting/Write_Daily";
 

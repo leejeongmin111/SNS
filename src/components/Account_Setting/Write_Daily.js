@@ -76,52 +76,59 @@ export default function Write_Daily() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style} component="form">
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            <IconButton
-              aria-label="upload picture"
-              component="label"
-              size="large"
-            >
-              <input
-                hidden
-                accept="image/*"
-                type="file"
-                name="img"
-                onChange={srcChange}
-              />
-              <PhotoIcon></PhotoIcon>
-            </IconButton>
-            <br></br>
-            <div className="uploadbox">
-              <img src={imgSrc} className="uploadimg"></img>
-            </div>
-            <div className="text_box">
-              <TextField
-                label="Post"
-                multiline
-                rows={16}
-                defaultValue=""
-                name="text"
-                onChange={(e) => setText(e.target.value)}
-                fullWidth
-              />
-            </div>
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 50 }}>
-            <Button
-              type="submit"
-              variant="outlined"
-              className="daily_button"
-              onClick={handleSubmit}
-            >
-              Submit
-            </Button>
-            <Button variant="outlined" onClick={deleteSrc}>
-              Cancle
-            </Button>
-          </Typography>
-        </Box>
+        <form
+          action="http://127.0.0.1:3001/write_daily"
+          method="post"
+          encType="multipart/form-data"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              <IconButton
+                aria-label="upload picture"
+                component="label"
+                size="large"
+              >
+                <input
+                  hidden
+                  accept="image/*"
+                  type="file"
+                  name="img"
+                  onChange={srcChange}
+                />
+                <PhotoIcon></PhotoIcon>
+              </IconButton>
+              <br></br>
+              <div className="uploadbox">
+                <img src={imgSrc} className="uploadimg"></img>
+              </div>
+              <div className="text_box">
+                <TextField
+                  label="Post"
+                  multiline
+                  rows={16}
+                  defaultValue=""
+                  name="text"
+                  onChange={(e) => setText(e.target.value)}
+                  fullWidth
+                />
+              </div>
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 50 }}>
+              <Button
+                type="submit"
+                variant="outlined"
+                className="daily_button"
+                onClick={handleSubmit}
+              >
+                Submit
+              </Button>
+              <Button variant="outlined" onClick={deleteSrc}>
+                Cancle
+              </Button>
+              <input type={"hidden"} name="emailSend" value={email}></input>
+            </Typography>
+          </Box>
+        </form>
       </Modal>
     </div>
   );

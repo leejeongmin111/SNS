@@ -1,5 +1,6 @@
 import "../../styles/Special/SFooter.scss";
 // 흰색 아이콘
+
 import dmOff from "../../images/footer_icon/message_off.png";
 import noticeOff from "../../images/footer_icon/bell_off.png";
 import homeOff from "../../images/footer_icon/home_off.png";

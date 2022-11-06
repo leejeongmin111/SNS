@@ -37,7 +37,7 @@ export default function Write_Special() {
   const handleClose = () => setOpen(false);
   const [imgSrc, setimgSrc] = useState("");
   const [kind, setKind] = useState("");
-  const email = useSelector((state) => state.email);
+  const [email] = useState(sessionStorage.getItem("email"));
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
   const nav = useNavigate();

@@ -6,15 +6,6 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Account/Register.scss";
-
-import emailIcon from "../../images/register_icon/email.png";
-import pwIcon from "../../images/register_icon/unlock.png";
-import pwchIcon from "../../images/register_icon/key.png";
-import nameIcon from "../../images/register_icon/name.png";
-import nickIcon from "../../images/register_icon/signature.png";
-import phoneIcon from "../../images/register_icon/smartphone.png";
-import idIcon from "../../images/register_icon/id.png";
-
 import SimpleSlider from "../Account_Setting/Slider";
 
 export default function Register() {
