@@ -11,7 +11,6 @@ import Dm from "./DM/Dm";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import Notice from "./Notice";
-import UserPage from "./UserPage";
 
 
 function reducer(currentState, action) {
@@ -44,7 +43,6 @@ function App() {
           <Route path="/special" element={<Special></Special>}></Route>
           <Route path="/jobsns" element={<JobSns></JobSns>}></Route>
           <Route path="/notice" element={<Notice></Notice>}></Route>
-          <Route path="/userpage" element={<UserPage></UserPage>}></Route>
         </Routes>
       </Provider>
     </>
