@@ -15,8 +15,7 @@ import { useState } from "react";
 import "../../styles/Account_Setting/Write_Daily.scss";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import postOff from "../../images/write_off.png";
-
+import postOff from "../../images/footer_icon/write_off.png";
 
 const style = {
   position: "absolute",
@@ -45,7 +44,7 @@ export default function Write_Job_Sns() {
   const deleteSrc = () => {
     URL.revokeObjectURL(imgSrc);
     setimgSrc("");
-    window.location.href = "/mainsns";
+    window.location.href = "/jobsns";
   };
 
   const handleSubmit = async (e) => {
@@ -53,12 +52,11 @@ export default function Write_Job_Sns() {
     await axios
       .post("http://127.0.0.1:3001/write_job", {
         text: text,
-        img: imgSrc,
+        // img: imgSrc,
         email: email,
       })
       .then((res) => {
-        console.log(res.data);
-        window.location.href = "/mainsns";
+        window.location.href = "/jobsns";
       })
       .catch((err) => {
         console.log("문제발생", err.response.data);
@@ -67,7 +65,9 @@ export default function Write_Job_Sns() {
 
   return (
     <div>
-      <Button className="daily_img" onClick={handleOpen}><img src={postOff} className="icon" style={{marginTop:14}}></img></Button>
+      <Button className="daily_img" onClick={handleOpen}>
+        <img src={postOff} className="icon" style={{ marginTop: 14 }}></img>
+      </Button>
 
       <Modal
         open={open}
@@ -75,12 +75,7 @@ export default function Write_Job_Sns() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box
-          sx={style}
-          component="form"
-          //onSubmit={handleChange}
-          // action 여기다가 주소 값 입력 해주세영~~!~!~!
-        >
+        <Box sx={style} component="form">
           <Typography id="modal-modal-title" variant="h6" component="h2">
             <IconButton
               aria-label="upload picture"

@@ -14,11 +14,8 @@ import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
 import "../../styles/Account_Setting/Write_Daily.scss";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import postOff from "../../images/write_off.png";
-
-
+import postOff from "../../images/footer_icon/write_off.png";
 
 const style = {
   position: "absolute",
@@ -39,7 +36,8 @@ export default function Write_Daily() {
   const handleClose = () => setOpen(false);
   const [text, setText] = useState("");
   const [imgSrc, setimgSrc] = useState("");
-  const email = useSelector((state) => state.email);
+  const [email] = useState(sessionStorage.getItem("email"));
+  // const email = useSelector((state) => state.email);
   const srcChange = (e) => {
     setimgSrc(URL.createObjectURL(e.target.files[0]));
   };
@@ -55,12 +53,10 @@ export default function Write_Daily() {
     await axios
       .post("http://127.0.0.1:3001/write_daily", {
         text: text,
-        img: imgSrc,
+        // img: imgSrc,
         email: email,
       })
       .then((res) => {
-        console.log(res.data);
-        // 값은 받아와지는데 페이지 이동이 안됨
         window.location.href = "/mainsns";
       })
       .catch((err) => {
@@ -70,7 +66,9 @@ export default function Write_Daily() {
 
   return (
     <div>
-      <Button className="daily_img" onClick={handleOpen}><img src={postOff} className="icon" style={{marginTop:14}}></img></Button>
+      <Button className="daily_img" onClick={handleOpen}>
+        <img src={postOff} className="icon" style={{ marginTop: 14 }}></img>
+      </Button>
 
       <Modal
         open={open}
