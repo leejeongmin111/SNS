@@ -80,6 +80,58 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
   }
 });
 
+router.post("/write_job", upload.single("img"), (req, res) => {
+  console.log("text 가져온값 : ", req.body);
+  console.log("img 가져온값 : ", req.file);
+  console.log("email 가져온 값 : ", req.body.emailSend);
+
+  if (req.body.text === "" && req.file === undefined) {
+    console.log("뭐좀 써봐");
+    res.redirect("http://localhost:3000/jobsns");
+  } else {
+    let text = req.body.text;
+    let img = req.file.buffer;
+    let email = req.body.emailSend;
+    let div = 1;
+
+    let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div,img_file) values(?,?,0,0,${div},?)`;
+    conn.query(sqlText, [text, email, img], function (err, rows) {
+      if (!err) {
+        console.log("데이터 넣기 성공");
+        res.redirect("http://localhost:3000/jobsns");
+      } else {
+        console.log("text집어넣기 문제", err);
+        throw err;
+      }
+    });
+  }
+});
+router.post("/write_special", (req, res) => {
+  console.log("텍스트 : ", req.body.text);
+  console.log("아이디 : ", req.body.email);
+  console.log("타이틀 : ", req.body.title);
+  console.log("종류 : ", req.body.kind);
+
+  let text = req.body.text;
+  let title = req.body.title;
+  let email = req.body.email;
+  let kind = req.body.kind;
+  let div = 2;
+
+  let sqlText = `insert into t_community(bd_type,bd_title,bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,?,?,0,0,${div})`;
+  conn.query(sqlText, [kind, title, text, email], function (err, rows) {
+    if (!err) {
+      console.log("코딩문답 잘들어갔어요");
+      res.json({
+        suc: "잘들어갔어요",
+      });
+    } else {
+      console.log("text집어넣기 문제", err);
+      throw err;
+    }
+  });
+});
+
 router.post("/mainsns", (req, res) => {
   let sql = "select bd_content from t_community";
   conn.query(sql, (err, rows) => {
@@ -200,58 +252,6 @@ router.post("/specialTitle", (req, res) => {
       });
     } else {
       console.log("코딩안됨/!!!", err);
-    }
-  });
-});
-
-router.post("/write_job", upload.single("img"), (req, res) => {
-  console.log("text 가져온값 : ", req.body);
-  console.log("img 가져온값 : ", req.file);
-  console.log("email 가져온 값 : ", req.body.emailSend);
-
-  if (req.body.text === "" && req.file === undefined) {
-    console.log("뭐좀 써봐");
-    res.redirect("http://localhost:3000/jobsns");
-  } else {
-    let text = req.body.text;
-    let img = req.file.buffer;
-    let email = req.body.emailSend;
-    let div = 1;
-
-    let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div,img_file) values(?,?,0,0,${div},?)`;
-    conn.query(sqlText, [text, email, img], function (err, rows) {
-      if (!err) {
-        console.log("데이터 넣기 성공");
-        res.redirect("http://localhost:3000/jobsns");
-      } else {
-        console.log("text집어넣기 문제", err);
-        throw err;
-      }
-    });
-  }
-});
-router.post("/write_special", (req, res) => {
-  console.log("텍스트 : ", req.body.text);
-  console.log("아이디 : ", req.body.email);
-  console.log("타이틀 : ", req.body.title);
-  console.log("종류 : ", req.body.kind);
-
-  let text = req.body.text;
-  let title = req.body.title;
-  let email = req.body.email;
-  let kind = req.body.kind;
-  let div = 2;
-
-  let sqlText = `insert into t_community(bd_type,bd_title,bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,?,?,0,0,${div})`;
-  conn.query(sqlText, [kind, title, text, email], function (err, rows) {
-    if (!err) {
-      console.log("코딩문답 잘들어갔어요");
-      res.json({
-        suc: "잘들어갔어요",
-      });
-    } else {
-      console.log("text집어넣기 문제", err);
-      throw err;
     }
   });
 });
