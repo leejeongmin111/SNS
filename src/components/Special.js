@@ -2,7 +2,7 @@ import "../styles/Special.scss";
 import Header from "./Special/SHeader";
 import Footer from "./Special/SFooter";
 import QuestionHeader from "./Special/SQuestionHeader";
-import QuestionCard from "./Special/SQuestionCard";
+import Question from "./Special/SQuestionCards";
 
 function Special() {
   return (
@@ -13,7 +13,7 @@ function Special() {
         <div className="container_QnA">
           <div className="container_main">
             <QuestionHeader />
-            <QuestionCard />
+            <Question/>
           </div>
           <Footer />
         </div>

@@ -54,15 +54,6 @@ function Card(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  return (
-    <>
-    <div className="card">
-      <header>
-        <Profile iconSize="medium" storyBorder={storyBorder} />
-        <CardButton className="cardButton" />
-      </header>
-      <img className="cardImage" src={image} alt="card content" onClick={handleOpen}/>
-
    {/*  댓글 입력 창 */}
    const [cmt,setCmt] = useState("");
    function chCmt(e){
@@ -92,9 +83,9 @@ function Card(props) {
          console.log("문제발생", err.response.data);
        });
    }
-  return (
+   return (
     <>
-   <div className="card">
+      <div className="card">
         <header>
           <Profile iconSize="medium" storyBorder={storyBorder}/>
           <CardButton className="cardButton" />
@@ -105,11 +96,12 @@ function Card(props) {
           alt="card content"
           onClick={handleOpen}
         />
-         {/* 게시글 내용 */}
-         <Post bd_id = {bd_id} bd_content={bd_content}></Post>
-      <CardMenu />
 
-      <div className="likedBy">
+        {/* 게시글 내용 */}
+        <Post bd_id = {bd_id} bd_content={bd_content}></Post>
+        <CardMenu />
+        
+        <div className="likedBy">
           <Profile iconSize="small" hideAccountName={true} />
           <span>
             Liked by <strong>{likedByText}</strong> and{" "}
@@ -119,6 +111,7 @@ function Card(props) {
         <div className="timePosted">
           {hours} HOURS AGO{" "}
           <a onClick={changeshow} className="cmt_fold">
+            {/* {comments.length}개의 댓글 {fold} */}
             {cmt.length}개의 댓글 {fold}
           </a>
         </div>
@@ -141,7 +134,16 @@ function Card(props) {
           })  
 
           }
-         
+          {/* 아래는 원래 거  */}
+          {/* {comments.map((comment) => {
+            return (
+              <Comment
+                key={comment.id}
+                accountName={comment.user}
+                comment={comment.text}
+              />
+            );
+          })} */}
         </div>
 
         <div className="addComment" style={show}>
@@ -165,64 +167,19 @@ function Card(props) {
           </Box>
         </div>
       </div>
-      <div className="timePosted">{hours} HOURS AGO <a onClick={changeshow} className="cmt_fold">{comments.length}개의 댓글 {fold}</a></div>
-        
-
-
-        {/* 댓글  */}
-      <div className="comments" style={show}>
-        <br></br>
-        {comments.map((comment) => {
-          return (
-            <Comment
-              key={comment.id}
-              accountName={comment.user}
-              comment={comment.text}
-            />
-          );
-        })}
-      </div> 
-
-      <div className="addComment" style={show}>
-      <Box
-        className="input_comment"
-        component="form"
-        onSubmit={handleSubmit}
-        noValidate
-        sx={{ mt: 1, marginTop: 0 }}
-        >
-        {/* 댓글 입력 창 */}
-        <input type="text"  name="name" maxlength="20" size="75" placeholder="Add a commnet..." ></input>
-        <Button type="submit">post</Button>
-        </Box>
-        
-      </div>
-    </div>
-
-
-           {/* 이미지 클릭 시 모달 창 */}
 
       {/* 이미지 클릭 시 모달 창 */}
-
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-          <JobImg_Click accountName="rafagrassetti"
-            storyBorder={storyBorder}
-            image={image}
-            comments={comments}
-            likedByText={likedByText}
-            likedByNumber={likedByNumber}
-            hours={hours}
-          />
         <JobImg_Click
-          bd_seq={bd_seq}
           accountName="rafagrassetti"
           storyBorder={storyBorder}
           image={image}
+          bd_seq={bd_seq}
           main_cmts={main_cmt}
           comments={comments}
           likedByText={likedByText}
