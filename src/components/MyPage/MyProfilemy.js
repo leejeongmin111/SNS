@@ -8,6 +8,57 @@ import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import Myfollow_Click from "./Myfollow_Click";
 import { useState } from "react";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import SetIcon from "../../images/setting.png";
+import Button from "@mui/material/Button";
+import { red } from "@mui/material/colors";
+import { color } from "@mui/system";
+
+function PositionedMenu() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <div className="set_container">
+      <Button
+        id="demo-positioned-button"
+        aria-controls={open ? "demo-positioned-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+        onClick={handleClick}
+      >
+        <img className="SetIcon" src={SetIcon} />
+      </Button>
+      <Menu
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+      >
+        <MenuItem onClick={handleClose}>회원 탈퇴</MenuItem>
+        <MenuItem onClick={handleClose}>회원 수정</MenuItem>
+        <MenuItem onClick={handleClose}>직업 인증</MenuItem>
+        <MenuItem onClick={handleClose}>로그 아웃</MenuItem>
+      </Menu>
+    </div>
+  );
+}
 
 // 모달 스타일 설정
 const style = {
@@ -69,6 +120,7 @@ function Profilemy(props) {
                 <Grid item xs={3}>
                   <span onClick={handleOpen}>팔로잉 &nbsp;&nbsp; 0</span>
                 </Grid>
+                <PositionedMenu />
               </Grid>
             </Box>
             <span className={`caption ${captionSize}`}>{caption}</span>

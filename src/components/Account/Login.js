@@ -1,42 +1,13 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import logo from "../../images/jobsnsLogo.png";
-import phone from "../../images/phone.png";
-import { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import "../../styles/Account/Login.scss";
+import logo from "../../images/jobsnsLogo.png";
+
+import * as React from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-const theme = createTheme();
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import SimpleSlider from "../Account_Setting/Slider";
+
 export default function Login() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -63,94 +34,44 @@ export default function Login() {
       });
   };
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <Container component="main">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 0,
-              display: "flex",
-              flexDirection: "row",
-              backgroundColor: "white",
-            }}
-          >
-            <img src={phone} className="loginMain"></img>
-            <Box
-              sx={{
-                marginTop: 15,
-                marginRight: 500,
-                marginLeft: 3,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "centre",
-              }}
-            >
-              <Box
-                sx={{
-                  marginTop: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "left",
-                }}
-              >
-                <img src={logo} width="300px"></img>
-              </Box>
-              <Box
-                component="form"
-                onSubmit={handleSubmit}
-                noValidate
-                sx={{ mt: 1, marginTop: 4 }}
-              >
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  autoFocus
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  onChange={(e) => setPw(e.target.value)}
-                  autoComplete="current-password"
-                />
-                <FormControlLabel
-                  control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Sign In
-                </Button>
-                <br></br>
-                <Link href="#" variant="body2">
-                  비밀번호를 잊으셨나요?
-                </Link>
-                <br></br>
-                <br></br>
-                <Link href="http://127.0.0.1:3001/register" variant="body1">
-                  {"Don't have an account ?  Resgister"}
-                </Link>
-                <Copyright sx={{ mt: 8, mb: 4 }} />
-              </Box>
-            </Box>
-          </Box>
-        </Container>
-      </ThemeProvider>
-    </>
+    <div className="Flex_Login">
+      <div class="image_container">
+        <SimpleSlider />
+      </div>
+      <div class="container">
+        <div class="form_container">
+          <form action="#">
+            <img className="logo" src={logo} alt="Jobsns logo" />
+            <div class="input_container">
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                onChange={(e) => setPw(e.target.value)}
+              />
+            </div>
+            <a href="#">Forgot your password?</a>
+            <div className="login_btn">
+              <button onSubmit={handleSubmit}>Log In</button>
+            </div>
+          </form>
+        </div>
+        <div className="blank_container"></div>
+        <div className="Sign_container">
+          <div className="Sign_up">
+            <a href="http://127.0.0.1:3001/register">You don't have account?</a>
+            <div className="SingUp_btn">
+              <button>Sign Up</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

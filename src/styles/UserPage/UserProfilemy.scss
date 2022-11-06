@@ -19,22 +19,25 @@
       font-weight: 600;
       margin-top: 10px;
     }
-
+    .follow_container {
+      width: 15%;
+      height: 30px;
+      .follow_btn {
+        border-radius: 20px;
+        background-color: rgb(13, 87, 224);
+        border: none;
+        font-size: 12px;
+        color: white;
+        height: 100%;
+        width: 100%;
+      }
+    }
     .My_box {
       margin-top: 20px;
       margin-left: 15px;
 
       color: darkgray;
       font-size: 12px;
-
-      .set_container {
-        width: 100px;
-        height: 20px;
-        .SetIcon {
-          width: 25%;
-          height: 25%;
-        }
-      }
     }
 
     &:hover {

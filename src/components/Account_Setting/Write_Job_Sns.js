@@ -15,7 +15,7 @@ import { useState } from "react";
 import "../../styles/Account_Setting/Write_Daily.scss";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import postOff from "../../images/write_off.png";
+import postOff from "../../images/footer_icon/write_off.png";
 
 const style = {
   position: "absolute",
@@ -47,8 +47,21 @@ export default function Write_Job_Sns() {
     window.location.href = "/jobsns";
   };
 
-
-  const handleSubmit = async (e) => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await axios
+      .post("http://127.0.0.1:3001/write_job", {
+        text: text,
+        // img: imgSrc,
+        email: email,
+      })
+      .then((res) => {
+        window.location.href = "/jobsns";
+      })
+      .catch((err) => {
+        console.log("문제발생", err.response.data);
+      });
+  };
 
   return (
     <div>

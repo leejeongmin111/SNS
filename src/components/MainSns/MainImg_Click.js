@@ -20,7 +20,11 @@ const style = {
 };
 
 function MainImg_Click(props) {
+<<<<<<< HEAD
+  const { storyBorder, image, comments, likedByText, likedByNumber, hours } =
+=======
   const { storyBorder, image, main_cmts, bd_seq, comments, likedByText, likedByNumber, hours } =
+>>>>>>> 54c92f16e1bc3ff5ee7f4ff1598c8d15eb0ea152
     props;
   const [email] = useState(sessionStorage.getItem("email"));
   const [comment, setComment] = useState("");
@@ -36,7 +40,11 @@ function MainImg_Click(props) {
       })
       .then((res) => {
         console.log("기철기철 " + res.data.send);
+<<<<<<< HEAD
+        // window.location.href = "/mainsns";
+=======
         window.location.href = "/mainsns";
+>>>>>>> 54c92f16e1bc3ff5ee7f4ff1598c8d15eb0ea152
       })
       .catch((err) => {
         console.log("문제발생", err.response.data);
@@ -53,6 +61,17 @@ function MainImg_Click(props) {
           {/* 댓글  */}
           <div className="comments">
             <br></br>
+<<<<<<< HEAD
+            {comments.map((comment) => {
+              return (
+                <Comment
+                  key={comment.id}
+                  accountName={comment.user}
+                  comment={comment.text}
+                />
+              );
+            })}
+=======
             {main_cmts&&main_cmts.map((cm)=>{
             console.log(cm.cmt_content);
             if(cm.bd_seq==bd_seq){
@@ -68,6 +87,7 @@ function MainImg_Click(props) {
           })  
 
           }
+>>>>>>> 54c92f16e1bc3ff5ee7f4ff1598c8d15eb0ea152
           </div>
           <Box
             className="input_comment"

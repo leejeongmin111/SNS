@@ -1,8 +1,8 @@
-import Header from "./MyPage/MyHeader";
-import Footer from "./MyPage/MyFooter";
-import Profilemy from "./MyPage/MyProfilemy";
-import Sidebar from "./MyPage/MySidebar";
-import "../styles/MyPage.scss";
+import Header from "./UserPage/UserHeader";
+import Footer from "./UserPage/UserFooter";
+import Profilemy from "./UserPage/UserProfilemy";
+import Sidebar from "./UserPage/UserSidebar";
+import "../styles/UserPage.scss";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -113,21 +113,6 @@ function MyPage() {
                   <BottomNavigationAction
                     label="Daily"
                     icon={<SnsProfile />}
-                    className="icon_button"
-                  />
-                  <BottomNavigationAction
-                    label="Job"
-                    icon={<JobIcon />}
-                    className="icon_button"
-                  />
-                  <BottomNavigationAction
-                    label="Save"
-                    icon={<SaveNone />}
-                    className="icon_button"
-                  />
-                  <BottomNavigationAction
-                    label="Tag"
-                    icon={<TagIcon />}
                     className="icon_button"
                   />
                 </BottomNavigation>
