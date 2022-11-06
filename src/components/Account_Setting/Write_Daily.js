@@ -14,7 +14,6 @@ import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
 import "../../styles/Account_Setting/Write_Daily.scss";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import postOff from "../../images/write_off.png";
 
@@ -37,7 +36,7 @@ export default function Write_Daily() {
   const handleClose = () => setOpen(false);
   const [text, setText] = useState("");
   const [imgSrc, setimgSrc] = useState("");
-  const email = useSelector((state) => state.email);
+  const [email] = useState(sessionStorage.getItem("email"));
   const srcChange = (e) => {
     setimgSrc(URL.createObjectURL(e.target.files[0]));
   };
@@ -48,22 +47,7 @@ export default function Write_Daily() {
     window.location.href = "/mainsns";
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await axios
-      .post("http://127.0.0.1:3001/write_daily", {
-        text: text,
-        img: imgSrc,
-        email: email,
-      })
-      .then((res) => {
-        console.log("기철기철 " + res.data.send);
-        window.location.href = "/mainsns";
-      })
-      .catch((err) => {
-        console.log("문제발생", err.response.data);
-      });
-  };
+  const handleSubmit = async (e) => {};
 
   return (
     <div>
@@ -77,52 +61,59 @@ export default function Write_Daily() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style} component="form">
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            <IconButton
-              aria-label="upload picture"
-              component="label"
-              size="large"
-            >
-              <input
-                hidden
-                accept="image/*"
-                type="file"
-                name="img"
-                onChange={srcChange}
-              />
-              <PhotoIcon></PhotoIcon>
-            </IconButton>
-            <br></br>
-            <div className="uploadbox">
-              <img src={imgSrc} className="uploadimg"></img>
-            </div>
-            <div className="text_box">
-              <TextField
-                label="Post"
-                multiline
-                rows={16}
-                defaultValue=""
-                name="text"
-                onChange={(e) => setText(e.target.value)}
-                fullWidth
-              />
-            </div>
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 50 }}>
-            <Button
-              type="submit"
-              variant="outlined"
-              className="daily_button"
-              onClick={handleSubmit}
-            >
-              Submit
-            </Button>
-            <Button variant="outlined" onClick={deleteSrc}>
-              Cancle
-            </Button>
-          </Typography>
-        </Box>
+        <form
+          action="http://127.0.0.1:3001/write_daily"
+          method="post"
+          encType="multipart/form-data"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              <IconButton
+                aria-label="upload picture"
+                component="label"
+                size="large"
+              >
+                <input
+                  hidden
+                  accept="image/*"
+                  type="file"
+                  name="img"
+                  onChange={srcChange}
+                />
+                <PhotoIcon></PhotoIcon>
+              </IconButton>
+              <br></br>
+              <div className="uploadbox">
+                <img src={imgSrc} className="uploadimg"></img>
+              </div>
+              <div className="text_box">
+                <TextField
+                  label="Post"
+                  multiline
+                  rows={16}
+                  defaultValue=""
+                  name="text"
+                  onChange={(e) => setText(e.target.value)}
+                  fullWidth
+                />
+              </div>
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 50 }}>
+              <Button
+                type="submit"
+                variant="outlined"
+                className="daily_button"
+                onClick={handleSubmit}
+              >
+                Submit
+              </Button>
+              <Button variant="outlined" onClick={deleteSrc}>
+                Cancle
+              </Button>
+              <input type={"hidden"} name="emailSend" value={email}></input>
+            </Typography>
+          </Box>
+        </form>
       </Modal>
     </div>
   );

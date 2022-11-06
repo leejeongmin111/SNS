@@ -16,6 +16,7 @@ import "../../styles/Account_Setting/Write_Job_Special.scss";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import postOff from "../../images/write_off.png";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -36,9 +37,10 @@ export default function Write_Special() {
   const handleClose = () => setOpen(false);
   const [imgSrc, setimgSrc] = useState("");
   const [kind, setKind] = useState("");
-  const email = useSelector((state) => state.email);
+  const [email] = useState(sessionStorage.getItem("email"));
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
+  const nav = useNavigate();
 
   const srcChange = (e) => {
     setimgSrc(URL.createObjectURL(e.target.files[0]));
@@ -64,7 +66,6 @@ export default function Write_Special() {
         email: email,
       })
       .then((res) => {
-        console.log(res.data);
         window.location.href = "/special";
       })
       .catch((err) => {
