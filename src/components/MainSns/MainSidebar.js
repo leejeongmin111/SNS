@@ -5,7 +5,7 @@ import image from "../../images/profile.jpg";
 import { useState } from "react";
 
 function Sidebar() {
-  const [emailTest] = useState(sessionStorage.getItem("email"));
+  const [nick] = useState(sessionStorage.getItem("nick"));
   return (
     <div className="sidebar_container">
       <div className="textcontainer">
@@ -13,7 +13,7 @@ function Sidebar() {
       </div>
       <div className="Mainsidebar">
         <Profile
-          username={emailTest}
+          username={nick}
           // caption="Aleksandar Popović"
           urlText="Switch"
           iconSize="big"
