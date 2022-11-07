@@ -16,7 +16,7 @@
   .container_Logo {
     width: 180px;
     height: 40px;
-    padding: 1em 0 0 1em;
+    padding: 0 0 0 1em;
 
     .logo {
       display: flex;
@@ -27,28 +27,28 @@
       }
     }
   }
-  .container_Search {
+  .Jcontainer_Search {
     width: 15px;
-    .searchBox {
+    .JsearchBox {
       position: absolute;
       transform: translate(-100%, 20%);
-      background: #2a7bee;
+      background: #eb4747;
       height: 35px;
       border-radius: 40px;
       padding: 5px;
       &:hover > {
-        .searchInput {
+        .JsearchInput {
           width: 250px;
           padding: 0 6px;
         }
 
-        .searchButton {
+        .JsearchButton {
           background: white;
           color: #2f3640;
         }
       }
 
-      .searchButton {
+      .JsearchButton {
         color: white;
         float: right;
         width: 35px;
@@ -60,13 +60,13 @@
         align-items: center;
         transition: 0.4s;
 
-        .searchIcon {
+        .JsearchIcon {
           display: flex;
           width: 100%;
         }
       }
 
-      .searchInput {
+      .JsearchInput {
         border: none;
         background: none;
         outline: none;
@@ -85,7 +85,7 @@
   }
 }
 @media screen and (max-width: 620px) {
-  .searchBox:hover > .searchInput {
+  .JsearchBox:hover > .JsearchInput {
     width: 150px;
     padding: 0 6px;
   }

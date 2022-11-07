@@ -8,7 +8,7 @@
     url("../../assets/font/Lobster-Regular.ttf") format("truetype");
 }
 
-.container_Tab {
+.container_head {
   position: fixed;
   background-color: none;
   display: flex;
@@ -16,13 +16,13 @@
   width: 20.5%;
   z-index: 10;
   height: 60px;
-  right: 8%;
+  right: 4.5%;
   top: 1.5%;
-  .container_Special {
-    width: 50%;
+  .Special_con {
+    width: 43%;
     height: 100%;
     padding: 1.5% 0 0 15%;
-    .Special_Btn {
+    .special_Btn {
       display: flex;
       width: 70%;
       height: 50px;
@@ -36,24 +36,6 @@
       background: linear-gradient(to bottom, #6dd5ed, #2193b0);
       border-radius: 50px;
       border: none;
-    }
-  }
-  .container_Status {
-    width: 50%;
-    height: 100%;
-    padding: 1.5% 0 0 0;
-
-    .Status_Btn {
-      width: 70%;
-      height: 50px;
-      font-family: "Lobster-Regular";
-      font-size: 30px;
-      background: #373b44;
-      background: -webkit-linear-gradient(to bottom, #519259, #116530);
-      background: linear-gradient(to bottom, #519259, #116530);
-      border-radius: 50px;
-      border: none;
-      color: white;
     }
   }
 }
