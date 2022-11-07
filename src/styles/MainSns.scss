@@ -13,10 +13,10 @@ body {
     grid-template-columns: 600px 1fr 600px;
 
     .blank {
-      background-color: $background-skyblue;
+      background-color: #2146c7;
     }
     .Main_container {
-      background-color: $background-blue;
+      background-color: #5800ff;
       border-right: 2px solid $border-color-grey;
       border-left: 2px solid $border-color-grey;
       grid-template-columns: 1fr;
@@ -31,7 +31,7 @@ body {
       }
     }
     .box {
-      background-color: $background-skyblue;
+      background-color: #2146c7;
     }
   }
 }

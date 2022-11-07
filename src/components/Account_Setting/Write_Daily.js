@@ -48,21 +48,7 @@ export default function Write_Daily() {
     window.location.href = "/mainsns";
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await axios
-      .post("http://127.0.0.1:3001/write_daily", {
-        text: text,
-        // img: imgSrc,
-        email: email,
-      })
-      .then((res) => {
-        window.location.href = "/mainsns";
-      })
-      .catch((err) => {
-        console.log("문제발생", err.response.data);
-      });
-  };
+  const handleSubmit = async (e) => {};
 
   return (
     <div>

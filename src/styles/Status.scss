@@ -20,11 +20,11 @@ body {
     display: grid;
     grid-template-columns: 600px 2fr 600px;
 
-    .blank {
-      background-color: $background-skyblue;
+    .Stblank {
+      background-color: #fffde3;
     }
     .Status_container {
-      background-color: $background-blue;
+      background-color: #eb1d36;
       border-right: 2px solid $border-color-grey;
       border-left: 2px solid $border-color-grey;
       grid-template-columns: 1fr;
@@ -42,7 +42,7 @@ body {
           align-items: center;
           width: 90%;
           height: 50px;
-          background-color: whitesmoke;
+          background-color: #ffcc1d;
           border: 2px solid black;
           border-radius: 20px;
           span {
@@ -86,7 +86,7 @@ body {
             width: 100%;
             align-items: center;
             display: flex;
-            background-color: #d8ebff;
+            background-color: #e8e8cc;
           }
           .Update_text1 {
             width: 100%;
@@ -136,7 +136,7 @@ body {
             width: 100%;
             align-items: center;
             display: flex;
-            background-color: rgb(239, 239, 148);
+            background-color: #e8e8cc;
           }
           .Update_text2 {
             width: 100%;
@@ -153,8 +153,8 @@ body {
           }
         }
       }
-      .box {
-        background-color: $background-skyblue;
+      .status_box {
+        background-color: #fffde3;
       }
     }
   }

@@ -8,7 +8,7 @@ import SideHeader from "./JobSns/JobSideHeader";
 function JobSns() {
   return (
     <main>
-      <div className="blank"></div>
+      <div className="jblank"></div>
       <div className="Job_container">
         <Header />
         <div className="card_container">
@@ -16,7 +16,7 @@ function JobSns() {
         </div>
         <Footer />
       </div>
-      <div className="box">
+      <div className="jbox">
         <SideHeader />
         <Sidebar />
       </div>
