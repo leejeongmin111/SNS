@@ -3,26 +3,24 @@ import Profile from "./JobProfile";
 import { ReactComponent as CardButton } from "../../images/cardButton.svg";
 import CardMenu from "./JobCardMenu";
 import Comment from "./JobComment";
-import {useState} from "react"
-import * as React from 'react';
-import { Form } from "react-router-dom";
+import { useState } from "react";
+import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Modal from '@mui/material/Modal';
-import JobImg_Click from "./JobImg_Click"
+import Modal from "@mui/material/Modal";
+import JobImg_Click from "./JobImg_Click";
 import axios from "axios";
 import Post from "./JobPost";
 
 function Card(props) {
   const {
-    bd_id,        // 글 작성자
-    bd_content,   // 글 내용
-    bd_seq,       // 글 번호 
-    bd_likes,     // 좋아요 갯수
-    bd_time,      // 글 작성일 
-    main_cmt,     // 댓글 객체                
-    image,     
-    comments,     
+    bd_id, // 글 작성자
+    bd_content, // 글 내용
+    bd_seq, // 글 번호
+    bd_likes, // 좋아요 갯수
+    main_cmt, // 댓글 객체
+    image,
+    comments,
     storyBorder,
     likedByText,
     likedByNumber,
@@ -31,63 +29,64 @@ function Card(props) {
 
   // 로그인되있는 아이디
   const [email] = useState(sessionStorage.getItem("email"));
-  const [show,setShow] = useState({display: 'none'});
-  const [num, setNum] =useState(0);
-  const [fold,setFold] = useState("보기")
-  function changeshow(){
-     if(num==0){
-        setNum(num+1);
-        setShow({display: 'block'});
-        setFold("접기");
-      }else{
-        setNum(0);
-        setShow({display: 'none'});
-        setFold("보기");
-      }
-    };
-    function handleSubmit (e){
+  const [show, setShow] = useState({ display: "none" });
+  const [num, setNum] = useState(0);
+  const [fold, setFold] = useState("보기");
+  function changeshow() {
+    if (num == 0) {
+      setNum(num + 1);
+      setShow({ display: "block" });
+      setFold("접기");
+    } else {
+      setNum(0);
+      setShow({ display: "none" });
+      setFold("보기");
+    }
+  }
+  function handleSubmit(e) {
     e.preventDefault();
   }
 
-  // 모달 설정 
+  // 모달 설정
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-   {/*  댓글 입력 창 */}
-   const [cmt,setCmt] = useState("");
-   function chCmt(e){
-     setCmt(e.target.value);
-   }
- 
-   // 댓글 입력 
-   function handleSubmit(e) {
-     e.preventDefault();
-     console.log(bd_seq);
-     console.log(bd_id);
-     console.log(email);
-     //console.log(temp_cm);
-     axios
-       .post("http://127.0.0.1:3001/comment", {
-         bd_seq: bd_seq,        // 글 순번 
-         bd_id: bd_id,          // 글 작성자 
-         mb_id: email,         // 댓글 작성자 
-         cmt_content: cmt,  // 댓글 내용
-             
-       })
-       .then((res) => {
-         console.log("아이디값 가져와짐",res);
-         window.location.href = "/mainsns";
-       })
-       .catch((err) => {
-         console.log("문제발생", err.response.data);
-       });
-   }
-   return (
+  {
+    /*  댓글 입력 창 */
+  }
+  const [cmt, setCmt] = useState("");
+  function chCmt(e) {
+    setCmt(e.target.value);
+  }
+
+  // 댓글 입력
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(bd_seq);
+    console.log(bd_id);
+    console.log(email);
+    //console.log(temp_cm);
+    axios
+      .post("http://127.0.0.1:3001/comment", {
+        bd_seq: bd_seq, // 글 순번
+        bd_id: bd_id, // 글 작성자
+        mb_id: email, // 댓글 작성자
+        cmt_content: cmt, // 댓글 내용
+      })
+      .then((res) => {
+        console.log("아이디값 가져와짐", res);
+        window.location.href = "/mainsns";
+      })
+      .catch((err) => {
+        console.log("문제발생", err.response.data);
+      });
+  }
+  return (
     <>
       <div className="card">
         <header>
-          <Profile iconSize="medium" storyBorder={storyBorder}/>
+          <Profile iconSize="medium" storyBorder={storyBorder} />
           <CardButton className="cardButton" />
         </header>
         <img
@@ -98,9 +97,9 @@ function Card(props) {
         />
 
         {/* 게시글 내용 */}
-        <Post bd_id = {bd_id} bd_content={bd_content}></Post>
+        <Post bd_id={bd_id} bd_content={bd_content}></Post>
         <CardMenu />
-        
+
         <div className="likedBy">
           <Profile iconSize="small" hideAccountName={true} />
           <span>
@@ -117,23 +116,22 @@ function Card(props) {
         </div>
 
         {/* 댓글  */}
-        <div className="comments" style={show} >
+        <div className="comments" style={show}>
           <br></br>
-          {main_cmt&&main_cmt.map((cm)=>{
-            console.log(cm.cmt_content);
-            if(cm.bd_seq==bd_seq){
-              return(
-                <Comment
-                key={cm.cmt_seq}
-                bd_id={cm.bd_id}
-                accountName={cm.mb_id }
-                comment={cm.cmt_content }
-              />
-              );
-            }
-          })  
-
-          }
+          {main_cmt &&
+            main_cmt.map((cm) => {
+              console.log(cm.cmt_content);
+              if (cm.bd_seq == bd_seq) {
+                return (
+                  <Comment
+                    key={cm.cmt_seq}
+                    bd_id={cm.bd_id}
+                    accountName={cm.mb_id}
+                    comment={cm.cmt_content}
+                  />
+                );
+              }
+            })}
           {/* 아래는 원래 거  */}
           {/* {comments.map((comment) => {
             return (
@@ -161,7 +159,7 @@ function Card(props) {
               maxlength="20"
               size="75"
               placeholder="Add a commnet..."
-              onChange ={chCmt}
+              onChange={chCmt}
             ></input>
             <Button type="submit">post</Button>
           </Box>

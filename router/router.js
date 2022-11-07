@@ -58,7 +58,6 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
   console.log("img 가져온값 : ", req.file);
   console.log("email 가져온 값 : ", req.body.emailSend);
 
-
   if (req.body.text === "" && req.file === undefined) {
     console.log("뭐좀 써봐");
     res.redirect("http://localhost:3000/mainsns");
@@ -79,6 +78,41 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
       }
     });
   }
+});
+
+router.post("/suggestion", (req, res) => {
+  console.log("useEffect가 진짜 문제인가??");
+
+  let sql =
+    "select mb_id,mb_profile from t_member where mb_id not in (select follow_id from t_follow) limit 5";
+  conn.query(sql, (err, info) => {
+    if (info.length > 0) {
+      console.log("suggestion 정보 가져와짐");
+      res.send({
+        dbInfo: info,
+      });
+    } else {
+      console.log("suggestion정보 안가져와짐", err);
+    }
+  });
+});
+
+router.post("/mainside", (req, res) => {
+  console.log("mainside 라우터 시작");
+  console.log("보낸 email 값 : ", req.body.email);
+  let email = req.body.email;
+
+  let sql = "select mb_profile from t_member where mb_id = ?";
+  conn.query(sql, [email], (err, info) => {
+    if (info.length > 0) {
+      console.log("mainside 정보 가져와짐");
+      res.send({
+        photo: info[0].mb_profile,
+      });
+    } else {
+      console.log("mainside정보 안가져와짐", err);
+    }
+  });
 });
 
 router.post("/write_job", upload.single("img"), (req, res) => {
@@ -147,42 +181,38 @@ router.post("/mainsns", (req, res) => {
   });
 });
 
-// router.post("/maincard", (req, res) => {
-//   let sql = "select bd_id,bd_content from t_community";
-//   conn.query(sql, (err, rows) => {
-//     if (!err) {
-//       console.log("아이디값 정민정민", rows[0].bd_id);
-//       console.log("게시글값 정민정민", rows[0].bd_content);
-//       res.send({
-//         email: rows[0].bd_id,
-//         content: rows[0].bd_content,
-//       });
-//     } else {
-//       console.log("정민이 아노디ㅛㅇ", err);
-//     }
-//   });
-// });
+router.post("/follow", (req, res) => {
+  console.log(req.body.username);
+  let followuser = req.body.username;
+  let myemail = req.body.email;
+
+  let sql = "insert into t_follow values(?,?)";
+  conn.query(sql, [myemail, followuser], (err, rows) => {
+    if (!err) {
+      console.log("팔로우 성공");
+      res.send({
+        suc: "팔로우 성공 승정보",
+      });
+    } else {
+      console.log("팔로우실패", err);
+    }
+  });
+});
 
 router.post("/maincards", (req, res) => {
-  let sql = "select * from t_community where bd_div=0"; // 모든 정보 배열 형태로 보내기
+  let sql =
+    "select c.bd_id,c.bd_content,c.bd_likes,c.bd_cnt,m.mb_id,m.m_profile,c.img_file from t_community c, t_member m where c.bd_id = m.mb_id and bd_div=0 order by bd_time desc"; // 모든 정보 배열 형태로 보내기
   let sql_cmt = "select * from t_comment";
   let cmts;
   conn.query(sql_cmt, (err, rows) => {
     if (!err) {
       cmts = rows;
-      console.log("cmts값 넣기");
-      // console.log("댓글들 ", cmts);
     }
   });
 
   conn.query(sql, (err, rows) => {
     if (!err) {
-      //console.log("아이디값 정민정민", rows[0]);
-      // console.log("게시글값 정민정민", rows);
       res.send({
-        email: rows[0].bd_id,
-        // content: rows[0].bd_content,
-        // 배열 안 객체로 보냄
         post: rows,
         cmts: cmts,
       });
@@ -224,18 +254,17 @@ router.post("/jobcards", (req, res) => {
 router.post("/comment", (req, res) => {
   // console.log("아이디", req.body.email);
   // console.log("코멘트", req.body.comment);
-  let bd_seq = req.body.bd_seq;               // 게시글 번호
-  let cmt_content = req.body.cmt_content;     // 댓글 내용
-  let mb_id = req.body.mb_id;                 // 댓글 작성자
-  let bd_id = req.body.bd_id;                 // 게시글 작성자
+  let bd_seq = req.body.bd_seq; // 게시글 번호
+  let cmt_content = req.body.cmt_content; // 댓글 내용
+  let mb_id = req.body.mb_id; // 댓글 작성자
+  let bd_id = req.body.bd_id; // 게시글 작성자
 
-  let sql_cnt = "update t_community set bd_cnt = bd_cnt +1 where bd_seq =?"
-  conn.query(sql_cnt,[bd_seq],(err,rows)=>{
-    if(!err){
-      console.log("댓글 수 증가 완료")
+  let sql_cnt = "update t_community set bd_cnt = bd_cnt +1 where bd_seq =?";
+  conn.query(sql_cnt, [bd_seq], (err, rows) => {
+    if (!err) {
+      console.log("댓글 수 증가 완료");
     }
-  })
-
+  });
 
   let sql =
     "insert into t_comment(bd_seq,cmt_content,mb_id,bd_id) values(?,?,?,?)";
@@ -278,7 +307,6 @@ router.post("/login", (req, res) => {
       console.log("문제없음", rows[0].mb_id);
       console.log("문제없음", rows[0].mb_nick);
       res.json({
-
         email: rows[0].mb_id,
         nick: rows[0].mb_nick,
       });

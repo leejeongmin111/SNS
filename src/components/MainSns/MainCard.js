@@ -3,7 +3,7 @@ import Profile from "./MainProfile";
 import { ReactComponent as CardButton } from "../../images/cardButton.svg";
 import CardMenu from "./MainCardMenu";
 import Comment from "./MainComment";
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 
 import * as React from "react";
 import { Form } from "react-router-dom";
@@ -14,47 +14,26 @@ import MainImg_Click from "./MainImg_Click";
 import axios from "axios";
 import Post from "./MainPost";
 
-
 function Card(props) {
   const {
-    bd_id,        // 글 작성자
-    bd_content,   // 글 내용
-    bd_seq,       // 글 번호 
-    bd_likes,     // 좋아요 갯수
-    bd_time,      // 글 작성일 
-    main_cmt,     // 댓글 객체  
-    bd_cnt,              
-    image,     
-    comments,     
+    bd_id, // 글 작성자
+    bd_content, // 글 내용
+    bd_seq, // 글 번호
+    bd_likes, // 좋아요 갯수
+    main_cmt, // 댓글 객체
+    bd_cnt, // 댓글수
+    image,
+    comments,
     storyBorder,
-    likedByText,
-    likedByNumber,
-    hours,
+    profile,
   } = props;
-  
-  // 댓글 개수 구하기
-  // useEffect(() => {
-  //   let cmt_count=0;
-  //   main_cmt.map((count)=>{
-  //     if(bd_seq==count.bd_seq){
-  //       cmt_count++;
-  //     }
-  //   })
-  // }, []);
-  
-  // email: rows[0].bd_id,
-  // content: rows[0].bd_content,
-   
-  
-  // 로그인되있는 아이디
+
   const [email] = useState(sessionStorage.getItem("email"));
 
   //댓글 숨기기
   const [show, setShow] = useState({ display: "none" });
   const [num, setNum] = useState(0);
   const [fold, setFold] = useState("보기");
-  // const [email, setEmail] = useState("");
-  const [content, setContent] = useState("");
   function changeshow() {
     if (num == 0) {
       setNum(num + 1);
@@ -72,29 +51,23 @@ function Card(props) {
   const handleClose = () => setOpen(false);
 
   // 댓글 입력 창
-  const [cmt,setCmt] = useState("");
-  function chCmt(e){
+  const [cmt, setCmt] = useState("");
+  function chCmt(e) {
     setCmt(e.target.value);
   }
 
-  // 댓글 입력 
+  // 댓글 입력
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(bd_seq);
-    console.log(bd_id);
-    console.log(email);
-    //console.log(temp_cm);
     axios
       .post("http://127.0.0.1:3001/comment", {
-        bd_seq: bd_seq,        // 글 순번 
-        bd_id: bd_id,          // 글 작성자 
-        mb_id: email,         // 댓글 작성자 
-        cmt_content: cmt,  // 댓글 내용
-            
+        bd_seq: bd_seq, // 글 순번
+        bd_id: bd_id, // 글 작성자
+        mb_id: email, // 댓글 작성자
+        cmt_content: cmt, // 댓글 내용
       })
       .then((res) => {
-        console.log("아이디값 가져와짐",res);
-        // window.location.href = "/mainsns";
+        console.log("아이디값 가져와짐", res);
         window.location.href = "/mainsns";
       })
       .catch((err) => {
@@ -105,7 +78,12 @@ function Card(props) {
     <>
       <div className="card">
         <header>
-          <Profile iconSize="medium" storyBorder={storyBorder}/>
+          <Profile
+            iconSize="medium"
+            storyBorder={storyBorder}
+            username={bd_id}
+            image={profile}
+          />
           <CardButton className="cardButton" />
         </header>
         <img
@@ -116,52 +94,39 @@ function Card(props) {
         />
 
         {/* 게시글 내용 */}
-        <Post bd_id = {bd_id} bd_content={bd_content}></Post>
+        <Post bd_id={bd_id} bd_content={bd_content}></Post>
         <CardMenu />
-        
+
         <div className="likedBy">
-          <Profile iconSize="small" hideAccountName={true} />
+          <Profile iconSize="small" hideAccountName={true} image={profile} />
           <span>
-            Liked by <strong>{likedByText}</strong> and{" "}
+            Liked by <strong>{email}</strong> and{" "}
             <strong>{bd_likes} others</strong>
           </span>
         </div>
         <div className="timePosted">
-          {hours} HOURS AGO{" "}
           <a onClick={changeshow} className="cmt_fold">
-            {/* {comments.length}개의 댓글 {fold} */}
             {bd_cnt}개의 댓글 {fold}
           </a>
         </div>
 
         {/* 댓글  */}
-        <div className="comments" style={show} >
+        <div className="comments" style={show}>
           <br></br>
-          {main_cmt&&main_cmt.map((cm)=>{
-            console.log(cm.cmt_content);
-            if(cm.bd_seq==bd_seq){
-              return(
-                <Comment
-                key={cm.cmt_seq}
-                bd_id={cm.bd_id}
-                accountName={cm.mb_id }
-                comment={cm.cmt_content }
-              />
-              );
-            }
-          })  
-
-          }
-          {/* 아래는 원래 거  */}
-          {/* {comments.map((comment) => {
-            return (
-              <Comment
-                key={comment.id}
-                accountName={comment.user}
-                comment={comment.text}
-              />
-            );
-          })} */}
+          {main_cmt &&
+            main_cmt.map((cm) => {
+              console.log(cm.cmt_content);
+              if (cm.bd_seq == bd_seq) {
+                return (
+                  <Comment
+                    key={cm.cmt_seq}
+                    bd_id={cm.bd_id}
+                    accountName={cm.mb_id}
+                    comment={cm.cmt_content}
+                  />
+                );
+              }
+            })}
         </div>
 
         <div className="addComment" style={show}>
@@ -179,7 +144,7 @@ function Card(props) {
               maxlength="20"
               size="75"
               placeholder="Add a commnet..."
-              onChange ={chCmt}
+              onChange={chCmt}
             ></input>
             <Button type="submit">post</Button>
           </Box>
@@ -194,15 +159,12 @@ function Card(props) {
         aria-describedby="modal-modal-description"
       >
         <MainImg_Click
-          accountName="rafagrassetti"
+          accountName={bd_id}
           storyBorder={storyBorder}
           image={image}
           bd_seq={bd_seq}
           main_cmts={main_cmt}
           comments={comments}
-          likedByText={likedByText}
-          likedByNumber={likedByNumber}
-          hours={hours}
         />
       </Modal>
     </>
