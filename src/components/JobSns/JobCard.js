@@ -12,6 +12,7 @@ import Modal from '@mui/material/Modal';
 import JobImg_Click from "./JobImg_Click"
 import axios from "axios";
 import Post from "./JobPost";
+
 function Card(props) {
   const {
     bd_id,        // 글 작성자
@@ -30,7 +31,6 @@ function Card(props) {
 
   // 로그인되있는 아이디
   const [email] = useState(sessionStorage.getItem("email"));
-
   const [show,setShow] = useState({display: 'none'});
   const [num, setNum] =useState(0);
   const [fold,setFold] = useState("보기")
@@ -53,8 +53,8 @@ function Card(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
- 
-   // 댓글 입력 창
+
+   {/*  댓글 입력 창 */}
    const [cmt,setCmt] = useState("");
    function chCmt(e){
      setCmt(e.target.value);
@@ -83,9 +83,9 @@ function Card(props) {
          console.log("문제발생", err.response.data);
        });
    }
-  return (
+   return (
     <>
-   <div className="card">
+      <div className="card">
         <header>
           <Profile iconSize="medium" storyBorder={storyBorder}/>
           <CardButton className="cardButton" />
@@ -96,11 +96,12 @@ function Card(props) {
           alt="card content"
           onClick={handleOpen}
         />
-         {/* 게시글 내용 */}
-         <Post bd_id = {bd_id} bd_content={bd_content}></Post>
-      <CardMenu />
 
-      <div className="likedBy">
+        {/* 게시글 내용 */}
+        <Post bd_id = {bd_id} bd_content={bd_content}></Post>
+        <CardMenu />
+        
+        <div className="likedBy">
           <Profile iconSize="small" hideAccountName={true} />
           <span>
             Liked by <strong>{likedByText}</strong> and{" "}
@@ -110,6 +111,7 @@ function Card(props) {
         <div className="timePosted">
           {hours} HOURS AGO{" "}
           <a onClick={changeshow} className="cmt_fold">
+            {/* {comments.length}개의 댓글 {fold} */}
             {cmt.length}개의 댓글 {fold}
           </a>
         </div>
@@ -132,7 +134,16 @@ function Card(props) {
           })  
 
           }
-         
+          {/* 아래는 원래 거  */}
+          {/* {comments.map((comment) => {
+            return (
+              <Comment
+                key={comment.id}
+                accountName={comment.user}
+                comment={comment.text}
+              />
+            );
+          })} */}
         </div>
 
         <div className="addComment" style={show}>
@@ -165,10 +176,10 @@ function Card(props) {
         aria-describedby="modal-modal-description"
       >
         <JobImg_Click
-          bd_seq={bd_seq}
           accountName="rafagrassetti"
           storyBorder={storyBorder}
           image={image}
+          bd_seq={bd_seq}
           main_cmts={main_cmt}
           comments={comments}
           likedByText={likedByText}

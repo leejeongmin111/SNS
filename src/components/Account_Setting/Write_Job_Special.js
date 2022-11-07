@@ -15,7 +15,7 @@ import { useState } from "react";
 import "../../styles/Account_Setting/Write_Job_Special.scss";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import postOff from "../../images/write_off.png";
+import postOff from "../../images/footer_icon/write_off.png";
 import { useNavigate } from "react-router-dom";
 
 const style = {

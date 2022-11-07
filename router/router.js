@@ -58,6 +58,7 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
   console.log("img 가져온값 : ", req.file);
   console.log("email 가져온 값 : ", req.body.emailSend);
 
+
   if (req.body.text === "" && req.file === undefined) {
     console.log("뭐좀 써봐");
     res.redirect("http://localhost:3000/mainsns");
@@ -170,14 +171,14 @@ router.post("/maincards", (req, res) => {
     if (!err) {
       cmts = rows;
       console.log("cmts값 넣기");
-      console.log("댓글들 ", cmts);
+      // console.log("댓글들 ", cmts);
     }
   });
 
   conn.query(sql, (err, rows) => {
     if (!err) {
-      console.log("아이디값 정민정민", rows[0]);
-      console.log("게시글값 정민정민", rows);
+      //console.log("아이디값 정민정민", rows[0]);
+      // console.log("게시글값 정민정민", rows);
       res.send({
         email: rows[0].bd_id,
         // content: rows[0].bd_content,
@@ -223,12 +224,19 @@ router.post("/jobcards", (req, res) => {
 router.post("/comment", (req, res) => {
   // console.log("아이디", req.body.email);
   // console.log("코멘트", req.body.comment);
-  let bd_seq = req.body.bd_seq;
-  let cmt_content = req.body.cmt_content;
-  let mb_id = req.body.mb_id;
-  let bd_id = req.body.bd_id;
+  let bd_seq = req.body.bd_seq;               // 게시글 번호
+  let cmt_content = req.body.cmt_content;     // 댓글 내용
+  let mb_id = req.body.mb_id;                 // 댓글 작성자
+  let bd_id = req.body.bd_id;                 // 게시글 작성자
 
-  // "insert into t_comment(bd_seq,cmt_content,mb_id,bd_id) values(1,?,'임시아이디',?)";
+  let sql_cnt = "update t_community set bd_cnt = bd_cnt +1 where bd_seq =?"
+  conn.query(sql_cnt,[bd_seq],(err,rows)=>{
+    if(!err){
+      console.log("댓글 수 증가 완료")
+    }
+  })
+
+
   let sql =
     "insert into t_comment(bd_seq,cmt_content,mb_id,bd_id) values(?,?,?,?)";
 
@@ -242,13 +250,12 @@ router.post("/comment", (req, res) => {
   });
 });
 
-router.post("/specialTitle", (req, res) => {
-  let sql = `select bd_title from t_community where bd_div = 2`;
+router.post("/specials", (req, res) => {
+  let sql = `select * from t_community where bd_div = 2`;
   conn.query(sql, (err, rows) => {
     if (rows.length > 0) {
-      console.log("코딩타이틀 가져옴");
       res.send({
-        title: rows[0].bd_title,
+        specials: rows,
       });
     } else {
       console.log("코딩안됨/!!!", err);
@@ -271,6 +278,7 @@ router.post("/login", (req, res) => {
       console.log("문제없음", rows[0].mb_id);
       console.log("문제없음", rows[0].mb_nick);
       res.json({
+
         email: rows[0].mb_id,
         nick: rows[0].mb_nick,
       });

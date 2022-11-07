@@ -96,7 +96,6 @@ function Cards() {
         hours={4}
       /> */}
       { post.map(function(pos){
-        console.log("Test")
         // 게시글에 번호에 맞는 댓글 구하기 
         
         return(
@@ -107,6 +106,7 @@ function Cards() {
           bd_seq = {pos.bd_seq}           // 글 번호 
           bd_likes ={pos.bd_likes}        // 좋아요 갯수
           bd_time ={pos.bd_time}          // 글 작성일 
+          bd_cnt = {pos.bd_cnt}           // 댓글 수 
           storyBorder={true}
           image ={"https://picsum.photos/800/1000"}
           comments ={commentsTwo}

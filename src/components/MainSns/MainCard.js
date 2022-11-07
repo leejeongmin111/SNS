@@ -4,6 +4,7 @@ import { ReactComponent as CardButton } from "../../images/cardButton.svg";
 import CardMenu from "./MainCardMenu";
 import Comment from "./MainComment";
 import { useState , useEffect} from "react";
+
 import * as React from "react";
 import { Form } from "react-router-dom";
 import Box from "@mui/material/Box";
@@ -21,7 +22,8 @@ function Card(props) {
     bd_seq,       // 글 번호 
     bd_likes,     // 좋아요 갯수
     bd_time,      // 글 작성일 
-    main_cmt,     // 댓글 객체                
+    main_cmt,     // 댓글 객체  
+    bd_cnt,              
     image,     
     comments,     
     storyBorder,
@@ -92,6 +94,7 @@ function Card(props) {
       })
       .then((res) => {
         console.log("아이디값 가져와짐",res);
+        // window.location.href = "/mainsns";
         window.location.href = "/mainsns";
       })
       .catch((err) => {
@@ -126,7 +129,8 @@ function Card(props) {
         <div className="timePosted">
           {hours} HOURS AGO{" "}
           <a onClick={changeshow} className="cmt_fold">
-            {cmt.length}개의 댓글 {fold}
+            {/* {comments.length}개의 댓글 {fold} */}
+            {bd_cnt}개의 댓글 {fold}
           </a>
         </div>
 
@@ -190,10 +194,10 @@ function Card(props) {
         aria-describedby="modal-modal-description"
       >
         <MainImg_Click
-          bd_seq={bd_seq}
           accountName="rafagrassetti"
           storyBorder={storyBorder}
           image={image}
+          bd_seq={bd_seq}
           main_cmts={main_cmt}
           comments={comments}
           likedByText={likedByText}

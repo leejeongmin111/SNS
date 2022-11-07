@@ -10,14 +10,16 @@ function QuestionHeader() {
       <div className="container_search">
         <div class="wrap">
           <div class="search">
-            <input
+
+            {/* 검색 창 */}
+            {/* <input
               type="text"
               class="searchTerm"
               placeholder="Search for Post"
             />
             <button type="submit" class="searchButton">
               <img className="searchIcon" src={SearchIcon} alt="searchIcon" />
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

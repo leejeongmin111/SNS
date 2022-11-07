@@ -26,6 +26,15 @@
 
       color: darkgray;
       font-size: 12px;
+
+      .set_container {
+        width: 100px;
+        height: 20px;
+        .SetIcon {
+          width: 25%;
+          height: 25%;
+        }
+      }
     }
 
     &:hover {

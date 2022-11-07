@@ -18,7 +18,6 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import { useEffect } from "react";
 import { display } from "@mui/system";
 
-
 const itemData = [
   {
     img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
@@ -92,9 +91,8 @@ function MyPage() {
   return (
     <main>
       <div className="blank"></div>
-      <div className="My_container" >
-      {/* 연습 <div className="My_container"  style={cnt==1?{display:"none"}:{display:""}}> */}
-
+      <div className="My_container">
+        {/* 연습 <div className="My_container"  style={cnt==1?{display:"none"}:{display:""}}> */}
         <Header />
         <React.Fragment>
           <Container>
@@ -133,7 +131,7 @@ function MyPage() {
                     className="icon_button"
                   />
                 </BottomNavigation>
-              </Box> 
+              </Box>
               <br></br>
               <Grid
                 container
