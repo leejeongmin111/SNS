@@ -46,11 +46,11 @@ const data = [
   },
 ];
 const pieData = [
-  { name: "3년 이하", value: 92.9 },
-  { name: "3 ~ 5년", value: 111 },
-  { name: "5 ~ 10년", value: 73 },
-  { name: "10 ~ 15년", value: 72 },
-  { name: "15년 이상", value: 24 },
+  { name: " 3년 이하", value: 92.9 },
+  { name: " 3 ~ 5년", value: 111 },
+  { name: " 5 ~ 10년", value: 73 },
+  { name: " 10 ~ 15년", value: 72 },
+  { name: " 15년 이상", value: 24 },
 ];
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
@@ -83,7 +83,7 @@ const renderCustomizedLabel = ({
 function Status() {
   return (
     <main>
-      <div className="blank"></div>
+      <div className="Stblank"></div>
       <div className="Status_container">
         <Header />
         <div className="container_chart">
@@ -125,8 +125,8 @@ function Status() {
                 />
                 <Tooltip />
                 <Legend />
-                <Bar yAxisId="left" dataKey="연봉" fill="#8884d8" />
-                <Bar yAxisId="right" dataKey="만족도" fill="#82ca9d" />
+                <Bar yAxisId="left" dataKey="연봉" fill="#8D8DAA" />
+                <Bar yAxisId="right" dataKey="만족도" fill="#66BFBF" />
               </BarChart>
             </div>
             <div className="Update_text1">
@@ -170,7 +170,7 @@ function Status() {
         </div>
         <Footer />
       </div>
-      <div className="box">
+      <div className="status_box">
         <SideHeader />
         <Sidebar />
       </div>

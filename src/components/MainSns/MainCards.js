@@ -17,6 +17,8 @@ function Cards() {
       .then((res) => {
         setPost(res.data.post);
         setCmts(res.data.cmts);
+        console.log(res.data.post);
+        console.log(post);
       })
       .catch((err) => {
         console.log("문제발생123", err);
