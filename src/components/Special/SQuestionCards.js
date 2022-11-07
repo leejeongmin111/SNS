@@ -6,14 +6,14 @@ import axios from "axios";
 
 function Question() {
   const [specials, setSpecials] = useState([]);
+  const [cmts, setCmts] = useState([]);
   
   useEffect(() => {
     axios
       .post("http://127.0.0.1:3001/specials", {})
       .then((res) => {
-        console.log("여ㅣㅇ겨이",res.data.specials);
         setSpecials(res.data.specials);
-        console.log(specials);
+        setCmts(res.data.cmts);
       })
       .catch((err) => {
         console.log("문제발생", err.response.data);
@@ -34,6 +34,7 @@ function Question() {
         bd_cnt  = {special.bd_cnt}      // 댓글 수 
         bd_likes  = {special.bd_likes}    // 좋아요 수
         bd_type = {special.bd_type}       // 프로그램 종류
+        cmts = {cmts}                    // 댓글 들
       />
       );
     })

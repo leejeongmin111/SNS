@@ -21,7 +21,8 @@ function QuestionCard(props) {
         bd_id,       // 글 작성자 
         bd_cnt,      // 댓글 수 
         bd_likes,    // 좋아요 수
-        bd_type      // 프로그램 종류
+        bd_type,      // 프로그램 종류
+        cmts          // 댓글들 (배열)
       } = props;
   // 모달 설정
   const [open, setOpen] = React.useState(false);
@@ -48,7 +49,8 @@ function QuestionCard(props) {
     <>
     <div className="Card_container" onClick={handleOpen}>
       <div className="Card_image"><img src={program} className="program_img"></img></div>
-      <div className="Card_text">{bd_title}</div>
+      <div className="Card_text">{bd_title}
+      <div>댓글 수 :{bd_cnt} 좋아요 수 :{bd_likes}</div></div>
     </div>
 
 
@@ -65,7 +67,8 @@ function QuestionCard(props) {
           bd_id ={bd_id}       // 글 작성자 
           bd_cnt ={bd_cnt}      // 댓글 수 
           bd_likes={bd_likes}    // 좋아요 수
-          bd_type={bd_type} 
+          bd_type={bd_type}     // 프로그램 종류
+          cmts = {cmts}        // 댓글
        />
     </Modal>
       </>

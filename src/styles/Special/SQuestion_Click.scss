@@ -1,29 +1,70 @@
 
 .SQ_img_main{
-
     background-color: blanchedalmond;
-    .SQ_img_click{
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
+    .SQ_left{
+        width: 70%;
+        height: 98%;
         float:left;
-        margin-top: 2%;
-        margin-left: 2%;
-        border-style: groove;
+        margin-top: 30px;
+        margin-left: 30px;
+        .SQ_img_click{
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            float:left;
+            margin-top: 10px;
+            margin-left: 2%;
+            border-style: groove;
 
+        }
+        .SQ_title{
+            border-radius: 5%;
+            background-color: white;
+            width: 87%;
+            height:13%;
+            margin-left: 6%;
+            margin-top: 3%;
+            border-style: outset;
+            
+
+        }
+        .SQ_content{
+            height: 70%;
+            width: 91%;
+            background-color: white;
+            margin-left: 3%;
+            margin-top: 4%;
+            border-radius: 5%;
+            line-height: 80px;
+            text-align: center;        
+            border-style: outset;
+
+            .SQ_icons{
+                margin-top: 48%;
+            }
+        }
 
     }
-    .SQ_title{
-        border-radius: 5%;
+
+    .SQ_Right{
         background-color: white;
-        width: 85%;
-        height:13%;
-        margin-left: 4%;
-        margin-top: 4%;
-        border-style: outset;
+        width: 400px;
+        height: 780px;
+        float: left;
+        margin-top: 65px;
+        border-radius: 5%;
+        line-height: 80px;
+        text-align: center;    
+        border-style: ridge;
 
-    }
-    .SQ_content{
+        .comments{
+            height: 80px;
+        }
+
+
+        .SQ_input_comment{
+            margin-top: 150%;
+        }
 
     }
 }
