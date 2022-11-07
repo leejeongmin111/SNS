@@ -58,7 +58,6 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
   console.log("img 가져온값 : ", req.file);
   console.log("email 가져온 값 : ", req.body.emailSend);
 
-
   if (req.body.text === "" && req.file === undefined) {
     console.log("뭐좀 써봐");
     res.redirect("http://localhost:3000/mainsns");
@@ -224,18 +223,17 @@ router.post("/jobcards", (req, res) => {
 router.post("/comment", (req, res) => {
   // console.log("아이디", req.body.email);
   // console.log("코멘트", req.body.comment);
-  let bd_seq = req.body.bd_seq;               // 게시글 번호
-  let cmt_content = req.body.cmt_content;     // 댓글 내용
-  let mb_id = req.body.mb_id;                 // 댓글 작성자
-  let bd_id = req.body.bd_id;                 // 게시글 작성자
+  let bd_seq = req.body.bd_seq; // 게시글 번호
+  let cmt_content = req.body.cmt_content; // 댓글 내용
+  let mb_id = req.body.mb_id; // 댓글 작성자
+  let bd_id = req.body.bd_id; // 게시글 작성자
 
-  let sql_cnt = "update t_community set bd_cnt = bd_cnt +1 where bd_seq =?"
-  conn.query(sql_cnt,[bd_seq],(err,rows)=>{
-    if(!err){
-      console.log("댓글 수 증가 완료")
+  let sql_cnt = "update t_community set bd_cnt = bd_cnt +1 where bd_seq =?";
+  conn.query(sql_cnt, [bd_seq], (err, rows) => {
+    if (!err) {
+      console.log("댓글 수 증가 완료");
     }
-  })
-
+  });
 
   let sql =
     "insert into t_comment(bd_seq,cmt_content,mb_id,bd_id) values(?,?,?,?)";
@@ -278,7 +276,6 @@ router.post("/login", (req, res) => {
       console.log("문제없음", rows[0].mb_id);
       console.log("문제없음", rows[0].mb_nick);
       res.json({
-
         email: rows[0].mb_id,
         nick: rows[0].mb_nick,
       });
@@ -289,6 +286,25 @@ router.post("/login", (req, res) => {
   });
 });
 
+router.post("/myPage/daily", (req, res) => {
+  let id = req.body.id;
+  let div = req.body.div;
+  let ch = req.body.ch;
+  console.log(id);
+  // if (ch == 2) {
+  // let sql = `select a.img_file img_file, a.bd_file bd_file from t_community a, m_save b where a.bd_seq = b.bd_seq`
+  // } else {
+  let sql = `select * from t_community where bd_id = ${id} and bd_div=${div} order by bd_time desc`;
+  conn.query(sql, (err, rows) => {
+    if (rows.length > 0) {
+      console.log("성공");
+      res.send({
+        result: rows,
+      });
+    }
+  });
+  // }
+});
 router.get("/", function (request, response) {
   console.log("Happy Hacking!");
   response.sendFile(path.join(__dirname, "..", "build", "index.html"));
