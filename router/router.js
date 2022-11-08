@@ -91,7 +91,7 @@ router.post("/suggestion", (req, res) => {
     "select mb_id,m_profile from t_member where mb_id not in (select follow_id from t_follow) limit 5";
   conn.query(sql, (err, info) => {
     if (info.length > 0) {
-      console.log("suggestion 정보 가져와짐");
+      console.log("suggestion 정보 가져와짐", info);
       res.send({
         dbInfo: info,
       });
@@ -205,7 +205,7 @@ router.post("/follow", (req, res) => {
 
 router.post("/maincards", (req, res) => {
   let sql =
-    "select c.bd_id,c.bd_content,c.bd_likes,c.bd_cnt,m.mb_id,m.m_profile,c.img_file from t_community c, t_member m where c.bd_id = m.mb_id and bd_div=0 order by bd_time desc"; // 모든 정보 배열 형태로 보내기
+    "select c.bd_seq,c.bd_id,c.bd_content,c.bd_likes,c.bd_cnt,m.mb_id,m.m_profile,c.img_file from t_community c, t_member m where c.bd_id = m.mb_id and bd_div=0 order by bd_time desc"; // 모든 정보 배열 형태로 보내기
   let sql_cmt = "select * from t_comment";
   let cmts;
   conn.query(sql_cmt, (err, rows) => {
@@ -256,8 +256,10 @@ router.post("/jobcards", (req, res) => {
 });
 
 router.post("/comment", (req, res) => {
-  // console.log("아이디", req.body.email);
-  // console.log("코멘트", req.body.comment);
+  console.log("게시글 아이디 : ", req.body.bd_id);
+  console.log("코멘트", req.body.cmt_content);
+  console.log("로그인아이디 : ", req.body.mb_id);
+  console.log("게시글 순번 : ", req.body.bd_seq);
   let bd_seq = req.body.bd_seq; // 게시글 번호
   let cmt_content = req.body.cmt_content; // 댓글 내용
   let mb_id = req.body.mb_id; // 댓글 작성자
@@ -279,6 +281,8 @@ router.post("/comment", (req, res) => {
       res.send({
         suc: "성공 정민",
       });
+    } else {
+      console.log("댓글문제 : ", err);
     }
   });
 });
@@ -322,22 +326,74 @@ router.post("/mypage", (req, res) => {
   });
 });
 
+router.post("/followClick", (req, res) => {
+  console.log("followClick라우터 시작");
+  let email = req.body.email;
+  let sql =
+    "select m.mb_id id,m.m_profile profile from t_member m, t_follow f where m.mb_id = f.follow_id and f.mb_id = ?;";
+  conn.query(sql, [email], (err, rows) => {
+    if (rows.length > 0) {
+      console.log("followClick성공");
+      res.send({
+        info: rows,
+      });
+    } else {
+      console.log("followClick실패", err);
+    }
+  });
+});
+
 router.post("/mypagecnt", (req, res) => {
   console.log("mypagecnt" + req.body.email);
   let email = req.body.email;
   let sql = "select count(bd_seq) cnt from t_community where bd_id = ?";
-  // let cnt;
+  let sqlMy = "select m_profile from t_member where mb_id = ?";
+  let myInfo;
+  let sqlFollow = "select follow_id follow from t_follow where mb_id = ?";
+  let follow;
+  let followCnt;
+  // let sqlFollowing =
+  //   "select a.mb_id following,count(a.mb_id) followingCnt from t_follow a where a.follow_id not in(select mb_id from t_follow  where mb_id = ?)";
+  // let following;
+  conn.query(sqlFollow, [email], (err, rows) => {
+    followCnt = rows.length;
+    if (!err) {
+      console.log("follow성공", rows);
+      console.log("followcnt : ", followCnt);
+      follow = rows;
+    } else {
+      console.log("follow쪽 문제", err);
+    }
+  });
+  // conn.query(sqlFollowing, [email], (err, rows) => {
+  //   if (!err) {
+  //     console.log("following성공");
+  //     following = rows;
+  //   } else {
+  //     console.log("following문제", err);
+  //   }
+  // });
+  conn.query(sqlMy, [email], (err, rows) => {
+    if (!err) {
+      myInfo = rows[0].m_profile;
+    } else {
+      console.log("마이페이지 내사진 안가져와짐 : ", err);
+    }
+  });
+
   conn.query(sql, [email], (err, rows) => {
     if (rows.length > 0) {
-      console.log("cnt값 가져와짐");
+      console.log("라스트 마이프로필");
       res.send({
+        myInfo: myInfo,
         cnt: rows,
+        follow: follow,
+        followCnt: followCnt,
       });
     } else {
       console.log("cnt값 안가져와짐", err);
     }
   });
-  let sqlLast = "select ";
 });
 
 router.post("/login", (req, res) => {
