@@ -13,11 +13,8 @@ import MenuItem from "@mui/material/MenuItem";
 import SetIcon from "../../images/setting.png";
 import Button from "@mui/material/Button";
 import axios from "axios";
-<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
-=======
 import basic from "../../images/basicprofile.jpg";
->>>>>>> 8ebda18019a7e2f0470739371d2373b7f2cb4ab4
 
 function PositionedMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
