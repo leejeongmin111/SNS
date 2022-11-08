@@ -22,7 +22,6 @@ function Question() {
 
   return (
     <>
-    <button onClick={()=>console.log(specials)}>Test</button>
     <div className="questions">
     {specials.map((special)=>{
       return(

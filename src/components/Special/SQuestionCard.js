@@ -29,9 +29,12 @@ function QuestionCard(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [program, setProgram] = useState();
-     
+
+
   // 프로그램 종류 구하기  Java Python React Html
       useEffect(() => {
+
+    
     if(bd_type=="Java"){
       setProgram(java_img)
     }else if(bd_type=="Python"){
@@ -43,14 +46,15 @@ function QuestionCard(props) {
     }else{
       setProgram(html_img);
     }
-  })
+  },[])
 
   return (
     <>
     <div className="Card_container" onClick={handleOpen}>
       <div className="Card_image"><img src={program} className="program_img"></img></div>
       <div className="Card_text">{bd_title}
-      <div>댓글 수 :{bd_cnt} 좋아요 수 :{bd_likes}</div></div>
+      {/* <div>댓글 수 :{bd_cnt} 좋아요 수 :{bd_likes}</div> */}
+      </div>
     </div>
 
 

@@ -11,6 +11,17 @@ import { useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import CardMenu from "../MainSns/MainCardMenu";
 import Comment from "./SComment";
+import { FunctionsOutlined } from "@mui/icons-material";
+import Right from '@mui/icons-material/KeyboardArrowRight';
+import Left from '@mui/icons-material/KeyboardArrowLeft';
+
+import "../../styles/JobSns/JobCardMenu.scss";
+import { ReactComponent as Inbox } from "../../images/inbox.svg";
+import { ReactComponent as Comments } from "../../images/comments.svg";
+import { ReactComponent as Notifications } from "../../images/notifications.svg";
+import { ReactComponent as Bookmark } from "../../images/bookmark.svg";
+
+
 
 // 모달 창 크기 설정 
 const style = {
@@ -38,16 +49,11 @@ function SQuestion_Click(props){
         } = props;
 
         const [program, setProgram] = useState();
-        const [temp_cmt, setTemp_cmt] = useState([]);
+        const [cmt_num, setCmt_num] =useState(0);
+
         // 프로그램 종류 구하기  Java Python React Html
         useEffect(() => {
-            let temp_cmts =[];
-            for(let i = 0 ; i < cmts.lenght;i ++){
-                if(bd_seq==cmts[i].bd_seq){
-                    temp_cmts.push(i);
-                }
-            }
-            setTemp_cmt(temp_cmts)
+
           if(bd_type=="Java"){
             setProgram(java_img)
           }else if(bd_type=="Python"){
@@ -65,8 +71,18 @@ function SQuestion_Click(props){
         const [cmt,setCmt] = useState("");
         function chCmt(e){
             setCmt(e.target.value);
-            console.log(temp_cmt)
         }
+        function cmt_plus(){
+          if(cmt_num!==cmts.length-1){
+          setCmt_num(cmt_num+1);
+          }
+        }
+        function cmt_minus(){
+          if(cmt_num!==0){
+            setCmt_num(cmt_num-1);
+            }
+        }
+
         function handleSubmit(e) {
             e.preventDefault();
             axios
@@ -93,12 +109,36 @@ function SQuestion_Click(props){
                     <Box className = "SQ_title"><h1 align="center">{bd_title}</h1></Box>
                     <Box className = "SQ_content">
                         {bd_content}
-                        <Box className="SQ_icons"><CardMenu ></CardMenu></Box>
+                        <Box className="SQ_icons">
+
+                         <div className="cardMenu">
+                            <div className="interactions">
+                              <Notifications className="icon" />
+                              <Comments className="icon" />
+                              <Inbox className="icon" />
+                            </div>
+                            <Bookmark className="icon" />
+                          </div>
+
+                        </Box>
                     </Box>
                 </Box>
+                  
+                      {/* <Left className="icon_left" onClick={cmt_minus}></Left> */}
                 <Box className="SQ_Right">
+                        
+                      {/* <Right className="icon_right" onClick={cmt_plus}></Right> */}
                     <Box className="comments">
-                    {cmts.map(function(cmt){
+                            
+                           {/* { cmts && <Comment
+                                    key={cmts[cmt_num].cmt_seq}
+                                    bd_seq = {cmts[cmt_num].bd_seq}         // 원글 번호
+                                    content ={cmts[cmt_num].cmt_content}    // 댓글 내용
+                                    accountName ={email}         // 댓글 작성자
+                                    bd_id ={cmts[cmt_num].bd_id}           //원글 작성자
+                                />} */}
+                            
+                     {cmts.map(function(cmt){
                         if(bd_seq==cmt.bd_seq){
                             return(
                                 <Comment
@@ -110,7 +150,7 @@ function SQuestion_Click(props){
                                 />
                             );
                         }
-                    })}
+                    })} 
                     </Box>
                     <Box
                         className="SQ_input_comment"
@@ -128,8 +168,9 @@ function SQuestion_Click(props){
                             onChange={chCmt}
                             sx={{width:250}}
                         />
-                        <Button type="submit">post</Button>
+                        <Button type="submit" onClick={()=>window.location.href = "/special"}>post</Button>
                         </Box>
+                         
                     </Box>
                 </Box>        
         </>
