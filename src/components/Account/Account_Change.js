@@ -13,23 +13,17 @@ import IconButton from "@mui/material/IconButton";
 
 export default function Account_Change() {
     
-  const [email, setEmail] = useState("");
-  const [job, setJob] = useState("");
-  const [pw, setPw] = useState("");
-  const [name, setName] = useState("");
-  const [nick, setNick] = useState("");
-  const [rn, setRn] = useState("");
-  const [phone, setPhone] = useState("");
-  const [gender, setGender] = useState("");
+  const [email, setEmail] = useState("");  //아이디
+  const [pw, setPw] = useState("");         // 비번 
+  const [nick, setNick] = useState("");     // 닉네임
+  const [imgSrc, setimgSrc] = useState(""); // 이미지 
   const nav = useNavigate();
-  const [imgSrc, setimgSrc] = useState("");
   const srcChange = (e) => {
     setimgSrc(URL.createObjectURL(e.target.files[0]));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(email, pw, name, nick, rn, phone, gender, job);
   };
 
   return (
@@ -58,7 +52,7 @@ export default function Account_Change() {
                 name="password CK"
                 onChange={(e) => setPw(e.target.value)}
               />
-              <input type="text" placeholder="Nick Name" name="NickName" />
+              <input type="text" placeholder="Nick Name" name="NickName" onChange={(e)=>setNick(e.target.value)} />
               <div>
                 <IconButton
                     aria-label="upload picture"
