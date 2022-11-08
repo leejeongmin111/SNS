@@ -38,6 +38,7 @@ function Footer() {
   }
 
   return (
+    <>
     <div className="footer_container">
       <div className="menu">
         <img className="icon" src={dmOff} alt="dm" />
@@ -55,6 +56,7 @@ function Footer() {
         />
       </div>
     </div>
+    </>
   );
 }
 
