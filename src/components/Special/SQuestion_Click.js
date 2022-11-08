@@ -1,0 +1,138 @@
+import { Box } from "@mui/system";
+import Button from "@mui/material/Button";
+import { useState } from "react";
+import axios from "axios";
+import "../../styles/Special/SQuestion_Click.scss"
+import html_img from "../../images/Program/html.png"
+import java_img from "../../images/Program/java1.png"
+import python_img from "../../images/Program/python.png"
+import react_img from "../../images/Program/react.png"
+import { useEffect } from "react";
+import TextField from "@mui/material/TextField";
+import CardMenu from "../MainSns/MainCardMenu";
+import Comment from "./SComment";
+
+// 모달 창 크기 설정 
+const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 1600,
+    height: 900,
+    bgcolor: "background.paper",
+    border: "1px solid #000",
+    boxShadow: 24,
+  };
+
+function SQuestion_Click(props){
+    const { 
+        bd_seq,   // 게시글 번호
+        bd_title,   // 글 제목
+        bd_content,// 글 내용
+        bd_id,       // 글 작성자 
+        bd_cnt,      // 댓글 수 
+        bd_likes,   // 좋아요 수
+        bd_type,     // 프로그램 종류 
+        cmts,       // 댓글
+        } = props;
+
+        const [program, setProgram] = useState();
+        const [temp_cmt, setTemp_cmt] = useState([]);
+        // 프로그램 종류 구하기  Java Python React Html
+        useEffect(() => {
+            let temp_cmts =[];
+            for(let i = 0 ; i < cmts.lenght;i ++){
+                if(bd_seq==cmts[i].bd_seq){
+                    temp_cmts.push(i);
+                }
+            }
+            setTemp_cmt(temp_cmts)
+          if(bd_type=="Java"){
+            setProgram(java_img)
+          }else if(bd_type=="Python"){
+            setProgram(python_img);
+          }else if(bd_type=="React"){
+            setProgram(react_img);
+          }else if(bd_type=="Html"){
+            setProgram(html_img);
+          }else{
+            setProgram("");
+          }
+        })
+        //댓글 제출
+        const [email] = useState(sessionStorage.getItem("email"));
+        const [cmt,setCmt] = useState("");
+        function chCmt(e){
+            setCmt(e.target.value);
+            console.log(temp_cmt)
+        }
+        function handleSubmit(e) {
+            e.preventDefault();
+            axios
+              .post("http://127.0.0.1:3001/comment", {
+                bd_seq: bd_seq,        // 글 순번 
+                bd_id: bd_id,          // 글 작성자 
+                mb_id: email,         // 댓글 작성자 
+                cmt_content: cmt,  // 댓글 내용
+                    
+              })
+              .then((res) => {
+                console.log("아이디값 가져와짐",res);
+                // window.location.href = "/mainsns";
+              })
+              .catch((err) => {
+                console.log("문제발생", err.response.data);
+              });
+          }
+    return(
+        <>
+            <Box className="SQ_img_main" sx={style} >
+                <Box className= "SQ_left">
+                    <img src={program} className="SQ_img_click"></img>
+                    <Box className = "SQ_title"><h1 align="center">{bd_title}</h1></Box>
+                    <Box className = "SQ_content">
+                        {bd_content}
+                        <Box className="SQ_icons"><CardMenu ></CardMenu></Box>
+                    </Box>
+                </Box>
+                <Box className="SQ_Right">
+                    <Box className="comments">
+                    {cmts.map(function(cmt){
+                        if(bd_seq==cmt.bd_seq){
+                            return(
+                                <Comment
+                                    key={cmt.cmt_seq}
+                                    bd_seq = {cmt.bd_seq}         // 원글 번호
+                                    content ={cmt.cmt_content}    // 댓글 내용
+                                    accountName ={email}         // 댓글 작성자
+                                    bd_id ={cmt.bd_id}           //원글 작성자
+                                />
+                            );
+                        }
+                    })}
+                    </Box>
+                    <Box
+                        className="SQ_input_comment"
+                        component="form"
+                        onSubmit={handleSubmit}
+                        noValidate
+                        sx={{ mt: 1, marginTop: 0 }}
+                    >
+                         {/* 댓글 입력 창 */}
+                         <TextField
+                            multiline
+                            rows={2}
+                            defaultValue=""
+                            name="comment"
+                            onChange={chCmt}
+                            sx={{width:250}}
+                        />
+                        <Button type="submit">post</Button>
+                        </Box>
+                    </Box>
+                </Box>        
+        </>
+    );
+}
+export default SQuestion_Click

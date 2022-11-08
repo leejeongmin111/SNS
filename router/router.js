@@ -22,7 +22,6 @@ router.post("/register", (req, res) => {
   console.log("가져온값", req.body.nick);
   console.log("가져온값", req.body.rn);
   console.log("가져온값", req.body.phone);
-  console.log("가져온값", req.body.gender);
   console.log("가져온값", req.body.job);
 
   let email = req.body.email;
@@ -31,14 +30,13 @@ router.post("/register", (req, res) => {
   let nick = req.body.nick;
   let rn = req.body.rn;
   let phone = req.body.phone;
-  let gender = req.body.gender;
-  let job = req.body.job;
+  let job = 0;
 
-  let sql = `insert into t_member(mb_id ,mb_pw, mb_name, mb_nick, mb_rn, mb_phone, mb_gender) values(?,?,?,?,?,?,?)`;
+  let sql = `insert into t_member(mb_id ,mb_pw, mb_name, mb_nick, mb_rn, mb_phone, t_job) values(?,?,?,?,?,?,?)`;
   // t_member테이블에 job컬럼없어서 오류발생 그러므로 생성해야함
   conn.query(
     sql,
-    [email, pw, name, nick, rn, phone, gender, job],
+    [email, pw, name, nick, rn, phone, job],
     function (err, rows) {
       if (!err) {
         console.log("문제없음");
@@ -51,6 +49,12 @@ router.post("/register", (req, res) => {
       }
     }
   );
+});
+
+router.post("/changeProfile", upload.single("img"), (req, res) => {
+  let nick = req.body.nick;
+  let password = req.body.password;
+  let img = req.file.buffer;
 });
 
 router.post("/write_daily", upload.single("img"), (req, res) => {
@@ -66,7 +70,7 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
     let img = req.file.buffer;
     let email = req.body.emailSend;
     let div = 0;
-
+    // let sqlText = `update t_member set m_profile = ? where mb_id = '3'`;
     let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div,img_file) values(?,?,0,0,${div},?)`;
     conn.query(sqlText, [text, email, img], function (err, rows) {
       if (!err) {
@@ -280,11 +284,20 @@ router.post("/comment", (req, res) => {
 });
 
 router.post("/specials", (req, res) => {
+  let sql_cmt = "select * from t_comment";
+  let cmts;
+  conn.query(sql_cmt, (err, rows) => {
+    if (!err) {
+      cmts = rows;
+    }
+  });
+  console.log("여기야", cmts);
   let sql = `select * from t_community where bd_div = 2`;
   conn.query(sql, (err, rows) => {
     if (rows.length > 0) {
       res.send({
         specials: rows,
+        cmts: cmts,
       });
     } else {
       console.log("코딩안됨/!!!", err);
@@ -358,11 +371,19 @@ router.post("/myPage/daily", (req, res) => {
   let ch = req.body.ch;
   console.log(id);
   // if (ch == 2) {
-  // let sql = `select a.img_file img_file, a.bd_file bd_file from t_community a, m_save b where a.bd_seq = b.bd_seq`
+  // let sql = `select a.img_file img_file, a.bd_seq bd_seq, b.save_time st from t_community a, m_save b where a.bd_seq = b.bd_seq and a.bd_id = ${id} order by st desc`
+  // conn.query(sql,(err,rows)=>{
+  //   if (rows.length > 0) {
+  //     console.log("성공");
+  //     res.send({
+  //       result: rows,
+  //     });
+  //   }
+  // })
   // } else {
   let sql = `select * from t_community where bd_id = ${id} and bd_div=${div} order by bd_time desc`;
   conn.query(sql, (err, rows) => {
-    if (rows.length > 0) {
+    if (!err) {
       console.log("성공");
       res.send({
         result: rows,
@@ -370,6 +391,30 @@ router.post("/myPage/daily", (req, res) => {
     }
   });
   // }
+});
+
+router.post("/deleteProfile", (req, res) => {
+  let id = req.body.id;
+  let sql = `delete from t_member where mb_id = ${id}`;
+  let sql1 = `delete from m_save where mb_id = ${id}`;
+  let sql2 = `delete from t_comment where mb_id = ${id}`;
+  let sql3 = `delete from t_follow where follow id =${id} and mb_id = ${id}`;
+  let sql4 = `delete from t_like where mb_id = ${id}`;
+  let sql5 = `delete from t_notic where mb_id = ${id}`;
+  conn.query(sql);
+  conn.query(sql1);
+  conn.query(sql3);
+  conn.query(sql4);
+  conn.query(sql2);
+  conn.query(sql5, function (err, rows) {
+    if (!err) {
+      console.log("회원 탈퇴 성공");
+      res.redirect("http://localhost:3000/jobsns");
+    } else {
+      console.log("회원 탈퇴 문제", err);
+      throw err;
+    }
+  });
 });
 router.get("/", function (request, response) {
   console.log("Happy Hacking!");

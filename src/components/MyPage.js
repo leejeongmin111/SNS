@@ -42,7 +42,6 @@ function MyPage() {
         div: div,
         ch: ch,
       })
-
       .then((data) => {
         console.log(data.data.result);
         setPost(data.data.result);
@@ -116,7 +115,6 @@ function MyPage() {
                 columns={{ xs: 4, sm: 8, md: 12 }}
                 className="Pro_gird"
               >
-                {/* {Array.from(Array(10)).map((_, index) => { */}
                 {post1.map((pos, index) => {
                   let imgDt;
                   if (pos.img_file == null) {
