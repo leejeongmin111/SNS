@@ -4,6 +4,7 @@ const mysql = require("mysql2"); //설치한 mysql기능
 //사용자가 보낸 값이 post방식일때 분석해주는 express기능
 const path = require("path");
 const multer = require("multer");
+const { json } = require("body-parser");
 var upload = multer({ test: "upload/" });
 
 let conn = mysql.createConnection({
@@ -101,8 +102,9 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
     let img = req.file.buffer;
     let email = req.body.emailSend;
     let div = 0;
-    // let sqlText = `update t_member set m_profile = ? where mb_id = '4'`;
-    // conn.query(sqlText, [email], function (err, rows) {
+    // 프로필 사진 넣기
+    // let sqlText = `update t_member set m_profile = ? where mb_id = '123@123'`;
+    // conn.query(sqlText, [img], function (err, rows) {
     let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div,img_file) values(?,?,0,0,${div},?)`;
     conn.query(sqlText, [text, email, img], function (err, rows) {
       if (!err) {
@@ -487,6 +489,7 @@ router.post("/myPage/daily", (req, res) => {
 });
 
 router.post("/saveList", (req, res) => {
+  // 스크랩 기능
   let id = req.body.id;
   let seq = req.body.bd_seq;
   console.log(id);
@@ -499,6 +502,9 @@ router.post("/saveList", (req, res) => {
       conn.query(sql, (err1) => {
         if (!err1) {
           console.log("저장됨 삭제 완료");
+          res.json({
+            result: "삭제",
+          });
         } else {
           console.log("저장됨 삭제 실패" + err1);
         }
@@ -509,8 +515,44 @@ router.post("/saveList", (req, res) => {
       conn.query(sql, [id, seq], (err) => {
         if (!err) {
           console.log("저장성공");
+          res.json({
+            result: "성공",
+          });
         } else {
           console.log("저장실패" + err);
+        }
+      });
+    }
+  });
+});
+
+router.post("/likeIn", (req, res) => {
+  let id = req.body.id;
+  let bd_seq = req.body.bd_seq;
+  let sql = `select * from t_like where mb_id = '${id}' and bd_seq = ${bd_seq}`;
+  conn.query(sql, (err, rows) => {
+    if (rows.length > 0) {
+      let sql1 = `delete from t_like where mb_id = '${id}' and bd_seq = ${bd_seq}`;
+      conn.query(sql1, (err, rows) => {
+        if (!err) {
+          console.log("좋아요 취소 = 헤어짐");
+          res.json({
+            result: "삭제",
+          });
+        } else {
+          console.log("좋아요 삭제 실패...질척거릴거야!!!");
+        }
+      });
+    } else {
+      let sql1 = `insert into t_like values(?,?)`;
+      conn.query(sql1, [id, bd_seq], (err) => {
+        if (!err) {
+          console.log("좋아요 성공!!!ㅋ커플탄생");
+          res.json({
+            result: "성공",
+          });
+        } else {
+          console.log("좋아요 실패...커플지옥 솔로천국");
         }
       });
     }

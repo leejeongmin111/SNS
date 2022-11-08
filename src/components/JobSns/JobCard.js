@@ -56,6 +56,13 @@ function Card(props) {
         bd_seq: bd_seq,
         id: email,
       })
+      .then((res) => {
+        if (res.data.result == "성공") {
+          alert("스크랩 완료");
+        } else {
+          alert("스크랩 삭제");
+        }
+      })
       .catch((err) => {
         console.log("게시물 저장 안됨!!!" + err);
       });

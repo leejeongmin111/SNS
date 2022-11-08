@@ -55,7 +55,6 @@ function Cards() {
             profile={profileDt}
             image={imgDt} // 게시물 사진
             main_cmt={cmts} // 전체댓글
-            bd_seq={pos.bd_seq}
           />
         );
       })}

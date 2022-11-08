@@ -58,8 +58,33 @@ function Card(props) {
         bd_seq: bd_seq,
         id: email,
       })
+      .then((res) => {
+        if (res.data.result == "성공") {
+          alert("스크랩 완료");
+        } else {
+          alert("스크랩 삭제");
+        }
+      })
       .catch((err) => {
-        console.log("게시물 저장 안됨!!!" + err);
+        console.log("스크랩 안됨!!!" + err);
+      });
+  }
+  // 좋아요 버rrrrrr튼
+  function likeBt() {
+    axios
+      .post("http://127.0.0.1:3001/likeIn", {
+        bd_seq: bd_seq,
+        id: email,
+      })
+      .then((res) => {
+        if (res.data.result == "성공") {
+          alert("좋아요 완료");
+        } else {
+          alert("좋아요 삭제");
+        }
+      })
+      .catch((err) => {
+        console.log("좋아요 안됨!!!" + err);
       });
   }
   // 모달 설정
@@ -116,7 +141,7 @@ function Card(props) {
         {/* 아이콘 들 */}
         <div className="cardMenu">
           <div className="interactions">
-            <Notifications className="icon" />
+            <Notifications className="icon" onClick={likeBt} />
             <Comments className="icon" onClick={changeshow} />
             <Inbox className="icon" />
           </div>

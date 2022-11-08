@@ -11,7 +11,7 @@ function Suggestions() {
     axios
       .post("http://127.0.0.1:3001/suggestion", {})
       .then((res) => {
-        console.log("suggestion 페이지 : ", res.data.dbInfo);
+        console.log("suggestion 페이지 : ", res.data);
         setDbInfo(res.data.dbInfo);
       })
       .catch((err) => {
@@ -33,7 +33,7 @@ function Suggestions() {
         } else {
           window.Buffer = window.Buffer || require("buffer").Buffer;
           let encode = window.Buffer.from(info.m_profile).toString("base64");
-          imgDt = "data:image/png;base64," + encode;
+          imgDt = "data:image/*;base64," + encode;
           console.log("mysuggestion2 : " + imgDt);
         }
         return (
@@ -43,7 +43,7 @@ function Suggestions() {
             urlText="Follow"
             storyBorder={true}
             username={info.mb_id}
-            image={basic}
+            image={imgDt}
           />
         );
       })}
