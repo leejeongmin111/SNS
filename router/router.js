@@ -253,11 +253,20 @@ router.post("/comment", (req, res) => {
 });
 
 router.post("/specials", (req, res) => {
+  let sql_cmt = 'select * from t_comment'
+  let cmts;
+  conn.query(sql_cmt,(err,rows) => {
+    if(!err){
+      cmts = rows;
+    }
+  })
+  console.log("여기야",cmts)
   let sql = `select * from t_community where bd_div = 2`;
   conn.query(sql, (err, rows) => {
     if (rows.length > 0) {
       res.send({
         specials: rows,
+        cmts : cmts,
       });
     } else {
       console.log("코딩안됨/!!!", err);
