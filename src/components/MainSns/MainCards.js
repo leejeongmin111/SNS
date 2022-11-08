@@ -37,7 +37,7 @@ function Cards() {
           imgDt = "data:image/png;base64," + encode;
         }
         if (pos.m_profile === null) {
-          pos.m_profile = basic;
+            profileDt = basic;          
         } else {
           window.Buffer = window.Buffer || require("buffer").Buffer;
           let encode = window.Buffer.from(pos.m_profile).toString("base64");

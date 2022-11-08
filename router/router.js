@@ -311,7 +311,7 @@ router.post("/mypage", (req, res) => {
   let sql =
     "select mb_id,mb_profile from t_member where mb_id not in (select follow_id from t_follow) limit 5";
   conn.query(sql, (err, rows) => {
-    if (rows.length > 0) {
+    if (!err) {
       console.log("여기는 마이페이지 라우터");
       res.send({
         dbInfo: rows,
