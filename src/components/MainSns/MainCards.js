@@ -50,6 +50,7 @@ function Cards() {
             bd_content={pos.bd_content} // 글 내용
             bd_likes={pos.bd_likes} // 좋아요 갯수
             bd_cnt={pos.bd_cnt} // 댓글 수
+            bd_seq={pos.bd_seq} // 글 번호
             storyBorder={true}
             profile={profileDt}
             image={imgDt} // 게시물 사진

@@ -9,13 +9,13 @@ function Suggestions() {
 
   useEffect(() => {
     axios
-      .post("http://127.0.0.1:3001/mypage", {})
+      .post("http://127.0.0.1:3001/suggestion", {})
       .then((res) => {
-        console.log("mypage시작");
+        console.log("suggestion 페이지 : ", res.data.dbInfo);
         setDbInfo(res.data.dbInfo);
       })
       .catch((err) => {
-        console.log("수정 시작 문제");
+        console.log("suggestion 페이지 : ", err);
       });
   }, []);
 
@@ -26,8 +26,15 @@ function Suggestions() {
       </div>
       {/* 친구가 아닌 사람만 나오기 랜덤으로 5명 나오게하기 */}
       {dbInfo.map(function (info) {
-        if (info.mb_profile === null) {
-          info.mb_profile = basic;
+        let imgDt;
+        if (info.m_profile === null) {
+          imgDt = basic;
+          console.log("mysuggestion1 : " + imgDt);
+        } else {
+          window.Buffer = window.Buffer || require("buffer").Buffer;
+          let encode = window.Buffer.from(info.m_profile).toString("base64");
+          imgDt = "data:image/png;base64," + encode;
+          console.log("mysuggestion2 : " + imgDt);
         }
         return (
           <Profile
@@ -36,7 +43,7 @@ function Suggestions() {
             urlText="Follow"
             storyBorder={true}
             username={info.mb_id}
-            image={info.mb_profile}
+            image={basic}
           />
         );
       })}
