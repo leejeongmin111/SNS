@@ -16,10 +16,10 @@ function Profile(props) {
         username: username,
       })
       .then((res) => {
-        console.log("follow로 값넘어가기", res);
+        console.log("Mainfollow로 값넘어가기", res);
       })
       .catch((err) => {
-        console.log("follow페이지 문제", err);
+        console.log("Mainfollow페이지 문제", err);
       });
   }
 

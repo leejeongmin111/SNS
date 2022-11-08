@@ -261,7 +261,8 @@ router.post("/maincards", (req, res) => {
 });
 
 router.post("/jobcards", (req, res) => {
-  let sql = "select * from t_community where bd_div = 1 order by bd_time desc"; // 모든 정보 배열 형태로 보내기
+  let sql =
+    "select c.bd_seq,c.bd_id,c.bd_content,c.bd_likes,c.bd_cnt,m.mb_id,m.m_profile,c.img_file from t_community c, t_member m where c.bd_id = m.mb_id and bd_div=1 order by bd_time desc"; // 모든 정보 배열 형태로 보내기
   let sql_cmt = "select * from t_comment";
   let cmts;
   conn.query(sql_cmt, (err, rows) => {
@@ -377,6 +378,23 @@ router.post("/followClick", (req, res) => {
   });
 });
 
+router.post("/followingClick", (req, res) => {
+  console.log("followClick라우터 시작");
+  let email = req.body.email;
+  let sql =
+    "select f.mb_id id,m.m_profile profile from t_member m, t_follow f where m.mb_id = f.follow_id and f.follow_id = ?;";
+  conn.query(sql, [email], (err, rows) => {
+    if (rows.length > 0) {
+      console.log("followClick성공");
+      res.send({
+        info: rows,
+      });
+    } else {
+      console.log("followClick실패", err);
+    }
+  });
+});
+
 router.post("/mypagecnt", (req, res) => {
   console.log("mypagecnt" + req.body.email);
   let email = req.body.email;
@@ -386,9 +404,9 @@ router.post("/mypagecnt", (req, res) => {
   let sqlFollow = "select follow_id follow from t_follow where mb_id = ?";
   let follow;
   let followCnt;
-  // let sqlFollowing =
-  //   "select a.mb_id following,count(a.mb_id) followingCnt from t_follow a where a.follow_id not in(select mb_id from t_follow  where mb_id = ?)";
-  // let following;
+  let sqlFollowing =
+    "select count(mb_id) cnt from t_follow where follow_id = ?;";
+  let followingCnt;
   conn.query(sqlFollow, [email], (err, rows) => {
     followCnt = rows.length;
     if (!err) {
@@ -399,14 +417,14 @@ router.post("/mypagecnt", (req, res) => {
       console.log("follow쪽 문제", err);
     }
   });
-  // conn.query(sqlFollowing, [email], (err, rows) => {
-  //   if (!err) {
-  //     console.log("following성공");
-  //     following = rows;
-  //   } else {
-  //     console.log("following문제", err);
-  //   }
-  // });
+  conn.query(sqlFollowing, [email], (err, rows) => {
+    if (!err) {
+      console.log("following성공", rows);
+      followingCnt = rows;
+    } else {
+      console.log("following문제", err);
+    }
+  });
   conn.query(sqlMy, [email], (err, rows) => {
     if (!err) {
       myInfo = rows[0].m_profile;
@@ -423,6 +441,7 @@ router.post("/mypagecnt", (req, res) => {
         cnt: rows,
         follow: follow,
         followCnt: followCnt,
+        followingCnt: followingCnt,
       });
     } else {
       console.log("cnt값 안가져와짐", err);

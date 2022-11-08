@@ -15,10 +15,9 @@ function Suggestions() {
         setDbInfo(res.data.dbInfo);
       })
       .catch((err) => {
-        console.log("suggestion 페이지 : ", err);
+        console.log("수정 시작 문제");
       });
   }, []);
-
   return (
     <div className="suggestions">
       <div className="titleContainer">
@@ -29,12 +28,11 @@ function Suggestions() {
         let imgDt;
         if (info.m_profile === null) {
           imgDt = basic;
-          console.log("mysuggestion1 : " + imgDt);
+          console.log("메인서제션 basic값 들어감", info.m_profile);
         } else {
           window.Buffer = window.Buffer || require("buffer").Buffer;
           let encode = window.Buffer.from(info.m_profile).toString("base64");
           imgDt = "data:image/*;base64," + encode;
-          console.log("mysuggestion2 : " + imgDt);
         }
         return (
           <Profile

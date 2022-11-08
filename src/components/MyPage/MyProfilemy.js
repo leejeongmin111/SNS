@@ -15,6 +15,7 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import basic from "../../images/basicprofile.jpg";
+import Myfollowing_Click from "./Myfollowing_Click";
 
 function PositionedMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -100,9 +101,7 @@ function Profilemy(props) {
 
   const [cntPost, setCnt] = useState("");
   const [myprofile, setMyprofile] = useState([]);
-  const [follow, setFollow] = useState([]);
   const [followCnt, setFollowCnt] = useState();
-  const [followInfo, setFollowInfo] = useState([]);
   const [following, setFollowing] = useState([]);
 
   useEffect(() => {
@@ -111,17 +110,11 @@ function Profilemy(props) {
         email: email,
       })
       .then((res) => {
-        console.log("mypagecnt들 결과값 : ", res);
+        console.log("mypagecnt들 결과값 : ", res.data.followingCnt[0].cnt);
         setCnt(res.data.cnt[0].cnt);
         setMyprofile(res.data.myInfo.data);
-        setFollow(res.data.follow);
         setFollowCnt(res.data.followCnt);
-        setFollowInfo(res.data.followInfoTotal);
-        // setFollowing(res.data.following.data);
-        // console.log("res.data.cnt[0].cnt : " + res.data.cnt[0].cnt);
-        // console.log("res.data.myInfo.data : " + res.data.myInfo.data);
-        // console.log("res.data.follow.data : " + res.data.follow.data);
-        // console.log("res.data.following.data : " + res.data.following.data);
+        setFollowing(res.data.followingCnt[0].cnt);
       })
       .catch((err) => {
         console.log("mypagecnt끝내기 실패", err);
@@ -139,8 +132,21 @@ function Profilemy(props) {
 
   // 모달 설정
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  // 팔로우 팔로잉창 설정
+  const [follow_open, setFollow_open] = useState();
+  let temp;
+  function Open_follow() {
+    temp = 1;
+    setFollow_open(<Myfollow_Click></Myfollow_Click>);
+    setOpen(true);
+  }
+  function Open_following() {
+    temp = 0;
+    setFollow_open(<Myfollowing_Click></Myfollowing_Click>);
+    setOpen(true);
+  }
 
   const [email] = useState(sessionStorage.getItem("email"));
 
@@ -163,12 +169,14 @@ function Profilemy(props) {
                   <span>게시물 &nbsp;&nbsp; {cntPost}</span>
                 </Grid>
                 <Grid item xs={3}>
-                  <span onClick={handleOpen}>
+                  <span onClick={Open_follow}>
                     팔로우 &nbsp;&nbsp;{followCnt}
                   </span>
                 </Grid>
                 <Grid item xs={3}>
-                  <span onClick={handleOpen}>팔로잉 &nbsp;&nbsp; 0</span>
+                  <span onClick={Open_following}>
+                    팔로잉 &nbsp;&nbsp;{following}
+                  </span>
                 </Grid>
                 <PositionedMenu />
               </Grid>
@@ -187,9 +195,7 @@ function Profilemy(props) {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
-            <Myfollow_Click></Myfollow_Click>
-          </Box>
+          <Box sx={style}>{follow_open}</Box>
         </Modal>
       </div>
     </>
