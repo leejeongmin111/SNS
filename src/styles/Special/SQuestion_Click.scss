@@ -1,6 +1,7 @@
 
 .SQ_img_main{
     background-color: blanchedalmond;
+
     .SQ_left{
         width: 70%;
         height: 98%;
@@ -56,15 +57,36 @@
         line-height: 80px;
         text-align: center;    
         border-style: ridge;
+        position: relative;
+
+        
+    
+    .icon_right{
+        z-index: 3;
+        position: absolute;
+        margin-left:180px;
+        margin-top:350px;
+    }
 
         .comments{
             height: 80px;
+            
         }
 
 
         .SQ_input_comment{
             margin-top: 150%;
+
         }
+        
+    }
+
+    .icon_left{
+        z-index: 3;
+        position: absolute;
+        margin-left: 0px;
+        margin-top: 420px;
+
 
     }
 }

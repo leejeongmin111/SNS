@@ -29,9 +29,18 @@ function QuestionCard(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [program, setProgram] = useState();
-     
+
+  // 게시글 댓글에 맞추기
+  const [temp_cmt, setTemp_cmt] = useState([]);
+
   // 프로그램 종류 구하기  Java Python React Html
       useEffect(() => {
+
+        let temp = cmts.filter(function(cm){
+          return cm.bd_seq==bd_seq
+        });
+        setTemp_cmt(temp);
+    
     if(bd_type=="Java"){
       setProgram(java_img)
     }else if(bd_type=="Python"){
@@ -43,7 +52,7 @@ function QuestionCard(props) {
     }else{
       setProgram(html_img);
     }
-  })
+  },[])
 
   return (
     <>
@@ -68,7 +77,7 @@ function QuestionCard(props) {
           bd_cnt ={bd_cnt}      // 댓글 수 
           bd_likes={bd_likes}    // 좋아요 수
           bd_type={bd_type}     // 프로그램 종류
-          cmts = {cmts}        // 댓글
+          cmts = {temp_cmt}        // 댓글
        />
     </Modal>
       </>
