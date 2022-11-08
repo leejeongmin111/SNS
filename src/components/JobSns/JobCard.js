@@ -12,6 +12,13 @@ import JobImg_Click from "./JobImg_Click";
 import axios from "axios";
 import Post from "./JobPost";
 
+import "../../styles/JobSns/JobCardMenu.scss";
+import { ReactComponent as Inbox } from "../../images/inbox.svg";
+import { ReactComponent as Comments } from "../../images/comments.svg";
+import { ReactComponent as Notifications } from "../../images/notifications.svg";
+import { ReactComponent as Bookmark } from "../../images/bookmark.svg";
+
+
 function Card(props) {
   const {
     bd_id, // 글 작성자
@@ -98,7 +105,17 @@ function Card(props) {
 
         {/* 게시글 내용 */}
         <Post bd_id={bd_id} bd_content={bd_content}></Post>
-        <CardMenu />
+          
+          {/* 아이콘들 */}
+          <div className="cardMenu">
+            <div className="interactions">
+                <Notifications className="icon" />
+                <Comments className="icon" />
+                <Inbox className="icon" />
+            </div>
+            <Bookmark className="icon" />
+          </div>
+
 
         <div className="likedBy">
           <Profile iconSize="small" hideAccountName={true} />

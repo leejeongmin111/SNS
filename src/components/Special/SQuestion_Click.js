@@ -15,6 +15,14 @@ import { FunctionsOutlined } from "@mui/icons-material";
 import Right from '@mui/icons-material/KeyboardArrowRight';
 import Left from '@mui/icons-material/KeyboardArrowLeft';
 
+import "../../styles/JobSns/JobCardMenu.scss";
+import { ReactComponent as Inbox } from "../../images/inbox.svg";
+import { ReactComponent as Comments } from "../../images/comments.svg";
+import { ReactComponent as Notifications } from "../../images/notifications.svg";
+import { ReactComponent as Bookmark } from "../../images/bookmark.svg";
+
+
+
 // 모달 창 크기 설정 
 const style = {
     position: "absolute",
@@ -101,7 +109,18 @@ function SQuestion_Click(props){
                     <Box className = "SQ_title"><h1 align="center">{bd_title}</h1></Box>
                     <Box className = "SQ_content">
                         {bd_content}
-                        <Box className="SQ_icons"><CardMenu ></CardMenu></Box>
+                        <Box className="SQ_icons">
+
+                         <div className="cardMenu">
+                            <div className="interactions">
+                              <Notifications className="icon" />
+                              <Comments className="icon" />
+                              <Inbox className="icon" />
+                            </div>
+                            <Bookmark className="icon" />
+                          </div>
+
+                        </Box>
                     </Box>
                 </Box>
                   
