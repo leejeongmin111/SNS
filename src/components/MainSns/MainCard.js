@@ -1,7 +1,6 @@
 import "../../styles/MainSns/MainCard.scss";
 import Profile from "./MainProfile";
 import { ReactComponent as CardButton } from "../../images/cardButton.svg";
-import CardMenu from "./MainCardMenu";
 import Comment from "./MainComment";
 import { useState } from "react";
 
@@ -13,6 +12,13 @@ import Modal from "@mui/material/Modal";
 import MainImg_Click from "./MainImg_Click";
 import axios from "axios";
 import Post from "./MainPost";
+
+import "../../styles/MainSns/MainCardMenu.scss";
+import { ReactComponent as Inbox } from "../../images/inbox.svg";
+import { ReactComponent as Comments } from "../../images/comments.svg";
+import { ReactComponent as Notifications } from "../../images/notifications.svg";
+import { ReactComponent as Bookmark } from "../../images/bookmark.svg";
+import { SettingsPhoneTwoTone } from "@mui/icons-material";
 
 function Card(props) {
   const {
@@ -95,7 +101,16 @@ function Card(props) {
 
         {/* 게시글 내용 */}
         <Post bd_id={bd_id} bd_content={bd_content}></Post>
-        <CardMenu />
+
+        {/* 아이콘 들 */}
+        <div className="cardMenu">
+          <div className="interactions">
+            <Notifications className="icon" />
+            <Comments className="icon" onClick={changeshow} />
+            <Inbox className="icon" />
+          </div>
+          <Bookmark className="icon" />
+        </div>
 
         <div className="likedBy">
           <Profile iconSize="small" hideAccountName={true} image={profile} />

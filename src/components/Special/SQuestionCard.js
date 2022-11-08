@@ -30,16 +30,10 @@ function QuestionCard(props) {
   const handleClose = () => setOpen(false);
   const [program, setProgram] = useState();
 
-  // 게시글 댓글에 맞추기
-  const [temp_cmt, setTemp_cmt] = useState([]);
 
   // 프로그램 종류 구하기  Java Python React Html
       useEffect(() => {
 
-        let temp = cmts.filter(function(cm){
-          return cm.bd_seq==bd_seq
-        });
-        setTemp_cmt(temp);
     
     if(bd_type=="Java"){
       setProgram(java_img)
@@ -59,7 +53,8 @@ function QuestionCard(props) {
     <div className="Card_container" onClick={handleOpen}>
       <div className="Card_image"><img src={program} className="program_img"></img></div>
       <div className="Card_text">{bd_title}
-      <div>댓글 수 :{bd_cnt} 좋아요 수 :{bd_likes}</div></div>
+      {/* <div>댓글 수 :{bd_cnt} 좋아요 수 :{bd_likes}</div> */}
+      </div>
     </div>
 
 
@@ -77,7 +72,7 @@ function QuestionCard(props) {
           bd_cnt ={bd_cnt}      // 댓글 수 
           bd_likes={bd_likes}    // 좋아요 수
           bd_type={bd_type}     // 프로그램 종류
-          cmts = {temp_cmt}        // 댓글
+          cmts = {cmts}        // 댓글
        />
     </Modal>
       </>

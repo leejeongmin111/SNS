@@ -15,6 +15,14 @@ import { FunctionsOutlined } from "@mui/icons-material";
 import Right from '@mui/icons-material/KeyboardArrowRight';
 import Left from '@mui/icons-material/KeyboardArrowLeft';
 
+import "../../styles/JobSns/JobCardMenu.scss";
+import { ReactComponent as Inbox } from "../../images/inbox.svg";
+import { ReactComponent as Comments } from "../../images/comments.svg";
+import { ReactComponent as Notifications } from "../../images/notifications.svg";
+import { ReactComponent as Bookmark } from "../../images/bookmark.svg";
+
+
+
 // 모달 창 크기 설정 
 const style = {
     position: "absolute",
@@ -45,7 +53,6 @@ function SQuestion_Click(props){
 
         // 프로그램 종류 구하기  Java Python React Html
         useEffect(() => {
-        
 
           if(bd_type=="Java"){
             setProgram(java_img)
@@ -66,7 +73,7 @@ function SQuestion_Click(props){
             setCmt(e.target.value);
         }
         function cmt_plus(){
-          if(cmt_num!==cmts.length){
+          if(cmt_num!==cmts.length-1){
           setCmt_num(cmt_num+1);
           }
         }
@@ -102,24 +109,36 @@ function SQuestion_Click(props){
                     <Box className = "SQ_title"><h1 align="center">{bd_title}</h1></Box>
                     <Box className = "SQ_content">
                         {bd_content}
-                        <Box className="SQ_icons"><CardMenu ></CardMenu></Box>
+                        <Box className="SQ_icons">
+
+                         <div className="cardMenu">
+                            <div className="interactions">
+                              <Notifications className="icon" />
+                              <Comments className="icon" />
+                              <Inbox className="icon" />
+                            </div>
+                            <Bookmark className="icon" />
+                          </div>
+
+                        </Box>
                     </Box>
                 </Box>
                   
-                      <Left className="icon_left" onClick={cmt_minus}></Left>
+                      {/* <Left className="icon_left" onClick={cmt_minus}></Left> */}
                 <Box className="SQ_Right">
                         
-                      <Right className="icon_right" onClick={cmt_plus}></Right>
+                      {/* <Right className="icon_right" onClick={cmt_plus}></Right> */}
                     <Box className="comments">
-
-                              <Comment
+                            
+                           {/* { cmts && <Comment
                                     key={cmts[cmt_num].cmt_seq}
                                     bd_seq = {cmts[cmt_num].bd_seq}         // 원글 번호
                                     content ={cmts[cmt_num].cmt_content}    // 댓글 내용
                                     accountName ={email}         // 댓글 작성자
                                     bd_id ={cmts[cmt_num].bd_id}           //원글 작성자
-                                />
-                     {/* {cmts.map(function(cmt){
+                                />} */}
+                            
+                     {cmts.map(function(cmt){
                         if(bd_seq==cmt.bd_seq){
                             return(
                                 <Comment
@@ -131,7 +150,7 @@ function SQuestion_Click(props){
                                 />
                             );
                         }
-                    })}  */}
+                    })} 
                     </Box>
                     <Box
                         className="SQ_input_comment"
@@ -149,7 +168,7 @@ function SQuestion_Click(props){
                             onChange={chCmt}
                             sx={{width:250}}
                         />
-                        <Button type="submit">post</Button>
+                        <Button type="submit" onClick={()=>window.location.href = "/special"}>post</Button>
                         </Box>
                          
                     </Box>

@@ -97,7 +97,7 @@ function MyPage() {
                     className="icon_button"
                     onClick={() => {
                       setCh(2);
-                      setDiv(0);
+                      setDiv(2);
                     }}
                   />
                   <BottomNavigationAction
