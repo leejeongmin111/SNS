@@ -55,6 +55,37 @@ router.post("/changeProfile", upload.single("img"), (req, res) => {
   let nick = req.body.nick;
   let password = req.body.password;
   let img = req.file.buffer;
+  let id = req.body.id;
+
+  let cnt = ["nick", "pw", "img"];
+  let userInfo = [nick, password, img];
+  for (let i = 0; i < userInfo.length; i++) {
+    if (userInfo[i] == "") {
+      cnt.splice(i, 1);
+    }
+  }
+  userInfo = userInfo.filter(function (data) {
+    return data != "";
+    if (rows.length > 0) {
+      console.log("성공");
+      res.send({
+        result: rows,
+      });
+    }
+  });
+  cnt = cnt.filter(function (data) {
+    return data != "";
+  });
+  for (let i = 0; i < userInfo.length; i++) {
+    let sql = `update t_member set ${cnt[i]} = '${userInfo[i]}' where id = '${id}';`;
+    conn.query(sql, function (err, rows) {
+      if (!err) {
+        console.log("회원정보 수정 성공!");
+      } else {
+        console.log("회원정보 수정 실패!" + err);
+      }
+    });
+  }
 });
 
 router.post("/write_daily", upload.single("img"), (req, res) => {
@@ -70,9 +101,9 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
     let img = req.file.buffer;
     let email = req.body.emailSend;
     let div = 0;
-    // let sqlText = `update t_member set m_profile = ? where mb_id = '3'`;
-    let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div,img_file) values(?,?,0,0,${div},?)`;
-    conn.query(sqlText, [text, email, img], function (err, rows) {
+    let sqlText = `update t_member set m_profile = ? where mb_id = '5'`;
+    //let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div,img_file) values(?,?,0,0,${div},?)`;
+    conn.query(sqlText, [img], function (err, rows) {
       if (!err) {
         console.log("데이터 넣기 성공");
         res.redirect("http://localhost:3000/mainsns");
@@ -253,20 +284,20 @@ router.post("/comment", (req, res) => {
 });
 
 router.post("/specials", (req, res) => {
-  let sql_cmt = 'select * from t_comment'
+  let sql_cmt = "select * from t_comment";
   let cmts;
-  conn.query(sql_cmt,(err,rows) => {
-    if(!err){
+  conn.query(sql_cmt, (err, rows) => {
+    if (!err) {
       cmts = rows;
     }
-  })
-  console.log("여기야",cmts)
+  });
+  console.log("여기야", cmts);
   let sql = `select * from t_community where bd_div = 2`;
   conn.query(sql, (err, rows) => {
     if (rows.length > 0) {
       res.send({
         specials: rows,
-        cmts : cmts,
+        cmts: cmts,
       });
     } else {
       console.log("코딩안됨/!!!", err);
