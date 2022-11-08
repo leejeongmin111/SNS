@@ -1,11 +1,36 @@
-import "../../styles/JobSns/JobSidebar.scss";
+import "../../styles/MainSns/MainSidebar.scss";
 import Profile from "./JobProfile";
 import Suggestions from "./JobSuggestions";
-import image from "../../images/profile.jpg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import basic from "../../images/basicprofile.jpg";
 
 function Sidebar() {
-  const [emailTest] = useState(sessionStorage.getItem("email"));
+  const [email] = useState(sessionStorage.getItem("email"));
+  const [photoInfo, setPhoto] = useState("");
+
+  useEffect(() => {
+    axios
+      .post("http://127.0.0.1:3001/mainside", {
+        email: email,
+      })
+      .then((res) => {
+        console.log("mainside시작", res);
+        setPhoto(res.data.photo);
+      })
+      .catch((err) => {
+        console.log("mainside끝내기 실패", err);
+      });
+  }, []);
+  let profileDt;
+  if (photoInfo === null) {
+    profileDt = basic;
+  } else {
+    window.Buffer = window.Buffer || require("buffer").Buffer;
+    let encode = window.Buffer.from(photoInfo).toString("base64");
+    profileDt = "data:image/png;base64," + encode;
+  }
+
   return (
     <div className="sidebar_container">
       <div className="textcontainer">
@@ -13,11 +38,10 @@ function Sidebar() {
       </div>
       <div className="Mainsidebar">
         <Profile
-          username={emailTest}
-          caption="Aleksandar Popović"
+          username={email}
           urlText="Switch"
           iconSize="big"
-          image={image}
+          image={profileDt}
         />
         <Suggestions />
       </div>

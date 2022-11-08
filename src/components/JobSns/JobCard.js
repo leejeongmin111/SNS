@@ -29,8 +29,7 @@ function Card(props) {
     comments,
     storyBorder,
     likedByText,
-    likedByNumber,
-    hours,
+    profile,
   } = props;
 
   // 로그인되있는 아이디
@@ -101,7 +100,12 @@ function Card(props) {
     <>
       <div className="card">
         <header>
-          <Profile iconSize="medium" storyBorder={storyBorder} />
+          <Profile
+            iconSize="medium"
+            storyBorder={storyBorder}
+            username={bd_id}
+            image={profile}
+          />
           <CardButton className="cardButton" />
         </header>
         <img
@@ -132,7 +136,6 @@ function Card(props) {
           </span>
         </div>
         <div className="timePosted">
-          {hours} HOURS AGO{" "}
           <a onClick={changeshow} className="cmt_fold">
             {/* {comments.length}개의 댓글 {fold} */}
             {cmt.length}개의 댓글 {fold}
@@ -156,16 +159,6 @@ function Card(props) {
                 );
               }
             })}
-          {/* 아래는 원래 거  */}
-          {/* {comments.map((comment) => {
-            return (
-              <Comment
-                key={comment.id}
-                accountName={comment.user}
-                comment={comment.text}
-              />
-            );
-          })} */}
         </div>
 
         <div className="addComment" style={show}>
@@ -198,15 +191,11 @@ function Card(props) {
         aria-describedby="modal-modal-description"
       >
         <JobImg_Click
-          accountName="rafagrassetti"
           storyBorder={storyBorder}
           image={image}
           bd_seq={bd_seq}
           main_cmts={main_cmt}
           comments={comments}
-          likedByText={likedByText}
-          likedByNumber={likedByNumber}
-          hours={hours}
         />
       </Modal>
     </>

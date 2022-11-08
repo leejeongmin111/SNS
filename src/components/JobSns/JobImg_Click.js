@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import "../../styles/JobSns/JobImg_Click.scss";
+import "../../styles/MainSns/MainImg_Click.scss";
 import Comment from "./JobComment";
 import Button from "@mui/material/Button";
 import CardMenu from "./JobCardMenu";
@@ -19,8 +19,8 @@ const style = {
   boxShadow: 24,
 };
 
-function JobImg_Click(props) {
-  const { image, comments } = props;
+function MainImg_Click(props) {
+  const { image, main_cmts, bd_seq } = props;
   const [email] = useState(sessionStorage.getItem("email"));
   const [comment, setComment] = useState("");
 
@@ -34,8 +34,8 @@ function JobImg_Click(props) {
         comment: comment,
       })
       .then((res) => {
-        console.log("기철기철 " + res.data.send);
-        window.location.href = "/jobsns";
+        console.log("mainImg_click : " + res.data);
+        window.location.href = "/mainsns";
       })
       .catch((err) => {
         console.log("문제발생", err.response.data);
@@ -52,22 +52,27 @@ function JobImg_Click(props) {
           {/* 댓글  */}
           <div className="comments">
             <br></br>
-            {comments.map((comment) => {
-              return (
-                <Comment
-                  key={comment.id}
-                  accountName={comment.user}
-                  comment={comment.text}
-                />
-              );
-            })}
+            {main_cmts &&
+              main_cmts.map((cm) => {
+                console.log(cm.cmt_content);
+                if (cm.bd_seq == bd_seq) {
+                  return (
+                    <Comment
+                      key={cm.cmt_seq}
+                      bd_id={cm.bd_id}
+                      accountName={cm.mb_id}
+                      comment={cm.cmt_content}
+                    />
+                  );
+                }
+              })}
           </div>
           <Box
             className="input_comment"
             component="form"
-            onSubmit={handleSubmit}
             noValidate
             sx={{ mt: 1, marginTop: 0 }}
+            onSubmit={handleSubmit}
           >
             {/* 댓글 입력 창 */}
             <input
@@ -77,6 +82,7 @@ function JobImg_Click(props) {
               size="60"
               placeholder="Add a commnet..."
               className="img_click_input"
+              onChange={(e) => setComment(e.target.value)}
             ></input>
             <Button type="submit">post</Button>
           </Box>
@@ -85,4 +91,4 @@ function JobImg_Click(props) {
     </>
   );
 }
-export default JobImg_Click;
+export default MainImg_Click;

@@ -12,8 +12,9 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import JobImg_Click from "./JobImg_Click";
 import axios from "axios";
-import Post from "./JobPost";
+
 import black from "../../images/blackImg.jpg";
+import basic from "../../images/basicprofile.jpg";
 
 function Cards() {
   // 객체로 받아옴
@@ -37,15 +38,21 @@ function Cards() {
     <div className="cards">
       {post.map(function (pos, index) {
         let imgDt;
+        let profileDt;
         // 게시글에 번호에 맞는 댓글 구하기
-        if (post[index].img_file == null) {
+        if (pos.img_file == null) {
           imgDt = black;
         } else {
           window.Buffer = window.Buffer || require("buffer").Buffer;
-          let encode = window.Buffer.from(post[index].img_file).toString(
-            "base64"
-          );
+          let encode = window.Buffer.from(pos.img_file).toString("base64");
           imgDt = "data:image/png;base64," + encode;
+        }
+        if (pos.m_profile === null) {
+          profileDt = basic;
+        } else {
+          window.Buffer = window.Buffer || require("buffer").Buffer;
+          let encode = window.Buffer.from(pos.m_profile).toString("base64");
+          profileDt = "data:image/*;base64," + encode;
         }
         return (
           <Card
@@ -56,6 +63,7 @@ function Cards() {
             bd_likes={pos.bd_likes} // 좋아요 갯수
             bd_time={pos.bd_time} // 글 작성일
             storyBorder={true}
+            profile={profileDt}
             image={imgDt}
             main_cmt={cmts}
             likedByText="mapvault"

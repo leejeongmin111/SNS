@@ -11,14 +11,13 @@ function Suggestions() {
     axios
       .post("http://127.0.0.1:3001/suggestion", {})
       .then((res) => {
-        console.log("suggestion 페이지 : ", res.data.dbInfo);
+        console.log("suggestion 페이지 : ", res.data);
         setDbInfo(res.data.dbInfo);
       })
       .catch((err) => {
-        console.log("suggestion 페이지 : ", err);
+        console.log("수정 시작 문제");
       });
   }, []);
-
   return (
     <div className="suggestions">
       <div className="titleContainer">
@@ -29,12 +28,14 @@ function Suggestions() {
         let imgDt;
         if (info.m_profile === null) {
           imgDt = basic;
-          console.log("mysuggestion1 : " + imgDt);
+          console.log("메인서제션 basic값 들어감", info.m_profile);
         } else {
           window.Buffer = window.Buffer || require("buffer").Buffer;
           let encode = window.Buffer.from(info.m_profile).toString("base64");
-          imgDt = "data:image/png;base64," + encode;
-          console.log("mysuggestion2 : " + imgDt);
+          imgDt = "data:image/*;base64," + encode;
+          // console.log(imgDt);
+          // console.log("메인서제션 원래있는 값 들어감", info.m_profile.data);
+          console.log("sug 안 들어감");
         }
         return (
           <Profile
@@ -43,7 +44,7 @@ function Suggestions() {
             urlText="Follow"
             storyBorder={true}
             username={info.mb_id}
-            image={basic}
+            image={imgDt}
           />
         );
       })}
