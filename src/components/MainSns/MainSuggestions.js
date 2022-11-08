@@ -29,14 +29,13 @@ function Suggestions() {
         let imgDt;
         if (info.m_profile === null) {
           imgDt = basic;
-          console.log("메인서제션 basic값 들어감");
+          console.log("메인서제션 basic값 들어감", info.m_profile);
         } else {
           window.Buffer = window.Buffer || require("buffer").Buffer;
           let encode = window.Buffer.from(info.m_profile).toString("base64");
-          imgDt = "data:image/*;base64," + encode;
+          imgDt = "data:image/png;base64," + encode;
           console.log(imgDt);
-          console.log("메인서제션 원래있는 값 들어감", info.m_profile.data);
-          console.log("sug 안 들어감");
+          console.log("메인서제션 원래있는 값 들어감", info.m_profile);
         }
         return (
           <Profile
