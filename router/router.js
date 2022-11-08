@@ -101,9 +101,10 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
     let img = req.file.buffer;
     let email = req.body.emailSend;
     let div = 0;
-    let sqlText = `update t_member set m_profile = ? where mb_id = '5'`;
-    //let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div,img_file) values(?,?,0,0,${div},?)`;
-    conn.query(sqlText, [img], function (err, rows) {
+    // let sqlText = `update t_member set m_profile = ? where mb_id = '9'`;
+    // conn.query(sqlText, [email], function (err, rows) {
+    let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div,img_file) values(?,?,0,0,${div},?)`;
+    conn.query(sqlText, [text, email, img], function (err, rows) {
       if (!err) {
         console.log("데이터 넣기 성공");
         res.redirect("http://localhost:3000/mainsns");
@@ -258,7 +259,7 @@ router.post("/maincards", (req, res) => {
 });
 
 router.post("/jobcards", (req, res) => {
-  let sql = "select * from t_community where bd_div = 1"; // 모든 정보 배열 형태로 보내기
+  let sql = "select * from t_community where bd_div = 1 order by bd_time desc"; // 모든 정보 배열 형태로 보내기
   let sql_cmt = "select * from t_comment";
   let cmts;
   conn.query(sql_cmt, (err, rows) => {
@@ -401,6 +402,7 @@ router.post("/myPage/daily", (req, res) => {
   let div = req.body.div;
   let ch = req.body.ch;
   console.log(id);
+  console.log("여기????");
   // if (ch == 2) {
   // let sql = `select a.img_file img_file, a.bd_seq bd_seq, b.save_time st from t_community a, m_save b where a.bd_seq = b.bd_seq and a.bd_id = ${id} order by st desc`
   // conn.query(sql,(err,rows)=>{
@@ -412,13 +414,15 @@ router.post("/myPage/daily", (req, res) => {
   //   }
   // })
   // } else {
-  let sql = `select * from t_community where bd_id = ${id} and bd_div=${div} order by bd_time desc`;
+  let sql = `select * from t_community where bd_id = '${id}' and bd_div=${div} order by bd_time desc`;
   conn.query(sql, (err, rows) => {
     if (!err) {
       console.log("성공");
       res.send({
         result: rows,
       });
+    } else {
+      console.log("실패" + err);
     }
   });
   // }

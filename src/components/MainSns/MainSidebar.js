@@ -24,7 +24,7 @@ function Sidebar() {
   }, []);
   let profileDt;
   if (photoInfo === null) {
-    photoInfo = basic;
+    profileDt = basic;
   } else {
     window.Buffer = window.Buffer || require("buffer").Buffer;
     let encode = window.Buffer.from(photoInfo).toString("base64");
