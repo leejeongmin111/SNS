@@ -29,13 +29,11 @@ function Cards() {
       {post.map(function (pos, index) {
         let imgDt;
         // 게시글에 번호에 맞는 댓글 구하기
-        if (post[index].img_file == null) {
+        if (pos.img_file == null) {
           imgDt = black;
         } else {
           window.Buffer = window.Buffer || require("buffer").Buffer;
-          let encode = window.Buffer.from(post[index].img_file).toString(
-            "base64"
-          );
+          let encode = window.Buffer.from(pos.img_file).toString("base64");
           imgDt = "data:image/png;base64," + encode;
         }
         return (
@@ -48,7 +46,7 @@ function Cards() {
             bd_time={pos.bd_time} // 글 작성일
             bd_cnt={pos.bd_cnt} // 댓글 수
             storyBorder={true}
-            image={imgDt}
+            image={imgDt} // 게시글 이미지
             main_cmt={cmts}
             likedByText="mapvault"
             likedByNumber={90}

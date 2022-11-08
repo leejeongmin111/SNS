@@ -42,7 +42,6 @@ function MyPage() {
         div: div,
         ch: ch,
       })
-
       .then((data) => {
         console.log(data.data.result);
         setPost(data.data.result);
@@ -52,15 +51,6 @@ function MyPage() {
         console.log("문제가 많아~ 시험지 춰럼~" + err);
       });
   }, [ch]);
-  // let cnt = 0;
-  // useEffect(function (){
-  //   localStorage.getItem("email")
-  //   //클릭한 회원의 email
-  //   if(!){
-  //     cnt == 1;
-  // 연습
-  //   }
-  // });
 
   return (
     <main>
@@ -126,7 +116,6 @@ function MyPage() {
                 columns={{ xs: 4, sm: 8, md: 12 }}
                 className="Pro_gird"
               >
-                {/* {Array.from(Array(10)).map((_, index) => { */}
                 {post1.map((pos, index) => {
                   let imgDt;
                   if (pos.img_file == null) {
