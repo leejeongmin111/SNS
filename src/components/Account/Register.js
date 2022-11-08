@@ -30,7 +30,6 @@ export default function Register() {
         nick: nick,
         rn: rn,
         phone: phone,
-        gender: gender,
         job: job,
       })
       .then((res) => {
@@ -84,7 +83,7 @@ export default function Register() {
           </div>
           <div className="blank_container2"></div>
           <div className="btn_container">
-            <button>Sign Up</button>
+            <button onClick={handleSubmit}>Sign Up</button>
           </div>
         </form>
       </div>

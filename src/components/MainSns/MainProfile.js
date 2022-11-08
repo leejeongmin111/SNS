@@ -1,21 +1,27 @@
 import "../../styles/MainSns/MainProfile.scss";
 import ProfileIcon from "./MainProfileIcon";
-import users from "../../data/users";
+import { useState } from "react";
+import axios from "axios";
 
 function Profile(props) {
-  const {
-    username,
-    caption,
-    // urlText,
-    iconSize,
-    captionSize,
-    storyBorder,
-    hideAccountName,
-    image,
-  } = props;
-  let accountName = username
-    ? username
-    : users[Math.floor(Math.random() * (users.length - 1))].username;
+  const [email] = useState(sessionStorage.getItem("email"));
+  const { iconSize, storyBorder, hideAccountName, image, username, urlText } =
+    props;
+  let accountName = email;
+
+  function followClick() {
+    axios
+      .post("http://127.0.0.1:3001/follow", {
+        email: email,
+        username: username,
+      })
+      .then((res) => {
+        console.log("follow로 값넘어가기", res);
+      })
+      .catch((err) => {
+        console.log("follow페이지 문제", err);
+      });
+  }
 
   return (
     <div className="profile">
@@ -23,14 +29,16 @@ function Profile(props) {
         iconSize={iconSize}
         storyBorder={storyBorder}
         image={image}
+        username={username}
       />
-      {(accountName || caption) && !hideAccountName && (
+      {accountName && !hideAccountName && (
         <div className="textContainer">
-          <span className="accountName">{accountName}</span>
-          <span className={`caption ${captionSize}`}>{caption}</span>
+          <span className="accountName">{username}</span>
         </div>
       )}
-      {/* <a href="/">{urlText}</a> */}
+      <a href="/mainsns" onClick={followClick}>
+        {urlText}
+      </a>
     </div>
   );
 }

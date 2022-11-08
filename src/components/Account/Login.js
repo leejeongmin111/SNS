@@ -40,7 +40,11 @@ export default function Login() {
       </div>
       <div class="container">
         <div class="form_container">
-          <form action="http://127.0.0.1:3001/login" method="post" onSubmit={handleSubmit}>
+          <form
+            action="http://127.0.0.1:3001/login"
+            method="post"
+            onSubmit={handleSubmit}
+          >
             <img className="logo" src={logo} alt="Jobsns logo" />
             <div class="input_container">
               <input
@@ -58,7 +62,7 @@ export default function Login() {
             </div>
             <a href="#">Forgot your password?</a>
             <div className="login_btn">
-              <button >Log In</button>
+              <button>Log In</button>
             </div>
           </form>
         </div>
