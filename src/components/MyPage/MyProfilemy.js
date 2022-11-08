@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import SetIcon from "../../images/setting.png";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function PositionedMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -23,7 +24,7 @@ function PositionedMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const nav = useNavigate();
   return (
     <div className="set_container">
       <Button
@@ -51,7 +52,7 @@ function PositionedMenu() {
         }}
       >
         <MenuItem onClick={handleClose}>회원 탈퇴</MenuItem>
-        <MenuItem onClick={handleClose}>회원 수정</MenuItem>
+        <MenuItem onClick={()=>{nav('/change')}}>회원 수정</MenuItem>
         <MenuItem onClick={handleClose}>직업 인증</MenuItem>
         <MenuItem onClick={handleClose}>로그 아웃</MenuItem>
       </Menu>
