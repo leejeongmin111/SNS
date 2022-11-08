@@ -12,7 +12,7 @@ import Dm from "./DM/Dm";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import Notice from "./Notice";
-
+import Account_Change from "./Account/Account_Change";
 
 function reducer(currentState, action) {
   if (currentState === undefined) {
@@ -45,6 +45,7 @@ function App() {
           <Route path="/jobsns" element={<JobSns></JobSns>}></Route>
           <Route path="/notice" element={<Notice></Notice>}></Route>
           <Route path="/userpage" element={<UserPage></UserPage>}></Route>
+          <Route path="/change" element={<Account_Change></Account_Change>}></Route>
         </Routes>
       </Provider>
     </>

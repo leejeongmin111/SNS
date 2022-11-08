@@ -116,7 +116,6 @@ function Card(props) {
         />
 
         {/* 게시글 내용 */}
-        <Post bd_id={bd_id} bd_content={bd_content}></Post>
 
         {/* 아이콘들 */}
         <div className="cardMenu">
@@ -135,6 +134,7 @@ function Card(props) {
             <strong>{bd_likes} others</strong>
           </span>
         </div>
+        <Post bd_id={bd_id} bd_content={bd_content}></Post>
         <div className="timePosted">
           <a onClick={changeshow} className="cmt_fold">
             {/* {comments.length}개의 댓글 {fold} */}
