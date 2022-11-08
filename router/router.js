@@ -549,12 +549,15 @@ router.post("/likeIn", (req, res) => {
   let id = req.body.id;
   let bd_seq = req.body.bd_seq;
   let sql = `select * from t_like where mb_id = '${id}' and bd_seq = ${bd_seq}`;
+  let sqlin = `update t_community set bd_likes = (bd_likes + 1) where bd_seq = ${bd_seq}`;
+  let sqlout = `update t_community set bd_likes = (bd_likes - 1) where bd_seq = ${bd_seq}`;
   conn.query(sql, (err, rows) => {
     if (rows.length > 0) {
       let sql1 = `delete from t_like where mb_id = '${id}' and bd_seq = ${bd_seq}`;
       conn.query(sql1, (err, rows) => {
         if (!err) {
           console.log("좋아요 취소 = 헤어짐");
+          conn.query(sqlout);
           res.json({
             result: "삭제",
           });
@@ -567,6 +570,7 @@ router.post("/likeIn", (req, res) => {
       conn.query(sql1, [id, bd_seq], (err) => {
         if (!err) {
           console.log("좋아요 성공!!!ㅋ커플탄생");
+          conn.query(sqlin);
           res.json({
             result: "성공",
           });
