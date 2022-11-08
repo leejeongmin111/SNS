@@ -18,7 +18,6 @@ import { ReactComponent as Comments } from "../../images/comments.svg";
 import { ReactComponent as Notifications } from "../../images/notifications.svg";
 import { ReactComponent as Bookmark } from "../../images/bookmark.svg";
 
-
 function Card(props) {
   const {
     bd_id, // 글 작성자
@@ -50,6 +49,16 @@ function Card(props) {
       setFold("보기");
     }
   }
+  function save() {
+    axios
+      .post("http://127.0.0.1:3001/saveList", {
+        bd_seq: bd_seq,
+        id: email,
+      })
+      .catch((err) => {
+        console.log("게시물 저장 안됨!!!" + err);
+      });
+  }
   function handleSubmit(e) {
     e.preventDefault();
   }
@@ -69,7 +78,6 @@ function Card(props) {
 
   // 댓글 입력
   function handleSubmit(e) {
-    e.preventDefault();
     console.log(bd_seq);
     console.log(bd_id);
     console.log(email);
@@ -105,17 +113,16 @@ function Card(props) {
 
         {/* 게시글 내용 */}
         <Post bd_id={bd_id} bd_content={bd_content}></Post>
-          
-          {/* 아이콘들 */}
-          <div className="cardMenu">
-            <div className="interactions">
-                <Notifications className="icon" />
-                <Comments className="icon" />
-                <Inbox className="icon" />
-            </div>
-            <Bookmark className="icon" />
-          </div>
 
+        {/* 아이콘들 */}
+        <div className="cardMenu">
+          <div className="interactions">
+            <Notifications className="icon" />
+            <Comments className="icon" onClick={changeshow} />
+            <Inbox className="icon" />
+          </div>
+          <Bookmark className="icon" onClick={save} />
+        </div>
 
         <div className="likedBy">
           <Profile iconSize="small" hideAccountName={true} />

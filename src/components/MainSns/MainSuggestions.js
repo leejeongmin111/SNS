@@ -29,10 +29,12 @@ function Suggestions() {
         let imgDt;
         if (info.m_profile === null) {
           imgDt = basic;
+          console.log("sug 안 들어감");
         } else {
           window.Buffer = window.Buffer || require("buffer").Buffer;
           let encode = window.Buffer.from(info.m_profile).toString("base64");
-          imgDt = "data:image/png;base64," + encode;
+          imgDt = "data:image/*;base64," + encode;
+          console.log("sug들어감");
         }
         return (
           <Profile

@@ -55,6 +55,37 @@ router.post("/changeProfile", upload.single("img"), (req, res) => {
   let nick = req.body.nick;
   let password = req.body.password;
   let img = req.file.buffer;
+  let id = req.body.id;
+
+  let cnt = ["nick", "pw", "img"];
+  let userInfo = [nick, password, img];
+  for (let i = 0; i < userInfo.length; i++) {
+    if (userInfo[i] == "") {
+      cnt.splice(i, 1);
+    }
+  }
+  userInfo = userInfo.filter(function (data) {
+    return data != "";
+    if (rows.length > 0) {
+      console.log("성공");
+      res.send({
+        result: rows,
+      });
+    }
+  });
+  cnt = cnt.filter(function (data) {
+    return data != "";
+  });
+  for (let i = 0; i < userInfo.length; i++) {
+    let sql = `update t_member set ${cnt[i]} = '${userInfo[i]}' where id = '${id}';`;
+    conn.query(sql, function (err, rows) {
+      if (!err) {
+        console.log("회원정보 수정 성공!");
+      } else {
+        console.log("회원정보 수정 실패!" + err);
+      }
+    });
+  }
 });
 
 router.post("/write_daily", upload.single("img"), (req, res) => {
@@ -70,7 +101,8 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
     let img = req.file.buffer;
     let email = req.body.emailSend;
     let div = 0;
-    // let sqlText = `update t_member set m_profile = ? where mb_id = '3'`;
+    // let sqlText = `update t_member set m_profile = ? where mb_id = '9'`;
+    // conn.query(sqlText, [email], function (err, rows) {
     let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div,img_file) values(?,?,0,0,${div},?)`;
     conn.query(sqlText, [text, email, img], function (err, rows) {
       if (!err) {
@@ -227,7 +259,7 @@ router.post("/maincards", (req, res) => {
 });
 
 router.post("/jobcards", (req, res) => {
-  let sql = "select * from t_community where bd_div = 1"; // 모든 정보 배열 형태로 보내기
+  let sql = "select * from t_community where bd_div = 1 order by bd_time desc"; // 모든 정보 배열 형태로 보내기
   let sql_cmt = "select * from t_comment";
   let cmts;
   conn.query(sql_cmt, (err, rows) => {
@@ -309,7 +341,7 @@ router.post("/mypage", (req, res) => {
   console.log("마이페이지 라우터");
 
   let sql =
-    "select mb_id,mb_profile from t_member where mb_id not in (select follow_id from t_follow) limit 5";
+    "select mb_id,m_profile from t_member where mb_id not in (select follow_id from t_follow) limit 5";
   conn.query(sql, (err, rows) => {
     if (!err) {
       console.log("여기는 마이페이지 라우터");
@@ -370,27 +402,62 @@ router.post("/myPage/daily", (req, res) => {
   let div = req.body.div;
   let ch = req.body.ch;
   console.log(id);
-  // if (ch == 2) {
-  // let sql = `select a.img_file img_file, a.bd_seq bd_seq, b.save_time st from t_community a, m_save b where a.bd_seq = b.bd_seq and a.bd_id = ${id} order by st desc`
-  // conn.query(sql,(err,rows)=>{
-  //   if (rows.length > 0) {
-  //     console.log("성공");
-  //     res.send({
-  //       result: rows,
-  //     });
-  //   }
-  // })
-  // } else {
-  let sql = `select * from t_community where bd_id = ${id} and bd_div=${div} order by bd_time desc`;
-  conn.query(sql, (err, rows) => {
-    if (!err) {
-      console.log("성공");
-      res.send({
-        result: rows,
+  console.log("여기????");
+  if (ch == 2) {
+    let sql = `select a.img_file img_file, a.bd_seq bd_seq, b.save_time st from t_community a, m_save b where a.bd_seq = b.bd_seq and b.mb_id = '${id}' order by st desc`;
+    conn.query(sql, (err, rows) => {
+      if (!err) {
+        console.log("성공");
+        res.send({
+          result: rows,
+        });
+      } else {
+        console.log(err);
+      }
+    });
+  } else {
+    let sql = `select * from t_community where bd_id = '${id}' and bd_div=${div} order by bd_time desc`;
+    conn.query(sql, (err, rows) => {
+      if (!err) {
+        console.log("성공");
+        res.send({
+          result: rows,
+        });
+      } else {
+        console.log("실패" + err);
+      }
+    });
+  }
+});
+
+router.post("/saveList", (req, res) => {
+  let id = req.body.id;
+  let seq = req.body.bd_seq;
+  console.log(seq);
+  let sql1 = `select * from m_save where mb_id = '${id}' and bd_seq = ${seq}`;
+  conn.query(sql1, (err, rows) => {
+    if (rows.length > 0) {
+      console.log("이미 저장된 데이터");
+      let sql = `delete from m_save where mb_id = '${id}' and bd_seq = ${seq}`;
+      conn.query(sql, (err1) => {
+        if (!err1) {
+          console.log("저장됨 삭제 완료");
+        } else {
+          console.log("저장됨 삭제 실패" + err1);
+        }
+      });
+    } else {
+      console.log("저장된 데이터 아님");
+      let sql = `insert into m_save(mb_id ,bd_seq) values(?,?)`;
+      conn.query(sql, [id, seq], (err) => {
+        if (!err) {
+          console.log("저장성공");
+        } else {
+          console.log("저장실패" + err);
+        }
       });
     }
   });
-  // }
 });
 
 router.post("/deleteProfile", (req, res) => {

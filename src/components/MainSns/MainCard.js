@@ -13,14 +13,12 @@ import MainImg_Click from "./MainImg_Click";
 import axios from "axios";
 import Post from "./MainPost";
 
-
 import "../../styles/MainSns/MainCardMenu.scss";
 import { ReactComponent as Inbox } from "../../images/inbox.svg";
 import { ReactComponent as Comments } from "../../images/comments.svg";
 import { ReactComponent as Notifications } from "../../images/notifications.svg";
 import { ReactComponent as Bookmark } from "../../images/bookmark.svg";
 import { SettingsPhoneTwoTone } from "@mui/icons-material";
-
 
 function Card(props) {
   const {
@@ -111,12 +109,8 @@ function Card(props) {
             <Comments className="icon" onClick={changeshow} />
             <Inbox className="icon" />
           </div>
-            <Bookmark className="icon" />
+          <Bookmark className="icon" />
         </div>
-
-
-
-
 
         <div className="likedBy">
           <Profile iconSize="small" hideAccountName={true} image={profile} />

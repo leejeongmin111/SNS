@@ -47,21 +47,7 @@ export default function Write_Job_Sns() {
     window.location.href = "/jobsns";
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await axios
-      .post("http://127.0.0.1:3001/write_job", {
-        text: text,
-        // img: imgSrc,
-        email: email,
-      })
-      .then((res) => {
-        window.location.href = "/jobsns";
-      })
-      .catch((err) => {
-        console.log("문제발생", err.response.data);
-      });
-  };
+  const handleSubmit = async (e) => {};
 
   return (
     <div>
@@ -75,9 +61,8 @@ export default function Write_Job_Sns() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-
         <form
-          action="http://127.0.0.1:3001/write_daily"
+          action="http://127.0.0.1:3001/write_job"
           method="post"
           encType="multipart/form-data"
         >
