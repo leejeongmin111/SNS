@@ -49,6 +49,7 @@ function Card(props) {
       setFold("보기");
     }
   }
+  // 게시글 저장하기
   function save() {
     axios
       .post("http://127.0.0.1:3001/saveList", {

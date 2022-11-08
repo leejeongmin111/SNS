@@ -23,6 +23,12 @@ function PositionedMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const deletePr = () => {
+    axios.post("/deleteProfile").then((window.location.href = "/jobsns"));
+  };
+  const logout = () => {
+    window.location.href = "/";
+  };
 
   return (
     <div className="set_container">
@@ -50,10 +56,10 @@ function PositionedMenu() {
           horizontal: "left",
         }}
       >
-        <MenuItem onClick={handleClose}>회원 탈퇴</MenuItem>
+        <MenuItem onClick={deletePr}>회원 탈퇴</MenuItem>
         <MenuItem onClick={handleClose}>회원 수정</MenuItem>
         <MenuItem onClick={handleClose}>직업 인증</MenuItem>
-        <MenuItem onClick={handleClose}>로그 아웃</MenuItem>
+        <MenuItem onClick={logout}>로그 아웃</MenuItem>
       </Menu>
     </div>
   );

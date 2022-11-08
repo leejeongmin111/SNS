@@ -51,6 +51,17 @@ function Card(props) {
       setFold("보기");
     }
   }
+  // 게시글 저장하기
+  function save() {
+    axios
+      .post("http://127.0.0.1:3001/saveList", {
+        bd_seq: bd_seq,
+        id: email,
+      })
+      .catch((err) => {
+        console.log("게시물 저장 안됨!!!" + err);
+      });
+  }
   // 모달 설정
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -109,7 +120,7 @@ function Card(props) {
             <Comments className="icon" onClick={changeshow} />
             <Inbox className="icon" />
           </div>
-          <Bookmark className="icon" />
+          <Bookmark className="icon" onClick={save} />
         </div>
 
         <div className="likedBy">

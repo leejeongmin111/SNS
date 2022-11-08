@@ -101,7 +101,7 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
     let img = req.file.buffer;
     let email = req.body.emailSend;
     let div = 0;
-    // let sqlText = `update t_member set m_profile = ? where mb_id = '9'`;
+    // let sqlText = `update t_member set m_profile = ? where mb_id = '4'`;
     // conn.query(sqlText, [email], function (err, rows) {
     let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div,img_file) values(?,?,0,0,${div},?)`;
     conn.query(sqlText, [text, email, img], function (err, rows) {
@@ -237,7 +237,7 @@ router.post("/follow", (req, res) => {
 
 router.post("/maincards", (req, res) => {
   let sql =
-    "select c.bd_id,c.bd_content,c.bd_likes,c.bd_cnt,m.mb_id,m.m_profile,c.img_file from t_community c, t_member m where c.bd_id = m.mb_id and bd_div=0 order by bd_time desc"; // 모든 정보 배열 형태로 보내기
+    "select c.bd_seq,c.bd_id,c.bd_content,c.bd_likes,c.bd_cnt,m.mb_id,m.m_profile,c.img_file from t_community c, t_member m where c.bd_id = m.mb_id and bd_div=0 order by bd_time desc"; // 모든 정보 배열 형태로 보내기
   let sql_cmt = "select * from t_comment";
   let cmts;
   conn.query(sql_cmt, (err, rows) => {
@@ -433,6 +433,7 @@ router.post("/myPage/daily", (req, res) => {
 router.post("/saveList", (req, res) => {
   let id = req.body.id;
   let seq = req.body.bd_seq;
+  console.log(id);
   console.log(seq);
   let sql1 = `select * from m_save where mb_id = '${id}' and bd_seq = ${seq}`;
   conn.query(sql1, (err, rows) => {
