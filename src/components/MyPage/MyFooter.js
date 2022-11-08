@@ -8,13 +8,6 @@ import userOff from "../../images/footer_icon/user_off.png";
 import * as React from "react";
 import Write_Daily from "../Account_Setting/Write_Daily";
 
-// 눌렀을 때 변경 될 아이콘
-// import dmOn from "../../images/footer_icon/message_on.png";
-// import noticeOn from "../../images/footer_icon/bell_on.png";
-// import posteOn from "../../images/footer_icon/write_on.png";
-// import homeOn from "../../images/footer_icon/home_on.png";
-// import userOn from "../../images/footer_icon/user_on.png";
-
 function Footer() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);

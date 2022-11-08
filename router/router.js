@@ -115,6 +115,41 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
   }
 });
 
+router.post("/suggestion", (req, res) => {
+  console.log("suggestion이 진짜 문제인가??");
+
+  let sql =
+    "select mb_id,m_profile from t_member where mb_id not in (select follow_id from t_follow) limit 5";
+  conn.query(sql, (err, info) => {
+    if (info.length > 0) {
+      console.log("suggestion 정보 가져와짐");
+      res.send({
+        dbInfo: info,
+      });
+    } else {
+      console.log("suggestion정보 안가져와짐", err);
+    }
+  });
+});
+
+router.post("/mainside", (req, res) => {
+  console.log("mainside 라우터 시작");
+  console.log("보낸 email 값 : ", req.body.email);
+  let email = req.body.email;
+
+  let sql = "select m_profile from t_member where mb_id = ?";
+  conn.query(sql, [email], (err, info) => {
+    if (info.length > 0) {
+      console.log("mainside 정보 가져와짐");
+      res.send({
+        photo: info[0].m_profile,
+      });
+    } else {
+      console.log("mainside정보 안가져와짐", err);
+    }
+  });
+});
+
 router.post("/write_job", upload.single("img"), (req, res) => {
   console.log("text 가져온값 : ", req.body);
   console.log("img 가져온값 : ", req.file);
@@ -181,42 +216,38 @@ router.post("/mainsns", (req, res) => {
   });
 });
 
-// router.post("/maincard", (req, res) => {
-//   let sql = "select bd_id,bd_content from t_community";
-//   conn.query(sql, (err, rows) => {
-//     if (!err) {
-//       console.log("아이디값 정민정민", rows[0].bd_id);
-//       console.log("게시글값 정민정민", rows[0].bd_content);
-//       res.send({
-//         email: rows[0].bd_id,
-//         content: rows[0].bd_content,
-//       });
-//     } else {
-//       console.log("정민이 아노디ㅛㅇ", err);
-//     }
-//   });
-// });
+router.post("/follow", (req, res) => {
+  console.log(req.body.username);
+  let followuser = req.body.username;
+  let myemail = req.body.email;
+
+  let sql = "insert into t_follow values(?,?)";
+  conn.query(sql, [myemail, followuser], (err, rows) => {
+    if (!err) {
+      console.log("팔로우 성공");
+      res.send({
+        suc: "팔로우 성공 승정보",
+      });
+    } else {
+      console.log("팔로우실패", err);
+    }
+  });
+});
 
 router.post("/maincards", (req, res) => {
-  let sql = "select * from t_community where bd_div=0 order by bd_time desc"; // 모든 정보 배열 형태로 보내기
+  let sql =
+    "select c.bd_id,c.bd_content,c.bd_likes,c.bd_cnt,m.mb_id,m.m_profile,c.img_file from t_community c, t_member m where c.bd_id = m.mb_id and bd_div=0 order by bd_time desc"; // 모든 정보 배열 형태로 보내기
   let sql_cmt = "select * from t_comment";
   let cmts;
   conn.query(sql_cmt, (err, rows) => {
     if (!err) {
       cmts = rows;
-      console.log("cmts값 넣기");
-      // console.log("댓글들 ", cmts);
     }
   });
 
   conn.query(sql, (err, rows) => {
     if (!err) {
-      //console.log("아이디값 정민정민", rows[0]);
-      // console.log("게시글값 정민정민", rows);
       res.send({
-        email: rows[0].bd_id,
-        // content: rows[0].bd_content,
-        // 배열 안 객체로 보냄
         post: rows,
         cmts: cmts,
       });
@@ -303,6 +334,41 @@ router.post("/specials", (req, res) => {
       console.log("코딩안됨/!!!", err);
     }
   });
+});
+
+router.post("/mypage", (req, res) => {
+  console.log("마이페이지 라우터");
+
+  let sql =
+    "select mb_id,mb_profile from t_member where mb_id not in (select follow_id from t_follow) limit 5";
+  conn.query(sql, (err, rows) => {
+    if (rows.length > 0) {
+      console.log("여기는 마이페이지 라우터");
+      res.send({
+        dbInfo: rows,
+      });
+    } else {
+      console.log("마이페이지 라우터 오류", err);
+    }
+  });
+});
+
+router.post("/mypagecnt", (req, res) => {
+  console.log("mypagecnt" + req.body.email);
+  let email = req.body.email;
+  let sql = "select count(bd_seq) cnt from t_community where bd_id = ?";
+  // let cnt;
+  conn.query(sql, [email], (err, rows) => {
+    if (rows.length > 0) {
+      console.log("cnt값 가져와짐");
+      res.send({
+        cnt: rows,
+      });
+    } else {
+      console.log("cnt값 안가져와짐", err);
+    }
+  });
+  let sqlLast = "select ";
 });
 
 router.post("/login", (req, res) => {

@@ -20,8 +20,7 @@ const style = {
 };
 
 function MainImg_Click(props) {
-  const { storyBorder, image, main_cmts, bd_seq, comments, likedByText, likedByNumber, hours } =
-    props;
+  const { image, main_cmts, bd_seq } = props;
   const [email] = useState(sessionStorage.getItem("email"));
   const [comment, setComment] = useState("");
 
@@ -35,8 +34,7 @@ function MainImg_Click(props) {
         comment: comment,
       })
       .then((res) => {
-        console.log("기철기철 " + res.data.send);
-        // window.location.href = "/mainsns";
+        console.log("mainImg_click : " + res.data);
         window.location.href = "/mainsns";
       })
       .catch((err) => {
@@ -54,30 +52,20 @@ function MainImg_Click(props) {
           {/* 댓글  */}
           <div className="comments">
             <br></br>
-            {/* {comments.map((comment) => {
-              return (
-                <Comment
-                  key={comment.id}
-                  accountName={comment.user}
-                  comment={comment.text}
-                />
-              );
-            })} */}
-            {main_cmts&&main_cmts.map((cm)=>{
-            console.log(cm.cmt_content);
-            if(cm.bd_seq==bd_seq){
-              return(
-                <Comment
-                key={cm.cmt_seq}
-                bd_id={cm.bd_id}
-                accountName={cm.mb_id }
-                comment={cm.cmt_content }
-              />
-              );
-            }
-          })  
-
-          }
+            {main_cmts &&
+              main_cmts.map((cm) => {
+                console.log(cm.cmt_content);
+                if (cm.bd_seq == bd_seq) {
+                  return (
+                    <Comment
+                      key={cm.cmt_seq}
+                      bd_id={cm.bd_id}
+                      accountName={cm.mb_id}
+                      comment={cm.cmt_content}
+                    />
+                  );
+                }
+              })}
           </div>
           <Box
             className="input_comment"
