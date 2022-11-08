@@ -75,7 +75,7 @@ function Card(props) {
 
   // 댓글 입력
   function handleSubmit(e) {
-    e.preventDefault();
+    // e.preventDefault();
     axios
       .post("http://127.0.0.1:3001/comment", {
         bd_seq: bd_seq, // 글 순번

@@ -11,7 +11,7 @@ function Suggestions() {
     axios
       .post("http://127.0.0.1:3001/suggestion", {})
       .then((res) => {
-        console.log("suggestion 페이지 : ", res.data.dbInfo);
+        console.log("suggestion 페이지 : ", res.data);
         setDbInfo(res.data.dbInfo);
       })
       .catch((err) => {
@@ -27,14 +27,23 @@ function Suggestions() {
       {/* 친구가 아닌 사람만 나오기 랜덤으로 5명 나오게하기 */}
       {dbInfo.map(function (info) {
         let imgDt;
-        if (info.m_profile === null) {
+        if (info.m_profile.data === null) {
           imgDt = basic;
-          console.log("sug 안 들어감");
+          console.log("메인서제션 basic값 들어감", info.m_profile.data);
         } else {
           window.Buffer = window.Buffer || require("buffer").Buffer;
-          let encode = window.Buffer.from(info.m_profile).toString("base64");
-          imgDt = "data:image/*;base64," + encode;
-          console.log("sug들어감");
+          let encode = window.Buffer.from(info.m_profile.data).toString(
+            "base64"
+          );
+          imgDt = "data:image/png;base64," + encode;
+          console.log(imgDt);
+          console.log("메인서제션 원래있는 값 들어감", info.m_profile.data);
+          //   console.log("sug 안 들어감");
+          // } else {
+          //   window.Buffer = window.Buffer || require("buffer").Buffer;
+          //   let encode = window.Buffer.from(info.m_profile).toString("base64");
+          //   imgDt = "data:image/*;base64," + encode;
+          //   console.log("sug들어감");
         }
         return (
           <Profile

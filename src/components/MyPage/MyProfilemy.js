@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import SetIcon from "../../images/setting.png";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import basic from "../../images/basicprofile.jpg";
 
 function PositionedMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -88,6 +89,8 @@ function Profilemy(props) {
     storyBorder,
     hideAccountName,
     image,
+    followImg,
+    followId,
   } = props;
 
   let accountName = username
@@ -95,19 +98,43 @@ function Profilemy(props) {
     : users[Math.floor(Math.random() * users.length)].username;
 
   const [cntPost, setCnt] = useState("");
+  const [myprofile, setMyprofile] = useState([]);
+  const [follow, setFollow] = useState([]);
+  const [followCnt, setFollowCnt] = useState();
+  const [followInfo, setFollowInfo] = useState([]);
+  const [following, setFollowing] = useState([]);
+
   useEffect(() => {
     axios
       .post("http://127.0.0.1:3001/mypagecnt", {
         email: email,
       })
       .then((res) => {
-        console.log("mypagecnt시작", res.data.cnt[0].cnt);
+        console.log("mypagecnt들 결과값 : ", res);
         setCnt(res.data.cnt[0].cnt);
+        setMyprofile(res.data.myInfo.data);
+        setFollow(res.data.follow);
+        setFollowCnt(res.data.followCnt);
+        setFollowInfo(res.data.followInfoTotal);
+        // setFollowing(res.data.following.data);
+        // console.log("res.data.cnt[0].cnt : " + res.data.cnt[0].cnt);
+        // console.log("res.data.myInfo.data : " + res.data.myInfo.data);
+        // console.log("res.data.follow.data : " + res.data.follow.data);
+        // console.log("res.data.following.data : " + res.data.following.data);
       })
       .catch((err) => {
         console.log("mypagecnt끝내기 실패", err);
       });
   }, []);
+
+  let profileDt;
+  if (myprofile === null) {
+    profileDt = basic;
+  } else {
+    window.Buffer = window.Buffer || require("buffer").Buffer;
+    let encode = window.Buffer.from(myprofile).toString("base64");
+    profileDt = "data:image/png;base64," + encode;
+  }
 
   // 모달 설정
   const [open, setOpen] = React.useState(false);
@@ -123,7 +150,7 @@ function Profilemy(props) {
           <ProfileIcon
             iconSize={iconSize}
             storyBorder={storyBorder}
-            image={image}
+            image={profileDt}
           />
         </div>
         {(accountName || caption) && !hideAccountName && (
@@ -135,7 +162,9 @@ function Profilemy(props) {
                   <span>게시물 &nbsp;&nbsp; {cntPost}</span>
                 </Grid>
                 <Grid item xs={3}>
-                  <span onClick={handleOpen}>팔로우 &nbsp;&nbsp;0</span>
+                  <span onClick={handleOpen}>
+                    팔로우 &nbsp;&nbsp;{followCnt}
+                  </span>
                 </Grid>
                 <Grid item xs={3}>
                   <span onClick={handleOpen}>팔로잉 &nbsp;&nbsp; 0</span>
