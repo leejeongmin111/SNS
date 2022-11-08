@@ -81,10 +81,10 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
 });
 
 router.post("/suggestion", (req, res) => {
-  console.log("useEffect가 진짜 문제인가??");
+  console.log("suggestion이 진짜 문제인가??");
 
   let sql =
-    "select mb_id,mb_profile from t_member where mb_id not in (select follow_id from t_follow) limit 5";
+    "select mb_id,m_profile from t_member where mb_id not in (select follow_id from t_follow) limit 5";
   conn.query(sql, (err, info) => {
     if (info.length > 0) {
       console.log("suggestion 정보 가져와짐");
@@ -102,12 +102,12 @@ router.post("/mainside", (req, res) => {
   console.log("보낸 email 값 : ", req.body.email);
   let email = req.body.email;
 
-  let sql = "select mb_profile from t_member where mb_id = ?";
+  let sql = "select m_profile from t_member where mb_id = ?";
   conn.query(sql, [email], (err, info) => {
     if (info.length > 0) {
       console.log("mainside 정보 가져와짐");
       res.send({
-        photo: info[0].mb_profile,
+        photo: info[0].m_profile,
       });
     } else {
       console.log("mainside정보 안가져와짐", err);
@@ -292,6 +292,41 @@ router.post("/specials", (req, res) => {
   });
 });
 
+router.post("/mypage", (req, res) => {
+  console.log("마이페이지 라우터");
+
+  let sql =
+    "select mb_id,mb_profile from t_member where mb_id not in (select follow_id from t_follow) limit 5";
+  conn.query(sql, (err, rows) => {
+    if (rows.length > 0) {
+      console.log("여기는 마이페이지 라우터");
+      res.send({
+        dbInfo: rows,
+      });
+    } else {
+      console.log("마이페이지 라우터 오류", err);
+    }
+  });
+});
+
+router.post("/mypagecnt", (req, res) => {
+  console.log("mypagecnt" + req.body.email);
+  let email = req.body.email;
+  let sql = "select count(bd_seq) cnt from t_community where bd_id = ?";
+  // let cnt;
+  conn.query(sql, [email], (err, rows) => {
+    if (rows.length > 0) {
+      console.log("cnt값 가져와짐");
+      res.send({
+        cnt: rows,
+      });
+    } else {
+      console.log("cnt값 안가져와짐", err);
+    }
+  });
+  let sqlLast = "select ";
+});
+
 router.post("/login", (req, res) => {
   // View (React) => router로 데이텅 보내기
   console.log("join router", req.body.email);
@@ -317,6 +352,25 @@ router.post("/login", (req, res) => {
   });
 });
 
+router.post("/myPage/daily", (req, res) => {
+  let id = req.body.id;
+  let div = req.body.div;
+  let ch = req.body.ch;
+  console.log(id);
+  // if (ch == 2) {
+  // let sql = `select a.img_file img_file, a.bd_file bd_file from t_community a, m_save b where a.bd_seq = b.bd_seq`
+  // } else {
+  let sql = `select * from t_community where bd_id = ${id} and bd_div=${div} order by bd_time desc`;
+  conn.query(sql, (err, rows) => {
+    if (rows.length > 0) {
+      console.log("성공");
+      res.send({
+        result: rows,
+      });
+    }
+  });
+  // }
+});
 router.get("/", function (request, response) {
   console.log("Happy Hacking!");
   response.sendFile(path.join(__dirname, "..", "build", "index.html"));

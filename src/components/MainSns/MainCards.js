@@ -16,6 +16,8 @@ function Cards() {
         console.log("메인카드 들어온값 : ", res);
         setPost(res.data.post);
         setCmts(res.data.cmts);
+        console.log(res.data.post);
+        console.log(post);
       })
       .catch((err) => {
         console.log("문제발생123", err);
@@ -25,18 +27,21 @@ function Cards() {
     <div className="cards">
       {post.map(function (pos, index) {
         let imgDt;
+        let profileDt;
         // 게시글에 번호에 맞는 댓글 구하기
-        if (post[index].img_file == null) {
+        if (pos.img_file == null) {
           imgDt = black;
         } else {
           window.Buffer = window.Buffer || require("buffer").Buffer;
-          let encode = window.Buffer.from(post[index].img_file).toString(
-            "base64"
-          );
+          let encode = window.Buffer.from(pos.img_file).toString("base64");
           imgDt = "data:image/png;base64," + encode;
         }
         if (pos.m_profile === null) {
           pos.m_profile = basic;
+        } else {
+          window.Buffer = window.Buffer || require("buffer").Buffer;
+          let encode = window.Buffer.from(pos.m_profile).toString("base64");
+          profileDt = "data:image/png;base64," + encode;
         }
 
         return (
@@ -46,7 +51,7 @@ function Cards() {
             bd_likes={pos.bd_likes} // 좋아요 갯수
             bd_cnt={pos.bd_cnt} // 댓글 수
             storyBorder={true}
-            profile={pos.m_profile}
+            profile={profileDt}
             image={imgDt} // 게시물 사진
             main_cmt={cmts} // 전체댓글
           />

@@ -36,7 +36,7 @@ function Profile(props) {
           <span className="accountName">{username}</span>
         </div>
       )}
-      <a href="#" onClick={followClick}>
+      <a href="/mainsns" onClick={followClick}>
         {urlText}
       </a>
     </div>

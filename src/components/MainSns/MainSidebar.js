@@ -16,16 +16,20 @@ function Sidebar() {
       })
       .then((res) => {
         console.log("mainside시작", res);
-        if (res.data.photo === null) {
-          setPhoto(basic);
-        } else {
-          setPhoto(res.data.photo);
-        }
+        setPhoto(res.data.photo);
       })
       .catch((err) => {
         console.log("mainside끝내기 실패", err);
       });
   }, []);
+  let profileDt;
+  if (photoInfo === null) {
+    photoInfo = basic;
+  } else {
+    window.Buffer = window.Buffer || require("buffer").Buffer;
+    let encode = window.Buffer.from(photoInfo).toString("base64");
+    profileDt = "data:image/png;base64," + encode;
+  }
 
   return (
     <div className="sidebar_container">
@@ -37,7 +41,7 @@ function Sidebar() {
           username={email}
           urlText="Switch"
           iconSize="big"
-          image={photoInfo}
+          image={profileDt}
         />
         <Suggestions />
       </div>

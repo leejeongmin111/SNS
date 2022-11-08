@@ -3,7 +3,7 @@ import Profile from "./MainProfile";
 import { ReactComponent as CardButton } from "../../images/cardButton.svg";
 import CardMenu from "./MainCardMenu";
 import Comment from "./MainComment";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import * as React from "react";
 import { Form } from "react-router-dom";
@@ -21,7 +21,7 @@ function Card(props) {
     bd_seq, // 글 번호
     bd_likes, // 좋아요 갯수
     main_cmt, // 댓글 객체
-    bd_cnt, // 댓글수
+    bd_cnt,
     image,
     comments,
     storyBorder,
@@ -115,7 +115,6 @@ function Card(props) {
           <br></br>
           {main_cmt &&
             main_cmt.map((cm) => {
-              console.log(cm.cmt_content);
               if (cm.bd_seq == bd_seq) {
                 return (
                   <Comment

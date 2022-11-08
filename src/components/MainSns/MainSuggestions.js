@@ -11,7 +11,7 @@ function Suggestions() {
     axios
       .post("http://127.0.0.1:3001/suggestion", {})
       .then((res) => {
-        console.log("일단 여기 수정 시작", res.data.dbInfo[0].mb_profile);
+        console.log("suggestion 페이지 : ", res.data.dbInfo);
         setDbInfo(res.data.dbInfo);
       })
       .catch((err) => {
@@ -26,8 +26,13 @@ function Suggestions() {
       </div>
       {/* 친구가 아닌 사람만 나오기 랜덤으로 5명 나오게하기 */}
       {dbInfo.map(function (info) {
-        if (info.mb_profile === null) {
-          info.mb_profile = basic;
+        let imgDt;
+        if (info.m_profile === null) {
+          imgDt = basic;
+        } else {
+          window.Buffer = window.Buffer || require("buffer").Buffer;
+          let encode = window.Buffer.from(info.m_profile).toString("base64");
+          imgDt = "data:image/png;base64," + encode;
         }
         return (
           <Profile
@@ -36,7 +41,7 @@ function Suggestions() {
             urlText="Follow"
             storyBorder={true}
             username={info.mb_id}
-            image={info.mb_profile}
+            image={imgDt}
           />
         );
       })}

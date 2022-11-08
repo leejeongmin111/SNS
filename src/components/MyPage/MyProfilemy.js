@@ -7,13 +7,12 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import Myfollow_Click from "./Myfollow_Click";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import SetIcon from "../../images/setting.png";
 import Button from "@mui/material/Button";
-import { red } from "@mui/material/colors";
-import { color } from "@mui/system";
+import axios from "axios";
 
 function PositionedMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -89,12 +88,27 @@ function Profilemy(props) {
     ? username
     : users[Math.floor(Math.random() * users.length)].username;
 
+  const [cntPost, setCnt] = useState("");
+  useEffect(() => {
+    axios
+      .post("http://127.0.0.1:3001/mypagecnt", {
+        email: email,
+      })
+      .then((res) => {
+        console.log("mypagecnt시작", res.data.cnt[0].cnt);
+        setCnt(res.data.cnt[0].cnt);
+      })
+      .catch((err) => {
+        console.log("mypagecnt끝내기 실패", err);
+      });
+  }, []);
+
   // 모달 설정
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [nick] = useState(sessionStorage.getItem("nick"));
+  const [email] = useState(sessionStorage.getItem("email"));
 
   return (
     <>
@@ -108,14 +122,14 @@ function Profilemy(props) {
         </div>
         {(accountName || caption) && !hideAccountName && (
           <div className="My_textContainer">
-            <span className="My_accountName">{nick}</span>
+            <span className="My_accountName">{email}</span>
             <Box className="My_box">
               <Grid container spacing={1}>
                 <Grid item xs={3}>
-                  <span>게시물 &nbsp;&nbsp; 0</span>
+                  <span>게시물 &nbsp;&nbsp; {cntPost}</span>
                 </Grid>
                 <Grid item xs={3}>
-                  <span onClick={handleOpen}>팔로우 &nbsp;&nbsp; 0</span>
+                  <span onClick={handleOpen}>팔로우 &nbsp;&nbsp;0</span>
                 </Grid>
                 <Grid item xs={3}>
                   <span onClick={handleOpen}>팔로잉 &nbsp;&nbsp; 0</span>
