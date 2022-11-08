@@ -43,7 +43,7 @@ function Suggestions() {
             urlText="Follow"
             storyBorder={true}
             username={info.mb_id}
-            image={basic}
+            image={imgDt}
           />
         );
       })}
