@@ -76,12 +76,12 @@ function Footer() {
     <>
     <div className="footer_container">
       <div className="menu">
-        <img className="icon" src={dmOff} alt="dm" />
-        <img className="icon" src={notice_icon} alt="message" onClick={handleClick_notice} sx={{color:blue}}/>
-        <img className="icon" src={homeOff} alt="home" onClick={home_click} />
+        <img id="icon_notice_main" className="icon" src={notice_icon} alt="message" onClick={handleClick_notice} sx={{color:blue}}/>
+        <img id="icon_home_main" className="icon" src={homeOff} alt="home" onClick={home_click} />
         <Write_Daily className="icon_daily"></Write_Daily>
         {/* <img className="icon" src={postOff} alt="post" /> */}
         <img
+          id="icon_my_main"
           className="icon"
           src={userOff}
           alt="mypage"
