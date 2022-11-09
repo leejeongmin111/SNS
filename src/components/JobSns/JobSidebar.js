@@ -32,9 +32,15 @@ function Sidebar() {
   }
 
   return (
+<<<<<<< HEAD
     <div className="Jsidebar_container">
       <div className="Jtextcontainer">
         <span className="JFriendsText">Follow Suggestions</span>
+=======
+    <div className="sidebar_container">
+      <div className="textcontainer">
+        <span className="FriendsText">Follow Suggestions</span>
+>>>>>>> 1fa77082c1662de427c664e8780fcf057c3a9d35
       </div>
       <div className="JMainsidebar">
         <Profile

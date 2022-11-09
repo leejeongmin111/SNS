@@ -25,6 +25,7 @@ function Card(props) {
     bd_likes, // 좋아요 갯수
     main_cmt, // 댓글 객체
     image,
+    bd_cnt,    // 댓글 갯수
     comments,
     storyBorder,
     likedByText,
@@ -162,7 +163,7 @@ function Card(props) {
         <div className="timePosted">
           <a onClick={changeshow} className="cmt_fold">
             {/* {comments.length}개의 댓글 {fold} */}
-            {cmt.length}개의 댓글 {fold}
+            {bd_cnt}개의 댓글 {fold}
           </a>
         </div>
 
@@ -215,15 +216,18 @@ function Card(props) {
         aria-describedby="modal-modal-description"
       >
         <JobImg_Click
+          bd_content={bd_content}    // 글내용
+          bd_id={bd_id}               // 글 작성자
+          bd_likes={bd_likes}           // 좋아요수 
+          bd_cnt={bd_cnt}             // 댓글 갯수
+          main_cmts={main_cmt}         //댓글 객체
           storyBorder={storyBorder}
           image={image}
           bd_seq={bd_seq}
-          main_cmts={main_cmt}
           comments={comments}
         />
       </Modal>
     </>
   );
 }
-
 export default Card;

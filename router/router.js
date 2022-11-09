@@ -53,13 +53,32 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/changeProfile", upload.single("img"), (req, res) => {
-  let nick = req.body.nick;
+  let nick = req.body.NickName;
   let password = req.body.password;
-  let img = req.file.buffer;
-  let id = req.body.id;
-
-  let cnt = ["nick", "pw", "img"];
-  let userInfo = [nick, password, img];
+  let id = req.body.email;
+  if (req.file == undefined) {
+  } else {
+    let img = req.file.buffer;
+    let sqldelete = `update t_member set m_profile = null where mb_id = '${id}' `;
+    // let sqlImg = `update t_member set m_profile = ? where mb_id = ${id}`;
+    let sqlImg = `update t_member set m_profile = ? where mb_id = '${id}'`;
+    conn.query(sqldelete, (err) => {
+      if (!err) {
+        console.log("이미지 삭제 완료");
+      } else {
+        console.log("이미지 삭제 실패" + err);
+      }
+    });
+    conn.query(sqlImg, [img], (err, rows) => {
+      if (!err) {
+        console.log("프로필사진 수정 성공");
+      } else {
+        console.log("프로필사진 수정 실패..." + err);
+      }
+    });
+  }
+  let cnt = ["mb_nick", "mb_pw"];
+  let userInfo = [nick, password];
   for (let i = 0; i < userInfo.length; i++) {
     if (userInfo[i] == "") {
       cnt.splice(i, 1);
@@ -67,26 +86,23 @@ router.post("/changeProfile", upload.single("img"), (req, res) => {
   }
   userInfo = userInfo.filter(function (data) {
     return data != "";
-    if (rows.length > 0) {
-      console.log("성공");
-      res.send({
-        result: rows,
-      });
-    }
   });
   cnt = cnt.filter(function (data) {
     return data != "";
   });
   for (let i = 0; i < userInfo.length; i++) {
-    let sql = `update t_member set ${cnt[i]} = '${userInfo[i]}' where id = '${id}';`;
+    let sql = `update t_member set ${cnt[i]} = '${userInfo[i]}' where mb_id = '${id}'`;
     conn.query(sql, function (err, rows) {
       if (!err) {
-        console.log("회원정보 수정 성공!");
+        console.log("회원정보 수정 성공!", cnt[i], "를", userInfo[i]);
       } else {
         console.log("회원정보 수정 실패!" + err);
+        console.log(cnt[i]);
+        console.log(userInfo[i]);
       }
     });
   }
+  res.redirect("/");
 });
 
 router.post("/write_daily", upload.single("img"), (req, res) => {
@@ -103,7 +119,7 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
     let email = req.body.emailSend;
     let div = 0;
     // 프로필 사진 넣기
-    // let sqlText = `update t_member set m_profile = ? where mb_id = '123@123'`;
+    // let sqlText = `update t_member set m_profile = ? where mb_id = '3'`;
     // conn.query(sqlText, [img], function (err, rows) {
     let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div,img_file) values(?,?,0,0,${div},?)`;
     conn.query(sqlText, [text, email, img], function (err, rows) {
@@ -479,7 +495,6 @@ router.post("/myPage/daily", (req, res) => {
   let div = req.body.div;
   let ch = req.body.ch;
   console.log(id);
-  console.log("여기????");
   if (ch == 2) {
     let sql = `select a.img_file img_file, a.bd_seq bd_seq, b.save_time st from t_community a, m_save b where a.bd_seq = b.bd_seq and b.mb_id = '${id}' order by st desc`;
     conn.query(sql, (err, rows) => {
