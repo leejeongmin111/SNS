@@ -5,6 +5,26 @@
   padding-left: 1.5em;
   font-size: 0.75em;
   margin-bottom: 0.4em;
+  align-items: center;
   .post_num{
+    
+
+      .img_content{
+
+      }
+
+      .img_likes{
+      }
+    
   }
+}
+.img_content{
+  font-size: 25px;
+  margin-left: 10px;
+}
+.img_likes{
+  float:right;
+  margin-right: 50px;
+  font-weight: 50;
+  font-size: 12px;
 }
