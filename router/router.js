@@ -138,7 +138,7 @@ router.post("/suggestion", (req, res) => {
     "select mb_id,m_profile from t_member where mb_id not in (select follow_id from t_follow) limit 5";
   conn.query(sql, (err, info) => {
     if (info.length > 0) {
-      console.log("suggestion 정보 가져와짐", info);
+      console.log("suggestion 정보 가져와짐");
       res.send({
         dbInfo: info,
       });
@@ -312,6 +312,24 @@ router.post("/comment", (req, res) => {
   let cmt_content = req.body.comment; // 댓글 내용
   let mb_id = req.body.email; // 댓글 작성자
   let bd_id = req.body.bd_id; // 게시글 작성자
+  //div search
+  let comment;
+  let div;
+  let sqlDiv = `select bd_div from t_community where bd_seq = ${bd_seq}`;
+  conn.query(sqlDiv, [bd_seq], (err, rows) => {
+    if (!err) {
+      div = rows[0].bd_div;
+      console.log(div + "이거야이거");
+      if (div == 0) {
+        comment = `${mb_id}님이 회원님의 게시글에 댓글을 남겼습니다.`;
+      } else if (div == 1) {
+        comment = `JOBSNS에서 회원님의 게시글에 댓글을 남겼습니다.`;
+      } else {
+        comment = `코딩문답에서 회원님의 게시글에 댓글을 남겼습니다.`;
+      }
+    }
+  });
+  // notice comment
 
   let sql_cnt = "update t_community set bd_cnt = bd_cnt +1 where bd_seq =?";
   conn.query(sql_cnt, [bd_seq], (err, rows) => {
@@ -322,10 +340,17 @@ router.post("/comment", (req, res) => {
 
   let sql =
     "insert into t_comment(bd_seq,cmt_content,mb_id,bd_id) values(?,?,?,?)";
-
+  let sqlNt = `insert into t_notice(bd_seq,bd_id,mb_id,n_div,n_comment) values (?,?,?,?,?)`;
   conn.query(sql, [bd_seq, cmt_content, mb_id, bd_id], (err, rows) => {
     if (!err) {
       console.log("댓글 넣어졌어");
+      conn.query(sqlNt, [bd_seq, bd_id, mb_id, div, comment], (err, rows) => {
+        if (!err) {
+          console.log("알림 들어감!");
+        } else {
+          console.log("알림 안들어감" + err);
+        }
+      });
       res.send({
         suc: "성공 정민",
       });
@@ -588,9 +613,29 @@ router.post("/saveList", (req, res) => {
 router.post("/likeIn", (req, res) => {
   let id = req.body.id;
   let bd_seq = req.body.bd_seq;
+  let div;
+  let master;
   let sql = `select * from t_like where mb_id = '${id}' and bd_seq = ${bd_seq}`;
   let sqlin = `update t_community set bd_likes = (bd_likes + 1) where bd_seq = ${bd_seq}`;
   let sqlout = `update t_community set bd_likes = (bd_likes - 1) where bd_seq = ${bd_seq}`;
+  let comment;
+  // bd_div 찾기
+  let sqlDiv = `select bd_div,bd_id from t_community where bd_seq = ${bd_seq}`;
+  conn.query(sqlDiv, [bd_seq], (err, rows) => {
+    if (!err) {
+      div = rows[0].bd_div;
+      master = rows[0].bd_id;
+      if (div == 0) {
+        comment = `${id}님이 회원님의 게시글에 좋아요를 눌렀습니다.`;
+      } else if (div == 1) {
+        comment = `JOBSNS에서 회원님의 게시글에 좋아요를 눌렀습니다.`;
+      } else if (div == 2) {
+        comment = `코딩문답에서 회원님의 게시글에 좋아요를 눌렀습니다.`;
+      }
+    }
+  });
+  let sqlNt = `insert into t_notice(bd_seq,bd_id,mb_id,n_div,n_comment) values (?,?,?,?,?)`;
+
   conn.query(sql, (err, rows) => {
     if (rows.length > 0) {
       let sql1 = `delete from t_like where mb_id = '${id}' and bd_seq = ${bd_seq}`;
@@ -611,6 +656,13 @@ router.post("/likeIn", (req, res) => {
         if (!err) {
           console.log("좋아요 성공!!!ㅋ커플탄생");
           conn.query(sqlin);
+          conn.query(sqlNt, [bd_seq, master, id, div, comment], (err, rows) => {
+            if (!err) {
+              console.log("알림 들어감!");
+            } else {
+              console.log("알림 안들어감");
+            }
+          });
           res.json({
             result: "성공",
           });
@@ -645,6 +697,23 @@ router.post("/deleteProfile", (req, res) => {
     }
   });
 });
+
+router.post("/notice", (req, res) => {
+  let id = req.body.id;
+  console.log(id);
+  let sql = `select n_comment,nt_time from t_notice where bd_id = '${id}' order by nt_time desc limit 5;`;
+  conn.query(sql, (err, rows) => {
+    if (!err) {
+      console.log("알림데이터 꺼내먹어요~");
+      res.json({
+        comment: rows,
+      });
+    } else {
+      console.log("알림데이터 못꺼내먹음..." + err);
+    }
+  });
+});
+
 router.get("/", function (request, response) {
   console.log("Happy Hacking!");
   response.sendFile(path.join(__dirname, "..", "build", "index.html"));

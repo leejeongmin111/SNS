@@ -73,8 +73,9 @@ function Card(props) {
   function likeBt() {
     axios
       .post("http://127.0.0.1:3001/likeIn", {
-        bd_seq: bd_seq,
-        id: email,
+        bd_seq: bd_seq, // 글 순번
+        id: email, // 좋아요 누른 사람
+        bd_id: bd_id, // 글 쓴 사람
       })
       .then((res) => {
         if (res.data.result == "성공") {
