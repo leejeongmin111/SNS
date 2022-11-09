@@ -1,26 +1,47 @@
 
 .img_click_main{
-
     background-color: aliceblue;
     .img_click{
-        width: 50%;
-        height: 100%;
-        float:left;
-    }
-    .click_box1{
-        width: 50%;
-        height: 50%;
-        border: '1px dashed grey';
-        float:right;
+        width: 100%;
+        height: 65%;
+        border : 1px solid grey;
 
+        
     }
+    // .click_box1{
+    //     width: 47%;
+    //     height: 30%;
+    //     border: '1px dashed grey';
+    //     float:right;
+        
+    // }
     .click_box2{
-        width: 50%;
-        height: 50%;
+        width: 100%;
+        height: 28%;
         border: 1px;
-        float:right;
-        .img_click_input{
-            margin-left: 15px;
+        overflow:auto;
+        margin-top: 1px;
+        float:left;
+
+        .comments{
+            height: 12%;
+
         }
+        .input_comment{
+            position: fixed;
+            margin-top: 130px;
+            margin-left: 10px;
+
+        }
+        // .img_click_input{
+        //     margin-left: 15px;
+        //     
+        //     margin-bottom: 10px;
+
+        // }
+        //     .img_post{
+        //         position: fixed;
+        //         margin-left: 60%;
+        //     }
 }
 }
