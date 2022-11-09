@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import CardMenu from "./JobCardMenu";
 import { useState } from "react";
 import axios from "axios";
-import JobPost from "./JobPost"
+import JobPost from "./JobPost";
 
 // box 스타일 설정
 const style = {
@@ -21,19 +21,22 @@ const style = {
 };
 
 function MainImg_Click(props) {
-    const {   
-        bd_content,   // 글내용
-        bd_id,        // 글 작성자
-        bd_likes,     // 좋아요수 
-        bd_cnt,       // 댓글 갯수
-        main_cmts,    //댓글 객체
-        storyBorder,
-        image,
-        bd_seq,
-        comments, 
-      } = props;
+  const {
+    bd_content, // 글내용
+    bd_id, // 글 작성자
+    bd_likes, // 좋아요수
+    bd_cnt, // 댓글 갯수
+    main_cmts, //댓글 객체
+    storyBorder,
+    image,
+    bd_seq,
+    comments,
+  } = props;
   const [email] = useState(sessionStorage.getItem("email"));
+  const [nick] = useState(sessionStorage.getItem("nick"));
   const [comment, setComment] = useState("");
+  const [likeId, setLikeId] = useState("");
+  const [likeNick, setLikeNick] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -42,9 +45,9 @@ function MainImg_Click(props) {
     axios
       .post("http://127.0.0.1:3001/comment", {
         cmt_content: comment,
-        bd_seq:bd_seq,
-        mb_id:email,
-        bd_id:bd_id,
+        bd_seq: bd_seq,
+        mb_id: email,
+        bd_id: bd_id,
       })
       .then((res) => {
         console.log("mainImg_click : " + res.data);
@@ -57,14 +60,28 @@ function MainImg_Click(props) {
 
   return (
     <>
-    
       <Box sx={style} className="img_click_main">
         <img src={image} className="img_click"></img>
         {/* <Box className="click_box1">
         </Box> */}
         <Box className="click_box2">
-        <JobPost className="img_post_cm" bd_content={bd_content} bd_id = {bd_id} bd_likes={bd_likes}></JobPost>
-          <CardMenu></CardMenu>
+          <JobPost
+            className="img_post_cm"
+            bd_content={bd_content}
+            bd_id={bd_id}
+            bd_likes={bd_likes}
+          ></JobPost>
+          <CardMenu
+            bd_content={bd_content} // 글내용
+            bd_id={bd_id} // 글 작성자
+            bd_likes={bd_likes} // 좋아요수
+            bd_cnt={bd_cnt} // 댓글 갯수
+            main_cmts={main_cmts} //댓글 객체
+            storyBorder={storyBorder}
+            image={image}
+            bd_seq={bd_seq}
+            comments={comments}
+          ></CardMenu>
           {/* 댓글  */}
           <div className="comments">
             <br></br>
@@ -100,7 +117,9 @@ function MainImg_Click(props) {
               className="img_click_input"
               onChange={(e) => setComment(e.target.value)}
             ></input>
-            <Button type="submit" className="img_post">post</Button>
+            <Button type="submit" className="img_post">
+              post
+            </Button>
           </Box>
         </Box>
       </Box>
