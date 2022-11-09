@@ -55,7 +55,9 @@ router.post("/register", (req, res) => {
 router.post("/changeProfile", upload.single("img"), (req, res) => {
   let nick = req.body.NickName;
   let password = req.body.password;
-  let id = req.body.email;
+  let id = req.body.emailSend;
+  console.log(req.body);
+  console.log(id);
   if (req.file == undefined) {
   } else {
     let img = req.file.buffer;
@@ -118,6 +120,8 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
     let img = req.file.buffer;
     let email = req.body.emailSend;
     let div = 0;
+    // let sqlText = `update t_member set m_profile = ? where mb_id = 'yangkang@daum.net'`;
+    // conn.query(sqlText, [img], function (err, rows) {
     let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div,img_file) values(?,?,0,0,${div},?)`;
     conn.query(sqlText, [text, email, img], function (err, rows) {
       if (!err) {
@@ -681,16 +685,16 @@ router.post("/deleteProfile", (req, res) => {
   let sql2 = `delete from t_comment where mb_id = ${id}`;
   let sql3 = `delete from t_follow where follow id =${id} and mb_id = ${id}`;
   let sql4 = `delete from t_like where mb_id = ${id}`;
-  let sql5 = `delete from t_notic where mb_id = ${id}`;
-  conn.query(sql);
+  let sql5 = `delete from t_notice where mb_id = ${id}`;
+  conn.query(sql5);
   conn.query(sql1);
   conn.query(sql3);
   conn.query(sql4);
   conn.query(sql2);
-  conn.query(sql5, function (err, rows) {
+  conn.query(sql, function (err, rows) {
     if (!err) {
       console.log("회원 탈퇴 성공");
-      res.redirect("http://localhost:3000/jobsns");
+      res.redirect("http://localhost:3000/");
     } else {
       console.log("회원 탈퇴 문제", err);
       throw err;
