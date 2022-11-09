@@ -1,5 +1,6 @@
 import Header from "./UserPage/UserHeader";
-import Footer from "./UserPage/UserFooter";
+//import Footer from "./UserPage/UserFooter";
+import Footer from "./MyPage/MyFooter";
 import Profilemy from "./UserPage/UserProfilemy";
 import Sidebar from "./UserPage/UserSidebar";
 import "../styles/UserPage.scss";
@@ -42,7 +43,7 @@ function MyPage() {
   return (
     <main>
       <div className="blank"></div>
-      <div className="My_container">
+      <div className="userMy_container">
         <Header />
         <React.Fragment>
           <Container>
@@ -106,7 +107,7 @@ function MyPage() {
         </React.Fragment>
         <Footer />
       </div>
-      <div className="box">
+      <div className="box_user">
         <Sidebar />
       </div>
     </main>

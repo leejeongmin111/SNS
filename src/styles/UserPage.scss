@@ -1,5 +1,4 @@
 @import "./_variables";
-
 body {
   background-color: $background-white;
   font-family: $font;
@@ -11,7 +10,12 @@ body {
   main {
     display: grid;
     grid-template-columns: 600px 1fr 600px;
-
+    .blank {
+      background-color: #cce5ff;
+    }
+    .box_user {
+      background-color: #cce5ff;
+    }
     .userblank {
       background-color: #cce5ff;
     }
@@ -68,4 +72,7 @@ body {
 }
 .My_container {
   margin-top: 85px;
+}
+.userMy_container {
+  background-color: #5800ff;
 }
