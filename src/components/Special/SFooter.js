@@ -36,11 +36,12 @@ function Footer() {
   return (
     <div className="footer_container">
       <div className="menu">
-        <img className="icon" src={dmOff} alt="dm" />
-        <img className="icon" src={noticeOff} alt="message" />
-        <img className="icon" src={homeOff} alt="home" onClick={home_click} />
+        {/* <img className="icon" src={dmOff} alt="dm" /> */}
+        <img className="icon" src={noticeOff} alt="message" id="icon_notice_special" />
+        <img id="icon_home_special" className="icon" src={homeOff} alt="home" onClick={home_click} />
         <Write_Special></Write_Special>
         <img
+          id="icon_my_special"
           className="icon"
           src={userOff}
           alt="mypage"

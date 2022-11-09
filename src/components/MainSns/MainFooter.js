@@ -67,18 +67,25 @@ function Footer() {
     <>
       <div className="footer_container">
         <div className="menu">
-          <img className="icon" src={dmOff} alt="dm" />
           <img
+            id="icon_notice_main"
             className="icon"
             src={notice_icon}
             alt="message"
             onClick={handleClick_notice}
             sx={{ color: blue }}
           />
-          <img className="icon" src={homeOff} alt="home" onClick={home_click} />
+          <img
+            id="icon_home_main"
+            className="icon"
+            src={homeOff}
+            alt="home"
+            onClick={home_click}
+          />
           <Write_Daily className="icon_daily"></Write_Daily>
           {/* <img className="icon" src={postOff} alt="post" /> */}
           <img
+            id="icon_my_main"
             className="icon"
             src={userOff}
             alt="mypage"
@@ -87,26 +94,26 @@ function Footer() {
             }}
           />
         </div>
-      </div>
 
-      <Popover
-        id={id}
-        open={open_notice}
-        anchorEl={anchorEl_notice}
-        onClose={handleClose_notice}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "center",
-        }}
-        transformOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
-        anchorReference="anchorPosition"
-        anchorPosition={{ top: 900, left: 1600 }}
-      >
-        <Notice></Notice>
-      </Popover>
+        <Popover
+          id={id}
+          open={open_notice}
+          anchorEl={anchorEl_notice}
+          onClose={handleClose_notice}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center",
+          }}
+          transformOrigin={{
+            vertical: "bottom",
+            horizontal: "center",
+          }}
+          anchorReference="anchorPosition"
+          anchorPosition={{ top: 900, left: 1600 }}
+        >
+          <Notice></Notice>
+        </Popover>
+      </div>
     </>
   );
 }
