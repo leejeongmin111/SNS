@@ -58,6 +58,7 @@ function Cards() {
           <Card
             key={pos.bd_seq}
             bd_id={pos.bd_id} // 글 작성자
+            mb_nick={pos.mb_nick}
             bd_content={pos.bd_content} // 글 내용
             bd_seq={pos.bd_seq} // 글 번호
             bd_likes={pos.bd_likes} // 좋아요 갯수

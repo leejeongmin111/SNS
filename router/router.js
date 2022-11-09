@@ -139,7 +139,7 @@ router.post("/suggestion", (req, res) => {
   console.log("suggestion이 진짜 문제인가??");
 
   let sql =
-    "select mb_id,m_profile from t_member where mb_id not in (select follow_id from t_follow) limit 5";
+    "select mb_id,mb_nick,m_profile from t_member where mb_id not in (select follow_id from t_follow) limit 5";
   conn.query(sql, (err, info) => {
     if (info.length > 0) {
       console.log("suggestion 정보 가져와짐");
@@ -279,7 +279,7 @@ router.post("/maincards", (req, res) => {
 
 router.post("/jobcards", (req, res) => {
   let sql =
-    "select c.bd_seq,c.bd_id,c.bd_content,c.bd_likes,c.bd_cnt,m.mb_id,m.m_profile,c.img_file from t_community c, t_member m where c.bd_id = m.mb_id and bd_div=1 order by bd_time desc"; // 모든 정보 배열 형태로 보내기
+    "select m.mb_nick,c.bd_seq,c.bd_id,c.bd_content,c.bd_likes,c.bd_cnt,m.mb_id,m.m_profile,c.img_file from t_community c, t_member m where c.bd_id = m.mb_id and bd_div=1 order by bd_time desc"; // 모든 정보 배열 형태로 보내기
   let sql_cmt = "select * from t_comment";
   let cmts;
   conn.query(sql_cmt, (err, rows) => {
@@ -627,6 +627,12 @@ router.post("/likeIn", (req, res) => {
   let comment;
   // bd_div 찾기
   let sqlDiv = `select bd_div,bd_id from t_community where bd_seq = ${bd_seq}`;
+
+  let sqlLike =
+    "select m.mb_id,m.mb_nick from t_like l, t_member m where m.mb_id = l.mb_id and l.mb_id = ?";
+  let likeNick;
+  let likeId;
+
   conn.query(sqlDiv, [bd_seq], (err, rows) => {
     if (!err) {
       div = rows[0].bd_div;
@@ -669,8 +675,19 @@ router.post("/likeIn", (req, res) => {
               console.log("알림 안들어감");
             }
           });
-          res.json({
-            result: "성공",
+          conn.query(sqlLike, [id], (err, rows) => {
+            if (rows.length > 0) {
+              console.log("like정보 가져와짐");
+              likeNick = rows[0].mb_nick;
+              likeId = rows[0].mb_id;
+              console.log("likeNick값 : " + likeNick);
+              console.log("likeId값 : " + likeId);
+            }
+            res.json({
+              result: "성공",
+              nick: likeNick,
+              id: likeId,
+            });
           });
         } else {
           console.log("좋아요 실패...커플지옥 솔로천국");

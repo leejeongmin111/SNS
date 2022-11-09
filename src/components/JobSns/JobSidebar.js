@@ -7,6 +7,7 @@ import basic from "../../images/basicprofile.jpg";
 
 function Sidebar() {
   const [email] = useState(sessionStorage.getItem("email"));
+  const [nick] = useState(sessionStorage.getItem("nick"));
   const [photoInfo, setPhoto] = useState("");
 
   useEffect(() => {
@@ -38,7 +39,7 @@ function Sidebar() {
       </div>
       <div className="JMainsidebar">
         <Profile
-          username={email}
+          username={nick}
           urlText="Switch"
           iconSize="big"
           image={profileDt}
