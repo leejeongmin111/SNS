@@ -75,7 +75,13 @@ function PositionedMenu() {
         >
           회원 수정
         </MenuItem>
-        <MenuItem onClick={handleClose}>직업 인증</MenuItem>
+        <MenuItem
+          onClick={() => {
+            nav("/jobsetting");
+          }}
+        >
+          직업 인증
+        </MenuItem>
         <MenuItem onClick={logout}>로그 아웃</MenuItem>
       </Menu>
     </div>

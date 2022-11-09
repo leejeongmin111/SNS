@@ -13,6 +13,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import Notice from "./Notice";
 import Account_Change from "./Account/Account_Change";
+import JobSetting from "./Account_Setting/Job_Setting";
 
 function reducer(currentState, action) {
   if (currentState === undefined) {
@@ -48,6 +49,8 @@ function App() {
             path="/change"
             element={<Account_Change></Account_Change>}
           ></Route>
+          <Route path="/jobsetting" element={<JobSetting></JobSetting>}></Route>
+
         </Routes>
       </Provider>
     </>
