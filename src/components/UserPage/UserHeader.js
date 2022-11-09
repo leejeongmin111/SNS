@@ -6,8 +6,8 @@ function Header() {
   const nav = useNavigate();
 
   return (
-    <div className="container_Box">
-      <div className="container_Logo">
+    <div className="usercontainer_Box">
+      <div className="usercontainer_Logo">
         <img
           className="logo"
           src={logo}
@@ -17,16 +17,16 @@ function Header() {
           }}
         />
       </div>
-      <div className="container_Search">
-        <div className="searchBox">
+      <div className="usercontainer_Search">
+        <div className="usersearchBox">
           <input
-            className="searchInput"
+            className="usersearchInput"
             type="text"
             name=""
             placeholder="Search"
           />
-          <button className="searchButton" href="#">
-            <img className="searchIcon" src={searchIcon} alt="searchIcon" />
+          <button className="usersearchButton" href="#">
+            <img className="usersearchIcon" src={searchIcon} alt="searchIcon" />
           </button>
         </div>
       </div>

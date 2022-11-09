@@ -90,8 +90,8 @@ function MyPage() {
 
   return (
     <main>
-      <div className="blank"></div>
-      <div className="My_container">
+      <div className="userblank"></div>
+      <div className="userMy_container">
         {/* 연습 <div className="My_container"  style={cnt==1?{display:"none"}:{display:""}}> */}
         <Header />
         <React.Fragment>
@@ -137,7 +137,7 @@ function MyPage() {
         </React.Fragment>
         <Footer />
       </div>
-      <div className="box">
+      <div className="userbox">
         <Sidebar />
       </div>
     </main>
