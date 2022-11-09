@@ -1,5 +1,13 @@
 @import "../_variables";
 
+@font-face {
+  font-family: "Lobster-Regular";
+  font-weight: 300;
+  src: url("../../assets/font/Lobster-Regular.ttf") format("woff2"),
+    url("../../assets/font/Lobster-Regular.ttf") format("woff"),
+    url("../../assets/font/Lobster-Regular.ttf") format("truetype");
+}
+
 .profile {
   display: flex;
   align-items: center;
@@ -13,7 +21,8 @@
     min-width: 180px;
 
     .accountName {
-      font-weight: 500;
+      font-family: "Lobster-Regular";
+      font-size: 17px;
       margin-bottom: 5px;
 
       &:hover {

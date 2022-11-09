@@ -1,6 +1,6 @@
 @import "../_variables";
 
-.container_Box {
+.usercontainer_Box {
   position: fixed;
   background-color: white;
   box-shadow: 0 5px 15px rgba($color: #000000, $alpha: 1);
@@ -13,7 +13,7 @@
   top: 1.5%;
   left: 32.15%;
 
-  .container_Logo {
+  .usercontainer_Logo {
     width: 180px;
     height: 40px;
     padding: 1em 0 0 1em;
@@ -27,28 +27,28 @@
       }
     }
   }
-  .container_Search {
+  .usercontainer_Search {
     width: 15px;
-    .searchBox {
+    .usersearchBox {
       position: absolute;
       transform: translate(-100%, 20%);
-      background: #2a7bee;
+      background: #5800ff;
       height: 35px;
       border-radius: 40px;
       padding: 5px;
       &:hover > {
-        .searchInput {
+        .usersearchInput {
           width: 250px;
           padding: 0 6px;
         }
 
-        .searchButton {
+        .usersearchButton {
           background: white;
           color: #2f3640;
         }
       }
 
-      .searchButton {
+      .usersearchButton {
         color: white;
         float: right;
         width: 35px;
@@ -60,13 +60,13 @@
         align-items: center;
         transition: 0.4s;
 
-        .searchIcon {
+        .usersearchIcon {
           display: flex;
           width: 100%;
         }
       }
 
-      .searchInput {
+      .usersearchInput {
         border: none;
         background: none;
         outline: none;
@@ -85,7 +85,7 @@
   }
 }
 @media screen and (max-width: 620px) {
-  .searchBox:hover > .searchInput {
+  .usersearchBox:hover > .usersearchInput {
     width: 150px;
     padding: 0 6px;
   }

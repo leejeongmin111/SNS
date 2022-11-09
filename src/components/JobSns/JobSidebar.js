@@ -1,4 +1,4 @@
-import "../../styles/MainSns/MainSidebar.scss";
+import "../../styles/JobSns/JobSidebar.scss";
 import Profile from "./JobProfile";
 import Suggestions from "./JobSuggestions";
 import { useState, useEffect } from "react";
@@ -32,11 +32,11 @@ function Sidebar() {
   }
 
   return (
-    <div className="sidebar_container">
-      <div className="textcontainer">
-        <span className="FriendsText">Follow Suggestions</span>
+    <div className="Jsidebar_container">
+      <div className="Jtextcontainer">
+        <span className="JFriendsText">Follow Suggestions</span>
       </div>
-      <div className="Mainsidebar">
+      <div className="JMainsidebar">
         <Profile
           username={email}
           urlText="Switch"

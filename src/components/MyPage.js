@@ -1,4 +1,4 @@
-import Header from "./MyPage/MyHeader";
+import MYHeader from "./MyPage/MyHeader";
 import Footer from "./MyPage/MyFooter";
 import Profilemy from "./MyPage/MyProfilemy";
 import Sidebar from "./MyPage/MySidebar";
@@ -54,9 +54,9 @@ function MyPage() {
 
   return (
     <main>
-      <div className="blank"></div>
-      <div className="My_container">
-        <Header />
+      <div className="Myblank"></div>
+      <div className="MyMy_container">
+        <MYHeader />
         <React.Fragment>
           <Container>
             <Box className="Pro_box">
@@ -140,7 +140,7 @@ function MyPage() {
         </React.Fragment>
         <Footer />
       </div>
-      <div className="box">
+      <div className="Mybox">
         <Sidebar />
       </div>
     </main>

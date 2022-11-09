@@ -7,7 +7,7 @@ import Footer from "./MainSns/MainFooter";
 function MainSns() {
   return (
     <main>
-      <div className="blank"></div>
+      <div className="Mainblank"></div>
       <div className="Main_container">
         <Header />
         <div className="card_container">
@@ -15,7 +15,7 @@ function MainSns() {
         </div>
         <Footer />
       </div>
-      <div className="box">
+      <div className="Mainbox">
         <Sidebar />
       </div>
     </main>

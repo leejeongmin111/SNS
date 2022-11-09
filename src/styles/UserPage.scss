@@ -12,11 +12,11 @@ body {
     display: grid;
     grid-template-columns: 600px 1fr 600px;
 
-    .blank {
-      background-color: $background-skyblue;
+    .userblank {
+      background-color: #cce5ff;
     }
-    .My_container {
-      background-color: $background-blue;
+    .userMy_container {
+      background-color: #5800ff;
       border-right: 2px solid $border-color-grey;
       border-left: 2px solid $border-color-grey;
       grid-template-columns: 1fr;
@@ -50,8 +50,8 @@ body {
           margin-left: 0.3em;
         }
       }
-      .box {
-        background-color: $background-skyblue;
+      .userbox {
+        background-color: #cce5ff;
       }
     }
   }
