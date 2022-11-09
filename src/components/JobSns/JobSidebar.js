@@ -34,7 +34,7 @@ function Sidebar() {
   return (
     <div className="sidebar_container">
       <div className="textcontainer">
-        <span className="FriendsText">Your Friends</span>
+        <span className="FriendsText">Follow Suggestions</span>
       </div>
       <div className="Mainsidebar">
         <Profile
