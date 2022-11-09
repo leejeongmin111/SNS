@@ -12,7 +12,6 @@ import axios from "axios";
 import Post from "./JobPost";
 
 import "../../styles/JobSns/JobCardMenu.scss";
-import { ReactComponent as Inbox } from "../../images/inbox.svg";
 import { ReactComponent as Comments } from "../../images/comments.svg";
 import { ReactComponent as Notifications } from "../../images/notifications.svg";
 import { ReactComponent as Bookmark } from "../../images/bookmark.svg";
@@ -147,7 +146,6 @@ function Card(props) {
           <div className="interactions">
             <Notifications className="icon" onClick={likeBt} />
             <Comments className="icon" onClick={changeshow} />
-            <Inbox className="icon" />
           </div>
           <Bookmark className="icon" onClick={save} />
         </div>
