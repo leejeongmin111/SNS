@@ -34,7 +34,7 @@ function Footer() {
   return (
     <div className="footer_container">
       <div className="menu">
-        <img className="icon" src={dmOff} alt="dm" />
+        {/* <img className="icon" src={dmOff} alt="dm" /> */}
         <img className="icon" src={noticeOff} alt="message" />
         <img className="icon" src={homeOff} alt="home" onClick={home_click} />
         <Write_Daily></Write_Daily>
