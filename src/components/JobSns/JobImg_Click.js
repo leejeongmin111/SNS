@@ -63,7 +63,7 @@ function MainImg_Click(props) {
         {/* <Box className="click_box1">
         </Box> */}
         <Box className="click_box2">
-          <JobPost  bd_content={bd_content} bd_id = {bd_id}></JobPost>
+        <JobPost className="img_post_cm" bd_content={bd_content} bd_id = {bd_id} bd_likes={bd_likes}></JobPost>
           <CardMenu></CardMenu>
           {/* 댓글  */}
           <div className="comments">

@@ -225,6 +225,7 @@ function Card(props) {
           image={image}
           bd_seq={bd_seq}
           comments={comments}
+          likedByText={likedByText}
         />
       </Modal>
     </>

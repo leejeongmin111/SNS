@@ -31,6 +31,7 @@ function MainImg_Click(props) {
     image,
     bd_seq,
     comments, 
+    likedByText,
   } = props;
   const [email] = useState(sessionStorage.getItem("email"));
   const [comment, setComment] = useState("");
@@ -61,8 +62,9 @@ function MainImg_Click(props) {
         <img src={image} className="img_click"></img>
         {/* <Box className="click_box1">게시글 내용들</Box> */}
         <Box className="click_box2">
-        <Mainpost  bd_content={bd_content} bd_id = {bd_id}></Mainpost>
+        <Mainpost className="img_post_cm" bd_content={bd_content} bd_id = {bd_id} bd_likes={bd_likes}></Mainpost>
           <CardMenu></CardMenu>
+        
           {/* 댓글  */}
           <div className="comments">
             <br></br>
