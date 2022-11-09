@@ -1,7 +1,11 @@
 import "../../styles/MainSns/MainProfileIcon.scss";
 
 function ProfileIcon(props) {
-  const { iconSize, storyBorder, image } = props;
+  const { iconSize, storyBorder, image, username } = props;
+  function move() {
+    sessionStorage.setItem("userId", username);
+    window.location.href = "/userpage";
+  }
 
   return (
     <div className={storyBorder ? "storyBorder" : ""}>
@@ -10,6 +14,7 @@ function ProfileIcon(props) {
         className={`profileIcon ${iconSize}`}
         src={image}
         alt="profile"
+        onClick={move}
       />
     </div>
   );

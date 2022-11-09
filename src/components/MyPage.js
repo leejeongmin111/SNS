@@ -1,4 +1,4 @@
-import Header from "./MyPage/MyHeader";
+import MYHeader from "./MyPage/MyHeader";
 import Footer from "./MyPage/MyFooter";
 import Profilemy from "./MyPage/MyProfilemy";
 import Sidebar from "./MyPage/MySidebar";
@@ -16,18 +16,9 @@ import TagIcon from "../Icons/TagIcon";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import { useEffect, useState } from "react";
-// import { display } from "@mui/system";
-// import { Hidden } from "@mui/material";
 import axios from "axios";
 import black from "../images/blackImg.jpg";
 
-// const Item = styled(Paper)(({ theme }) => ({
-//   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-//   ...theme.typography.body2,
-//   padding: theme.spacing(2),
-//   textAlign: "center",
-//   color: theme.palette.text.secondary,
-// }));
 function MyPage() {
   const [email] = useState(sessionStorage.getItem("email"));
   const [value, setValue] = React.useState(0);
@@ -54,9 +45,9 @@ function MyPage() {
 
   return (
     <main>
-      <div className="blank"></div>
-      <div className="My_container">
-        <Header />
+      <div className="Myblank"></div>
+      <div className="MyMy_container">
+        <MYHeader />
         <React.Fragment>
           <Container>
             <Box className="Pro_box">
@@ -140,7 +131,7 @@ function MyPage() {
         </React.Fragment>
         <Footer />
       </div>
-      <div className="box">
+      <div className="Mybox">
         <Sidebar />
       </div>
     </main>

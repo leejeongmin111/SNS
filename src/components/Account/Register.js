@@ -16,12 +16,11 @@ export default function Register() {
   const [nick, setNick] = useState("");
   const [rn, setRn] = useState("");
   const [phone, setPhone] = useState("");
-  const [gender, setGender] = useState("");
   const nav = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(email, pw, name, nick, rn, phone, gender, job);
+    console.log(email, pw, name, nick, rn, phone, job);
     await axios
       .post("http://127.0.0.1:3001/register", {
         email: email,
@@ -64,22 +63,37 @@ export default function Register() {
                 type="password"
                 placeholder="Password Check"
                 name="password CK"
-                onChange={(e) => setPw(e.target.value)}
               />
-              <input type="text" placeholder="Name" name="Name" />
-              <input type="text" placeholder="Nick Name" name="NickName" />
+              <input
+                type="text"
+                placeholder="Name"
+                name="Name"
+                onChange={(e) => setName(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Nick Name"
+                name="NickName"
+                onChange={(e) => setNick(e.target.value)}
+              />
               <input
                 type="text"
                 placeholder="주민 등록 번호"
                 name="Resident_Number"
+                onChange={(e) => setRn(e.target.value)}
               />
-              <input type="text" placeholder="Phone Number" name="Phone" />
+              <input
+                type="text"
+                placeholder="Phone Number"
+                name="Phone"
+                onChange={(e) => setPhone(e.target.value)}
+              />
             </div>
           </div>
           <div className="blank_container1"></div>
           <div class="job_container">
             <span>직 업 을 선 택 해 주 세 요</span>
-            <Jobcheckbox />
+            <Jobcheckbox setJob={setJob} />
           </div>
           <div className="blank_container2"></div>
           <div className="btn_container">
@@ -88,12 +102,14 @@ export default function Register() {
         </form>
       </div>
       <div className="sub_container">
-        <div className="return_container">
-          <span>이미 계정이 있으신가요?</span>
-          <div className="return_btn">
-            <button>RETURN</button>
+        <a href="/">
+          <div className="return_container">
+            <span>이미 계정이 있으신가요?</span>
+            <div className="return_btn">
+              <button>RETURN</button>
+            </div>
           </div>
-        </div>
+        </a>
         <div className="blank_container3"></div>
         <div class="image_container">
           <SimpleSlider />

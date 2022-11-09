@@ -12,8 +12,8 @@ body {
     display: grid;
     grid-template-columns: 600px 1fr 600px;
 
-    .blank {
-      background-color: #2146c7;
+    .Mainblank {
+      background-color: #cce5ff;
     }
     .Main_container {
       background-color: #5800ff;
@@ -30,8 +30,8 @@ body {
         align-items: center;
       }
     }
-    .box {
-      background-color: #2146c7;
+    .Mainbox {
+      background-color: #cce5ff;
     }
   }
 }

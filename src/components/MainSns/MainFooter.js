@@ -41,15 +41,6 @@ const style = {
 function Footer() {
   const nav = useNavigate();
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   // 맨 위 페이지로 올라가기
   function home_click() {
     window.scrollTo({
@@ -103,26 +94,26 @@ function Footer() {
             }}
           />
         </div>
-      </div>
 
-      <Popover
-        id={id}
-        open={open_notice}
-        anchorEl={anchorEl_notice}
-        onClose={handleClose_notice}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "center",
-        }}
-        transformOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
-        anchorReference="anchorPosition"
-        anchorPosition={{ top: 900, left: 1600 }}
-      >
-        <Notice></Notice>
-      </Popover>
+        <Popover
+          id={id}
+          open={open_notice}
+          anchorEl={anchorEl_notice}
+          onClose={handleClose_notice}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center",
+          }}
+          transformOrigin={{
+            vertical: "bottom",
+            horizontal: "center",
+          }}
+          anchorReference="anchorPosition"
+          anchorPosition={{ top: 900, left: 1600 }}
+        >
+          <Notice></Notice>
+        </Popover>
+      </div>
     </>
   );
 }

@@ -12,11 +12,11 @@ body {
     display: grid;
     grid-template-columns: 600px 1fr 600px;
 
-    .blank {
-      background-color: $background-skyblue;
+    .userblank {
+      background-color: #cce5ff;
     }
-    .My_container {
-      background-color: $background-blue;
+    .userMy_container {
+      background-color: #5800ff;
       border-right: 2px solid $border-color-grey;
       border-left: 2px solid $border-color-grey;
       grid-template-columns: 1fr;
@@ -40,18 +40,19 @@ body {
             background-color: white;
           }
         }
-        // .Pro_grid {
-        //   // margin: 1px;
-        // }
-        .Pro_imgs {
-          height: 12em;
-          width: 12em;
-          margin-left: 2em;
-          margin-left: 0.3em;
+        .Pro_grid {
+          // margin: 1px;
+
+          .Pro_imgs {
+            height: 12em;
+            width: 12em;
+            margin-left: 2em;
+            margin-left: 0.3em;
+          }
         }
       }
-      .box {
-        background-color: $background-skyblue;
+      .userbox {
+        background-color: #cce5ff;
       }
     }
   }
@@ -60,4 +61,11 @@ body {
   main .container {
     justify-content: center !important;
   }
+}
+.Pro_imgs {
+  width: 90%;
+  height: 90%;
+}
+.My_container {
+  margin-top: 85px;
 }

@@ -6,18 +6,18 @@ import black from "../../images/blackImg.jpg";
 import basic from "../../images/basicprofile.jpg";
 
 function Cards() {
-  const [post, setPost] = useState([]);
+  const [postmain, setPost] = useState([]);
   const [cmts, setCmts] = useState([]);
 
   useEffect(() => {
     axios
       .post("http://127.0.0.1:3001/maincards", {})
       .then((res) => {
-        console.log("메인카드 들어온값 : ", res);
+        //console.log("메인카드 들어온값 : ", res);
         setPost(res.data.post);
         setCmts(res.data.cmts);
         console.log(res.data.post);
-        console.log(post);
+        console.log("maincards post : ", res.data.post[0]);
       })
       .catch((err) => {
         console.log("문제발생123", err);
@@ -25,7 +25,7 @@ function Cards() {
   }, []);
   return (
     <div className="cards">
-      {post.map(function (pos, index) {
+      {postmain.map(function (pos, index) {
         let imgDt;
         let profileDt;
         // 게시글에 번호에 맞는 댓글 구하기

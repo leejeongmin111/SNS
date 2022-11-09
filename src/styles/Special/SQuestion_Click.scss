@@ -1,92 +1,115 @@
+@font-face {
+  font-family: "Lobster-Regular";
+  font-weight: 300;
+  src: url("../../assets/font/Lobster-Regular.ttf") format("woff2"),
+    url("../../assets/font/Lobster-Regular.ttf") format("woff"),
+    url("../../assets/font/Lobster-Regular.ttf") format("truetype");
+}
 
-.SQ_img_main{
-    background-color: blanchedalmond;
-
-    .SQ_left{
-        width: 70%;
-        height: 98%;
-        float:left;
-        margin-top: 30px;
-        margin-left: 30px;
-        .SQ_img_click{
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            float:left;
-            margin-top: 10px;
-            margin-left: 2%;
-            border-style: groove;
-
+.SQ_container {
+  background-color: skyblue;
+  display: inline-flex;
+  .SQ_left {
+    width: 45%;
+    height: 90%;
+    float: left;
+    margin: 5% 2% 0 4%;
+    .SQ_title {
+      border-radius: 20px;
+      background-color: white;
+      width: 100%;
+      height: 100%;
+      .title {
+        width: 100%;
+        height: 15%;
+        border-bottom: 2px solid black;
+        .SQ_img_click {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          float: left;
+          margin-top: 4%;
+          margin-left: 4%;
+          border-style: groove;
+          border: 3px solid rgb(212, 13, 13);
         }
-        .SQ_title{
-            border-radius: 5%;
-            background-color: white;
-            width: 87%;
-            height:13%;
-            margin-left: 6%;
-            margin-top: 3%;
-            border-style: outset;
-            
-
+        .title_text {
+          margin-top: 4%;
+          width: 70%;
+          float: right;
         }
-        .SQ_content{
-            height: 70%;
-            width: 91%;
-            background-color: white;
-            margin-left: 3%;
-            margin-top: 4%;
-            border-radius: 5%;
-            line-height: 80px;
-            text-align: center;        
-            border-style: outset;
-
-            .SQ_icons{
-                margin-top: 48%;
-            }
-        }
-
-    }
-
-    .SQ_Right{
+      }
+      .input_img {
+        height: 55%;
+        width: 100%;
         background-color: white;
-        width: 400px;
-        height: 780px;
-        float: left;
-        margin-top: 65px;
-        border-radius: 5%;
-        line-height: 80px;
-        text-align: center;    
-        border-style: ridge;
-        position: relative;
-
-        
-    
-    .icon_right{
-        z-index: 3;
-        position: absolute;
-        margin-left:180px;
-        margin-top:350px;
-    }
-
-        .comments{
-            height: 80px;
-            
+        text-align: center;
+        border-bottom: 2px solid black;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
+      }
+      .text_con {
+        padding: 5% 5% 0 5%;
+        height: 25%;
+        width: 90%;
+      }
+      .txcon {
+        width: 100%;
+        height: 30%;
+      }
+    }
+  }
 
+  .SQ_Right {
+    width: 45%;
+    height: 90%;
+    float: right;
+    margin: 5% 4% 0 2%;
 
-        .SQ_input_comment{
-            margin-top: 150%;
+    .comment_con {
+      border-radius: 20px;
+      background-color: white;
+      width: 100%;
+      height: 100%;
 
+      .comment_text {
+        font-family: "Lobster-Regular";
+        font-size: 30px;
+        text-align: center;
+        margin-bottom: 5%;
+        padding-top: 5%;
+      }
+      .comments {
+        height: 67%;
+        border-bottom: 2px solid black;
+        border-top: 2px solid black;
+        padding-top: 5%;
+      }
+
+      .SQ_input_comment {
+        padding-top: 5%;
+        height: 10%;
+        width: 100%;
+        .textField {
+          border-radius: 20px;
         }
-        
+        .submit_btn {
+          border: none;
+          background: rgb(57, 69, 235);
+          background: radial-gradient(
+            circle,
+            rgb(142, 165, 214) 0%,
+            rgb(21, 101, 198) 100%
+          );
+          color: white;
+          margin-top: 2%;
+          margin-left: 75%;
+          width: 20%;
+        }
+      }
     }
-
-    .icon_left{
-        z-index: 3;
-        position: absolute;
-        margin-left: 0px;
-        margin-top: 420px;
-
-
-    }
+  }
 }

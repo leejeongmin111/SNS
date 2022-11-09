@@ -69,10 +69,12 @@ export default function Login() {
         <div className="blank_container"></div>
         <div className="Sign_container">
           <div className="Sign_up">
-            <a href="http://127.0.0.1:3001/register">You don't have account?</a>
-            <div className="SingUp_btn">
-              <button>Sign Up</button>
-            </div>
+            <a href="http://127.0.0.1:3001/register">
+              You don't have account?
+              <div className="SingUp_btn">
+                <button>Sign Up</button>
+              </div>
+            </a>
           </div>
         </div>
       </div>

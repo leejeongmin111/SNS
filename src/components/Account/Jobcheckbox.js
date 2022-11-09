@@ -23,7 +23,7 @@ export default function Jobcheckbox(props) {
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
           value={age}
-          onChange={handleChange}
+          onClick={handleChange}
           autoWidth
           label="JOB"
         >

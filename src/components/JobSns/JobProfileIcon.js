@@ -1,27 +1,20 @@
 import "../../styles/JobSns/JobProfileIcon.scss";
 
 function ProfileIcon(props) {
-  const { iconSize, storyBorder, image } = props;
-
-  function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  const { iconSize, storyBorder, image, username } = props;
+  function move() {
+    sessionStorage.setItem("userId", username);
+    window.location.href = "/userpage";
   }
-
-  let randomId = getRandomInt(1, 70);
-
-  let profileImage = image
-    ? image
-    : `https://i.pravatar.cc/150?img=${randomId}`;
 
   return (
     <div className={storyBorder ? "storyBorder" : ""}>
       <img
         width={80}
         className={`profileIcon ${iconSize}`}
-        src={profileImage}
+        src={image}
         alt="profile"
+        onClick={move}
       />
     </div>
   );

@@ -118,9 +118,6 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
     let img = req.file.buffer;
     let email = req.body.emailSend;
     let div = 0;
-    // 프로필 사진 넣기
-    // let sqlText = `update t_member set m_profile = ? where mb_id = '3'`;
-    // conn.query(sqlText, [img], function (err, rows) {
     let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div,img_file) values(?,?,0,0,${div},?)`;
     conn.query(sqlText, [text, email, img], function (err, rows) {
       if (!err) {
@@ -308,12 +305,12 @@ router.post("/jobcards", (req, res) => {
 
 router.post("/comment", (req, res) => {
   console.log("게시글 아이디 : ", req.body.bd_id);
-  console.log("코멘트", req.body.cmt_content);
-  console.log("로그인아이디 : ", req.body.mb_id);
+  console.log("코멘트 : ", req.body.comment);
+  console.log("로그인아이디 : ", req.body.email);
   console.log("게시글 순번 : ", req.body.bd_seq);
   let bd_seq = req.body.bd_seq; // 게시글 번호
-  let cmt_content = req.body.cmt_content; // 댓글 내용
-  let mb_id = req.body.mb_id; // 댓글 작성자
+  let cmt_content = req.body.comment; // 댓글 내용
+  let mb_id = req.body.email; // 댓글 작성자
   let bd_id = req.body.bd_id; // 게시글 작성자
   //div search
   let comment;
@@ -361,6 +358,18 @@ router.post("/comment", (req, res) => {
       console.log("댓글문제 : ", err);
     }
   });
+
+  let sql_content = "select bd_content from t_community where bd_seq = ?";
+  conn.query(sql_content, [bd_seq], (err, content) => {
+    if (content.length > 0) {
+      console.log("bd_content 성공 : ", content);
+      res.send({
+        content: content,
+      });
+    } else {
+      console.log("bd_content에러", err);
+    }
+  });
 });
 
 router.post("/specials", (req, res) => {
@@ -405,9 +414,8 @@ router.post("/mypage", (req, res) => {
 router.post("/followClick", (req, res) => {
   console.log("followClick라우터 시작");
   let email = req.body.email;
-  let sql =
-    "select m.mb_id id,m.m_profile profile from t_member m, t_follow f where m.mb_id = f.follow_id and f.mb_id = ?;";
-  conn.query(sql, [email], (err, rows) => {
+  let sql = `select m.mb_id id,m.m_profile profile from t_member m, t_follow f where m.mb_id = f.follow_id and f.mb_id = ? and m.mb_id != ?;`;
+  conn.query(sql, [email, email], (err, rows) => {
     if (rows.length > 0) {
       console.log("followClick성공");
       res.send({
@@ -422,9 +430,8 @@ router.post("/followClick", (req, res) => {
 router.post("/followingClick", (req, res) => {
   console.log("followClick라우터 시작");
   let email = req.body.email;
-  let sql =
-    "select f.mb_id id,m.m_profile profile from t_member m, t_follow f where m.mb_id = f.follow_id and f.follow_id = ?;";
-  conn.query(sql, [email], (err, rows) => {
+  let sql = `select f.mb_id id,m.m_profile profile from t_member m, t_follow f where m.mb_id = f.follow_id and f.follow_id = ? and f.mb_id != ?;`;
+  conn.query(sql, [email, email], (err, rows) => {
     if (rows.length > 0) {
       console.log("followClick성공");
       res.send({
@@ -442,13 +449,14 @@ router.post("/mypagecnt", (req, res) => {
   let sql = "select count(bd_seq) cnt from t_community where bd_id = ?";
   let sqlMy = "select m_profile from t_member where mb_id = ?";
   let myInfo;
-  let sqlFollow = "select follow_id follow from t_follow where mb_id = ?";
+  let sqlFollow =
+    "select follow_id follow from t_follow where mb_id = ? and follow_id != ?";
   let follow;
   let followCnt;
   let sqlFollowing =
-    "select count(mb_id) cnt from t_follow where follow_id = ?;";
+    "select count(mb_id) cnt from t_follow where follow_id = ? and mb_id != ?;";
   let followingCnt;
-  conn.query(sqlFollow, [email], (err, rows) => {
+  conn.query(sqlFollow, [email, email], (err, rows) => {
     followCnt = rows.length;
     if (!err) {
       console.log("follow성공", rows);
@@ -458,7 +466,7 @@ router.post("/mypagecnt", (req, res) => {
       console.log("follow쪽 문제", err);
     }
   });
-  conn.query(sqlFollowing, [email], (err, rows) => {
+  conn.query(sqlFollowing, [email, email], (err, rows) => {
     if (!err) {
       console.log("following성공", rows);
       followingCnt = rows;
@@ -545,6 +553,23 @@ router.post("/myPage/daily", (req, res) => {
       }
     });
   }
+});
+
+router.post("/userpage", (req, res) => {
+  let id = req.body.id;
+  console.log(id);
+
+  let sql = `select * from t_community where bd_id = '${id}' and bd_div=0 order by bd_time desc`;
+  conn.query(sql, (err, rows) => {
+    if (!err) {
+      console.log("성공");
+      res.send({
+        result: rows,
+      });
+    } else {
+      console.log("실패" + err);
+    }
+  });
 });
 
 router.post("/saveList", (req, res) => {

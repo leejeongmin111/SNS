@@ -39,13 +39,15 @@ function App() {
           <Route path="/" element={<Login></Login>}></Route>
           <Route path="/register" element={<Register></Register>}></Route>
           <Route path="/mainsns" element={<MainSns></MainSns>}></Route>
-          <Route path="/dm" element={<Dm></Dm>}></Route>
           <Route path="/status" element={<Status></Status>}></Route>
           <Route path="/special" element={<Special></Special>}></Route>
           <Route path="/jobsns" element={<JobSns></JobSns>}></Route>
           <Route path="/notice" element={<Notice></Notice>}></Route>
           <Route path="/userpage" element={<UserPage></UserPage>}></Route>
-          <Route path="/change" element={<Account_Change></Account_Change>}></Route>
+          <Route
+            path="/change"
+            element={<Account_Change></Account_Change>}
+          ></Route>
         </Routes>
       </Provider>
     </>

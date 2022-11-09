@@ -8,18 +8,17 @@
     url("../../assets/font/Lobster-Regular.ttf") format("truetype");
 }
 
-.sidebar_container {
+.Msidebar_container {
   position: fixed;
   right: 8%;
   top: 10%;
-  border: 1px solid transparent;
-  .textcontainer {
+
+  .Mtextcontainer {
     width: 384px;
     padding: 0.45em 0 0.4em 0;
     height: 50px;
-    background-color: $background-white;
 
-    .FriendsText {
+    .MFriendsText {
       justify-content: center;
       margin-top: 0.1em;
       font-family: "Lobster-Regular";
@@ -29,9 +28,11 @@
   }
 
   .Mainsidebar {
+    border: 2px solid #5800ff;
+    border-radius: 10px;
     background-color: $background-white;
     width: 320px;
-    padding: 0 2em 2em 2em;
+    padding: 2em;
   }
 }
 

@@ -12,12 +12,12 @@ import Modal from "@mui/material/Modal";
 import MainImg_Click from "./MainImg_Click";
 import axios from "axios";
 import Post from "./MainPost";
+import { useNavigate } from "react-router-dom";
 
 import "../../styles/MainSns/MainCardMenu.scss";
 import { ReactComponent as Comments } from "../../images/comments.svg";
 import { ReactComponent as Notifications } from "../../images/notifications.svg";
 import { ReactComponent as Bookmark } from "../../images/bookmark.svg";
-import { SettingsPhoneTwoTone } from "@mui/icons-material";
 
 function Card(props) {
   const {
@@ -39,6 +39,7 @@ function Card(props) {
   const [show, setShow] = useState({ display: "none" });
   const [num, setNum] = useState(0);
   const [fold, setFold] = useState("보기");
+
   function changeshow() {
     if (num == 0) {
       setNum(num + 1);
@@ -106,7 +107,7 @@ function Card(props) {
         bd_seq: bd_seq, // 글 순번
         bd_id: bd_id, // 글 작성자
         mb_id: email, // 댓글 작성자
-        cmt_content: cmt, // 댓글 내용
+        comment: cmt, // 댓글 내용
       })
       .then((res) => {
         console.log("아이디값 가져와짐", res);
@@ -116,6 +117,7 @@ function Card(props) {
         console.log("문제발생", err.response.data);
       });
   }
+
   return (
     <>
       <div className="card">
@@ -128,14 +130,13 @@ function Card(props) {
           />
           <CardButton className="cardButton" />
         </header>
+
         <img
           className="cardImage"
           src={image}
           alt="card content"
           onClick={handleOpen}
         />
-
-        {/* 게시글 내용 */}
 
         {/* 아이콘 들 */}
         <div className="cardMenu">
@@ -163,21 +164,19 @@ function Card(props) {
         {/* 댓글  */}
         <div className="comments" style={show}>
           <br></br>
-          {main_cmt &&
-            main_cmt.map((cm) => {
-              if (cm.bd_seq == bd_seq) {
-                return (
-                  <Comment
-                    key={cm.cmt_seq}
-                    bd_id={cm.bd_id}
-                    accountName={cm.mb_id}
-                    comment={cm.cmt_content}
-                  />
-                );
-              }
-            })}
+          {main_cmt.map((cm) => {
+            if (cm.bd_seq == bd_seq) {
+              return (
+                <Comment
+                  key={cm.cmt_seq}
+                  bd_id={cm.bd_id}
+                  accountName={cm.mb_id}
+                  comment={cm.cmt_content}
+                />
+              );
+            }
+          })}
         </div>
-
         <div className="addComment" style={show}>
           <Box
             className="input_comment"
@@ -208,11 +207,14 @@ function Card(props) {
         aria-describedby="modal-modal-description"
       >
         <MainImg_Click
-          accountName={bd_id}
+          bd_content={bd_content} // 글내용
+          bd_id={bd_id} // 글 작성자
+          bd_likes={bd_likes} // 좋아요수
+          bd_cnt={bd_cnt} // 댓글 갯수
+          main_cmts={main_cmt} //댓글 객체
           storyBorder={storyBorder}
           image={image}
           bd_seq={bd_seq}
-          main_cmts={main_cmt}
           comments={comments}
         />
       </Modal>
