@@ -285,15 +285,15 @@ router.post("/jobcards", (req, res) => {
   conn.query(sql_cmt, (err, rows) => {
     if (!err) {
       cmts = rows;
-      console.log("cmts값 넣기");
-      console.log("댓글들 ", cmts);
+      // console.log("cmts값 넣기");
+      // console.log("댓글들 ", cmts);
     }
   });
 
   conn.query(sql, (err, rows) => {
     if (!err) {
-      console.log("아이디값 정민정민", rows[0]);
-      console.log("게시글값 정민정민", rows);
+      // console.log("아이디값 정민정민", rows[0]);
+      // console.log("게시글값 정민정민", rows);
       res.send({
         email: rows[0].bd_id,
         // content: rows[0].bd_content,
@@ -310,12 +310,14 @@ router.post("/jobcards", (req, res) => {
 router.post("/comment", (req, res) => {
   console.log("게시글 아이디 : ", req.body.bd_id);
   console.log("코멘트 : ", req.body.comment);
-  console.log("로그인아이디 : ", req.body.email);
+  console.log("로그인아이디 : ", req.body.mb_id);
   console.log("게시글 순번 : ", req.body.bd_seq);
   let bd_seq = req.body.bd_seq; // 게시글 번호
   let cmt_content = req.body.comment; // 댓글 내용
-  let mb_id = req.body.email; // 댓글 작성자
+  let mb_id = req.body.mb_id; // 댓글 작성자
   let bd_id = req.body.bd_id; // 게시글 작성자
+  console.log("mb_id = ", mb_id);
+  console.log("bd_id = ", bd_id);
   //div search
   let comment;
   let div;
