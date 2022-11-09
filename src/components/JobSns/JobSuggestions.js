@@ -36,12 +36,6 @@ function Suggestions() {
           imgDt = "data:image/png;base64," + encode;
           console.log(imgDt);
           console.log("메인서제션 원래있는 값 들어감", info.m_profile.data);
-          //   console.log("sug 안 들어감");
-          // } else {
-          //   window.Buffer = window.Buffer || require("buffer").Buffer;
-          //   let encode = window.Buffer.from(info.m_profile).toString("base64");
-          //   imgDt = "data:image/*;base64," + encode;
-          //   console.log("sug들어감");
         }
         return (
           <Profile
@@ -49,7 +43,7 @@ function Suggestions() {
             captionSize="small"
             urlText="Follow"
             storyBorder={true}
-            username={info.mb_id}
+            username={info.mb_nick}
             image={imgDt}
           />
         );

@@ -21,6 +21,7 @@ import { ReactComponent as Bookmark } from "../../images/bookmark.svg";
 function Card(props) {
   const {
     bd_id, // 글 작성자
+    mb_nick,
     bd_content, // 글 내용
     bd_seq, // 글 번호
     bd_likes, // 좋아요 갯수
@@ -33,11 +34,14 @@ function Card(props) {
   } = props;
 
   const [email] = useState(sessionStorage.getItem("email"));
+  const [nick] = useState(sessionStorage.getItem("nick"));
 
   //댓글 숨기기
   const [show, setShow] = useState({ display: "none" });
   const [num, setNum] = useState(0);
   const [fold, setFold] = useState("보기");
+  const [likeId, setLikeId] = useState("");
+  const [likeNick, setLikeNick] = useState("");
 
   function changeshow() {
     if (num == 0) {
@@ -77,9 +81,14 @@ function Card(props) {
       })
       .then((res) => {
         if (res.data.result == "성공") {
+          console.log("좋아요 완료 : " + res.data.nick);
           alert("좋아요 완료");
+          setLikeId(res.data.id);
+          setLikeNick(res.data.nick);
         } else {
           alert("좋아요 삭제");
+          setLikeId(email);
+          setLikeNick(nick);
         }
       })
       .catch((err) => {
@@ -123,7 +132,7 @@ function Card(props) {
           <Profile
             iconSize="medium"
             storyBorder={storyBorder}
-            username={bd_id}
+            username={mb_nick}
             image={profile}
           />
           <CardButton className="cardButton" />
@@ -148,7 +157,7 @@ function Card(props) {
         <div className="likedBy">
           <Profile iconSize="small" hideAccountName={true} image={profile} />
           <span>
-            Liked by <strong>{email}</strong> and{" "}
+            Liked by <strong>{likeNick}</strong> and{" "}
             <strong>{bd_likes} others</strong>
           </span>
         </div>
