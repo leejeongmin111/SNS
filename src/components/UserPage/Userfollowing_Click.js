@@ -3,13 +3,13 @@ import photo from "../../images/basicprofile.jpg";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function Userfollow_Click() {
+function Userfollowing_Click() {
   const [Info, setInfo] = useState([]);
   const [userId] = useState(sessionStorage.getItem("userId"));
 
   useEffect(() => {
     axios
-      .post("http://127.0.0.1:3001/followClick", {
+      .post("http://127.0.0.1:3001/followingClick", {
         email: userId,
       })
       .then((res) => {
@@ -37,4 +37,4 @@ function Userfollow_Click() {
     </>
   );
 }
-export default Userfollow_Click;
+export default Userfollowing_Click;

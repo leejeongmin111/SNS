@@ -53,13 +53,32 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/changeProfile", upload.single("img"), (req, res) => {
-  let nick = req.body.nick;
+  let nick = req.body.NickName;
   let password = req.body.password;
-  let img = req.file.buffer;
-  let id = req.body.id;
-
-  let cnt = ["nick", "pw", "img"];
-  let userInfo = [nick, password, img];
+  let id = req.body.email;
+  if (req.file == undefined) {
+  } else {
+    let img = req.file.buffer;
+    let sqldelete = `update t_member set m_profile = null where mb_id = '${id}' `;
+    // let sqlImg = `update t_member set m_profile = ? where mb_id = ${id}`;
+    let sqlImg = `update t_member set m_profile = ? where mb_id = '${id}'`;
+    conn.query(sqldelete, (err) => {
+      if (!err) {
+        console.log("이미지 삭제 완료");
+      } else {
+        console.log("이미지 삭제 실패" + err);
+      }
+    });
+    conn.query(sqlImg, [img], (err, rows) => {
+      if (!err) {
+        console.log("프로필사진 수정 성공");
+      } else {
+        console.log("프로필사진 수정 실패..." + err);
+      }
+    });
+  }
+  let cnt = ["mb_nick", "mb_pw"];
+  let userInfo = [nick, password];
   for (let i = 0; i < userInfo.length; i++) {
     if (userInfo[i] == "") {
       cnt.splice(i, 1);
@@ -67,26 +86,23 @@ router.post("/changeProfile", upload.single("img"), (req, res) => {
   }
   userInfo = userInfo.filter(function (data) {
     return data != "";
-    if (rows.length > 0) {
-      console.log("성공");
-      res.send({
-        result: rows,
-      });
-    }
   });
   cnt = cnt.filter(function (data) {
     return data != "";
   });
   for (let i = 0; i < userInfo.length; i++) {
-    let sql = `update t_member set ${cnt[i]} = '${userInfo[i]}' where id = '${id}';`;
+    let sql = `update t_member set ${cnt[i]} = '${userInfo[i]}' where mb_id = '${id}'`;
     conn.query(sql, function (err, rows) {
       if (!err) {
-        console.log("회원정보 수정 성공!");
+        console.log("회원정보 수정 성공!", cnt[i], "를", userInfo[i]);
       } else {
         console.log("회원정보 수정 실패!" + err);
+        console.log(cnt[i]);
+        console.log(userInfo[i]);
       }
     });
   }
+  res.redirect("/");
 });
 
 router.post("/write_daily", upload.single("img"), (req, res) => {
@@ -373,9 +389,8 @@ router.post("/mypage", (req, res) => {
 router.post("/followClick", (req, res) => {
   console.log("followClick라우터 시작");
   let email = req.body.email;
-  let sql =
-    "select m.mb_id id,m.m_profile profile from t_member m, t_follow f where m.mb_id = f.follow_id and f.mb_id = ?;";
-  conn.query(sql, [email], (err, rows) => {
+  let sql = `select m.mb_id id,m.m_profile profile from t_member m, t_follow f where m.mb_id = f.follow_id and f.mb_id = ? and m.mb_id != ?;`;
+  conn.query(sql, [email, email], (err, rows) => {
     if (rows.length > 0) {
       console.log("followClick성공");
       res.send({
@@ -390,9 +405,8 @@ router.post("/followClick", (req, res) => {
 router.post("/followingClick", (req, res) => {
   console.log("followClick라우터 시작");
   let email = req.body.email;
-  let sql =
-    "select f.mb_id id,m.m_profile profile from t_member m, t_follow f where m.mb_id = f.follow_id and f.follow_id = ?;";
-  conn.query(sql, [email], (err, rows) => {
+  let sql = `select f.mb_id id,m.m_profile profile from t_member m, t_follow f where m.mb_id = f.follow_id and f.follow_id = ? and f.mb_id != ?;`;
+  conn.query(sql, [email, email], (err, rows) => {
     if (rows.length > 0) {
       console.log("followClick성공");
       res.send({
@@ -410,13 +424,14 @@ router.post("/mypagecnt", (req, res) => {
   let sql = "select count(bd_seq) cnt from t_community where bd_id = ?";
   let sqlMy = "select m_profile from t_member where mb_id = ?";
   let myInfo;
-  let sqlFollow = "select follow_id follow from t_follow where mb_id = ?";
+  let sqlFollow =
+    "select follow_id follow from t_follow where mb_id = ? and follow_id != ?";
   let follow;
   let followCnt;
   let sqlFollowing =
-    "select count(mb_id) cnt from t_follow where follow_id = ?;";
+    "select count(mb_id) cnt from t_follow where follow_id = ? and mb_id != ?;";
   let followingCnt;
-  conn.query(sqlFollow, [email], (err, rows) => {
+  conn.query(sqlFollow, [email, email], (err, rows) => {
     followCnt = rows.length;
     if (!err) {
       console.log("follow성공", rows);
@@ -426,7 +441,7 @@ router.post("/mypagecnt", (req, res) => {
       console.log("follow쪽 문제", err);
     }
   });
-  conn.query(sqlFollowing, [email], (err, rows) => {
+  conn.query(sqlFollowing, [email, email], (err, rows) => {
     if (!err) {
       console.log("following성공", rows);
       followingCnt = rows;
@@ -488,7 +503,6 @@ router.post("/myPage/daily", (req, res) => {
   let div = req.body.div;
   let ch = req.body.ch;
   console.log(id);
-  console.log("여기????");
   if (ch == 2) {
     let sql = `select a.img_file img_file, a.bd_seq bd_seq, b.save_time st from t_community a, m_save b where a.bd_seq = b.bd_seq and b.mb_id = '${id}' order by st desc`;
     conn.query(sql, (err, rows) => {
@@ -514,6 +528,23 @@ router.post("/myPage/daily", (req, res) => {
       }
     });
   }
+});
+
+router.post("/userpage", (req, res) => {
+  let id = req.body.id;
+  console.log(id);
+
+  let sql = `select * from t_community where bd_id = '${id}' and bd_div=0 order by bd_time desc`;
+  conn.query(sql, (err, rows) => {
+    if (!err) {
+      console.log("성공");
+      res.send({
+        result: rows,
+      });
+    } else {
+      console.log("실패" + err);
+    }
+  });
 });
 
 router.post("/saveList", (req, res) => {

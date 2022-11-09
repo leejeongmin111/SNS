@@ -3,7 +3,9 @@ import Profile from "./JobProfile";
 import { ReactComponent as CardButton } from "../../images/cardButton.svg";
 import Comment from "./JobComment";
 import { useState } from "react";
+
 import * as React from "react";
+import { Form } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
@@ -23,18 +25,20 @@ function Card(props) {
     bd_seq, // 글 번호
     bd_likes, // 좋아요 갯수
     main_cmt, // 댓글 객체
+    bd_cnt,
     image,
     comments,
     storyBorder,
-    likedByText,
     profile,
   } = props;
 
-  // 로그인되있는 아이디
   const [email] = useState(sessionStorage.getItem("email"));
+
+  //댓글 숨기기
   const [show, setShow] = useState({ display: "none" });
   const [num, setNum] = useState(0);
   const [fold, setFold] = useState("보기");
+
   function changeshow() {
     if (num == 0) {
       setNum(num + 1);
@@ -61,11 +65,8 @@ function Card(props) {
         }
       })
       .catch((err) => {
-        console.log("게시물 저장 안됨!!!" + err);
+        console.log("스크랩 안됨!!!" + err);
       });
-  }
-  function handleSubmit(e) {
-    e.preventDefault();
   }
   // 좋아요 버rrrrrr튼
   function likeBt() {
@@ -85,15 +86,12 @@ function Card(props) {
         console.log("좋아요 안됨!!!" + err);
       });
   }
-
   // 모달 설정
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  {
-    /*  댓글 입력 창 */
-  }
+  // 댓글 입력 창
   const [cmt, setCmt] = useState("");
   function chCmt(e) {
     setCmt(e.target.value);
@@ -101,16 +99,13 @@ function Card(props) {
 
   // 댓글 입력
   function handleSubmit(e) {
-    console.log(bd_seq);
-    console.log(bd_id);
-    console.log(email);
-    //console.log(temp_cm);
+    // e.preventDefault();
     axios
       .post("http://127.0.0.1:3001/comment", {
         bd_seq: bd_seq, // 글 순번
         bd_id: bd_id, // 글 작성자
         mb_id: email, // 댓글 작성자
-        cmt_content: cmt, // 댓글 내용
+        comment: cmt, // 댓글 내용
       })
       .then((res) => {
         console.log("아이디값 가져와짐", res);
@@ -120,6 +115,7 @@ function Card(props) {
         console.log("문제발생", err.response.data);
       });
   }
+
   return (
     <>
       <div className="card">
@@ -132,6 +128,7 @@ function Card(props) {
           />
           <CardButton className="cardButton" />
         </header>
+
         <img
           className="cardImage"
           src={image}
@@ -139,9 +136,7 @@ function Card(props) {
           onClick={handleOpen}
         />
 
-        {/* 게시글 내용 */}
-
-        {/* 아이콘들 */}
+        {/* 아이콘 들 */}
         <div className="cardMenu">
           <div className="interactions">
             <Notifications className="icon" onClick={likeBt} />
@@ -153,15 +148,14 @@ function Card(props) {
         <div className="likedBy">
           <Profile iconSize="small" hideAccountName={true} image={profile} />
           <span>
-            Liked by <strong>{likedByText}</strong> and{" "}
+            Liked by <strong>{email}</strong> and{" "}
             <strong>{bd_likes} others</strong>
           </span>
         </div>
         <Post bd_id={bd_id} bd_content={bd_content}></Post>
         <div className="timePosted">
           <a onClick={changeshow} className="cmt_fold">
-            {/* {comments.length}개의 댓글 {fold} */}
-            {cmt.length}개의 댓글 {fold}
+            {bd_cnt}개의 댓글 {fold}
           </a>
         </div>
 
@@ -170,7 +164,6 @@ function Card(props) {
           <br></br>
           {main_cmt &&
             main_cmt.map((cm) => {
-              console.log(cm.cmt_content);
               if (cm.bd_seq == bd_seq) {
                 return (
                   <Comment

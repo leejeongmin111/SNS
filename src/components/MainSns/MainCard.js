@@ -12,6 +12,7 @@ import Modal from "@mui/material/Modal";
 import MainImg_Click from "./MainImg_Click";
 import axios from "axios";
 import Post from "./MainPost";
+import { useNavigate } from "react-router-dom";
 
 import "../../styles/MainSns/MainCardMenu.scss";
 import { ReactComponent as Comments } from "../../images/comments.svg";
@@ -38,6 +39,7 @@ function Card(props) {
   const [show, setShow] = useState({ display: "none" });
   const [num, setNum] = useState(0);
   const [fold, setFold] = useState("보기");
+
   function changeshow() {
     if (num == 0) {
       setNum(num + 1);
@@ -114,6 +116,7 @@ function Card(props) {
         console.log("문제발생", err.response.data);
       });
   }
+
   return (
     <>
       <div className="card">
@@ -126,6 +129,7 @@ function Card(props) {
           />
           <CardButton className="cardButton" />
         </header>
+
         <img
           className="cardImage"
           src={image}
