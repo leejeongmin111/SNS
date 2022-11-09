@@ -15,10 +15,9 @@ import { FunctionsOutlined } from "@mui/icons-material";
 import Right from "@mui/icons-material/KeyboardArrowRight";
 import Left from "@mui/icons-material/KeyboardArrowLeft";
 
-import "../../styles/JobSns/JobCardMenu.scss";
-import { ReactComponent as Comments } from "../../images/comments.svg";
-import { ReactComponent as Notifications } from "../../images/notifications.svg";
-import { ReactComponent as Bookmark } from "../../images/bookmark.svg";
+// 에러 이미지 모음
+
+import javaerr from "../../images/ErrorImage/javaErr1.png";
 
 // 모달 창 크기 설정
 const style = {
@@ -26,7 +25,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 1600,
+  width: 1000,
   height: 900,
   bgcolor: "background.paper",
   border: "1px solid #000",
@@ -98,74 +97,69 @@ function SQuestion_Click(props) {
   }
   return (
     <>
-      <Box className="SQ_img_main" sx={style}>
+      <Box className="SQ_container" sx={style}>
         <Box className="SQ_left">
-          <img src={program} className="SQ_img_click"></img>
           <Box className="SQ_title">
-            <h1 align="center">{bd_title}</h1>
-          </Box>
-          <Box className="SQ_content">
-            {bd_content}
-            <Box className="SQ_icons">
-              <div className="cardMenu">
-                <div className="interactions">
-                  <Notifications className="icon" />
-                  <Comments className="icon" />
-                </div>
-                <Bookmark className="icon" />
+            <div className="title">
+              <img src={program} className="SQ_img_click"></img>
+              <div className="title_text">
+                <h1 align="left">{bd_title}</h1>
               </div>
-            </Box>
+            </div>
+            <div className="input_img">
+              <img src={javaerr} />
+            </div>
+            <div className="text_con">
+              <span>
+                이 2가지 오류때문에 미칠 것 같습니다.. 강의자료에 있는 강사님
+                소스를 그대로 붙여봐도 똑같습니다.. 대체 뭐가 문제일까요??
+              </span>
+            </div>
           </Box>
         </Box>
-
-        {/* <Left className="icon_left" onClick={cmt_minus}></Left> */}
         <Box className="SQ_Right">
-          {/* <Right className="icon_right" onClick={cmt_plus}></Right> */}
-          <Box className="comments">
-            {/* { cmts && <Comment
-                                    key={cmts[cmt_num].cmt_seq}
-                                    bd_seq = {cmts[cmt_num].bd_seq}         // 원글 번호
-                                    content ={cmts[cmt_num].cmt_content}    // 댓글 내용
-                                    accountName ={email}         // 댓글 작성자
-                                    bd_id ={cmts[cmt_num].bd_id}           //원글 작성자
-                                />} */}
-
-            {cmts.map(function (cmt) {
-              if (bd_seq == cmt.bd_seq) {
-                return (
-                  <Comment
-                    key={cmt.cmt_seq}
-                    bd_seq={cmt.bd_seq} // 원글 번호
-                    content={cmt.cmt_content} // 댓글 내용
-                    accountName={email} // 댓글 작성자
-                    bd_id={cmt.bd_id} //원글 작성자
-                  />
-                );
-              }
-            })}
-          </Box>
-          <Box
-            className="SQ_input_comment"
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1, marginTop: 0 }}
-          >
-            {/* 댓글 입력 창 */}
-            <TextField
-              multiline
-              rows={2}
-              defaultValue=""
-              name="comment"
-              onChange={chCmt}
-              sx={{ width: 250 }}
-            />
-            <Button
-              type="submit"
-              onClick={() => (window.location.href = "/special")}
+          <Box className="comment_con">
+            <div className="comment_text">Comments</div>
+            <Box className="comments">
+              {cmts.map(function (cmt) {
+                if (bd_seq == cmt.bd_seq) {
+                  return (
+                    <Comment
+                      key={cmt.cmt_seq}
+                      bd_seq={cmt.bd_seq} // 원글 번호
+                      content={cmt.cmt_content} // 댓글 내용
+                      accountName={email} // 댓글 작성자
+                      bd_id={cmt.bd_id} //원글 작성자
+                    />
+                  );
+                }
+              })}
+            </Box>
+            <Box
+              className="SQ_input_comment"
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1, marginTop: 0 }}
             >
-              post
-            </Button>
+              {/* 댓글 입력 창 */}
+              <TextField
+                className="textField"
+                multiline
+                rows={2}
+                defaultValue=""
+                name="comment"
+                onChange={chCmt}
+                sx={{ width: 400, paddingLeft: 2.5 }}
+              />
+              <Button
+                className="submit_btn"
+                type="submit"
+                onClick={() => (window.location.href = "/special")}
+              >
+                post
+              </Button>
+            </Box>
           </Box>
         </Box>
       </Box>

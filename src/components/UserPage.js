@@ -3,6 +3,7 @@ import Footer from "./UserPage/UserFooter";
 import Profilemy from "./UserPage/UserProfilemy";
 import Sidebar from "./UserPage/UserSidebar";
 import "../styles/UserPage.scss";
+
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -85,7 +86,14 @@ function MyPage() {
                     imgDt = "data:image/png;base64," + encode;
                   }
                   return (
-                    <Grid item xs={2} sm={4} md={4} key={index}>
+                    <Grid
+                      item
+                      xs={2}
+                      sm={4}
+                      md={4}
+                      key={index}
+                      className="img_grid_box"
+                    >
                       <item>
                         <img src={imgDt} className="Pro_imgs"></img>
                       </item>

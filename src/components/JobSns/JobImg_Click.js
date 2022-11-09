@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import CardMenu from "./JobCardMenu";
 import { useState } from "react";
 import axios from "axios";
+import JobPost from "./JobPost"
 
 // box 스타일 설정
 const style = {
@@ -12,7 +13,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 1200,
+  width: 800,
   height: 800,
   bgcolor: "background.paper",
   border: "1px solid #000",
@@ -20,7 +21,17 @@ const style = {
 };
 
 function MainImg_Click(props) {
-  const { image, main_cmts, bd_seq } = props;
+    const {   
+        bd_content,   // 글내용
+        bd_id,        // 글 작성자
+        bd_likes,     // 좋아요수 
+        bd_cnt,       // 댓글 갯수
+        main_cmts,    //댓글 객체
+        storyBorder,
+        image,
+        bd_seq,
+        comments, 
+      } = props;
   const [email] = useState(sessionStorage.getItem("email"));
   const [comment, setComment] = useState("");
 
@@ -30,8 +41,10 @@ function MainImg_Click(props) {
     console.log("댓글js파일");
     axios
       .post("http://127.0.0.1:3001/comment", {
-        email: email,
-        comment: comment,
+        cmt_content: comment,
+        bd_seq:bd_seq,
+        mb_id:email,
+        bd_id:bd_id,
       })
       .then((res) => {
         console.log("mainImg_click : " + res.data);
@@ -44,10 +57,13 @@ function MainImg_Click(props) {
 
   return (
     <>
+    
       <Box sx={style} className="img_click_main">
         <img src={image} className="img_click"></img>
-        <Box className="click_box1">게시글 내용들</Box>
+        {/* <Box className="click_box1">
+        </Box> */}
         <Box className="click_box2">
+        <JobPost className="img_post_cm" bd_content={bd_content} bd_id = {bd_id} bd_likes={bd_likes}></JobPost>
           <CardMenu></CardMenu>
           {/* 댓글  */}
           <div className="comments">
@@ -84,7 +100,7 @@ function MainImg_Click(props) {
               className="img_click_input"
               onChange={(e) => setComment(e.target.value)}
             ></input>
-            <Button type="submit">post</Button>
+            <Button type="submit" className="img_post">post</Button>
           </Box>
         </Box>
       </Box>

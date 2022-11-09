@@ -3,7 +3,6 @@ import coin from "../images/coin.png";
 import sandclock from "../images/sandclock.png";
 import Header from "./Status/StatusHeader";
 import Footer from "./Status/StatusFooter";
-import Sidebar from "./Status/StatusSidebar";
 import SideHeader from "./Status/StatusSideHeader";
 import React, { PureComponent } from "react";
 import {
@@ -172,7 +171,6 @@ function Status() {
       </div>
       <div className="status_box">
         <SideHeader />
-        <Sidebar />
       </div>
     </main>
   );

@@ -29,6 +29,8 @@
   .cardImage {
     width: 100%;
     display: block;
+    border-bottom: 2px solid rgb(168, 160, 152);
+    border-top: 2px solid rgb(168, 160, 152);
   }
 
   .likedBy {
@@ -52,6 +54,13 @@
     padding-bottom: 1em;
     color: $font-color-secondary;
     border-bottom: 1px solid $border-color-grey-secondary;
+    .cmt_fold {
+      font-size: 15px;
+      margin-bottom: 5em;
+      margin-left: 35em;
+      color: black;
+      font-weight: bold;
+    }
   }
 
   .addComment {

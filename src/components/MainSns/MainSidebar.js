@@ -32,9 +32,9 @@ function Sidebar() {
   }
 
   return (
-    <div className="sidebar_container">
-      <div className="textcontainer">
-        <span className="FriendsText">Your Friends</span>
+    <div className="Msidebar_container">
+      <div className="Mtextcontainer">
+        <span className="MFriendsText">Follow Suggestions</span>
       </div>
       <div className="Mainsidebar">
         <Profile

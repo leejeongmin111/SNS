@@ -1,4 +1,4 @@
-import "../../styles/MainSns/MainSidebar.scss";
+import "../../styles/MyPage/MySidebar.scss";
 import Profile from "./MyProfile";
 import Suggestions from "./MySuggestions";
 import { useState, useEffect } from "react";
@@ -32,11 +32,11 @@ function Sidebar() {
   }
 
   return (
-    <div className="sidebar_container">
-      <div className="textcontainer">
-        <span className="FriendsText">Your Friends</span>
+    <div className="Mysidebar_container">
+      <div className="Mytextcontainer">
+        <span className="MyFriendsText">Follow Suggestions</span>
       </div>
-      <div className="Mainsidebar">
+      <div className="MyMainsidebar">
         <Profile
           username={email}
           urlText="Switch"

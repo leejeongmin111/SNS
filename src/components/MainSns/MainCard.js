@@ -163,21 +163,19 @@ function Card(props) {
         {/* 댓글  */}
         <div className="comments" style={show}>
           <br></br>
-          {main_cmt &&
-            main_cmt.map((cm) => {
-              if (cm.bd_seq == bd_seq) {
-                return (
-                  <Comment
-                    key={cm.cmt_seq}
-                    bd_id={cm.bd_id}
-                    accountName={cm.mb_id}
-                    comment={cm.cmt_content}
-                  />
-                );
-              }
-            })}
+          {main_cmt.map((cm) => {
+            if (cm.bd_seq == bd_seq) {
+              return (
+                <Comment
+                  key={cm.cmt_seq}
+                  bd_id={cm.bd_id}
+                  accountName={cm.mb_id}
+                  comment={cm.cmt_content}
+                />
+              );
+            }
+          })}
         </div>
-
         <div className="addComment" style={show}>
           <Box
             className="input_comment"
@@ -208,10 +206,14 @@ function Card(props) {
         aria-describedby="modal-modal-description"
       >
         <MainImg_Click
+          bd_content={bd_content} // 글내용
+          bd_id={bd_id} // 글 작성자
+          bd_likes={bd_likes} // 좋아요수
+          bd_cnt={bd_cnt} // 댓글 갯수
+          main_cmts={main_cmt} //댓글 객체
           storyBorder={storyBorder}
           image={image}
           bd_seq={bd_seq}
-          main_cmts={main_cmt}
           comments={comments}
         />
       </Modal>

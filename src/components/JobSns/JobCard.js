@@ -25,8 +25,8 @@ function Card(props) {
     bd_seq, // 글 번호
     bd_likes, // 좋아요 갯수
     main_cmt, // 댓글 객체
-    bd_cnt,
     image,
+    bd_cnt, // 댓글 갯수
     comments,
     storyBorder,
     profile,
@@ -207,15 +207,19 @@ function Card(props) {
         aria-describedby="modal-modal-description"
       >
         <JobImg_Click
+          bd_content={bd_content} // 글내용
+          bd_id={bd_id} // 글 작성자
+          bd_likes={bd_likes} // 좋아요수
+          bd_cnt={bd_cnt} // 댓글 갯수
+          main_cmts={main_cmt} //댓글 객체
           storyBorder={storyBorder}
           image={image}
           bd_seq={bd_seq}
-          main_cmts={main_cmt}
           comments={comments}
+          // likedByText={likedByText}
         />
       </Modal>
     </>
   );
 }
-
 export default Card;
