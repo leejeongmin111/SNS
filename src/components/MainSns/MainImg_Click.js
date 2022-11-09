@@ -20,7 +20,7 @@ const style = {
 };
 
 function MainImg_Click(props) {
-  const { image, main_cmts, bd_seq } = props;
+  const { image, main_cmts, bd_seq, bd_id } = props;
   const [email] = useState(sessionStorage.getItem("email"));
   const [comment, setComment] = useState("");
 
@@ -31,6 +31,8 @@ function MainImg_Click(props) {
     axios
       .post("http://127.0.0.1:3001/comment", {
         email: email,
+        bd_seq: bd_seq,
+        bd_id: bd_id,
         comment: comment,
       })
       .then((res) => {

@@ -18,7 +18,6 @@ import { ReactComponent as Inbox } from "../../images/inbox.svg";
 import { ReactComponent as Comments } from "../../images/comments.svg";
 import { ReactComponent as Notifications } from "../../images/notifications.svg";
 import { ReactComponent as Bookmark } from "../../images/bookmark.svg";
-import { SettingsPhoneTwoTone } from "@mui/icons-material";
 
 function Card(props) {
   const {
@@ -106,7 +105,7 @@ function Card(props) {
         bd_seq: bd_seq, // 글 순번
         bd_id: bd_id, // 글 작성자
         mb_id: email, // 댓글 작성자
-        cmt_content: cmt, // 댓글 내용
+        comment: cmt, // 댓글 내용
       })
       .then((res) => {
         console.log("아이디값 가져와짐", res);
@@ -134,8 +133,6 @@ function Card(props) {
           alt="card content"
           onClick={handleOpen}
         />
-
-        {/* 게시글 내용 */}
 
         {/* 아이콘 들 */}
         <div className="cardMenu">
@@ -209,7 +206,6 @@ function Card(props) {
         aria-describedby="modal-modal-description"
       >
         <MainImg_Click
-          accountName={bd_id}
           storyBorder={storyBorder}
           image={image}
           bd_seq={bd_seq}

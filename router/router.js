@@ -102,9 +102,6 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
     let img = req.file.buffer;
     let email = req.body.emailSend;
     let div = 0;
-    // 프로필 사진 넣기
-    // let sqlText = `update t_member set m_profile = ? where mb_id = '123@123'`;
-    // conn.query(sqlText, [img], function (err, rows) {
     let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div,img_file) values(?,?,0,0,${div},?)`;
     conn.query(sqlText, [text, email, img], function (err, rows) {
       if (!err) {
@@ -292,12 +289,12 @@ router.post("/jobcards", (req, res) => {
 
 router.post("/comment", (req, res) => {
   console.log("게시글 아이디 : ", req.body.bd_id);
-  console.log("코멘트", req.body.cmt_content);
-  console.log("로그인아이디 : ", req.body.mb_id);
+  console.log("코멘트 : ", req.body.comment);
+  console.log("로그인아이디 : ", req.body.email);
   console.log("게시글 순번 : ", req.body.bd_seq);
   let bd_seq = req.body.bd_seq; // 게시글 번호
-  let cmt_content = req.body.cmt_content; // 댓글 내용
-  let mb_id = req.body.mb_id; // 댓글 작성자
+  let cmt_content = req.body.comment; // 댓글 내용
+  let mb_id = req.body.email; // 댓글 작성자
   let bd_id = req.body.bd_id; // 게시글 작성자
 
   let sql_cnt = "update t_community set bd_cnt = bd_cnt +1 where bd_seq =?";
@@ -318,6 +315,18 @@ router.post("/comment", (req, res) => {
       });
     } else {
       console.log("댓글문제 : ", err);
+    }
+  });
+
+  let sql_content = "select bd_content from t_community where bd_seq = ?";
+  conn.query(sql_content, [bd_seq], (err, content) => {
+    if (content.length > 0) {
+      console.log("bd_content 성공 : ", content);
+      res.send({
+        content: content,
+      });
+    } else {
+      console.log("bd_content에러", err);
     }
   });
 });

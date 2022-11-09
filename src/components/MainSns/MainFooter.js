@@ -7,9 +7,9 @@ import homeOff from "../../images/footer_icon/home_off.png";
 import postOff from "../../images/footer_icon/write_off.png";
 import userOff from "../../images/footer_icon/user_off.png";
 
-import Popover from '@mui/material/Popover';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import Notice from "../Notice";
 import { useState } from "react";
 
@@ -26,29 +26,20 @@ import noticeOn from "../../images/footer_icon/bell_on.png";
 
 // 모달 크기 설정
 const style = {
-  position: 'absolute',
-  top: '70%',
-  left: '45%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "70%",
+  left: "45%",
+  transform: "translate(-50%, -50%)",
   width: 100,
   height: 200,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
 
 function Footer() {
   const nav = useNavigate();
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   // 맨 위 페이지로 올라가기
   function home_click() {
@@ -58,7 +49,7 @@ function Footer() {
     });
   }
 
-  const [notice_icon,setNotice_icon]= useState(noticeOff)
+  const [notice_icon, setNotice_icon] = useState(noticeOff);
 
   const [anchorEl_notice, setAnchorEl_notice] = React.useState(null);
   const handleClick_notice = (event) => {
@@ -70,49 +61,52 @@ function Footer() {
     setAnchorEl_notice(null);
   };
   const open_notice = Boolean(anchorEl_notice);
-  const id = open_notice ? 'simple-popover' : undefined;
-  
+  const id = open_notice ? "simple-popover" : undefined;
+
   return (
     <>
-    <div className="footer_container">
-      <div className="menu">
-        <img className="icon" src={dmOff} alt="dm" />
-        <img className="icon" src={notice_icon} alt="message" onClick={handleClick_notice} sx={{color:blue}}/>
-        <img className="icon" src={homeOff} alt="home" onClick={home_click} />
-        <Write_Daily className="icon_daily"></Write_Daily>
-        {/* <img className="icon" src={postOff} alt="post" /> */}
-        <img
-          className="icon"
-          src={userOff}
-          alt="mypage"
-          onClick={() => {
-            nav("/mypage");
-          }}
-        />
+      <div className="footer_container">
+        <div className="menu">
+          <img className="icon" src={dmOff} alt="dm" />
+          <img
+            className="icon"
+            src={notice_icon}
+            alt="message"
+            onClick={handleClick_notice}
+            sx={{ color: blue }}
+          />
+          <img className="icon" src={homeOff} alt="home" onClick={home_click} />
+          <Write_Daily className="icon_daily"></Write_Daily>
+          {/* <img className="icon" src={postOff} alt="post" /> */}
+          <img
+            className="icon"
+            src={userOff}
+            alt="mypage"
+            onClick={() => {
+              nav("/mypage");
+            }}
+          />
+        </div>
       </div>
-    </div>
 
-   
-        <Popover
-            id={id}
-            open={open_notice}
-            anchorEl={anchorEl_notice}
-            onClose={handleClose_notice}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'center',
-            }}
-            transformOrigin={{
-              vertical: 'bottom',
-              horizontal: 'center',
-            }}
-            anchorReference="anchorPosition"
-            anchorPosition={{ top: 900, left: 1600 }}
-          >
-            <Notice></Notice>
-          </Popover>
-
-
+      <Popover
+        id={id}
+        open={open_notice}
+        anchorEl={anchorEl_notice}
+        onClose={handleClose_notice}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        anchorReference="anchorPosition"
+        anchorPosition={{ top: 900, left: 1600 }}
+      >
+        <Notice></Notice>
+      </Popover>
     </>
   );
 }

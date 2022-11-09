@@ -1,7 +1,6 @@
 import "../../styles/JobSns/JobCard.scss";
 import Profile from "./JobProfile";
 import { ReactComponent as CardButton } from "../../images/cardButton.svg";
-import CardMenu from "./JobCardMenu";
 import Comment from "./JobComment";
 import { useState } from "react";
 import * as React from "react";
@@ -154,7 +153,7 @@ function Card(props) {
         </div>
 
         <div className="likedBy">
-          <Profile iconSize="small" hideAccountName={true} />
+          <Profile iconSize="small" hideAccountName={true} image={profile} />
           <span>
             Liked by <strong>{likedByText}</strong> and{" "}
             <strong>{bd_likes} others</strong>
