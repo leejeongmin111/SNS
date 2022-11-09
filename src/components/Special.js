@@ -3,7 +3,7 @@ import SPHeader from "./Special/SHeader";
 import Footer from "./Special/SFooter";
 import QuestionHeader from "./Special/SQuestionHeader";
 import Question from "./Special/SQuestionCards";
-
+import SideHeader from "./Special/SSideHeader";
 function Special() {
   return (
     <main>
@@ -18,7 +18,9 @@ function Special() {
           <Footer />
         </div>
       </div>
-      <div className="SP_box"></div>
+      <div className="SP_box">
+        <SideHeader />
+      </div>
     </main>
   );
 }
