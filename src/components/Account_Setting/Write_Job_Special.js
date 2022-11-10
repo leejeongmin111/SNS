@@ -66,6 +66,9 @@ export default function Write_Special() {
         email: email,
       })
       .then((res) => {
+        if (res.data == "인증필요") {
+          alert("인증이 필요합니다.");
+        }
         window.location.href = "/special";
       })
       .catch((err) => {

@@ -28,15 +28,13 @@ export default function JobSetting() {
       <div className="Flex">
         <div class="flex_container">
           <form
-            action="http://127.0.0.1:3001/changeProfile"
+            action="http://127.0.0.1:3001/check"
             method="post"
             encType="multipart/form-data"
           >
             <div class="sign_container">
               <img className="logo" src={logo} alt="Jobsns logo" />
               <div class="input_container">
-              
-                
                 <div>
                   <IconButton
                     aria-label="upload picture"
@@ -54,7 +52,7 @@ export default function JobSetting() {
                   </IconButton>
                   <label for="file">IT</label>
                 </div>
-                <div className="change_box_job" >
+                <div className="change_box_job">
                   <img src={imgSrc} className="change_img_job"></img>
                 </div>
               </div>
@@ -64,6 +62,7 @@ export default function JobSetting() {
             <div className="btn_container">
               <button onClick={handleSubmit}>It_Submit</button>
             </div>
+            <input type={"hidden"} name="emailSend" value={email}></input>
           </form>
         </div>
         <div className="sub_container">

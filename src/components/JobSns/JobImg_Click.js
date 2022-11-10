@@ -33,10 +33,8 @@ function MainImg_Click(props) {
     comments,
   } = props;
   const [email] = useState(sessionStorage.getItem("email"));
-  const [nick] = useState(sessionStorage.getItem("nick"));
+
   const [comment, setComment] = useState("");
-  const [likeId, setLikeId] = useState("");
-  const [likeNick, setLikeNick] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();

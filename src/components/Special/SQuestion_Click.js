@@ -63,6 +63,7 @@ function SQuestion_Click(props) {
   });
   //댓글 제출
   const [email] = useState(sessionStorage.getItem("email"));
+  const [nick] = useState(sessionStorage.getItem("nick"));
   const [cmt, setCmt] = useState("");
   function chCmt(e) {
     setCmt(e.target.value);
@@ -85,7 +86,7 @@ function SQuestion_Click(props) {
         bd_seq: bd_seq, // 글 순번
         bd_id: bd_id, // 글 작성자
         mb_id: email, // 댓글 작성자
-        cmt_content: cmt, // 댓글 내용
+        comment: cmt, // 댓글 내용
       })
       .then((res) => {
         console.log("아이디값 가져와짐", res);
@@ -110,10 +111,7 @@ function SQuestion_Click(props) {
               <img src={javaerr} />
             </div>
             <div className="text_con">
-              <span>
-                이 2가지 오류때문에 미칠 것 같습니다.. 강의자료에 있는 강사님
-                소스를 그대로 붙여봐도 똑같습니다.. 대체 뭐가 문제일까요??
-              </span>
+              <span>{bd_content}</span>
             </div>
           </Box>
         </Box>
@@ -128,7 +126,7 @@ function SQuestion_Click(props) {
                       key={cmt.cmt_seq}
                       bd_seq={cmt.bd_seq} // 원글 번호
                       content={cmt.cmt_content} // 댓글 내용
-                      accountName={email} // 댓글 작성자
+                      accountName={cmt.mb_id} // 댓글 작성자
                       bd_id={cmt.bd_id} //원글 작성자
                     />
                   );

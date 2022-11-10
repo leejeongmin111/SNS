@@ -104,7 +104,7 @@ router.post("/changeProfile", upload.single("img"), (req, res) => {
       }
     });
   }
-  res.redirect("/");
+  res.redirect("http://127.0.0.1:3001/mypage");
 });
 
 router.post("/write_daily", upload.single("img"), (req, res) => {
@@ -136,12 +136,12 @@ router.post("/write_daily", upload.single("img"), (req, res) => {
 });
 
 router.post("/suggestion", (req, res) => {
-  console.log("suggestion이 진짜 문제인가??");
+  console.log("suggestion");
 
   let sql =
-    "select mb_id,mb_nick,m_profile from t_member where mb_id not in (select follow_id from t_follow) limit 5";
+    "select mb_id,mb_nick,m_profile from t_member where mb_id not in (select follow_id from t_follow ) order by rand() limit 5";
   conn.query(sql, (err, info) => {
-    if (info.length > 0) {
+    if (!err) {
       console.log("suggestion 정보 가져와짐");
       res.send({
         dbInfo: info,
@@ -174,27 +174,40 @@ router.post("/write_job", upload.single("img"), (req, res) => {
   console.log("text 가져온값 : ", req.body);
   console.log("img 가져온값 : ", req.file);
   console.log("email 가져온 값 : ", req.body.emailSend);
+  let check;
+  let email = req.body.emailSend;
+  let sqlcheck = `select t_job from t_member where mb_id='${email}'`;
+  conn.query(sqlcheck, (err, rows) => {
+    if (!err) {
+      check = rows[0].t_job;
+      console.log(check);
+      if (check == 1) {
+        if (req.body.text === "" && req.file === undefined) {
+          console.log("뭐좀 써봐");
+          res.redirect("http://localhost:3000/jobsns");
+        } else {
+          let text = req.body.text;
+          let img = req.file.buffer;
+          let div = 1;
 
-  if (req.body.text === "" && req.file === undefined) {
-    console.log("뭐좀 써봐");
-    res.redirect("http://localhost:3000/jobsns");
-  } else {
-    let text = req.body.text;
-    let img = req.file.buffer;
-    let email = req.body.emailSend;
-    let div = 1;
-
-    let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div,img_file) values(?,?,0,0,${div},?)`;
-    conn.query(sqlText, [text, email, img], function (err, rows) {
-      if (!err) {
-        console.log("데이터 넣기 성공");
+          let sqlText = `insert into t_community(bd_content,bd_id,bd_cnt,bd_likes,bd_div,img_file) values(?,?,0,0,${div},?)`;
+          conn.query(sqlText, [text, email, img], function (err, rows) {
+            if (!err) {
+              console.log("데이터 넣기 성공");
+              res.redirect("http://localhost:3000/jobsns");
+            } else {
+              console.log("text집어넣기 문제", err);
+              throw err;
+            }
+          });
+        }
         res.redirect("http://localhost:3000/jobsns");
       } else {
-        console.log("text집어넣기 문제", err);
-        throw err;
+        console.log("인증필요");
+        res.redirect("http://localhost:3000/jobsns");
       }
-    });
-  }
+    }
+  });
 });
 router.post("/write_special", (req, res) => {
   console.log("텍스트 : ", req.body.text);
@@ -207,19 +220,30 @@ router.post("/write_special", (req, res) => {
   let email = req.body.email;
   let kind = req.body.kind;
   let div = 2;
-
-  let sqlText = `insert into t_community(bd_type,bd_title,bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,?,?,0,0,${div})`;
-  conn.query(sqlText, [kind, title, text, email], function (err, rows) {
+  let sqlcheck = `select t_job from t_member where mb_id=${email}`;
+  conn.query(sqlcheck, (err, rows) => {
     if (!err) {
-      console.log("코딩문답 잘들어갔어요");
-      res.json({
-        suc: "잘들어갔어요",
-      });
-    } else {
-      console.log("text집어넣기 문제", err);
-      throw err;
+      check = rows[0];
     }
   });
+  if (check == 1) {
+    let sqlText = `insert into t_community(bd_type,bd_title,bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,?,?,0,0,${div})`;
+    conn.query(sqlText, [kind, title, text, email], function (err, rows) {
+      if (!err) {
+        console.log("코딩문답 잘들어갔어요");
+        res.json({
+          suc: "잘들어갔어요",
+        });
+      } else {
+        console.log("text집어넣기 문제", err);
+        throw err;
+      }
+    });
+  } else {
+    res.json({
+      suc: "인증필요",
+    });
+  }
 });
 
 router.post("/mainsns", (req, res) => {
@@ -733,6 +757,20 @@ router.post("/notice", (req, res) => {
       });
     } else {
       console.log("알림데이터 못꺼내먹음..." + err);
+    }
+  });
+});
+
+router.post("/check", upload.single("img"), (req, res) => {
+  let img = req.file.buffer;
+  let id = req.body.emailSend;
+  let sql = `insert into m_check values(?,1,1,?)`;
+  conn.query(sql, [id, img], (err, rows) => {
+    if (!err) {
+      console.log("인증확인중");
+      res.redirect("http://localhost:3000/mypage");
+    } else {
+      console.log("인증정보 불일치" + err);
     }
   });
 });
