@@ -18,7 +18,7 @@ function Header() {
         />
       </div>
       <div className="container_Search">
-        <div className="searchBox">
+        <div className="searchBox" style={{ backgroundColor: "#5800ff" }}>
           <input
             className="searchInput"
             type="text"
