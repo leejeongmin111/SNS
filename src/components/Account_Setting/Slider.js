@@ -21,7 +21,7 @@ export default class SimpleSlider extends Component {
       slidesToShow: 1,
       slidesToScroll: 1,
       autoplay: true, // 자동 재생
-      autoplaySpeed: 4000,
+      autoplaySpeed: 2000,
     };
     return (
       <div>

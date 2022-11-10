@@ -2,6 +2,7 @@
 
 .footer_container {
   position: fixed;
+  right: 37.5em;
   bottom: 0;
   width: 100%;
   padding: 0.25em 0 0.25em 0;
@@ -18,9 +19,8 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-    
 
-    #basic-button .icon{
+    #basic-button .icon {
       margin-bottom: 7px;
     }
 
@@ -32,13 +32,13 @@
         cursor: pointer;
       }
     }
-    #icon_notice_special{
+    #icon_notice_special {
       margin-right: 30px;
     }
-    #icon_home_special{
+    #icon_home_special {
       margin-right: 30px;
     }
-    #icon_my_special{
+    #icon_my_special {
       margin-left: 30px;
     }
   }

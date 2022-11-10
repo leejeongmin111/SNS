@@ -3,6 +3,7 @@
 .footer_container {
   position: fixed;
   bottom: 0;
+  right: 37.3em;
   width: 100%;
   padding: 0.25em 0 0.25em 0;
   display: flex;
@@ -18,8 +19,8 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-    
-    #basic-button .icon{
+
+    #basic-button .icon {
       margin-bottom: 7px;
     }
 
@@ -31,13 +32,13 @@
         cursor: pointer;
       }
     }
-    #icon_notice_status{
+    #icon_notice_status {
       margin-right: 30px;
     }
-    #icon_home_status{
+    #icon_home_status {
       margin-right: 30px;
     }
-    #icon_my_status{
+    #icon_my_status {
       margin-left: 30px;
     }
   }
