@@ -111,7 +111,7 @@ function SQuestion_Click(props) {
               <img src={javaerr} />
             </div>
             <div className="text_con">
-              <span>{bd_content}</span>
+              <span className="ttx">{bd_content}</span>
             </div>
           </Box>
         </Box>
