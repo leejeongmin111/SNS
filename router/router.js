@@ -139,7 +139,8 @@ router.post("/suggestion", (req, res) => {
   console.log("suggestion");
 
   let sql =
-    "select mb_id,mb_nick,m_profile from t_member where mb_id not in (select follow_id from t_follow ) order by rand() limit 5";
+    // "select mb_id,mb_nick,m_profile from t_member where mb_id not in (select follow_id from t_follow ) order by rand() limit 5";
+    `select mb_id,mb_nick,m_profile from t_member where mb_id = 'daOn@naver.com' union (select mb_id,mb_nick,m_profile from t_member where mb_id not in (select follow_id from t_follow ) order by rand() limit 4)`;
   conn.query(sql, (err, info) => {
     if (!err) {
       console.log("suggestion 정보 가져와짐");
