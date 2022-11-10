@@ -220,30 +220,31 @@ router.post("/write_special", (req, res) => {
   let email = req.body.email;
   let kind = req.body.kind;
   let div = 2;
-  let sqlcheck = `select t_job from t_member where mb_id=${email}`;
+  let sqlcheck = `select t_job from t_member where mb_id='${email}'`;
   conn.query(sqlcheck, (err, rows) => {
     if (!err) {
-      check = rows[0];
-    }
-  });
-  if (check == 1) {
-    let sqlText = `insert into t_community(bd_type,bd_title,bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,?,?,0,0,${div})`;
-    conn.query(sqlText, [kind, title, text, email], function (err, rows) {
-      if (!err) {
-        console.log("코딩문답 잘들어갔어요");
-        res.json({
-          suc: "잘들어갔어요",
+      check = rows[0].t_job;
+      console.log(check);
+      if (check == 0) {
+        let sqlText = `insert into t_community(bd_type,bd_title,bd_content,bd_id,bd_cnt,bd_likes,bd_div) values(?,?,?,?,0,0,${div})`;
+        conn.query(sqlText, [kind, title, text, email], function (err, rows) {
+          if (!err) {
+            console.log("코딩문답 잘들어갔어요");
+            res.json({
+              suc: "잘들어갔어요",
+            });
+          } else {
+            console.log("text집어넣기 문제", err);
+            throw err;
+          }
         });
       } else {
-        console.log("text집어넣기 문제", err);
-        throw err;
+        res.json({
+          suc: "인증필요",
+        });
       }
-    });
-  } else {
-    res.json({
-      suc: "인증필요",
-    });
-  }
+    }
+  });
 });
 
 router.post("/mainsns", (req, res) => {

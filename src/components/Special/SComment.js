@@ -7,13 +7,10 @@ function Comment(props) {
     accountName, // 댓글 작성자
     comment,
   } = props;
-  const Item = ({ text }) => {
-    return <p>{text}</p>;
-  };
+
   return (
     <div className="commentContainer">
       <div className="accountName">{accountName}</div>
-      {<Item text={"\n"}></Item>}
       <div className="comment">{content}</div>
     </div>
   );
