@@ -7,6 +7,13 @@
     url("../../assets/font/Lobster-Regular.ttf") format("woff"),
     url("../../assets/font/Lobster-Regular.ttf") format("truetype");
 }
+@font-face {
+  font-family: "Jua-Regularr";
+  font-weight: 300;
+  src: url("../../assets/font/Jua-Regular.ttf") format("woff2"),
+    url("../../assets/font/Jua-Regular.ttf") format("woff"),
+    url("../../assets/font/Jua-Regular.ttf") format("truetype");
+}
 
 .profile {
   display: flex;
@@ -20,17 +27,6 @@
     margin-left: 1em;
     min-width: 180px;
 
-    .accountName {
-      font-family: "Lobster-Regular";
-      font-size: 17px;
-      margin-bottom: 5px;
-
-      &:hover {
-        cursor: pointer;
-        text-decoration: underline;
-      }
-    }
-
     .caption {
       color: $font-color-secondary;
 
@@ -43,5 +39,15 @@
   a {
     text-align: right;
     width: 100%;
+  }
+}
+.accountName {
+  font-family: "Jua-Regularr";
+  font-size: 17px;
+  margin-top: 5px;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
   }
 }

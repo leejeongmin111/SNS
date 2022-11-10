@@ -1,5 +1,13 @@
 @import "../_variables";
 
+@font-face {
+  font-family: "Jua-Regularr";
+  font-weight: 300;
+  src: url("../../assets/font/Jua-Regular.ttf") format("woff2"),
+    url("../../assets/font/Jua-Regular.ttf") format("woff"),
+    url("../../assets/font/Jua-Regular.ttf") format("truetype");
+}
+
 .Card_container {
   padding: 10% 4% 0 2%;
   .Card_image {
@@ -30,8 +38,9 @@
     color: black;
     line-height: 100px;
     text-align: center;
-    background: #ffe9a0;
-    font-size: 20px;
+    background: #d6e4e5;
+    font-size: 25px;
     border-radius: 20px;
+    font-family: "Jua-Regularr";
   }
 }
