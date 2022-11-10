@@ -15,6 +15,7 @@ export default function Account_Change() {
   const [pw, setPw] = useState(""); // 비번
   const [nick, setNick] = useState(""); // 닉네임
   const [imgSrc, setimgSrc] = useState(""); // 이미지
+  const [email1] = useState(sessionStorage.getItem("email"));
   const nav = useNavigate();
   const srcChange = (e) => {
     setimgSrc(URL.createObjectURL(e.target.files[0]));
@@ -42,6 +43,7 @@ export default function Account_Change() {
                   name="email"
                   onChange={(e) => setEmail(e.target.value)}
                 />
+                <input type={"hidden"} name="emailSend" value={email1}></input>
                 <input
                   type="password"
                   placeholder="Password"

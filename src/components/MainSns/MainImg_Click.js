@@ -71,7 +71,7 @@ function MainImg_Click(props) {
             bd_id={bd_id}
             bd_likes={bd_likes}
           ></Mainpost>
-          <CardMenu></CardMenu>
+          <CardMenu bd_seq={bd_seq} />
 
           {/* 댓글  */}
           <div className="comments">

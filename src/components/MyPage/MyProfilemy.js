@@ -19,6 +19,7 @@ import Myfollowing_Click from "./Myfollowing_Click";
 
 function PositionedMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [email] = useState(sessionStorage.getItem("email"));
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -26,14 +27,20 @@ function PositionedMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const deletePr = () => {
-    axios.post("/deleteProfile").then((window.location.href = "/jobsns"));
+  const DeletePr = () => {
+    axios
+      .post("http://127.0.0.1:3001/deleteProfile", {
+        id: email,
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const logout = () => {
     window.location.href = "/";
   };
-  const nav= useNavigate();
-  
+  const nav = useNavigate();
+
   return (
     <div className="set_container">
       <Button
@@ -60,9 +67,21 @@ function PositionedMenu() {
           horizontal: "left",
         }}
       >
-        <MenuItem onClick={deletePr}>회원 탈퇴</MenuItem>
-        <MenuItem onClick={()=>{nav('/change')}}>회원 수정</MenuItem>  
-        <MenuItem onClick={()=>{nav('/jobsetting')}}>직업 인증</MenuItem>
+        <MenuItem onClick={DeletePr}>회원 탈퇴</MenuItem>
+        <MenuItem
+          onClick={() => {
+            nav("/change");
+          }}
+        >
+          회원 수정
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            nav("/jobsetting");
+          }}
+        >
+          직업 인증
+        </MenuItem>
         <MenuItem onClick={logout}>로그 아웃</MenuItem>
       </Menu>
     </div>
