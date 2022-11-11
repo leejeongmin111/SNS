@@ -140,7 +140,7 @@ router.post("/suggestion", (req, res) => {
 
   let sql =
     // "select mb_id,mb_nick,m_profile from t_member where mb_id not in (select follow_id from t_follow ) order by rand() limit 5";
-    `select mb_id,mb_nick,m_profile from t_member where mb_id = 'daOn@naver.com' union (select mb_id,mb_nick,m_profile from t_member where mb_id not in (select follow_id from t_follow ) order by rand() limit 4)`;
+    `select mb_id,mb_nick,m_profile from t_member where mb_id = 'daOn@naver.com' union (select mb_id,mb_nick,m_profile from t_member where mb_id not in (select follow_id from t_follow ) and  mb_id != 'daOn@naver.com' and mb_id != 'kichul@naver.com' order by rand() limit 6)`;
   conn.query(sql, (err, info) => {
     if (!err) {
       console.log("suggestion 정보 가져와짐");
@@ -282,7 +282,7 @@ router.post("/follow", (req, res) => {
 
 router.post("/maincards", (req, res) => {
   let sql =
-    "select c.bd_seq,c.bd_id,c.bd_content,c.bd_likes,c.bd_cnt,m.mb_id,m.m_profile,c.img_file from t_community c, t_member m where c.bd_id = m.mb_id and bd_div=0 order by bd_time desc"; // 모든 정보 배열 형태로 보내기
+    "select c.bd_seq,c.bd_id,c.bd_content,c.bd_likes,c.bd_cnt,m.mb_id,m.m_profile,c.img_file from t_community c, t_member m where c.bd_id = m.mb_id and bd_div=0 order by bd_time desc limit 10"; // 모든 정보 배열 형태로 보내기
   let sql_cmt = "select * from t_comment";
   let cmts;
   conn.query(sql_cmt, (err, rows) => {
