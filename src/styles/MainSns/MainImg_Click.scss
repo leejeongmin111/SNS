@@ -1,0 +1,58 @@
+
+.img_click_main{
+    //background-color: aliceblue;
+    background-color: white;
+    background-color: #F5F1F1;
+
+    .img_click{
+        width: 100%;
+        height: 65%;
+        //border : 1px solid grey;
+        border-bottom: 0.5px solid grey;
+
+        
+    }
+    // .click_box1{
+    //     width: 47%;
+    //     height: 30%;
+    //     border: '1px dashed grey';
+    //     float:right;
+        
+    // }
+    .click_box2{
+        width: 100%;
+        height: 28%;
+        overflow:auto;
+        margin-top: 1px;
+        float:left;
+       // background-color: white;
+        background-color: #F5F1F1;
+        
+        .span_like_cm{
+            margin-left: 15px;
+        }
+        .comments{
+            height: 6%;
+
+        }
+        .input_comment{
+            position: fixed;
+            margin-top: 130px;
+            margin-left: 12px;
+            width: 100%;
+            
+
+
+        }
+        // .img_click_input{
+        //     margin-left: 15px;
+        //     
+        //     margin-bottom: 10px;
+
+        // }
+        //     .img_post{
+        //         position: fixed;
+        //         margin-left: 60%;
+        //     }
+}
+}

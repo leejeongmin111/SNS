@@ -1,0 +1,58 @@
+@import "../_variables";
+
+.My_profile {
+  align-items: center;
+  font-size: 1em;
+  margin-bottom: 0.85em;
+
+  .My_img {
+    float: left;
+  }
+
+  .My_textContainer {
+    flex-direction: column;
+    display: flex;
+    margin-left: 8em;
+    margin-bottom: 3em;
+
+    .My_accountName {
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    .My_box {
+      margin-top: 20px;
+      margin-left: 15px;
+
+      color: darkgray;
+      font-size: 12px;
+
+      .set_container {
+        width: 100px;
+        height: 20px;
+        .SetIcon {
+          width: 25%;
+          height: 25%;
+        }
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+
+  .caption {
+    color: $font-color-secondary;
+
+    &.small {
+      font-size: 0.8em;
+    }
+  }
+}
+
+a {
+  text-align: right;
+  width: 100%;
+}

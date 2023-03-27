@@ -1,0 +1,114 @@
+@import "../_variables";
+
+.usercontainer_Box {
+  position: fixed;
+  background-color: white;
+  box-shadow: 0 5px 15px rgba($color: #000000, $alpha: 1);
+  border-radius: 13px;
+  display: flex;
+  justify-content: space-between;
+  width: 35.75%;
+  z-index: 10;
+  height: 60px;
+  top: 1.5%;
+  left: 32.15%;
+
+  .usercontainer_Logo {
+    width: 180px;
+    height: 40px;
+    padding: 1em 0 0 1em;
+
+    .logo {
+      display: flex;
+      width: 100%;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  .usercontainer_Search {
+    width: 15px;
+    .usersearchBox {
+      position: absolute;
+      transform: translate(-100%, 20%);
+      background: #5800ff;
+      height: 35px;
+      border-radius: 40px;
+      padding: 5px;
+      &:hover > {
+        .usersearchInput {
+          width: 250px;
+          padding: 0 6px;
+        }
+
+        .usersearchButton {
+          background: white;
+          color: #2f3640;
+        }
+      }
+
+      .usersearchButton {
+        color: white;
+        float: right;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s;
+
+        .usersearchIcon {
+          display: flex;
+          width: 100%;
+        }
+      }
+
+      .usersearchInput {
+        border: none;
+        background: none;
+        outline: none;
+        float: left;
+        padding: 0;
+        color: white;
+        font-size: 16px;
+        transition: 0.4s;
+        line-height: 40px;
+        width: 0px;
+      }
+      input::placeholder {
+        color: white;
+      }
+    }
+  }
+}
+@media screen and (max-width: 620px) {
+  .usersearchBox:hover > .usersearchInput {
+    width: 150px;
+    padding: 0 6px;
+  }
+}
+
+// @media only screen and (max-width: 860px) {
+//   .container {
+//     margin: 0;
+//     justify-content: center;
+//     .container_Logo {
+//       display: flex;
+//       width: 120px;
+//       height: 30px;
+//       .logo {
+//         width: 100px;
+//       }
+//     }
+//     .container_Special {
+//       width: 120px;
+//       height: 30px;
+//       .Icon {
+//         width: 100px;
+//       }
+//     }
+//   }
+// }

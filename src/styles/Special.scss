@@ -1,0 +1,46 @@
+@import "./_variables";
+
+body {
+  background-color: $background-white;
+  font-family: $font;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  min-width: fit-content;
+
+  main {
+    display: grid;
+    grid-template-columns: 600px 1fr 600px;
+
+    .SP_blank {
+      background-color: #fffde3;
+    }
+    .Special_container {
+      background-color: #eb1d36;
+      border-right: 2px solid $border-color-grey;
+      border-left: 2px solid $border-color-grey;
+      grid-template-columns: 1fr;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      left: 0;
+      .container_QnA {
+        padding: 13.5% 0 0 1.5%;
+        width: 100%;
+        align-items: center;
+        .container_main {
+          padding: 0 0 0 0.5%;
+        }
+      }
+    }
+    .SP_box {
+      background-color: #fffde3;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  main .container {
+    justify-content: center !important;
+  }
+}

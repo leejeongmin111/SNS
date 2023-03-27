@@ -1,0 +1,31 @@
+@import "../_variables";
+
+@font-face {
+  font-family: "NanumPenScript-Regular";
+  font-weight: 300;
+  src: url("../../assets/font/NanumPenScript-Regular.ttf") format("woff2"),
+    url("../../assets/font/NanumPenScript-Regular.ttf") format("woff"),
+    url("../../assets/font/NanumPenScript-Regular.ttf") format("truetype");
+}
+
+.Post_Container {
+  display: flex;
+  padding-left: 1.5em;
+  font-size: 0.75em;
+  margin-bottom: 0.4em;
+  align-items: center;
+}
+.img_content {
+  font-size: 25px;
+  margin-left: 10px;
+}
+.img_likes {
+  float: right;
+  margin-right: 50px;
+  font-weight: 50;
+  font-size: 12px;
+}
+.img_content {
+  font-family: "NanumPenScript-Regular";
+  font-size: 30px;
+}

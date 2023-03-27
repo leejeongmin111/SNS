@@ -1,0 +1,53 @@
+@import "../_variables";
+
+@font-face {
+  font-family: "Lobster-Regular";
+  font-weight: 300;
+  src: url("../../assets/font/Lobster-Regular.ttf") format("woff2"),
+    url("../../assets/font/Lobster-Regular.ttf") format("woff"),
+    url("../../assets/font/Lobster-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Jua-Regularr";
+  font-weight: 300;
+  src: url("../../assets/font/Jua-Regular.ttf") format("woff2"),
+    url("../../assets/font/Jua-Regular.ttf") format("woff"),
+    url("../../assets/font/Jua-Regular.ttf") format("truetype");
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  font-size: 0.8em;
+  margin-bottom: 0.85em;
+
+  .textContainer {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1em;
+    min-width: 180px;
+
+    .caption {
+      color: $font-color-secondary;
+
+      &.small {
+        font-size: 0.8em;
+      }
+    }
+  }
+
+  a {
+    text-align: right;
+    width: 100%;
+  }
+}
+.accountName {
+  font-family: "Jua-Regularr";
+  font-size: 17px;
+  margin-top: 5px;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}

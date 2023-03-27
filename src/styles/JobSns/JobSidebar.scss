@@ -1,0 +1,43 @@
+@import "../_variables";
+
+@font-face {
+  font-family: "Lobster-Regular";
+  font-weight: 300;
+  src: url("../../assets/font/Lobster-Regular.ttf") format("woff2"),
+    url("../../assets/font/Lobster-Regular.ttf") format("woff"),
+    url("../../assets/font/Lobster-Regular.ttf") format("truetype");
+}
+
+.Jsidebar_container {
+  position: fixed;
+  right: 8%;
+  top: 9.5%;
+
+  .Jtextcontainer {
+    width: 384px;
+    padding: 0.45em 0 0.4em 0;
+    height: 50px;
+
+    .JFriendsText {
+      justify-content: center;
+      margin-top: 0.1em;
+      font-family: "Lobster-Regular";
+      font-size: 30px;
+      display: flex;
+    }
+  }
+
+  .JMainsidebar {
+    border: 2px solid #eb1d36;
+    border-radius: 10px;
+    background-color: $background-white;
+    width: 320px;
+    padding: 2em;
+  }
+}
+
+// @media only screen and (max-width: 1024px) {
+//   .sidebar {
+//     display: none;
+//   }
+// }

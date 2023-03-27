@@ -1,0 +1,27 @@
+@import "../variables";
+
+@font-face {
+  font-family: "Lobster-Regular";
+  font-weight: 300;
+  src: url("../../assets/font/Lobster-Regular.ttf") format("woff2"),
+    url("../../assets/font/Lobster-Regular.ttf") format("woff"),
+    url("../../assets/font/Lobster-Regular.ttf") format("truetype");
+}
+
+.container_header {
+  height: 80px;
+  width: 97.5%;
+  background-color: $background-white;
+  border: 1px solid $border-color-grey;
+  border-radius: 10px;
+  .container_text {
+    height: 50%;
+    width: 100%;
+    text-align: center;
+    .header_text {
+      margin: 3%;
+      font-family: "Lobster-Regular";
+      font-size: 30px;
+    }
+  }
+}

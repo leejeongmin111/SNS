@@ -1,0 +1,32 @@
+@import "../_variables";
+
+.Dm_main {
+  // background-color: $background-white;
+  border-bottom: 2px solid $border-color-grey;
+  border-right: 2px solid $border-color-grey;
+  border-left: 2px solid $border-color-grey;
+  z-index: 1;
+  width: 640px;
+  position: fixed;
+  top: 0;
+  left: 29%;
+  background-color: $background-blue;
+  height: 900px;
+
+  .Dm_user_name {
+    border-bottom: 2px solid $border-color-grey;
+    border-right: 2px solid $border-color-grey;
+    border-left: 2px solid $border-color-grey;
+    background-color: $background-white;
+    font-size: 2rem;
+  }
+
+  .Dm_person {
+    float: left;
+    margin-top: 10px;
+  }
+  .Dm_comment {
+    float: left;
+    margin-top: 10px;
+  }
+}

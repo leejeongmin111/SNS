@@ -1,0 +1,60 @@
+@import "../_variables";
+
+.footer_container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 0.25em 0 0.25em 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  background-color: $background-white;
+  width: 37%;
+  border-top: 2px solid $border-color-grey;
+
+  .menu {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    
+    #basic-button .icon{
+      margin-bottom: 7px;
+    }
+
+
+
+    .icon {
+      padding: 0.7em 3em 0 3em;
+      width: 30px;
+      height: 30px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+   
+  }
+}
+
+@media only screen and (max-width: 860px) {
+  .container {
+    margin: 0;
+    justify-content: center;
+    .container_Logo {
+      display: flex;
+      width: 120px;
+      height: 30px;
+      .logo {
+        width: 100px;
+      }
+    }
+    .container_Special {
+      width: 120px;
+      height: 30px;
+      .Icon {
+        width: 100px;
+      }
+    }
+  }
+}

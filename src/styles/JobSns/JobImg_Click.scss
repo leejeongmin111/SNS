@@ -1,0 +1,27 @@
+
+.img_click_main{
+
+    background-color: aliceblue;
+    .img_click{
+        width: 50%;
+        height: 100%;
+        float:left;
+    }
+    .click_box1{
+        width: 50%;
+        height: 50%;
+        border: '1px dashed grey';
+        float:right;
+       
+
+    }
+    .click_box2{
+        width: 50%;
+        height: 50%;
+        border: 1px;
+        float:right;
+        .img_click_input{
+            margin-left: 15px;
+        }
+}
+}

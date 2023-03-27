@@ -1,0 +1,62 @@
+@import "../_variables";
+
+@font-face {
+  font-family: "Lobster-Regular";
+  font-weight: 300;
+  src: url("../../assets/font/Lobster-Regular.ttf") format("woff2"),
+    url("../../assets/font/Lobster-Regular.ttf") format("woff"),
+    url("../../assets/font/Lobster-Regular.ttf") format("truetype");
+}
+
+.container_head {
+  position: fixed;
+  background-color: none;
+  display: flex;
+  justify-content: space-between;
+  width: 20.5%;
+  z-index: 10;
+  height: 60px;
+  right: 4.5%;
+  top: 1.5%;
+  .Special_con {
+    width: 43%;
+    height: 100%;
+    padding: 1.5% 0 0 15%;
+    .special_Btn {
+      display: flex;
+      width: 70%;
+      height: 50px;
+      font-family: "Lobster-Regular";
+      font-size: 30px;
+      color: white;
+      text-align: center;
+      padding: 2% 0 0 10%;
+      background: #2193b0;
+      background: -webkit-linear-gradient(to bottom, #6dd5ed, #2193b0);
+      background: linear-gradient(to bottom, #6dd5ed, #2193b0);
+      border-radius: 50px;
+      border: none;
+    }
+  }
+}
+// @media only screen and (max-width: 860px) {
+//   .container {
+//     margin: 0;
+//     justify-content: center;
+//     .container_Logo {
+//       display: flex;
+//       width: 120px;
+//       height: 30px;
+//       .logo {
+//         width: 100px;
+//       }
+//     }
+//     .container_Special {
+//       width: 120px;
+//       height: 30px;
+//       .Icon {
+//         width: 100px;
+//       }
+//     }
+//   }
+// }

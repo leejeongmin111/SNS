@@ -1,0 +1,63 @@
+@import "./_variables";
+
+body {
+  background-color: $background-white;
+  font-family: $font;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  min-width: fit-content;
+
+  main {
+    display: grid;
+    grid-template-columns: 600px 1fr 600px;
+
+    .Myblank {
+      background-color: #cce5ff;
+    }
+    .MyMy_container {
+      background-color: #5800ff;
+      border-right: 2px solid $border-color-grey;
+      border-left: 2px solid $border-color-grey;
+      grid-template-columns: 1fr;
+      left: 0;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      .Pro_box {
+        width: 100%;
+        background-color: white;
+        margin-top: 100px;
+        .pro_text {
+          margin-left: 2rem;
+        }
+        .Pro_icon {
+          //margin-left: 13rem;
+          //font-size: 0.08rem;
+
+          .icon_button {
+            background-color: $background-blue;
+            background-color: white;
+          }
+        }
+        // .Pro_grid {
+        //   // margin: 1px;
+        // }
+        .Pro_imgs {
+          height: 12em;
+          width: 12em;
+          margin-left: 2em;
+          margin-left: 0.3em;
+        }
+      }
+    }
+    .Mybox {
+      background-color: #cce5ff;
+    }
+  }
+}
+@media only screen and (max-width: 1024px) {
+  main .container {
+    justify-content: center !important;
+  }
+}
